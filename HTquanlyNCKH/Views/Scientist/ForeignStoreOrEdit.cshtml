@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.Foreign
+@using (Html.BeginForm("ForeignStoreOrEdit", "Scientist", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.foreignID)
+    @Html.HiddenFor(model => model.fgnCreateDate)
+    @Html.HiddenFor(model => model.fgnModifierDate)
+
+    @Html.HiddenFor(model => model.fgnCreateUser)
+    @Html.HiddenFor(model => model.fgnModifierUser)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fgnName, "Tên ngoại ngữ", new { @class = "control-label" })
+        @Html.EditorFor(model => model.fgnName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.fgnName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fgnDescription, "Mô tả", new { @class = "control-label" })
+        @Html.EditorFor(model => model.fgnDescription, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.fgnDescription)
+    </div>
+    <div class="form-group">
+
+        <input type="submit" value="Lưu lại" class="btn btn-success " />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+}  

@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HTquanlyNCKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="classifiID" />
+          </Key>
+          <Property Name="classifiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clsName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="clsDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="clsCreateDate" Type="datetime" />
+          <Property Name="clsModifierDate" Type="datetime" />
+          <Property Name="clsCreateUser" Type="int" />
+          <Property Name="clsModifierUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Council">
+          <Key>
+            <PropertyRef Name="councilID" />
+          </Key>
+          <Property Name="councilID" Type="int" Nullable="false" />
+          <Property Name="cniName" Type="nvarchar" MaxLength="255" />
+          <Property Name="cniChairman" Type="nvarchar" MaxLength="255" />
+          <Property Name="cniSecretary" Type="nvarchar" MaxLength="255" />
+          <Property Name="cniReviewer" Type="nvarchar" MaxLength="500" />
+          <Property Name="cniComment" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="degreeID" />
+          </Key>
+          <Property Name="degreeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="degName" Type="nvarchar" MaxLength="255" />
+          <Property Name="degDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="degCreateDate" Type="datetime" />
+          <Property Name="degModifierDate" Type="datetime" />
+          <Property Name="degCreateUser" Type="int" />
+          <Property Name="degModifierUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="fieldID" />
+          </Key>
+          <Property Name="fieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fieName" Type="nvarchar" MaxLength="255" />
+          <Property Name="fieDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="fieCreateDate" Type="datetime" />
+          <Property Name="fieModifierDate" Type="datetime" />
+          <Property Name="fieCreateUser" Type="int" />
+          <Property Name="fieModifierUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Foreign">
+          <Key>
+            <PropertyRef Name="foreignID" />
+          </Key>
+          <Property Name="foreignID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fgnName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="fgnDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="fgnCreateDate" Type="datetime" />
+          <Property Name="fgnModifierDate" Type="datetime" />
+          <Property Name="fgnCreateUser" Type="int" />
+          <Property Name="fgnModifierUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="placeID" />
+          </Key>
+          <Property Name="placeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plaName" Type="nvarchar" MaxLength="255" />
+          <Property Name="plaDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="plaCreateDate" Type="datetime" />
+          <Property Name="plaModifierDate" Type="datetime" />
+          <Property Name="plaCreateUser" Type="int" />
+          <Property Name="plaModifierUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stsName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="stsDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="stsCreateDate" Type="datetime" />
+          <Property Name="stsModifierDate" Type="datetime" />
+          <Property Name="stsCreateUser" Type="int" />
+          <Property Name="stsModifierUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="topicID" />
+          </Key>
+          <Property Name="topicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scientistID" Type="int" />
+          <Property Name="scaleID" Type="int" />
+          <Property Name="classifiID" Type="int" />
+          <Property Name="statusID" Type="int" />
+          <Property Name="acceptsID" Type="int" />
+          <Property Name="fieldID" Type="int" />
+          <Property Name="tpcYear" Type="varchar" MaxLength="4" />
+          <Property Name="tpcName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tpcSummary" Type="nvarchar" MaxLength="255" />
+          <Property Name="tpcCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="tpcStartDate" Type="date" />
+          <Property Name="tpcEndDate" Type="date" />
+          <Property Name="tpcDateOfAcceptance" Type="date" />
+          <Property Name="tpcProofFile" Type="text" />
+          <Property Name="tpcReviewBoard" Type="nvarchar" MaxLength="500" />
+          <Property Name="tpcCreateData" Type="datetime" />
+          <Property Name="tpcModifierData" Type="datetime" />
+          <Property Name="tpcCreateUser" Type="int" />
+          <Property Name="tpcModifierUser" Type="int" />
+          <Property Name="tpcDeleteData" Type="datetime" />
+          <Property Name="tpcDeleteUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="unitID" />
+          </Key>
+          <Property Name="unitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="untName" Type="nvarchar" MaxLength="255" />
+          <Property Name="untDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="untCreateDate" Type="datetime" />
+          <Property Name="untModifierDate" Type="datetime" />
+          <Property Name="untCreateUser" Type="int" />
+          <Property Name="untModifierUser" Type="int" />
+        </EntityType>
+        <EntityContainer Name="HTquanlyNCKHModelStoreContainer">
+          <EntitySet Name="Classification" EntityType="Self.Classification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Council" EntityType="Self.Council" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Field" EntityType="Self.Field" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Foreign" EntityType="Self.Foreign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HTquanlyNCKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="classifiID" />
+          </Key>
+          <Property Name="classifiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clsName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="clsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="clsCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="clsModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="clsCreateUser" Type="Int32" />
+          <Property Name="clsModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="topicID" />
+          </Key>
+          <Property Name="topicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scientistID" Type="Int32" />
+          <Property Name="scaleID" Type="Int32" />
+          <Property Name="classifiID" Type="Int32" />
+          <Property Name="statusID" Type="Int32" />
+          <Property Name="acceptsID" Type="Int32" />
+          <Property Name="fieldID" Type="Int32" />
+          <Property Name="tpcYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="tpcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tpcSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tpcCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tpcStartDate" Type="DateTime" Precision="0" />
+          <Property Name="tpcEndDate" Type="DateTime" Precision="0" />
+          <Property Name="tpcDateOfAcceptance" Type="DateTime" Precision="0" />
+          <Property Name="tpcProofFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tpcReviewBoard" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="tpcCreateData" Type="DateTime" Precision="3" />
+          <Property Name="tpcModifierData" Type="DateTime" Precision="3" />
+          <Property Name="tpcCreateUser" Type="Int32" />
+          <Property Name="tpcModifierUser" Type="Int32" />
+          <Property Name="tpcDeleteData" Type="DateTime" Precision="3" />
+          <Property Name="tpcDeleteUser" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classifications" EntityType="Self.Classification" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Fields" EntityType="HTquanlyNCKHModel.Field" />
+          <EntitySet Name="Status" EntityType="HTquanlyNCKHModel.Status" />
+          <EntitySet Name="Councils" EntityType="HTquanlyNCKHModel.Council" />
+          <EntitySet Name="Degrees" EntityType="HTquanlyNCKHModel.Degree" />
+          <EntitySet Name="Foreigns" EntityType="HTquanlyNCKHModel.Foreign" />
+          <EntitySet Name="Places" EntityType="HTquanlyNCKHModel.Place" />
+          <EntitySet Name="Units" EntityType="HTquanlyNCKHModel.Unit" />
+        </EntityContainer>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="fieldID" />
+          </Key>
+          <Property Name="fieldID" Type="Int32" Nullable="false" />
+          <Property Name="fieName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fieDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fieCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="fieModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="fieCreateUser" Type="Int32" />
+          <Property Name="fieModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stsName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="stsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="stsCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="stsModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="stsCreateUser" Type="Int32" />
+          <Property Name="stsModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Council">
+          <Key>
+            <PropertyRef Name="councilID" />
+          </Key>
+          <Property Name="councilID" Type="Int32" Nullable="false" />
+          <Property Name="cniName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="cniChairman" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="cniSecretary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="cniReviewer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="cniComment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="degreeID" />
+          </Key>
+          <Property Name="degreeID" Type="Int32" Nullable="false" />
+          <Property Name="degName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="degDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="degCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="degModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="degCreateUser" Type="Int32" />
+          <Property Name="degModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Foreign">
+          <Key>
+            <PropertyRef Name="foreignID" />
+          </Key>
+          <Property Name="foreignID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fgnName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fgnDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fgnCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="fgnModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="fgnCreateUser" Type="Int32" />
+          <Property Name="fgnModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="placeID" />
+          </Key>
+          <Property Name="placeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plaName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="plaDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="plaCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="plaModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="plaCreateUser" Type="Int32" />
+          <Property Name="plaModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="unitID" />
+          </Key>
+          <Property Name="unitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="untName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="untDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="untCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="untModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="untCreateUser" Type="Int32" />
+          <Property Name="untModifierUser" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HTquanlyNCKHModelStoreContainer" CdmEntityContainer="DBModel">
+          <EntitySetMapping Name="Classifications">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Classification">
+              <MappingFragment StoreEntitySet="Classification">
+                <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+                <ScalarProperty Name="clsName" ColumnName="clsName" />
+                <ScalarProperty Name="clsDescription" ColumnName="clsDescription" />
+                <ScalarProperty Name="clsCreateDate" ColumnName="clsCreateDate" />
+                <ScalarProperty Name="clsModifierDate" ColumnName="clsModifierDate" />
+                <ScalarProperty Name="clsCreateUser" ColumnName="clsCreateUser" />
+                <ScalarProperty Name="clsModifierUser" ColumnName="clsModifierUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+                <ScalarProperty Name="scaleID" ColumnName="scaleID" />
+                <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
+                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+                <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
+                <ScalarProperty Name="tpcName" ColumnName="tpcName" />
+                <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
+                <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
+                <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
+                <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
+                <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
+                <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
+                <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
+                <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
+                <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
+                <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
+                <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
+                <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
+                <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fields">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Field">
+              <MappingFragment StoreEntitySet="Field">
+                <ScalarProperty Name="fieModifierUser" ColumnName="fieModifierUser" />
+                <ScalarProperty Name="fieCreateUser" ColumnName="fieCreateUser" />
+                <ScalarProperty Name="fieModifierDate" ColumnName="fieModifierDate" />
+                <ScalarProperty Name="fieCreateDate" ColumnName="fieCreateDate" />
+                <ScalarProperty Name="fieDescription" ColumnName="fieDescription" />
+                <ScalarProperty Name="fieName" ColumnName="fieName" />
+                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="stsModifierUser" ColumnName="stsModifierUser" />
+                <ScalarProperty Name="stsCreateUser" ColumnName="stsCreateUser" />
+                <ScalarProperty Name="stsModifierDate" ColumnName="stsModifierDate" />
+                <ScalarProperty Name="stsCreateDate" ColumnName="stsCreateDate" />
+                <ScalarProperty Name="stsDescription" ColumnName="stsDescription" />
+                <ScalarProperty Name="stsName" ColumnName="stsName" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Councils">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Council">
+              <MappingFragment StoreEntitySet="Council">
+                <ScalarProperty Name="cniComment" ColumnName="cniComment" />
+                <ScalarProperty Name="cniReviewer" ColumnName="cniReviewer" />
+                <ScalarProperty Name="cniSecretary" ColumnName="cniSecretary" />
+                <ScalarProperty Name="cniChairman" ColumnName="cniChairman" />
+                <ScalarProperty Name="cniName" ColumnName="cniName" />
+                <ScalarProperty Name="councilID" ColumnName="councilID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degrees">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Degree">
+              <MappingFragment StoreEntitySet="Degree">
+                <ScalarProperty Name="degModifierUser" ColumnName="degModifierUser" />
+                <ScalarProperty Name="degCreateUser" ColumnName="degCreateUser" />
+                <ScalarProperty Name="degModifierDate" ColumnName="degModifierDate" />
+                <ScalarProperty Name="degCreateDate" ColumnName="degCreateDate" />
+                <ScalarProperty Name="degDescription" ColumnName="degDescription" />
+                <ScalarProperty Name="degName" ColumnName="degName" />
+                <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foreigns">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Foreign">
+              <MappingFragment StoreEntitySet="Foreign">
+                <ScalarProperty Name="fgnModifierUser" ColumnName="fgnModifierUser" />
+                <ScalarProperty Name="fgnCreateUser" ColumnName="fgnCreateUser" />
+                <ScalarProperty Name="fgnModifierDate" ColumnName="fgnModifierDate" />
+                <ScalarProperty Name="fgnCreateDate" ColumnName="fgnCreateDate" />
+                <ScalarProperty Name="fgnDescription" ColumnName="fgnDescription" />
+                <ScalarProperty Name="fgnName" ColumnName="fgnName" />
+                <ScalarProperty Name="foreignID" ColumnName="foreignID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="plaModifierUser" ColumnName="plaModifierUser" />
+                <ScalarProperty Name="plaCreateUser" ColumnName="plaCreateUser" />
+                <ScalarProperty Name="plaModifierDate" ColumnName="plaModifierDate" />
+                <ScalarProperty Name="plaCreateDate" ColumnName="plaCreateDate" />
+                <ScalarProperty Name="plaDescription" ColumnName="plaDescription" />
+                <ScalarProperty Name="plaName" ColumnName="plaName" />
+                <ScalarProperty Name="placeID" ColumnName="placeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="untModifierUser" ColumnName="untModifierUser" />
+                <ScalarProperty Name="untCreateUser" ColumnName="untCreateUser" />
+                <ScalarProperty Name="untModifierDate" ColumnName="untModifierDate" />
+                <ScalarProperty Name="untCreateDate" ColumnName="untCreateDate" />
+                <ScalarProperty Name="untDescription" ColumnName="untDescription" />
+                <ScalarProperty Name="untName" ColumnName="untName" />
+                <ScalarProperty Name="unitID" ColumnName="unitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

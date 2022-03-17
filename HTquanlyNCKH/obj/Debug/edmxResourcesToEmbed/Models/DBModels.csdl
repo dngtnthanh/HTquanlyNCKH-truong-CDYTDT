@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HTquanlyNCKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Classification">
+    <Key>
+      <PropertyRef Name="classifiID" />
+    </Key>
+    <Property Name="classifiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clsName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="clsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="clsCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="clsModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="clsCreateUser" Type="Int32" />
+    <Property Name="clsModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="topicID" />
+    </Key>
+    <Property Name="topicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="scientistID" Type="Int32" />
+    <Property Name="scaleID" Type="Int32" />
+    <Property Name="classifiID" Type="Int32" />
+    <Property Name="statusID" Type="Int32" />
+    <Property Name="acceptsID" Type="Int32" />
+    <Property Name="fieldID" Type="Int32" />
+    <Property Name="tpcYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="tpcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcStartDate" Type="DateTime" Precision="0" />
+    <Property Name="tpcEndDate" Type="DateTime" Precision="0" />
+    <Property Name="tpcDateOfAcceptance" Type="DateTime" Precision="0" />
+    <Property Name="tpcProofFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tpcReviewBoard" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="tpcCreateData" Type="DateTime" Precision="3" />
+    <Property Name="tpcModifierData" Type="DateTime" Precision="3" />
+    <Property Name="tpcCreateUser" Type="Int32" />
+    <Property Name="tpcModifierUser" Type="Int32" />
+    <Property Name="tpcDeleteData" Type="DateTime" Precision="3" />
+    <Property Name="tpcDeleteUser" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classifications" EntityType="Self.Classification" />
+    <EntitySet Name="Topics" EntityType="Self.Topic" />
+    <EntitySet Name="Fields" EntityType="HTquanlyNCKHModel.Field" />
+    <EntitySet Name="Status" EntityType="HTquanlyNCKHModel.Status" />
+    <EntitySet Name="Councils" EntityType="HTquanlyNCKHModel.Council" />
+    <EntitySet Name="Degrees" EntityType="HTquanlyNCKHModel.Degree" />
+    <EntitySet Name="Foreigns" EntityType="HTquanlyNCKHModel.Foreign" />
+    <EntitySet Name="Places" EntityType="HTquanlyNCKHModel.Place" />
+    <EntitySet Name="Units" EntityType="HTquanlyNCKHModel.Unit" />
+  </EntityContainer>
+  <EntityType Name="Field">
+    <Key>
+      <PropertyRef Name="fieldID" />
+    </Key>
+    <Property Name="fieldID" Type="Int32" Nullable="false" />
+    <Property Name="fieName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fieDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="fieCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="fieModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="fieCreateUser" Type="Int32" />
+    <Property Name="fieModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="statusID" />
+    </Key>
+    <Property Name="statusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stsName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="stsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="stsCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="stsModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="stsCreateUser" Type="Int32" />
+    <Property Name="stsModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Council">
+    <Key>
+      <PropertyRef Name="councilID" />
+    </Key>
+    <Property Name="councilID" Type="Int32" Nullable="false" />
+    <Property Name="cniName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cniChairman" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cniSecretary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cniReviewer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="cniComment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Degree">
+    <Key>
+      <PropertyRef Name="degreeID" />
+    </Key>
+    <Property Name="degreeID" Type="Int32" Nullable="false" />
+    <Property Name="degName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="degDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="degCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="degModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="degCreateUser" Type="Int32" />
+    <Property Name="degModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Foreign">
+    <Key>
+      <PropertyRef Name="foreignID" />
+    </Key>
+    <Property Name="foreignID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fgnName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fgnDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="fgnCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="fgnModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="fgnCreateUser" Type="Int32" />
+    <Property Name="fgnModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Place">
+    <Key>
+      <PropertyRef Name="placeID" />
+    </Key>
+    <Property Name="placeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="plaName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="plaDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="plaCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="plaModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="plaCreateUser" Type="Int32" />
+    <Property Name="plaModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="unitID" />
+    </Key>
+    <Property Name="unitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="untName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="untDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="untCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="untModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="untCreateUser" Type="Int32" />
+    <Property Name="untModifierUser" Type="Int32" />
+  </EntityType>
+</Schema>

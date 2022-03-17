@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.Status
+@using (Html.BeginForm("StatusStoreOrEdit", "Topic", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.statusID)
+    @Html.HiddenFor(model => model.stsCreateDate)
+    @Html.HiddenFor(model => model.stsModifierDate)
+
+    @Html.HiddenFor(model => model.stsCreateUser)
+    @Html.HiddenFor(model => model.stsModifierUser)
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.classifiID, "Mã số", new { @class = "control-label" })
+            @Html.DisplayFor(model => model.classifiID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.classifiID)
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.stsName, "Tên trạng thái", new { @class = "control-label" })
+        @Html.EditorFor(model => model.stsName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.stsName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.stsDescription, "Mô tả", new { @class = "control-label" })
+        @Html.EditorFor(model => model.stsDescription, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.stsDescription)
+    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.clsCreateDate, new { @class = "control-label" })
+            @Html.EditorFor(model => model.clsModifierDate, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.clsCreateUser, new { @class = "control-label" })
+            @Html.EditorFor(model => model.clsCreateUser, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.clsModifierUser, new { @class = "control-label" })
+            @Html.EditorFor(model => model.clsModifierUser, new { htmlAttributes = new { @class = "form-control" } })
+        </div>*@
+
+    <div class="form-group">
+
+        <input type="submit" value="Lưu lại" class="btn btn-success" />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+}  

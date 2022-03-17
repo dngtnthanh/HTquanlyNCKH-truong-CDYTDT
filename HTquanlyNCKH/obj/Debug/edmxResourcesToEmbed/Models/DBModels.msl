@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HTquanlyNCKHModelStoreContainer" CdmEntityContainer="DBModel">
+    <EntitySetMapping Name="Classifications">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Classification">
+        <MappingFragment StoreEntitySet="Classification">
+          <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+          <ScalarProperty Name="clsName" ColumnName="clsName" />
+          <ScalarProperty Name="clsDescription" ColumnName="clsDescription" />
+          <ScalarProperty Name="clsCreateDate" ColumnName="clsCreateDate" />
+          <ScalarProperty Name="clsModifierDate" ColumnName="clsModifierDate" />
+          <ScalarProperty Name="clsCreateUser" ColumnName="clsCreateUser" />
+          <ScalarProperty Name="clsModifierUser" ColumnName="clsModifierUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
+        <MappingFragment StoreEntitySet="Topic">
+          <ScalarProperty Name="topicID" ColumnName="topicID" />
+          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+          <ScalarProperty Name="scaleID" ColumnName="scaleID" />
+          <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
+          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+          <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
+          <ScalarProperty Name="tpcName" ColumnName="tpcName" />
+          <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
+          <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
+          <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
+          <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
+          <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
+          <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
+          <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
+          <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
+          <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
+          <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
+          <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
+          <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
+          <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fields">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Field">
+        <MappingFragment StoreEntitySet="Field">
+          <ScalarProperty Name="fieModifierUser" ColumnName="fieModifierUser" />
+          <ScalarProperty Name="fieCreateUser" ColumnName="fieCreateUser" />
+          <ScalarProperty Name="fieModifierDate" ColumnName="fieModifierDate" />
+          <ScalarProperty Name="fieCreateDate" ColumnName="fieCreateDate" />
+          <ScalarProperty Name="fieDescription" ColumnName="fieDescription" />
+          <ScalarProperty Name="fieName" ColumnName="fieName" />
+          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="stsModifierUser" ColumnName="stsModifierUser" />
+          <ScalarProperty Name="stsCreateUser" ColumnName="stsCreateUser" />
+          <ScalarProperty Name="stsModifierDate" ColumnName="stsModifierDate" />
+          <ScalarProperty Name="stsCreateDate" ColumnName="stsCreateDate" />
+          <ScalarProperty Name="stsDescription" ColumnName="stsDescription" />
+          <ScalarProperty Name="stsName" ColumnName="stsName" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Councils">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Council">
+        <MappingFragment StoreEntitySet="Council">
+          <ScalarProperty Name="cniComment" ColumnName="cniComment" />
+          <ScalarProperty Name="cniReviewer" ColumnName="cniReviewer" />
+          <ScalarProperty Name="cniSecretary" ColumnName="cniSecretary" />
+          <ScalarProperty Name="cniChairman" ColumnName="cniChairman" />
+          <ScalarProperty Name="cniName" ColumnName="cniName" />
+          <ScalarProperty Name="councilID" ColumnName="councilID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Degrees">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Degree">
+        <MappingFragment StoreEntitySet="Degree">
+          <ScalarProperty Name="degModifierUser" ColumnName="degModifierUser" />
+          <ScalarProperty Name="degCreateUser" ColumnName="degCreateUser" />
+          <ScalarProperty Name="degModifierDate" ColumnName="degModifierDate" />
+          <ScalarProperty Name="degCreateDate" ColumnName="degCreateDate" />
+          <ScalarProperty Name="degDescription" ColumnName="degDescription" />
+          <ScalarProperty Name="degName" ColumnName="degName" />
+          <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Foreigns">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Foreign">
+        <MappingFragment StoreEntitySet="Foreign">
+          <ScalarProperty Name="fgnModifierUser" ColumnName="fgnModifierUser" />
+          <ScalarProperty Name="fgnCreateUser" ColumnName="fgnCreateUser" />
+          <ScalarProperty Name="fgnModifierDate" ColumnName="fgnModifierDate" />
+          <ScalarProperty Name="fgnCreateDate" ColumnName="fgnCreateDate" />
+          <ScalarProperty Name="fgnDescription" ColumnName="fgnDescription" />
+          <ScalarProperty Name="fgnName" ColumnName="fgnName" />
+          <ScalarProperty Name="foreignID" ColumnName="foreignID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Places">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Place">
+        <MappingFragment StoreEntitySet="Place">
+          <ScalarProperty Name="plaModifierUser" ColumnName="plaModifierUser" />
+          <ScalarProperty Name="plaCreateUser" ColumnName="plaCreateUser" />
+          <ScalarProperty Name="plaModifierDate" ColumnName="plaModifierDate" />
+          <ScalarProperty Name="plaCreateDate" ColumnName="plaCreateDate" />
+          <ScalarProperty Name="plaDescription" ColumnName="plaDescription" />
+          <ScalarProperty Name="plaName" ColumnName="plaName" />
+          <ScalarProperty Name="placeID" ColumnName="placeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Unit">
+        <MappingFragment StoreEntitySet="Unit">
+          <ScalarProperty Name="untModifierUser" ColumnName="untModifierUser" />
+          <ScalarProperty Name="untCreateUser" ColumnName="untCreateUser" />
+          <ScalarProperty Name="untModifierDate" ColumnName="untModifierDate" />
+          <ScalarProperty Name="untCreateDate" ColumnName="untCreateDate" />
+          <ScalarProperty Name="untDescription" ColumnName="untDescription" />
+          <ScalarProperty Name="untName" ColumnName="untName" />
+          <ScalarProperty Name="unitID" ColumnName="unitID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

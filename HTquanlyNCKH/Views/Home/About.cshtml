@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+@section Slider{}
+
+
+
+<div style="margin: 100px">
+
+
+    <div class="container">
+        <div class="col-md-12">
+            <h3>Dữ liệu trong Form</h3>
+            <form method="post" id="insert_data_hoten">
+                <label>Họ và tên</label>
+                <input type="text" id="hoTen" value="Thành" class="form-control" placeholder="Điền họ và tên" />
+                <label>Số Phone</label>
+                <input type="text" id="phone" class="form-control" />
+                <label>Địa chỉ</label>
+                <input type="text" id="diaChi" class="form-control" />
+                <label>Email</label>
+                <input type="text" id="email" class="form-control" />
+                <label>Ghi chú</label>
+                <input type="text" id="ghiChu" class="form-control" />
+
+                <label>Chọn địa chỉ: </label>
+                <select id="countryDropDownList">
+                    <option value="Select">Select</option>
+                </select>
+
+
+
+                <br /><br />
+                <input type="button" name="insert_data" id="button_insert" value="Insert" class="btn btn-success" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<table>
+    <tr>
+        <td contenteditable="true">Hello</td>
+        <td contenteditable="true">Hello</td>
+        <td contenteditable="true">Hello</td>
+    </tr>
+</table>
+
+  
+
+<script>
+
+    $(function () {
+
+        AjaxCall('/Home/GetCountries', null).done(function (response) {
+            if (response.length > 0) {
+                $('#countryDropDownList').html('');
+                var options = '';
+                options += '<option value="Select">Select</option>';
+                for (var i = 0; i < response.length; i++) {
+                    options += '<option value="' + response[i] + '">' + response[i] + '</option>';
+                }
+                $('#countryDropDownList').append(options);
+
+            }
+        }).fail(function (error) {
+            alert(error.StatusText);
+        });
+
+        //$('#countryDropDownList').on("change", function () {
+        //    var country = $('#countryDropDownList').val();
+        //    var obj = { country: country };
+        //    AjaxCall('/Home/GetStates', JSON.stringify(obj), 'POST').done(function (response) {
+        //        if (response.length > 0) {
+        //            $('#stateDropDownList').html('');
+        //            var options = '';
+        //            options += '<option value="Select">Select</option>';
+        //            for (var i = 0; i < response.length; i++) {
+        //                options += '<option value="' + response[i] + '">' + response[i] + '</option>';
+        //            }
+        //            $('#stateDropDownList').append(options);
+
+        //        }
+        //    }).fail(function (error) {
+        //        alert(error.StatusText);
+        //    });
+        //});
+
+    });
+
+    function AjaxCall(url, data, type) {
+        return $.ajax({
+            url: url,
+            type: type ? type : 'GET',
+            data: data,
+            contentType: 'application/json'
+        });
+    }
+</script>
+
+<script type="text/javascript">
+
+    $("#button_insert").on('click', function () {
+        var hoTen = $('#hoTen').val();
+        var phone = $('#phone').val();
+        var diaChi = $('#diaChi').val();
+        var email = $('#email').val();
+        var ghiChu = $('#ghiChu').val();
+        if (hoTen == "" || phone == "" || diaChi == "" || email == "" || ghiChu == "") {
+            alert("Không được bỏ trống các trường")
+        } else {
+            $.ajax({
+                url: "đường dẫn",
+                method: "POST",
+                data: { hoTen: hoTen, phone: phone, diaChi: diaChi, email: email, ghiChu: ghiChu },
+                success: function (data) {
+                    alert("Insert dữ liệu thành công");
+                }
+            });
+        }
+    });
+</script>
