@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HTquanlyNCKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ArtType">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="typName" Type="nvarchar" MaxLength="255" />
+    <Property Name="typDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="typCreateDate" Type="datetime" />
+    <Property Name="typModifierDate" Type="datetime" />
+    <Property Name="typCreateUser" Type="int" />
+    <Property Name="typModifierUser" Type="int" />
+  </EntityType>
   <EntityType Name="Classification">
     <Key>
       <PropertyRef Name="classifiID" />
@@ -11,6 +23,18 @@
     <Property Name="clsModifierDate" Type="datetime" />
     <Property Name="clsCreateUser" Type="int" />
     <Property Name="clsModifierUser" Type="int" />
+  </EntityType>
+  <EntityType Name="Conference">
+    <Key>
+      <PropertyRef Name="conferenceID" />
+    </Key>
+    <Property Name="conferenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cfrName" Type="nvarchar" MaxLength="255" />
+    <Property Name="cfrDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="cfrCreateDate" Type="datetime" />
+    <Property Name="cfrModifierDate" Type="datetime" />
+    <Property Name="cfrCreateUser" Type="int" />
+    <Property Name="cfrModifierUser" Type="int" />
   </EntityType>
   <EntityType Name="Council">
     <Key>
@@ -59,6 +83,32 @@
     <Property Name="fgnCreateUser" Type="int" />
     <Property Name="fgnModifierUser" Type="int" />
   </EntityType>
+  <EntityType Name="KeyWord">
+    <Key>
+      <PropertyRef Name="keyID" />
+    </Key>
+    <Property Name="keyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="keyName" Type="nvarchar" MaxLength="255" />
+    <Property Name="keyDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="keyCreateDate" Type="datetime" />
+    <Property Name="keyModifierDate" Type="datetime" />
+    <Property Name="keyCreateUser" Type="int" />
+    <Property Name="keyModifierUser" Type="int" />
+  </EntityType>
+  <EntityType Name="Nation">
+    <Key>
+      <PropertyRef Name="nationID" />
+    </Key>
+    <Property Name="nationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="natName" Type="nvarchar" MaxLength="255" />
+    <Property Name="natTwoCode" Type="char" MaxLength="2" />
+    <Property Name="natThreeCode" Type="char" MaxLength="3" />
+    <Property Name="natDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="natCreateDate" Type="datetime" />
+    <Property Name="natModifierDate" Type="datetime" />
+    <Property Name="natCreateUser" Type="int" />
+    <Property Name="natModifierUser" Type="int" />
+  </EntityType>
   <EntityType Name="Place">
     <Key>
       <PropertyRef Name="placeID" />
@@ -89,7 +139,6 @@
     </Key>
     <Property Name="topicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="scientistID" Type="int" />
-    <Property Name="scaleID" Type="int" />
     <Property Name="classifiID" Type="int" />
     <Property Name="statusID" Type="int" />
     <Property Name="acceptsID" Type="int" />
@@ -123,11 +172,15 @@
     <Property Name="untModifierUser" Type="int" />
   </EntityType>
   <EntityContainer Name="HTquanlyNCKHModelStoreContainer">
+    <EntitySet Name="ArtType" EntityType="Self.ArtType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Classification" EntityType="Self.Classification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Conference" EntityType="Self.Conference" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Council" EntityType="Self.Council" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Field" EntityType="Self.Field" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Foreign" EntityType="Self.Foreign" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KeyWord" EntityType="Self.KeyWord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nation" EntityType="Self.Nation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />

@@ -12,36 +12,8 @@
     <Property Name="clsCreateUser" Type="Int32" />
     <Property Name="clsModifierUser" Type="Int32" />
   </EntityType>
-  <EntityType Name="Topic">
-    <Key>
-      <PropertyRef Name="topicID" />
-    </Key>
-    <Property Name="topicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="scientistID" Type="Int32" />
-    <Property Name="scaleID" Type="Int32" />
-    <Property Name="classifiID" Type="Int32" />
-    <Property Name="statusID" Type="Int32" />
-    <Property Name="acceptsID" Type="Int32" />
-    <Property Name="fieldID" Type="Int32" />
-    <Property Name="tpcYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-    <Property Name="tpcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tpcSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tpcCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tpcStartDate" Type="DateTime" Precision="0" />
-    <Property Name="tpcEndDate" Type="DateTime" Precision="0" />
-    <Property Name="tpcDateOfAcceptance" Type="DateTime" Precision="0" />
-    <Property Name="tpcProofFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="tpcReviewBoard" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="tpcCreateData" Type="DateTime" Precision="3" />
-    <Property Name="tpcModifierData" Type="DateTime" Precision="3" />
-    <Property Name="tpcCreateUser" Type="Int32" />
-    <Property Name="tpcModifierUser" Type="Int32" />
-    <Property Name="tpcDeleteData" Type="DateTime" Precision="3" />
-    <Property Name="tpcDeleteUser" Type="Int32" />
-  </EntityType>
   <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Classifications" EntityType="Self.Classification" />
-    <EntitySet Name="Topics" EntityType="Self.Topic" />
     <EntitySet Name="Fields" EntityType="HTquanlyNCKHModel.Field" />
     <EntitySet Name="Status" EntityType="HTquanlyNCKHModel.Status" />
     <EntitySet Name="Councils" EntityType="HTquanlyNCKHModel.Council" />
@@ -49,6 +21,11 @@
     <EntitySet Name="Foreigns" EntityType="HTquanlyNCKHModel.Foreign" />
     <EntitySet Name="Places" EntityType="HTquanlyNCKHModel.Place" />
     <EntitySet Name="Units" EntityType="HTquanlyNCKHModel.Unit" />
+    <EntitySet Name="Nations" EntityType="HTquanlyNCKHModel.Nation" />
+    <EntitySet Name="KeyWords" EntityType="HTquanlyNCKHModel.KeyWord" />
+    <EntitySet Name="ArtTypes" EntityType="HTquanlyNCKHModel.ArtType" />
+    <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
+    <EntitySet Name="Conferences" EntityType="HTquanlyNCKHModel.Conference" />
   </EntityContainer>
   <EntityType Name="Field">
     <Key>
@@ -132,5 +109,81 @@
     <Property Name="untModifierDate" Type="DateTime" Precision="3" />
     <Property Name="untCreateUser" Type="Int32" />
     <Property Name="untModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Nation">
+    <Key>
+      <PropertyRef Name="nationID" />
+    </Key>
+    <Property Name="nationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="natName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="natTwoCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="natThreeCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="natDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="natCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="natModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="natCreateUser" Type="Int32" />
+    <Property Name="natModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="KeyWord">
+    <Key>
+      <PropertyRef Name="keyID" />
+    </Key>
+    <Property Name="keyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="keyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="keyDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="keyCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="keyModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="keyCreateUser" Type="Int32" />
+    <Property Name="keyModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ArtType">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="typDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="typCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="typModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="typCreateUser" Type="Int32" />
+    <Property Name="typModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="topicID" />
+    </Key>
+    <Property Name="topicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="scientistID" Type="Int32" />
+    <Property Name="classifiID" Type="Int32" />
+    <Property Name="statusID" Type="Int32" />
+    <Property Name="acceptsID" Type="Int32" />
+    <Property Name="fieldID" Type="Int32" />
+    <Property Name="tpcYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="tpcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcStartDate" Type="DateTime" Precision="0" />
+    <Property Name="tpcEndDate" Type="DateTime" Precision="0" />
+    <Property Name="tpcDateOfAcceptance" Type="DateTime" Precision="0" />
+    <Property Name="tpcProofFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tpcReviewBoard" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="tpcCreateData" Type="DateTime" Precision="3" />
+    <Property Name="tpcModifierData" Type="DateTime" Precision="3" />
+    <Property Name="tpcCreateUser" Type="Int32" />
+    <Property Name="tpcModifierUser" Type="Int32" />
+    <Property Name="tpcDeleteData" Type="DateTime" Precision="3" />
+    <Property Name="tpcDeleteUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Conference">
+    <Key>
+      <PropertyRef Name="conferenceID" />
+    </Key>
+    <Property Name="conferenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cfrName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cfrDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="cfrCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="cfrModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="cfrCreateUser" Type="Int32" />
+    <Property Name="cfrModifierUser" Type="Int32" />
   </EntityType>
 </Schema>

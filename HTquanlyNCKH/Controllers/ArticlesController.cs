@@ -7,269 +7,267 @@ using HTquanlyNCKH.Models;
 using System.Data.Entity;
 namespace HTquanlyNCKH.Controllers
 {
-    public class ScientistController : Controller
+    public class ArticlesController : Controller
     {
-        // GET: Scientist
+        // GET: Articles
         public ActionResult Index()
         {
             return View();
         }
-        //Quản lý trình độ nhà khoa học
-        public ActionResult DegreeGetData()
+
+        //Quản lý quốc gia của bài báo
+        public ActionResult NationGetData()
         {
             using (DBModel db = new DBModel())
             {
-                List<Degree> degreesList = db.Degrees.ToList<Degree>();
-                return Json(new { data = degreesList },
+                List<Nation> nationList = db.Nations.ToList<Nation>();
+                return Json(new { data = nationList },
                     JsonRequestBehavior.AllowGet);
             }
         }
         [HttpGet]
-        public ActionResult DegreeStoreOrEdit(int id = 0)
+        public ActionResult NationStoreOrEdit(int id = 0)
         {
-            if(id == 0)
+            if (id == 0)
             {
-                return View(new Degree());
+                return View(new Nation());
             }
             else
             {
                 using (DBModel db = new DBModel())
                 {
-                    return View(db.Degrees.Where(x => x.degreeID == id).FirstOrDefault<Degree>());
+                    return View(db.Nations.Where(x => x.nationID == id).FirstOrDefault<Nation>());
                 }
             }
         }
         [HttpPost]
-        public ActionResult DegreeStoreOrEdit(Degree degreeob)
+        public ActionResult NationStoreOrEdit(Nation nationob)
         {
             using (DBModel db = new DBModel())
             {
-                if (degreeob.degreeID == 0)
+                if (nationob.nationID == 0)
                 {
-                    db.Degrees.Add(degreeob);
-                    degreeob.degCreateDate = DateTime.Now;
+                    db.Nations.Add(nationob);
+                    nationob.natCreateDate = DateTime.Now;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
-                    degreeob.degModifierDate = DateTime.Now;
-                    db.Entry(degreeob).State = EntityState.Modified;
+                    nationob.natModifierDate = DateTime.Now;
+                    db.Entry(nationob).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
             }
         }
         [HttpPost]
-        public ActionResult DegreeDelete(int id)
+        public ActionResult NationDelete(int id)
         {
             using (DBModel db = new DBModel())
             {
-                Degree emp = db.Degrees.Where(x => x.degreeID == id).FirstOrDefault<Degree>();
-                db.Degrees.Remove(emp);
+                Nation emp = db.Nations.Where(x => x.nationID == id).FirstOrDefault<Nation>();
+                db.Nations.Remove(emp);
                 db.SaveChanges();
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
 
-        public ActionResult DegreeManage()
+        public ActionResult NationManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
 
 
-
-
-        //Thực thể ngoại ngữ của nhà nghiên cứu, nhà khoa học
-        public ActionResult ForeignGetData()
+        //Quản lý từ khoá
+        public ActionResult KeyWordGetData()
         {
             using (DBModel db = new DBModel())
             {
-                List<Foreign> foreignsList = db.Foreigns.ToList<Foreign>();
-                return Json(new { data = foreignsList },
+                List<KeyWord> keywordList = db.KeyWords.ToList<KeyWord>();
+                return Json(new { data = keywordList },
                     JsonRequestBehavior.AllowGet);
             }
         }
         [HttpGet]
-        public ActionResult ForeignStoreOrEdit(int id = 0)
+        public ActionResult KeyWordStoreOrEdit(int id = 0)
         {
             if (id == 0)
             {
-                return View(new Foreign());
+                return View(new KeyWord());
             }
             else
             {
                 using (DBModel db = new DBModel())
                 {
-                    return View(db.Foreigns.Where(x => x.foreignID == id).FirstOrDefault<Foreign>());
+                    return View(db.KeyWords.Where(x => x.keyID == id).FirstOrDefault<KeyWord>());
                 }
             }
         }
         [HttpPost]
-        public ActionResult ForeignStoreOrEdit(Foreign foreignob)
+        public ActionResult KeyWordStoreOrEdit(KeyWord keywordob)
         {
             using (DBModel db = new DBModel())
             {
-                if (foreignob.foreignID == 0)
+                if (keywordob.keyID == 0)
                 {
-                    db.Foreigns.Add(foreignob);
-                    foreignob.fgnCreateDate = DateTime.Now;
+                    db.KeyWords.Add(keywordob);
+                    keywordob.keyCreateDate = DateTime.Now;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
-                    foreignob.fgnModifierDate = DateTime.Now;
-                    db.Entry(foreignob).State = EntityState.Modified;
+                    keywordob.keyModifierDate = DateTime.Now;
+                    db.Entry(keywordob).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
             }
         }
         [HttpPost]
-        public ActionResult ForeignDelete(int id)
+        public ActionResult KeyWordDelete(int id)
         {
             using (DBModel db = new DBModel())
             {
-                Foreign emp = db.Foreigns.Where(x => x.foreignID == id).FirstOrDefault<Foreign>();
-                db.Foreigns.Remove(emp);
+                KeyWord emp = db.KeyWords.Where(x => x.keyID == id).FirstOrDefault<KeyWord>();
+                db.KeyWords.Remove(emp);
                 db.SaveChanges();
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
 
-        public ActionResult ForeignManage()
+        public ActionResult KeyWordManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
 
-        //Quản lý nơi sinh
-        public ActionResult PlaceGetData()
+        //Quản lý thể loại bài viết
+        public ActionResult ArtTypeGetData()
         {
             using (DBModel db = new DBModel())
             {
-                List<Place> degreesList = db.Places.ToList<Place>();
-                return Json(new { data = degreesList },
+                List<ArtType> artTypeList = db.ArtTypes.ToList<ArtType>();
+                return Json(new { data = artTypeList },
                     JsonRequestBehavior.AllowGet);
             }
         }
         [HttpGet]
-        public ActionResult PlaceStoreOrEdit(int id = 0)
+        public ActionResult ArtTypeStoreOrEdit(int id = 0)
         {
             if (id == 0)
             {
-                return View(new Place());
+                return View(new ArtType());
             }
             else
             {
                 using (DBModel db = new DBModel())
                 {
-                    return View(db.Places.Where(x => x.placeID == id).FirstOrDefault<Place>());
+                    return View(db.ArtTypes.Where(x => x.typeID == id).FirstOrDefault<ArtType>());
                 }
             }
         }
         [HttpPost]
-        public ActionResult PlaceStoreOrEdit(Place placeob)
+        public ActionResult ArtTypeStoreOrEdit(ArtType artTypeob)
         {
             using (DBModel db = new DBModel())
             {
-                if (placeob.placeID == 0)
+                if (artTypeob.typeID == 0)
                 {
-                    db.Places.Add(placeob);
-                    placeob.plaCreateDate = DateTime.Now;
+                    db.ArtTypes.Add(artTypeob);
+                    artTypeob.typCreateDate = DateTime.Now;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
-                    placeob.plaModifierDate = DateTime.Now;
-                    db.Entry(placeob).State = EntityState.Modified;
+                    artTypeob.typModifierDate = DateTime.Now;
+                    db.Entry(artTypeob).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
             }
         }
         [HttpPost]
-        public ActionResult PlaceDelete(int id)
+        public ActionResult ArtTypeDelete(int id)
         {
             using (DBModel db = new DBModel())
             {
-                Place emp = db.Places.Where(x => x.placeID == id).FirstOrDefault<Place>();
-                db.Places.Remove(emp);
+                ArtType emp = db.ArtTypes.Where(x => x.typeID == id).FirstOrDefault<ArtType>();
+                db.ArtTypes.Remove(emp);
                 db.SaveChanges();
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
 
-        public ActionResult PlaceManage()
+        public ActionResult ArtTypeManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
 
 
-
-        //Quản lý đơn vị làm việc
-        public ActionResult UnitGetData()
+        //Quản lý hội nghị
+        public ActionResult ConferenceGetData()
         {
             using (DBModel db = new DBModel())
             {
-                List<Unit> unitList = db.Units.ToList<Unit>();
-                return Json(new { data = unitList },
+                List<Conference> conferenceList = db.Conferences.ToList<Conference>();
+                return Json(new { data = conferenceList },
                     JsonRequestBehavior.AllowGet);
             }
         }
         [HttpGet]
-        public ActionResult UnitStoreOrEdit(int id = 0)
+        public ActionResult ConferenceStoreOrEdit(int id = 0)
         {
             if (id == 0)
             {
-                return View(new Unit());
+                return View(new Conference());
             }
             else
             {
                 using (DBModel db = new DBModel())
                 {
-                    return View(db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>());
+                    return View(db.Conferences.Where(x => x.conferenceID == id).FirstOrDefault<Conference>());
                 }
             }
         }
         [HttpPost]
-        public ActionResult UnitStoreOrEdit(Unit unitob)
+        public ActionResult ConferenceStoreOrEdit(Conference conferenceob)
         {
             using (DBModel db = new DBModel())
             {
-                if (unitob.unitID == 0)
+                if (conferenceob.conferenceID == 0)
                 {
-                    db.Units.Add(unitob);
-                    unitob.untCreateDate = DateTime.Now;
+                    db.Conferences.Add(conferenceob);
+                    conferenceob.cfrCreateDate = DateTime.Now;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
-                    unitob.untModifierDate = DateTime.Now;
-                    db.Entry(unitob).State = EntityState.Modified;
+                    conferenceob.cfrModifierDate = DateTime.Now;
+                    db.Entry(conferenceob).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
             }
         }
         [HttpPost]
-        public ActionResult UnitDelete(int id)
+        public ActionResult ConferenceDelete(int id)
         {
             using (DBModel db = new DBModel())
             {
-                Unit emp = db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>();
-                db.Units.Remove(emp);
+                Conference emp = db.Conferences.Where(x => x.conferenceID == id).FirstOrDefault<Conference>();
+                db.Conferences.Remove(emp);
                 db.SaveChanges();
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
 
-        public ActionResult UnitManage()
+        public ActionResult ConferenceManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();

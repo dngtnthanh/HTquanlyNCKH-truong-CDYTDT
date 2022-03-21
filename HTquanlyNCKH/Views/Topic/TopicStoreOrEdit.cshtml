@@ -6,11 +6,18 @@
 @using (Html.BeginForm("TopicStoreOrEdit", "Topic", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
     @Html.HiddenFor(model => model.topicID)
+
+
     @Html.HiddenFor(model => model.tpcCreateData)
     @Html.HiddenFor(model => model.tpcModifierData)
 
     @Html.HiddenFor(model => model.tpcCreateUser)
     @Html.HiddenFor(model => model.tpcModifierUser)
+
+    @Html.HiddenFor(model => model.tpcStartDate)
+    @Html.HiddenFor(model => model.tpcEndDate)
+    @Html.HiddenFor(model => model.tpcDateOfAcceptance)
+    
     <div class="form-group">
         @Html.LabelFor(model => model.tpcName, "Tên đề tài", new { @class = "control-label" })
         @Html.EditorFor(model => model.tpcName, new { htmlAttributes = new { @class = "form-control" } })
@@ -21,13 +28,45 @@
         @Html.EditorFor(model => model.tpcSummary, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.tpcSummary)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tpcYear, "Năm thực hiện", new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcYear, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = 1990, @max = 2100 } })
+        @Html.ValidationMessageFor(model => model.tpcYear)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tpcReviewBoard, "Hội Đồng Nghiệm Thu", new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcReviewBoard, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.tpcReviewBoard)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tpcStartDate, "Thời Gian Bắt Đầu: " + Model.tpcStartDate, new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcStartDate, new { htmlAttributes = new { @class = "form-control form-input", @type = "date" } })
+        @Html.ValidationMessageFor(model => model.tpcStartDate)
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tpcEndDate, "Thời Gian Kết Thúc: " + Model.tpcEndDate, new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcEndDate, new { htmlAttributes = new { @class = "form-control datepicker", @type = "date" } })
+        @Html.ValidationMessageFor(model => model.tpcEndDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tpcDateOfAcceptance, "Thời Gian Nghiệm Thu: " + Model.tpcDateOfAcceptance, new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcDateOfAcceptance, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+        @Html.ValidationMessageFor(model => model.tpcDateOfAcceptance)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tpcCode, "Mã Số Công Khai", new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcCode, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+        @Html.ValidationMessageFor(model => model.tpcCode)
+    </div>
     <div class="dropdown">
         <div class="form-group">
-            <label>Lĩnh vực</label>
+            <label>Lĩnh Vực</label>
             @Html.DropDownList("fieldID", new SelectList(ViewBag.fie, "fieldID", "fieName", "Select"), new { @class = "form-control" })
         </div>
     </div>
-    
+
     <div class="form-group">
         <label>Xếp loại: </label>
         @Html.DropDownList("classifiID", new SelectList(ViewBag.cls, "classifiID", "clsName", "Select"), new { @class = "form-control" })
@@ -37,11 +76,17 @@
         <label>Trạng thái: </label>
         @Html.DropDownList("statusID", new SelectList(ViewBag.sts, "statusID", "stsName", "Select"), new { @class = "form-control" })
     </div>
-
-
-
     <div class="form-group">
         <input type="submit" value="Lưu lại" class="btn btn-success " />
         <input type="reset" value="Làm mới" class="btn btn-warning" />
     </div>
+    @*<script>
+
+        $(document).ready(function () {
+
+            $('.datepicker').datepicker();
+
+        });
+    </script>*@
+
 }  

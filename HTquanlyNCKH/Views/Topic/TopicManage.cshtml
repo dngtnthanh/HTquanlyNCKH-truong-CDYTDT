@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Quản Lý Danh Sách Đề Tài";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -26,6 +25,7 @@
             <th width="10px">STT</th>
             <th> Tên Đề Tài</th>
             <th>Tóm Tắt</th>
+            <th>Năm Thực Hiện</th>
             <th><i class="fa-solid fa-screwdriver-wrench"></i> Tuỳ Chọn</th>
         </tr>
     </thead>
@@ -72,6 +72,7 @@
                     { "defaultContent": "" },
                     { "data": "tpcName" },
                     { "data": "tpcSummary" },
+                    { "data": "tpcYear" },
                     {
                         "data": "topicID", "render": function (data) {
 
@@ -189,54 +190,5 @@
                 margin-right: 0.5em;
             }
 
-    /*.pagination a {
-        color: #505cdc;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color .3s;
-        background-color: #d3e1f5;
-        border: solid 1px #1f00ff;
-        border-radius: 100px;
-        font-size: 12px;
-    }*/
-
-    /* Style the active/current link */
-    /*.pagination a.active {
-            background-color: aqua;
-            color: white;
-        }*/
-
-    /* Add a grey background color on mouse-over */
-    /*.pagination a:hover:not(.active) {
-            background-color: #bec4ed;
-        }*/
 </style>
 
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title ">
-                    Xác nhận xoá?
-                </h4>
-
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-            </div>
-
-
-            <div class="modal-body">
-                <button type="button" class="btn btn-check" data-dismiss="modal">
-                    Đóng
-                </button>
-                <button type="button" class="btn btn-danger">
-                    Xoá
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<br />

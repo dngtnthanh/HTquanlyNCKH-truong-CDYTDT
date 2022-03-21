@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.Nation
+@using (Html.BeginForm("NationStoreOrEdit", "Articles", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.nationID)
+    @Html.HiddenFor(model => model.natCreateDate)
+    @Html.HiddenFor(model => model.natModifierDate)
+
+    @Html.HiddenFor(model => model.natCreateUser)
+    @Html.HiddenFor(model => model.natModifierUser)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.natName, "Tên Quốc Gia", new { @class = "control-label" })
+        @Html.EditorFor(model => model.natName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.natName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.natDescription, "Mô tả", new { @class = "control-label" })
+        @Html.EditorFor(model => model.natDescription, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.natDescription)
+    </div>
+    <div class="form-group">
+
+        <input type="submit" value="Lưu lại" class="btn btn-success " />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+}  

@@ -14,34 +14,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Topics">
-      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
-        <MappingFragment StoreEntitySet="Topic">
-          <ScalarProperty Name="topicID" ColumnName="topicID" />
-          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
-          <ScalarProperty Name="scaleID" ColumnName="scaleID" />
-          <ScalarProperty Name="classifiID" ColumnName="classifiID" />
-          <ScalarProperty Name="statusID" ColumnName="statusID" />
-          <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
-          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
-          <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
-          <ScalarProperty Name="tpcName" ColumnName="tpcName" />
-          <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
-          <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
-          <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
-          <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
-          <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
-          <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
-          <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
-          <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
-          <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
-          <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
-          <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
-          <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
-          <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Fields">
       <EntityTypeMapping TypeName="HTquanlyNCKHModel.Field">
         <MappingFragment StoreEntitySet="Field">
@@ -129,6 +101,87 @@
           <ScalarProperty Name="untDescription" ColumnName="untDescription" />
           <ScalarProperty Name="untName" ColumnName="untName" />
           <ScalarProperty Name="unitID" ColumnName="unitID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nations">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Nation">
+        <MappingFragment StoreEntitySet="Nation">
+          <ScalarProperty Name="natModifierUser" ColumnName="natModifierUser" />
+          <ScalarProperty Name="natCreateUser" ColumnName="natCreateUser" />
+          <ScalarProperty Name="natModifierDate" ColumnName="natModifierDate" />
+          <ScalarProperty Name="natCreateDate" ColumnName="natCreateDate" />
+          <ScalarProperty Name="natDescription" ColumnName="natDescription" />
+          <ScalarProperty Name="natThreeCode" ColumnName="natThreeCode" />
+          <ScalarProperty Name="natTwoCode" ColumnName="natTwoCode" />
+          <ScalarProperty Name="natName" ColumnName="natName" />
+          <ScalarProperty Name="nationID" ColumnName="nationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeyWords">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.KeyWord">
+        <MappingFragment StoreEntitySet="KeyWord">
+          <ScalarProperty Name="keyModifierUser" ColumnName="keyModifierUser" />
+          <ScalarProperty Name="keyCreateUser" ColumnName="keyCreateUser" />
+          <ScalarProperty Name="keyModifierDate" ColumnName="keyModifierDate" />
+          <ScalarProperty Name="keyCreateDate" ColumnName="keyCreateDate" />
+          <ScalarProperty Name="keyDescription" ColumnName="keyDescription" />
+          <ScalarProperty Name="keyName" ColumnName="keyName" />
+          <ScalarProperty Name="keyID" ColumnName="keyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtTypes">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.ArtType">
+        <MappingFragment StoreEntitySet="ArtType">
+          <ScalarProperty Name="typModifierUser" ColumnName="typModifierUser" />
+          <ScalarProperty Name="typCreateUser" ColumnName="typCreateUser" />
+          <ScalarProperty Name="typModifierDate" ColumnName="typModifierDate" />
+          <ScalarProperty Name="typCreateDate" ColumnName="typCreateDate" />
+          <ScalarProperty Name="typDescription" ColumnName="typDescription" />
+          <ScalarProperty Name="typName" ColumnName="typName" />
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
+        <MappingFragment StoreEntitySet="Topic">
+          <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
+          <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
+          <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
+          <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
+          <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
+          <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
+          <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
+          <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
+          <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
+          <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
+          <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
+          <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
+          <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
+          <ScalarProperty Name="tpcName" ColumnName="tpcName" />
+          <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
+          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+          <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+          <ScalarProperty Name="topicID" ColumnName="topicID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conferences">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Conference">
+        <MappingFragment StoreEntitySet="Conference">
+          <ScalarProperty Name="cfrModifierUser" ColumnName="cfrModifierUser" />
+          <ScalarProperty Name="cfrCreateUser" ColumnName="cfrCreateUser" />
+          <ScalarProperty Name="cfrModifierDate" ColumnName="cfrModifierDate" />
+          <ScalarProperty Name="cfrCreateDate" ColumnName="cfrCreateDate" />
+          <ScalarProperty Name="cfrDescription" ColumnName="cfrDescription" />
+          <ScalarProperty Name="cfrName" ColumnName="cfrName" />
+          <ScalarProperty Name="conferenceID" ColumnName="conferenceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

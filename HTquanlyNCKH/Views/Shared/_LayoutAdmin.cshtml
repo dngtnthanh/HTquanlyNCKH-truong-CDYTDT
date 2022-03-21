@@ -230,7 +230,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
                             <a href="@Url.Action("index", "Admin")" class="nav-link">
                                 @*class="nav-link active">*@
@@ -332,6 +332,53 @@
                                     <a href="@Url.Action("PlaceManage", "Scientist")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Nơi sinh</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa-solid fa-newspaper"></i>
+                                <p>
+                                    Quản Lý Bài Báo Quốc Tế
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa-solid fa-list-check"></i>
+                                        <p>Danh sách các bài báo quốc tế</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("NationManage", "Articles")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Quốc gia</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ConferenceManage", "Articles")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Hội nghị</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("KeyWordManage", "Articles")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Từ khoá</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ArtTypeManage", "Articles")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thể loại bài viết</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("FieldManage", "Topic")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lĩnh vực nghiên cứu</p>
                                     </a>
                                 </li>
                             </ul>

@@ -210,7 +210,7 @@ namespace HTquanlyNCKH.Controllers
         {
             using (DBModel db = new DBModel())
             {
-                List<Topic> topicList = db.Topics.ToList<Topic>();
+                List<Topic> topicList = db.Topics.ToList<Topic>();                    
                 return Json(new { data = topicList },
                     JsonRequestBehavior.AllowGet);
             }
@@ -224,13 +224,15 @@ namespace HTquanlyNCKH.Controllers
                 {
                     List<Field> fie = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
                     ViewBag.fie = fie;
-                    ViewBag.fieNull = fie.Single(n => n.fieldID == 25);
+                    
 
                     List<Classification> cls = db.Classifications.OrderByDescending(n => n.classifiID).ToList<Classification>();
                     ViewBag.cls = cls;
 
                     List<Status> sts = db.Status.OrderByDescending(n => n.statusID).ToList<Status>();
                     ViewBag.sts = sts;
+
+                    
 
                     return View(new Topic());
                 }                    
@@ -248,8 +250,8 @@ namespace HTquanlyNCKH.Controllers
                     List<Status> sts = db.Status.OrderByDescending(n => n.statusID).ToList<Status>();
                     ViewBag.sts = sts;
 
-
-
+                    var tpc = db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>();
+                    ViewBag.tpcStartDate = tpc.tpcStartDate;
                     return View(db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>());
                 }
             }

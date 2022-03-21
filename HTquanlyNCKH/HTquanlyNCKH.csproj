@@ -144,13 +144,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScientistController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArtType.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Classification.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Conference.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Council.cs">
@@ -171,6 +178,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBModels1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Degree.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
@@ -178,6 +190,12 @@
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Foreign.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KeyWord.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Nation.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Place.cs">
@@ -2199,7 +2217,7 @@
     <Content Include="Models\DBModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBModels.edmx</DependentUpon>
-      <LastGenOutput>DBModels.cs</LastGenOutput>
+      <LastGenOutput>DBModels1.cs</LastGenOutput>
     </Content>
     <Content Include="Content\dist\css\adminlte.css.map" />
     <Content Include="Content\dist\css\adminlte.min.css.map" />
@@ -2348,7 +2366,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\listViewClassifi.cshtml" />
     <Content Include="Views\Topic\ClassifiManage.cshtml" />
     <Content Include="Views\Topic\ClassifiStoreOrEdit.cshtml" />
     <Content Include="Views\Topic\FieldManage.cshtml" />
@@ -2365,6 +2382,14 @@
     <Content Include="Views\Scientist\PlaceStoreOrEdit.cshtml" />
     <Content Include="Views\Scientist\UnitManage.cshtml" />
     <Content Include="Views\Scientist\UnitStoreOrEdit.cshtml" />
+    <Content Include="Views\Articles\NationManage.cshtml" />
+    <Content Include="Views\Articles\NationStoreOrEdit.cshtml" />
+    <Content Include="Views\Articles\KeyWordManage.cshtml" />
+    <Content Include="Views\Articles\KeyWordStoreOrEdit.cshtml" />
+    <Content Include="Views\Articles\ArtTypeStoreOrEdit.cshtml" />
+    <Content Include="Views\Articles\ArtTypeManage.cshtml" />
+    <Content Include="Views\Articles\ConferenceStoreOrEdit.cshtml" />
+    <Content Include="Views\Articles\ConferenceManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

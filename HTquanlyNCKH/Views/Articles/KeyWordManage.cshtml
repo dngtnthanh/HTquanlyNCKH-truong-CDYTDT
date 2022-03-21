@@ -1,17 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "Quản Lý Nơi Sinh";
+    ViewBag.Title = "Quản Lý Từ Khoá";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("PlaceStoreOrEdit","Scientist")')">
+
+
+<a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("KeyWordStoreOrEdit","Articles")')">
     <i class="fa fa-plus"></i> Thêm Mới
 </a>
-<table id="PlaceTable" class="table table-striped table-bordered" style="width:100%">
+<table id="KeyWordTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr @*style="background-color: #bec4ed*@>
             <th width="10px">STT</th>
-            <th> Tên Nơi Sinh</th>
-            <th>Mô Tả</th>
+            <th> Tên Từ Khoá</th>
+            <th> Mô tả</th>
             <th><i class="fa-solid fa-screwdriver-wrench"></i> Tuỳ Chọn</th>
         </tr>
     </thead>
@@ -41,11 +43,11 @@
 
 
 
-            dataTable = $("#PlaceTable").DataTable({
+            dataTable = $("#KeyWordTable").DataTable({
                 /*"info": false,*/
                 "ajax": {
 
-                    "url": "/Scientist/PlaceGetData",
+                    "url": "/Articles/KeyWordGetData",
                     "type": "GET",
                     "datatype": "json"
 
@@ -53,12 +55,12 @@
 
                 "columns": [
                     { "defaultContent": "" },
-                    { "data": "plaName" },
-                    { "data": "plaDescription" },
+                    { "data": "keyName" },
+                    { "data": "keyDescription" },
                     {
-                        "data": "placeID", "render": function (data) {
+                        "data": "keyID", "render": function (data) {
 
-                            return "<a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("PlaceStoreOrEdit", "Scientist")/" + data + "')><i class='fa fa-pencil'></i> Sửa</a>  <a class='btn btn-danger btn-sm' style='margin-left:5px'   onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon) Xoá</a>";
+                            return "<a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("KeyWordStoreOrEdit", "Articles")/" + data + "')><i class='fa fa-pencil'></i> Sửa</a>  <a class='btn btn-danger btn-sm' style='margin-left:5px'   onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon) Xoá</a>";
                         },
 
                         "orderable": false,
@@ -71,7 +73,7 @@
                 ],
 
                 "language": {
-                    "emptyTable": "Dữ liệu rỗng <b>Thêm mới </b> Button",
+                    "emptyTable": "Dữ liệu rỗng, hãy nhấn <b>Thêm mới </b>",
                     "formatNavigator": "<%= số trang %> / <%= trên trang %>",
                 }
 
@@ -136,7 +138,7 @@
             if (confirm('Bạn có chắc chắn muốn xoá?')) {
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("PlaceDelete", "Scientist")/' + id,
+                    url: '@Url.Action("KeyWordDelete", "Articles")/' + id,
                     success: function (data) {
 
                         if (data.success) {
