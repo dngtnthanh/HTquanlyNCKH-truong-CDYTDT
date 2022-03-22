@@ -126,6 +126,21 @@
           <Property Name="plaCreateUser" Type="int" />
           <Property Name="plaModifierUser" Type="int" />
         </EntityType>
+        <EntityType Name="Slider">
+          <Key>
+            <PropertyRef Name="sliderID" />
+          </Key>
+          <Property Name="sliderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sldH5" Type="nvarchar" MaxLength="255" />
+          <Property Name="sldH1" Type="nvarchar" MaxLength="255" />
+          <Property Name="sldContent" Type="nvarchar" MaxLength="255" />
+          <Property Name="sldImage" Type="text" />
+          <Property Name="sldDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="sldCreateDate" Type="datetime" />
+          <Property Name="sldModifierDate" Type="datetime" />
+          <Property Name="sldCreateUser" Type="int" />
+          <Property Name="ModifierUser" Type="int" />
+        </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="statusID" />
@@ -187,6 +202,7 @@
           <EntitySet Name="KeyWord" EntityType="Self.KeyWord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nation" EntityType="Self.Nation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
@@ -221,6 +237,7 @@
           <EntitySet Name="ArtTypes" EntityType="HTquanlyNCKHModel.ArtType" />
           <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
           <EntitySet Name="Conferences" EntityType="HTquanlyNCKHModel.Conference" />
+          <EntitySet Name="Sliders" EntityType="HTquanlyNCKHModel.Slider" />
         </EntityContainer>
         <EntityType Name="Field">
           <Key>
@@ -380,6 +397,21 @@
           <Property Name="cfrModifierDate" Type="DateTime" Precision="3" />
           <Property Name="cfrCreateUser" Type="Int32" />
           <Property Name="cfrModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Slider">
+          <Key>
+            <PropertyRef Name="sliderID" />
+          </Key>
+          <Property Name="sliderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sldH5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sldH1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sldContent" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sldImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sldDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sldCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="sldModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="sldCreateUser" Type="Int32" />
+          <Property Name="ModifierUser" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -568,6 +600,22 @@
                 <ScalarProperty Name="cfrDescription" ColumnName="cfrDescription" />
                 <ScalarProperty Name="cfrName" ColumnName="cfrName" />
                 <ScalarProperty Name="conferenceID" ColumnName="conferenceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sliders">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Slider">
+              <MappingFragment StoreEntitySet="Slider">
+                <ScalarProperty Name="ModifierUser" ColumnName="ModifierUser" />
+                <ScalarProperty Name="sldCreateUser" ColumnName="sldCreateUser" />
+                <ScalarProperty Name="sldModifierDate" ColumnName="sldModifierDate" />
+                <ScalarProperty Name="sldCreateDate" ColumnName="sldCreateDate" />
+                <ScalarProperty Name="sldDescription" ColumnName="sldDescription" />
+                <ScalarProperty Name="sldImage" ColumnName="sldImage" />
+                <ScalarProperty Name="sldContent" ColumnName="sldContent" />
+                <ScalarProperty Name="sldH1" ColumnName="sldH1" />
+                <ScalarProperty Name="sldH5" ColumnName="sldH5" />
+                <ScalarProperty Name="sliderID" ColumnName="sliderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

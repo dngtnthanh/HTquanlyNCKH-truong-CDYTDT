@@ -310,12 +310,12 @@
                                         <p>Đơn vị làm việc</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Học vị</p>
-                                    </a>
-                                </li>
+                                @*<li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Học vị</p>
+                    </a>
+                </li>*@
                                 <li class="nav-item">
                                     <a href="@Url.Action("FieldManage", "Topic")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -381,6 +381,25 @@
                                         <p>Lĩnh vực nghiên cứu</p>
                                     </a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa-solid fa-house-user"></i>
+                                <p>
+                                    Quản Lý Trang Người Dùng
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("SliderManage", "Admin")" class="nav-link">
+                                        <i class="fa-solid fa-panorama"></i>
+                                        <p>Ảnh bìa</p>
+                                    </a>
+                                </li>
+                                
                             </ul>
                         </li>
                     </ul>

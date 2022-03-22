@@ -121,6 +121,21 @@
     <Property Name="plaCreateUser" Type="int" />
     <Property Name="plaModifierUser" Type="int" />
   </EntityType>
+  <EntityType Name="Slider">
+    <Key>
+      <PropertyRef Name="sliderID" />
+    </Key>
+    <Property Name="sliderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sldH5" Type="nvarchar" MaxLength="255" />
+    <Property Name="sldH1" Type="nvarchar" MaxLength="255" />
+    <Property Name="sldContent" Type="nvarchar" MaxLength="255" />
+    <Property Name="sldImage" Type="text" />
+    <Property Name="sldDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="sldCreateDate" Type="datetime" />
+    <Property Name="sldModifierDate" Type="datetime" />
+    <Property Name="sldCreateUser" Type="int" />
+    <Property Name="ModifierUser" Type="int" />
+  </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="statusID" />
@@ -182,6 +197,7 @@
     <EntitySet Name="KeyWord" EntityType="Self.KeyWord" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nation" EntityType="Self.Nation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />

@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.Slider
+@using (Html.BeginForm("SliderStoreOrEdit", "Admin", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.sliderID)
+    @Html.HiddenFor(model => model.sldCreateDate)
+    @Html.HiddenFor(model => model.sldModifierDate)
+
+    @Html.HiddenFor(model => model.sldCreateUser)
+    @Html.HiddenFor(model => model.ModifierUser)
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.classifiID, "Mã số", new { @class = "control-label" })
+            @Html.DisplayFor(model => model.classifiID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.classifiID)
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sldH5, "Tên Trường", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sldH5, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sldH5)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sldH1, "Tiêu Đề", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sldH1, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sldH5)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sldContent, "Nội dung", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sldContent, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sldContent)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sldImage, "Ảnh Bìa", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sldImage, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sldImage)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sldDescription, "Mô Tả", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sldDescription, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sldDescription)
+    </div>
+
+    <div class="form-group">
+
+        <input type="submit" value="Lưu lại" class="btn btn-success " />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+}  

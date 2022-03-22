@@ -201,6 +201,9 @@
     <Compile Include="Models\Place.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Slider.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Status.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
@@ -2390,6 +2393,8 @@
     <Content Include="Views\Articles\ArtTypeManage.cshtml" />
     <Content Include="Views\Articles\ConferenceStoreOrEdit.cshtml" />
     <Content Include="Views\Articles\ConferenceManage.cshtml" />
+    <Content Include="Views\Admin\SliderManage.cshtml" />
+    <Content Include="Views\Admin\SliderStoreOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

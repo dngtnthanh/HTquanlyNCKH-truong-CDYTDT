@@ -18,6 +18,7 @@
         <EntityTypeShape EntityType="HTquanlyNCKHModel.ArtType" Width="1.5" PointX="6" PointY="10.75" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Topic" Width="1.5" PointX="0.5" PointY="0.75" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Conference" Width="1.5" PointX="8.25" PointY="10.75" />
+        <EntityTypeShape EntityType="HTquanlyNCKHModel.Slider" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

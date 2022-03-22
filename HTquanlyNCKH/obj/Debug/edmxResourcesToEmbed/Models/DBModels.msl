@@ -185,5 +185,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Sliders">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Slider">
+        <MappingFragment StoreEntitySet="Slider">
+          <ScalarProperty Name="ModifierUser" ColumnName="ModifierUser" />
+          <ScalarProperty Name="sldCreateUser" ColumnName="sldCreateUser" />
+          <ScalarProperty Name="sldModifierDate" ColumnName="sldModifierDate" />
+          <ScalarProperty Name="sldCreateDate" ColumnName="sldCreateDate" />
+          <ScalarProperty Name="sldDescription" ColumnName="sldDescription" />
+          <ScalarProperty Name="sldImage" ColumnName="sldImage" />
+          <ScalarProperty Name="sldContent" ColumnName="sldContent" />
+          <ScalarProperty Name="sldH1" ColumnName="sldH1" />
+          <ScalarProperty Name="sldH5" ColumnName="sldH5" />
+          <ScalarProperty Name="sliderID" ColumnName="sliderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

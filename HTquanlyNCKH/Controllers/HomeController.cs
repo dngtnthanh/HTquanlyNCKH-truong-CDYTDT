@@ -11,10 +11,19 @@ namespace HTquanlyNCKH.Controllers
     {
         public ActionResult Index()
         {
-          
-            
+            using (DBModel db = new DBModel()) {
 
-            return View();
+                //{
+                //    List<Slider> sliderList = db.Sliders.ToList<Slider>();
+                //    return Json(new { data = sliderList },
+                //    JsonRequestBehavior.AllowGet);
+
+                //List<Slider> sliderList = db.Sliders.ToList<Slider>();
+                var sliderList = from p in db.Sliders.OrderByDescending(n => n.sliderID)
+                                 select p;
+                ViewBag.slider = sliderList;
+            return View(sliderList);
+            }            
         }
 
         public ActionResult About()

@@ -38,5 +38,6 @@ namespace HTquanlyNCKH.Models
         public virtual DbSet<ArtType> ArtTypes { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<Conference> Conferences { get; set; }
+        public virtual DbSet<Slider> Sliders { get; set; }
     }
 }
