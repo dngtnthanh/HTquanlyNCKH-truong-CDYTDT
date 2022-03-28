@@ -18,6 +18,7 @@
     </Key>
     <Property Name="classifiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="clsName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="clsOrder" Type="int" />
     <Property Name="clsDescription" Type="nvarchar" MaxLength="500" />
     <Property Name="clsCreateDate" Type="datetime" />
     <Property Name="clsModifierDate" Type="datetime" />
@@ -82,6 +83,19 @@
     <Property Name="fgnModifierDate" Type="datetime" />
     <Property Name="fgnCreateUser" Type="int" />
     <Property Name="fgnModifierUser" Type="int" />
+  </EntityType>
+  <EntityType Name="Intro">
+    <Key>
+      <PropertyRef Name="introID" />
+    </Key>
+    <Property Name="introID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="itdName" Type="nvarchar" MaxLength="255" />
+    <Property Name="itdSummary" Type="nvarchar" MaxLength="500" />
+    <Property Name="itdIcon" Type="nvarchar" MaxLength="255" />
+    <Property Name="itdCreateDate" Type="datetime" />
+    <Property Name="itdModifierDate" Type="datetime" />
+    <Property Name="itdCreateUser" Type="int" />
+    <Property Name="itdModifierUser" Type="int" />
   </EntityType>
   <EntityType Name="KeyWord">
     <Key>
@@ -173,6 +187,7 @@
     <Property Name="tpcModifierUser" Type="int" />
     <Property Name="tpcDeleteData" Type="datetime" />
     <Property Name="tpcDeleteUser" Type="int" />
+    <Property Name="tpcImage" Type="text" />
   </EntityType>
   <EntityType Name="Unit">
     <Key>
@@ -194,6 +209,7 @@
     <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Field" EntityType="Self.Field" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Foreign" EntityType="Self.Foreign" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Intro" EntityType="Self.Intro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeyWord" EntityType="Self.KeyWord" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nation" EntityType="Self.Nation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />

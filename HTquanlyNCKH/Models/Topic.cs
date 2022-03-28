@@ -35,5 +35,6 @@ namespace HTquanlyNCKH.Models
         public Nullable<int> tpcModifierUser { get; set; }
         public Nullable<System.DateTime> tpcDeleteData { get; set; }
         public Nullable<int> tpcDeleteUser { get; set; }
+        public string tpcImage { get; set; }
     }
 }

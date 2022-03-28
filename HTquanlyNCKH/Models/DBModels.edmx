@@ -23,6 +23,7 @@
           </Key>
           <Property Name="classifiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clsName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="clsOrder" Type="int" />
           <Property Name="clsDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="clsCreateDate" Type="datetime" />
           <Property Name="clsModifierDate" Type="datetime" />
@@ -87,6 +88,19 @@
           <Property Name="fgnModifierDate" Type="datetime" />
           <Property Name="fgnCreateUser" Type="int" />
           <Property Name="fgnModifierUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Intro">
+          <Key>
+            <PropertyRef Name="introID" />
+          </Key>
+          <Property Name="introID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itdName" Type="nvarchar" MaxLength="255" />
+          <Property Name="itdSummary" Type="nvarchar" MaxLength="500" />
+          <Property Name="itdIcon" Type="nvarchar" MaxLength="255" />
+          <Property Name="itdCreateDate" Type="datetime" />
+          <Property Name="itdModifierDate" Type="datetime" />
+          <Property Name="itdCreateUser" Type="int" />
+          <Property Name="itdModifierUser" Type="int" />
         </EntityType>
         <EntityType Name="KeyWord">
           <Key>
@@ -178,6 +192,7 @@
           <Property Name="tpcModifierUser" Type="int" />
           <Property Name="tpcDeleteData" Type="datetime" />
           <Property Name="tpcDeleteUser" Type="int" />
+          <Property Name="tpcImage" Type="text" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -199,6 +214,7 @@
           <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Field" EntityType="Self.Field" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Foreign" EntityType="Self.Foreign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Intro" EntityType="Self.Intro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeyWord" EntityType="Self.KeyWord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nation" EntityType="Self.Nation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
@@ -211,20 +227,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HTquanlyNCKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Classification">
-          <Key>
-            <PropertyRef Name="classifiID" />
-          </Key>
-          <Property Name="classifiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="clsName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="clsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="clsCreateDate" Type="DateTime" Precision="3" />
-          <Property Name="clsModifierDate" Type="DateTime" Precision="3" />
-          <Property Name="clsCreateUser" Type="Int32" />
-          <Property Name="clsModifierUser" Type="Int32" />
-        </EntityType>
         <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Classifications" EntityType="Self.Classification" />
           <EntitySet Name="Fields" EntityType="HTquanlyNCKHModel.Field" />
           <EntitySet Name="Status" EntityType="HTquanlyNCKHModel.Status" />
           <EntitySet Name="Councils" EntityType="HTquanlyNCKHModel.Council" />
@@ -235,9 +238,11 @@
           <EntitySet Name="Nations" EntityType="HTquanlyNCKHModel.Nation" />
           <EntitySet Name="KeyWords" EntityType="HTquanlyNCKHModel.KeyWord" />
           <EntitySet Name="ArtTypes" EntityType="HTquanlyNCKHModel.ArtType" />
-          <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
           <EntitySet Name="Conferences" EntityType="HTquanlyNCKHModel.Conference" />
           <EntitySet Name="Sliders" EntityType="HTquanlyNCKHModel.Slider" />
+          <EntitySet Name="Classifications" EntityType="HTquanlyNCKHModel.Classification" />
+          <EntitySet Name="Introes" EntityType="HTquanlyNCKHModel.Intro" />
+          <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
         </EntityContainer>
         <EntityType Name="Field">
           <Key>
@@ -360,32 +365,6 @@
           <Property Name="typCreateUser" Type="Int32" />
           <Property Name="typModifierUser" Type="Int32" />
         </EntityType>
-        <EntityType Name="Topic">
-          <Key>
-            <PropertyRef Name="topicID" />
-          </Key>
-          <Property Name="topicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="scientistID" Type="Int32" />
-          <Property Name="classifiID" Type="Int32" />
-          <Property Name="statusID" Type="Int32" />
-          <Property Name="acceptsID" Type="Int32" />
-          <Property Name="fieldID" Type="Int32" />
-          <Property Name="tpcYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="tpcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="tpcSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="tpcCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="tpcStartDate" Type="DateTime" Precision="0" />
-          <Property Name="tpcEndDate" Type="DateTime" Precision="0" />
-          <Property Name="tpcDateOfAcceptance" Type="DateTime" Precision="0" />
-          <Property Name="tpcProofFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="tpcReviewBoard" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="tpcCreateData" Type="DateTime" Precision="3" />
-          <Property Name="tpcModifierData" Type="DateTime" Precision="3" />
-          <Property Name="tpcCreateUser" Type="Int32" />
-          <Property Name="tpcModifierUser" Type="Int32" />
-          <Property Name="tpcDeleteData" Type="DateTime" Precision="3" />
-          <Property Name="tpcDeleteUser" Type="Int32" />
-        </EntityType>
         <EntityType Name="Conference">
           <Key>
             <PropertyRef Name="conferenceID" />
@@ -413,25 +392,65 @@
           <Property Name="sldCreateUser" Type="Int32" />
           <Property Name="ModifierUser" Type="Int32" />
         </EntityType>
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="classifiID" />
+          </Key>
+          <Property Name="classifiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clsName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="clsOrder" Type="Int32" />
+          <Property Name="clsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="clsCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="clsModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="clsCreateUser" Type="Int32" />
+          <Property Name="clsModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Intro">
+          <Key>
+            <PropertyRef Name="introID" />
+          </Key>
+          <Property Name="introID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="itdName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="itdSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="itdIcon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="itdCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="itdModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="itdCreateUser" Type="Int32" />
+          <Property Name="itdModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="topicID" />
+          </Key>
+          <Property Name="topicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scientistID" Type="Int32" />
+          <Property Name="classifiID" Type="Int32" />
+          <Property Name="statusID" Type="Int32" />
+          <Property Name="acceptsID" Type="Int32" />
+          <Property Name="fieldID" Type="Int32" />
+          <Property Name="tpcYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="tpcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tpcSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tpcCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tpcStartDate" Type="DateTime" Precision="0" />
+          <Property Name="tpcEndDate" Type="DateTime" Precision="0" />
+          <Property Name="tpcDateOfAcceptance" Type="DateTime" Precision="0" />
+          <Property Name="tpcProofFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tpcReviewBoard" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="tpcCreateData" Type="DateTime" Precision="3" />
+          <Property Name="tpcModifierData" Type="DateTime" Precision="3" />
+          <Property Name="tpcCreateUser" Type="Int32" />
+          <Property Name="tpcModifierUser" Type="Int32" />
+          <Property Name="tpcDeleteData" Type="DateTime" Precision="3" />
+          <Property Name="tpcDeleteUser" Type="Int32" />
+          <Property Name="tpcImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HTquanlyNCKHModelStoreContainer" CdmEntityContainer="DBModel">
-          <EntitySetMapping Name="Classifications">
-            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Classification">
-              <MappingFragment StoreEntitySet="Classification">
-                <ScalarProperty Name="classifiID" ColumnName="classifiID" />
-                <ScalarProperty Name="clsName" ColumnName="clsName" />
-                <ScalarProperty Name="clsDescription" ColumnName="clsDescription" />
-                <ScalarProperty Name="clsCreateDate" ColumnName="clsCreateDate" />
-                <ScalarProperty Name="clsModifierDate" ColumnName="clsModifierDate" />
-                <ScalarProperty Name="clsCreateUser" ColumnName="clsCreateUser" />
-                <ScalarProperty Name="clsModifierUser" ColumnName="clsModifierUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Fields">
             <EntityTypeMapping TypeName="HTquanlyNCKHModel.Field">
               <MappingFragment StoreEntitySet="Field">
@@ -563,33 +582,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Topics">
-            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
-              <MappingFragment StoreEntitySet="Topic">
-                <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
-                <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
-                <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
-                <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
-                <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
-                <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
-                <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
-                <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
-                <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
-                <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
-                <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
-                <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
-                <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
-                <ScalarProperty Name="tpcName" ColumnName="tpcName" />
-                <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
-                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
-                <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
-                <ScalarProperty Name="statusID" ColumnName="statusID" />
-                <ScalarProperty Name="classifiID" ColumnName="classifiID" />
-                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
-                <ScalarProperty Name="topicID" ColumnName="topicID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Conferences">
             <EntityTypeMapping TypeName="HTquanlyNCKHModel.Conference">
               <MappingFragment StoreEntitySet="Conference">
@@ -616,6 +608,62 @@
                 <ScalarProperty Name="sldH1" ColumnName="sldH1" />
                 <ScalarProperty Name="sldH5" ColumnName="sldH5" />
                 <ScalarProperty Name="sliderID" ColumnName="sliderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classifications">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Classification">
+              <MappingFragment StoreEntitySet="Classification">
+                <ScalarProperty Name="clsModifierUser" ColumnName="clsModifierUser" />
+                <ScalarProperty Name="clsCreateUser" ColumnName="clsCreateUser" />
+                <ScalarProperty Name="clsModifierDate" ColumnName="clsModifierDate" />
+                <ScalarProperty Name="clsCreateDate" ColumnName="clsCreateDate" />
+                <ScalarProperty Name="clsDescription" ColumnName="clsDescription" />
+                <ScalarProperty Name="clsOrder" ColumnName="clsOrder" />
+                <ScalarProperty Name="clsName" ColumnName="clsName" />
+                <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Introes">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Intro">
+              <MappingFragment StoreEntitySet="Intro">
+                <ScalarProperty Name="itdModifierUser" ColumnName="itdModifierUser" />
+                <ScalarProperty Name="itdCreateUser" ColumnName="itdCreateUser" />
+                <ScalarProperty Name="itdModifierDate" ColumnName="itdModifierDate" />
+                <ScalarProperty Name="itdCreateDate" ColumnName="itdCreateDate" />
+                <ScalarProperty Name="itdIcon" ColumnName="itdIcon" />
+                <ScalarProperty Name="itdSummary" ColumnName="itdSummary" />
+                <ScalarProperty Name="itdName" ColumnName="itdName" />
+                <ScalarProperty Name="introID" ColumnName="introID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="tpcImage" ColumnName="tpcImage" />
+                <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
+                <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
+                <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
+                <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
+                <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
+                <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
+                <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
+                <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
+                <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
+                <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
+                <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
+                <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
+                <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
+                <ScalarProperty Name="tpcName" ColumnName="tpcName" />
+                <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
+                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+                <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

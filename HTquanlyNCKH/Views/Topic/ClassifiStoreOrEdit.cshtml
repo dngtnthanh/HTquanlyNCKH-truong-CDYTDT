@@ -26,6 +26,12 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.clsOrder, "Sắp xếp", new { @class = "control-label" })
+        @Html.EditorFor(model => model.clsOrder, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.clsOrder)
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.clsDescription, "Mô tả", new { @class = "control-label" })
         @Html.EditorFor(model => model.clsDescription, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.clsDescription)

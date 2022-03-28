@@ -192,6 +192,9 @@
     <Compile Include="Models\Foreign.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Intro.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\KeyWord.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
@@ -273,6 +276,8 @@
     <Content Include="Content\dist\img\credit\paypal2.png" />
     <Content Include="Content\dist\img\credit\visa.png" />
     <Content Include="Content\dist\img\default-150x150.png" />
+    <Content Include="Content\dist\img\HuongDanSuDung\24 3 2022 1.PNG" />
+    <Content Include="Content\dist\img\HuongDanSuDung\huong-dan-add-bia.PNG" />
     <Content Include="Content\dist\img\icons.png" />
     <Content Include="Content\dist\img\photo1.png" />
     <Content Include="Content\dist\img\photo2.png" />
@@ -2395,6 +2400,10 @@
     <Content Include="Views\Articles\ConferenceManage.cshtml" />
     <Content Include="Views\Admin\SliderManage.cshtml" />
     <Content Include="Views\Admin\SliderStoreOrEdit.cshtml" />
+    <Content Include="Views\Home\TopicManage.cshtml" />
+    <Content Include="Views\Home\TopicStoreOrEdit.cshtml" />
+    <Content Include="Views\Admin\IntroManage.cshtml" />
+    <Content Include="Views\Admin\IntroStoreOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,7 +13,7 @@
     </button>*@
 
 
-
+<img src="~/Content/dist/img/HuongDanSuDung/24 3 2022 1.PNG" width="100%" height="300"  />
 
 
 <a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("ClassifiStoreOrEdit","Topic")')">
@@ -25,6 +25,7 @@
         <tr @*style="background-color: #bec4ed*@>
             <th width="10px">STT</th>
             <th> Tên Xếp Loại</th>
+            <th>Sắp Xếp</th>
             <th>Mô Tả</th>
             <th><i class="fa-solid fa-screwdriver-wrench"></i> Tuỳ Chọn</th>
         </tr>
@@ -71,6 +72,7 @@
                 "columns": [
                     { "defaultContent": "" },
                     { "data": "clsName" },
+                    { "data": "clsOrder" },
                     { "data": "clsDescription" },
                     {
                         "data": "classifiID", "render": function (data) {
