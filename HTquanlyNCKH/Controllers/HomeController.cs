@@ -35,7 +35,7 @@ namespace HTquanlyNCKH.Controllers
         //    Countries.Add("Russia");
         //    return Json(Countries, JsonRequestBehavior.AllowGet);
         //}
-        public JsonResult GetCountries()
+        public JsonResult GetCountries()    
         {
             using (DBModel db = new DBModel())
             {
@@ -69,8 +69,8 @@ namespace HTquanlyNCKH.Controllers
             return Json(States, JsonRequestBehavior.AllowGet);
         }
 
-        // Xử lý hiển thị và tìm kiếm danh sách đề tài nghiên cứu khoa học
-        public ActionResult TopicGetData()
+        // xử lý CURD hiển thị và tìm kiếm danh sách đề tài nghiên cứu khoa học
+        public ActionResult TopicGetData()  //Hàm trả chuỗi json load tất cả danh sách đề tài
         {
             using (DBModel db = new DBModel())
             {
@@ -80,7 +80,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
         [HttpGet]
-        public ActionResult TopicStoreOrEdit(int id = 0)
+        public ActionResult TopicStoreOrEdit(int id = 0)    
         {
             if (id == 0)
             {

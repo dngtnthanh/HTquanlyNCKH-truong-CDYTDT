@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HTquanlyNCKH.Models;
 using System.Data.Entity;
+using HTquanlyNCKH.Models;
 namespace HTquanlyNCKH.Controllers
 {
     public class ScientistController : Controller
@@ -17,6 +17,7 @@ namespace HTquanlyNCKH.Controllers
         //Quản lý trình độ nhà khoa học
         public ActionResult DegreeGetData()
         {
+            
             using (DBModel db = new DBModel())
             {
                 List<Degree> degreesList = db.Degrees.ToList<Degree>();

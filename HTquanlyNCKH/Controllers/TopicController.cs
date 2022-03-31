@@ -14,7 +14,8 @@ namespace HTquanlyNCKH.Controllers
         {
             return View();
         }
-        public ActionResult ClassifiGetData()
+        //Xử lý CRUD và tìm kiếm phân loại đề tài vd: cấp trường, cấp bộ, cấp quốc tế.
+        public ActionResult ClassifiGetData()   // Trả chuỗi Json load danh sách phân loại đề tài
         {
             using (DBModel db = new DBModel())
             {
@@ -26,7 +27,7 @@ namespace HTquanlyNCKH.Controllers
         }
         
         [HttpGet]
-        public ActionResult ClassifiStoreOrEdit(int id = 0)
+        public ActionResult ClassifiStoreOrEdit(int id = 0)     //Hiển thị thông tin phân loại đề tài
         {
             if (id == 0)
             {
@@ -40,21 +41,22 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
+        
         [HttpPost]
-        public ActionResult ClassifiStoreOrEdit(Classification classificationob)
+        public ActionResult ClassifiStoreOrEdit(Classification classificationob)    //Xác nhận thêm mới hoặc sửa chữa phân loại đề tài
         {
             using (DBModel db = new DBModel())
             {
-                if (classificationob.classifiID == 0)
+                if (classificationob.classifiID == 0)       //Nếu id truyền vào là 0 thì thực hiện thêm mới
                 {
                     db.Classifications.Add(classificationob);
                     classificationob.clsCreateDate = DateTime.Now;  //Lưu lại thời gian khởi tạo
                     db.SaveChanges();
                     return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
-                else
+                else    //Ngược lại id truyền vào là một giá trị != 0 thì sửa chữa dữ liệu tại id đó
                 {
-                    classificationob.clsModifierDate = DateTime.Now;
+                    classificationob.clsModifierDate = DateTime.Now;        //Lưu thời gian sửa chữa
                     db.Entry(classificationob).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
@@ -62,7 +64,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
         [HttpPost]
-        public ActionResult ClassifiDelete(int id)
+        public ActionResult ClassifiDelete(int id)      //Xoá phân loại đề tài
         {
             using (DBModel db = new DBModel())
             {
@@ -73,7 +75,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
 
-        public ActionResult ClassifiManage()
+        public ActionResult ClassifiManage()        //Hiển thị trang mặc định
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();

@@ -39,6 +39,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
+            
             @using (DBModel db = new DBModel())
             {
                 var introList = from p in db.Introes select p;
@@ -100,7 +101,7 @@
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
                         </div>
                     </div>*@
-                <a class="btn btn-primary py-3 px-5 mt-2" href="">Xem Thêm</a>
+
             </div>
         </div>
     </div>

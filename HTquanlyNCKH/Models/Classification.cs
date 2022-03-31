@@ -16,11 +16,11 @@ namespace HTquanlyNCKH.Models
     {
         public int classifiID { get; set; }
         public string clsName { get; set; }
-        public Nullable<int> clsOrder { get; set; }
         public string clsDescription { get; set; }
         public Nullable<System.DateTime> clsCreateDate { get; set; }
         public Nullable<System.DateTime> clsModifierDate { get; set; }
         public Nullable<int> clsCreateUser { get; set; }
         public Nullable<int> clsModifierUser { get; set; }
+        public Nullable<int> clsOrder { get; set; }
     }
 }

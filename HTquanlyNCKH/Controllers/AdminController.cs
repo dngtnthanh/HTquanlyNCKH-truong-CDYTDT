@@ -99,6 +99,7 @@ namespace HTquanlyNCKH.Controllers
 
 
         //Quản lý giới thiệu Intro
+        
         public ActionResult IntroGetData()
         {
             using (DBModel db = new DBModel())
@@ -108,6 +109,7 @@ namespace HTquanlyNCKH.Controllers
                     JsonRequestBehavior.AllowGet);
             }
         }
+        
         [HttpGet]
         public ActionResult IntroStoreOrEdit(int id = 0)
         {
@@ -123,9 +125,11 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult IntroStoreOrEdit(Intro introob)
         {
+           
             using (DBModel db = new DBModel())
             {
                 if (introob.introID == 0)
