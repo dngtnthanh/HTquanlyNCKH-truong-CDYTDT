@@ -146,7 +146,7 @@ namespace HTquanlyNCKH.Controllers
             return View();
         }
 
-        //Quản lý nơi sinh
+        //Quản lý nơi sinh vd: Đồng Tháp, Vĩnh Long,...
         public ActionResult PlaceGetData()
         {
             using (DBModel db = new DBModel())
@@ -271,6 +271,72 @@ namespace HTquanlyNCKH.Controllers
         }
 
         public ActionResult UnitManage()
+        {
+            ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
+            return View();
+        }
+
+
+
+        //Quản lý nhà khoa học
+        public ActionResult ScientistGetData()
+        {
+            using (DBModel db = new DBModel())
+            {
+                List<Unit> unitList = db.Units.ToList<Unit>();
+                return Json(new { data = unitList },
+                    JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult ScientistStoreOrEdit(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new Unit());
+            }
+            else
+            {
+                using (DBModel db = new DBModel())
+                {
+                    return View(db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult ScientistStoreOrEdit(Unit unitob)
+        {
+            using (DBModel db = new DBModel())
+            {
+                if (unitob.unitID == 0)
+                {
+                    db.Units.Add(unitob);
+                    unitob.untCreateDate = DateTime.Now;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    unitob.untModifierDate = DateTime.Now;
+                    db.Entry(unitob).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult ScientistDelete(int id)
+        {
+            using (DBModel db = new DBModel())
+            {
+                Unit emp = db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>();
+                db.Units.Remove(emp);
+                db.SaveChanges();
+                return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+            }
+        }
+
+        public ActionResult ScientistManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();

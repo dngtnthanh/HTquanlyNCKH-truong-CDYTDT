@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HTquanlyNCKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HTquanlyNCKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ArtType">
           <Key>
             <PropertyRef Name="typeID" />
@@ -140,6 +140,26 @@
           <Property Name="plaCreateUser" Type="int" />
           <Property Name="plaModifierUser" Type="int" />
         </EntityType>
+        <EntityType Name="Scientist">
+          <Key>
+            <PropertyRef Name="scientistID" />
+          </Key>
+          <Property Name="scientistID" Type="int" Nullable="false" />
+          <Property Name="sctFirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="sctLastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
+          <Property Name="sctBirthday" Type="date" />
+          <Property Name="PlaceID" Type="int" />
+          <Property Name="degreeID" Type="int" />
+          <Property Name="unitID" Type="int" />
+          <Property Name="fieldID" Type="int" />
+          <Property Name="sctWorkingProcess" Type="nvarchar" MaxLength="500" />
+          <Property Name="sctResult" Type="nvarchar" MaxLength="500" />
+          <Property Name="sctForeignID" Type="int" />
+          <Property Name="sctAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="sctPhone" Type="varchar" MaxLength="15" />
+          <Property Name="sctEmail" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Slider">
           <Key>
             <PropertyRef Name="sliderID" />
@@ -218,13 +238,13 @@
           <EntitySet Name="KeyWord" EntityType="Self.KeyWord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nation" EntityType="Self.Nation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scientist" EntityType="Self.Scientist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HTquanlyNCKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -445,7 +465,28 @@
           <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="Topics" EntityType="Self.Topic" />
           <EntitySet Name="Units" EntityType="Self.Unit" />
+          <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
         </EntityContainer>
+        <EntityType Name="Scientist">
+          <Key>
+            <PropertyRef Name="scientistID" />
+          </Key>
+          <Property Name="scientistID" Type="Int32" Nullable="false" />
+          <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sctBirthday" Type="DateTime" Precision="0" />
+          <Property Name="PlaceID" Type="Int32" />
+          <Property Name="degreeID" Type="Int32" />
+          <Property Name="unitID" Type="Int32" />
+          <Property Name="fieldID" Type="Int32" />
+          <Property Name="sctWorkingProcess" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sctResult" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sctForeignID" Type="Int32" />
+          <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -665,6 +706,27 @@
                 <ScalarProperty Name="untModifierDate" ColumnName="untModifierDate" />
                 <ScalarProperty Name="untCreateUser" ColumnName="untCreateUser" />
                 <ScalarProperty Name="untModifierUser" ColumnName="untModifierUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scientists">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
+              <MappingFragment StoreEntitySet="Scientist">
+                <ScalarProperty Name="sctEmail" ColumnName="sctEmail" />
+                <ScalarProperty Name="sctPhone" ColumnName="sctPhone" />
+                <ScalarProperty Name="sctAddress" ColumnName="sctAddress" />
+                <ScalarProperty Name="sctForeignID" ColumnName="sctForeignID" />
+                <ScalarProperty Name="sctResult" ColumnName="sctResult" />
+                <ScalarProperty Name="sctWorkingProcess" ColumnName="sctWorkingProcess" />
+                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+                <ScalarProperty Name="unitID" ColumnName="unitID" />
+                <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+                <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
+                <ScalarProperty Name="sctBirthday" ColumnName="sctBirthday" />
+                <ScalarProperty Name="sctSex" ColumnName="sctSex" />
+                <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
+                <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
+                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

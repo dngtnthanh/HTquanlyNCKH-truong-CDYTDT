@@ -177,7 +177,7 @@ namespace HTquanlyNCKH.Controllers
                     db.Status.Add(statusob);
                     statusob.stsCreateDate = DateTime.Now;
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Lưu lại thànhc công!", JsonRequestBehavior.AllowGet });
+                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
@@ -259,7 +259,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
         [HttpPost]
-        public ActionResult TopicStoreOrEdit(Topic topicob)
+        public ActionResult TopicStoreOrEdit(Topic topicob, FormCollection collection)
         {
             using (DBModel db = new DBModel())
             {
@@ -267,8 +267,9 @@ namespace HTquanlyNCKH.Controllers
                 {
                     db.Topics.Add(topicob);
                     topicob.tpcCreateData = DateTime.Now;
+                    topicob.tpcStartDate = Convert.ToDateTime(collection.Get("ngay-bat-dau"));
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Lưu lại thànhc công!", JsonRequestBehavior.AllowGet });
+                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {

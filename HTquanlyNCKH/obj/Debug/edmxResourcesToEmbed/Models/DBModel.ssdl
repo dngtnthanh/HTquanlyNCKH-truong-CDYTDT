@@ -135,6 +135,26 @@
     <Property Name="plaCreateUser" Type="int" />
     <Property Name="plaModifierUser" Type="int" />
   </EntityType>
+  <EntityType Name="Scientist">
+    <Key>
+      <PropertyRef Name="scientistID" />
+    </Key>
+    <Property Name="scientistID" Type="int" Nullable="false" />
+    <Property Name="sctFirstName" Type="nvarchar" MaxLength="255" />
+    <Property Name="sctLastName" Type="nvarchar" MaxLength="255" />
+    <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
+    <Property Name="sctBirthday" Type="date" />
+    <Property Name="PlaceID" Type="int" />
+    <Property Name="degreeID" Type="int" />
+    <Property Name="unitID" Type="int" />
+    <Property Name="fieldID" Type="int" />
+    <Property Name="sctWorkingProcess" Type="nvarchar" MaxLength="500" />
+    <Property Name="sctResult" Type="nvarchar" MaxLength="500" />
+    <Property Name="sctForeignID" Type="int" />
+    <Property Name="sctAddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="sctPhone" Type="varchar" MaxLength="15" />
+    <Property Name="sctEmail" Type="varchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="Slider">
     <Key>
       <PropertyRef Name="sliderID" />
@@ -213,6 +233,7 @@
     <EntitySet Name="KeyWord" EntityType="Self.KeyWord" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nation" EntityType="Self.Nation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Scientist" EntityType="Self.Scientist" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />

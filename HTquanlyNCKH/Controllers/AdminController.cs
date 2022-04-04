@@ -164,5 +164,20 @@ namespace HTquanlyNCKH.Controllers
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
+
+        public ActionResult IntroSupport()      //Hiện popup hỗ trợ hướng dẫn thêm mới giới thiệu trên trang chủ
+        {
+            return View();
+        }
+
+        public ActionResult GetIconSupport()
+        {
+            return View();
+        }
+
+        public ActionResult SliderSupport()
+        {
+            return View();
+        }
     }
 }

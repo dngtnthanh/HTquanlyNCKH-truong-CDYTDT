@@ -147,7 +147,6 @@
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScientistController.cs" />
-    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,6 +197,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Place.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Scientist.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Slider.cs">
@@ -2400,7 +2402,10 @@
     <Content Include="Views\Home\TopicStoreOrEdit.cshtml" />
     <Content Include="Views\Admin\IntroManage.cshtml" />
     <Content Include="Views\Admin\IntroStoreOrEdit.cshtml" />
-    <Content Include="Views\Support\IntroSupport.cshtml" />
+    <Content Include="Views\Admin\IntroSupport.cshtml" />
+    <Content Include="Views\Admin\GetIconSupport.cshtml" />
+    <Content Include="Views\Admin\SliderSupport.cshtml" />
+    <Content Include="Views\Scientist\ScientistManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
