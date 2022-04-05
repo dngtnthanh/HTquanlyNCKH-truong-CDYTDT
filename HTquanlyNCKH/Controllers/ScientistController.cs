@@ -283,8 +283,8 @@ namespace HTquanlyNCKH.Controllers
         {
             using (DBModel db = new DBModel())
             {
-                List<Unit> unitList = db.Units.ToList<Unit>();
-                return Json(new { data = unitList },
+                List<Scientist> scientistList = db.Scientists.ToList<Scientist>();
+                return Json(new { data = scientistList },
                     JsonRequestBehavior.AllowGet);
             }
         }
@@ -293,32 +293,57 @@ namespace HTquanlyNCKH.Controllers
         {
             if (id == 0)
             {
-                return View(new Unit());
+                //List<Place> fie = db.Places.OrderByDescending(n => n.).ToList<Place>();
+                using (DBModel db = new DBModel())
+                {
+                    //Lấy danh sách nơi sinh (tỉnh)
+                    List<Place> places = db.Places.OrderByDescending(n => n.placeID).ToList<Place>();
+                    ViewBag.plaList = places;
+
+                    //Lấy danh sách trình độ nhà khoa học
+                    List<Degree> degrees = db.Degrees.OrderByDescending(n => n.degreeID).ToList<Degree>();
+                    ViewBag.degList = degrees;
+
+                    //Lấy danh sách phòng ban
+                    List<Unit> units = db.Units.OrderByDescending(n => n.unitID).ToList<Unit>();
+                    ViewBag.unitList = units;
+
+                    //Lấy danh sách chuyên ngành nghiên cứu
+                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
+                    ViewBag.fieldList = fields;
+
+                    //Lấy danh sách ngoại ngữ nhà khoa học
+                    List<Foreign> foreigns = db.Foreigns.OrderByDescending(n => n.foreignID).ToList<Foreign>();
+                    ViewBag.foreignList = foreigns;
+                }
+                
+
+                return View(new Scientist());
             }
             else
             {
                 using (DBModel db = new DBModel())
                 {
-                    return View(db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>());
+                    return View(db.Scientists.Where(x => x.scientistID == id).FirstOrDefault<Scientist>());
                 }
             }
         }
         [HttpPost]
-        public ActionResult ScientistStoreOrEdit(Unit unitob)
+        public ActionResult ScientistStoreOrEdit(Scientist scientistob)
         {
             using (DBModel db = new DBModel())
             {
-                if (unitob.unitID == 0)
+                if (scientistob.scientistID == 0)
                 {
-                    db.Units.Add(unitob);
-                    unitob.untCreateDate = DateTime.Now;
+                    db.Scientists.Add(scientistob);
+                    scientistob.sctCreateDate = DateTime.Now;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
-                    unitob.untModifierDate = DateTime.Now;
-                    db.Entry(unitob).State = EntityState.Modified;
+                    scientistob.sctModifierDate = DateTime.Now;
+                    db.Entry(scientistob).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
@@ -329,8 +354,8 @@ namespace HTquanlyNCKH.Controllers
         {
             using (DBModel db = new DBModel())
             {
-                Unit emp = db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>();
-                db.Units.Remove(emp);
+                Scientist emp = db.Scientists.Where(x => x.scientistID == id).FirstOrDefault<Scientist>();
+                db.Scientists.Remove(emp);
                 db.SaveChanges();
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }

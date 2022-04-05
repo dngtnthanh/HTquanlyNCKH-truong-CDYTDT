@@ -151,6 +151,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Article.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ArtType.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -208,6 +211,7 @@
     <Compile Include="Models\Status.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TableData.cs" />
     <Compile Include="Models\Topic.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -2398,14 +2402,17 @@
     <Content Include="Views\Articles\ConferenceManage.cshtml" />
     <Content Include="Views\Admin\SliderManage.cshtml" />
     <Content Include="Views\Admin\SliderStoreOrEdit.cshtml" />
-    <Content Include="Views\Home\TopicManage.cshtml" />
-    <Content Include="Views\Home\TopicStoreOrEdit.cshtml" />
+    <Content Include="Views\Home\Topic.cshtml" />
     <Content Include="Views\Admin\IntroManage.cshtml" />
     <Content Include="Views\Admin\IntroStoreOrEdit.cshtml" />
     <Content Include="Views\Admin\IntroSupport.cshtml" />
     <Content Include="Views\Admin\GetIconSupport.cshtml" />
     <Content Include="Views\Admin\SliderSupport.cshtml" />
     <Content Include="Views\Scientist\ScientistManage.cshtml" />
+    <Content Include="Views\Scientist\ScientistStoreOrEdit.cshtml" />
+    <Content Include="Views\Home\Scientist.cshtml" />
+    <Content Include="Views\Articles\ArticlesManage.cshtml" />
+    <Content Include="Views\Articles\ArticlesStoreOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,6 +5,27 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HTquanlyNCKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="articlesID" />
+          </Key>
+          <Property Name="articlesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="atlName" Type="nvarchar" MaxLength="255" />
+          <Property Name="scientistID" Type="int" />
+          <Property Name="nationID" Type="int" />
+          <Property Name="atlSummary" Type="nvarchar" MaxLength="500" />
+          <Property Name="keyID" Type="int" />
+          <Property Name="magazineID" Type="int" />
+          <Property Name="Point" Type="nvarchar" MaxLength="255" />
+          <Property Name="statusID" Type="int" />
+          <Property Name="atlLink" Type="varchar" MaxLength="500" />
+          <Property Name="typeID" Type="int" />
+          <Property Name="atlPublication" Type="nvarchar" MaxLength="255" />
+          <Property Name="fieldID" Type="int" />
+          <Property Name="atlNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="atlPageToPage" Type="nvarchar" MaxLength="255" />
+          <Property Name="atlPublicationDate" Type="date" />
+        </EntityType>
         <EntityType Name="ArtType">
           <Key>
             <PropertyRef Name="typeID" />
@@ -144,7 +165,7 @@
           <Key>
             <PropertyRef Name="scientistID" />
           </Key>
-          <Property Name="scientistID" Type="int" Nullable="false" />
+          <Property Name="scientistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sctFirstName" Type="nvarchar" MaxLength="255" />
           <Property Name="sctLastName" Type="nvarchar" MaxLength="255" />
           <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
@@ -159,6 +180,10 @@
           <Property Name="sctAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="sctPhone" Type="varchar" MaxLength="15" />
           <Property Name="sctEmail" Type="varchar" MaxLength="255" />
+          <Property Name="sctCreateDate" Type="datetime" />
+          <Property Name="sctModifierDate" Type="datetime" />
+          <Property Name="sctCreateUser" Type="int" />
+          <Property Name="sctModifierUser" Type="int" />
         </EntityType>
         <EntityType Name="Slider">
           <Key>
@@ -227,6 +252,7 @@
           <Property Name="untModifierUser" Type="int" />
         </EntityType>
         <EntityContainer Name="HTquanlyNCKHModelStoreContainer">
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtType" EntityType="Self.ArtType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classification" EntityType="Self.Classification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Conference" EntityType="Self.Conference" Schema="dbo" store:Type="Tables" />
@@ -466,12 +492,13 @@
           <EntitySet Name="Topics" EntityType="Self.Topic" />
           <EntitySet Name="Units" EntityType="Self.Unit" />
           <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
+          <EntitySet Name="Articles" EntityType="HTquanlyNCKHModel.Article" />
         </EntityContainer>
         <EntityType Name="Scientist">
           <Key>
             <PropertyRef Name="scientistID" />
           </Key>
-          <Property Name="scientistID" Type="Int32" Nullable="false" />
+          <Property Name="scientistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -486,6 +513,31 @@
           <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sctCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="sctCreateUser" Type="Int32" />
+          <Property Name="sctModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="articlesID" />
+          </Key>
+          <Property Name="articlesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="atlName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="scientistID" Type="Int32" />
+          <Property Name="nationID" Type="Int32" />
+          <Property Name="atlSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="keyID" Type="Int32" />
+          <Property Name="magazineID" Type="Int32" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="statusID" Type="Int32" />
+          <Property Name="atlLink" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="typeID" Type="Int32" />
+          <Property Name="atlPublication" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fieldID" Type="Int32" />
+          <Property Name="atlNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="atlPageToPage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="atlPublicationDate" Type="DateTime" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -712,6 +764,10 @@
           <EntitySetMapping Name="Scientists">
             <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
               <MappingFragment StoreEntitySet="Scientist">
+                <ScalarProperty Name="sctModifierUser" ColumnName="sctModifierUser" />
+                <ScalarProperty Name="sctCreateUser" ColumnName="sctCreateUser" />
+                <ScalarProperty Name="sctModifierDate" ColumnName="sctModifierDate" />
+                <ScalarProperty Name="sctCreateDate" ColumnName="sctCreateDate" />
                 <ScalarProperty Name="sctEmail" ColumnName="sctEmail" />
                 <ScalarProperty Name="sctPhone" ColumnName="sctPhone" />
                 <ScalarProperty Name="sctAddress" ColumnName="sctAddress" />
@@ -727,6 +783,28 @@
                 <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
                 <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
                 <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="atlPublicationDate" ColumnName="atlPublicationDate" />
+                <ScalarProperty Name="atlPageToPage" ColumnName="atlPageToPage" />
+                <ScalarProperty Name="atlNumber" ColumnName="atlNumber" />
+                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+                <ScalarProperty Name="atlPublication" ColumnName="atlPublication" />
+                <ScalarProperty Name="typeID" ColumnName="typeID" />
+                <ScalarProperty Name="atlLink" ColumnName="atlLink" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="magazineID" ColumnName="magazineID" />
+                <ScalarProperty Name="keyID" ColumnName="keyID" />
+                <ScalarProperty Name="atlSummary" ColumnName="atlSummary" />
+                <ScalarProperty Name="nationID" ColumnName="nationID" />
+                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+                <ScalarProperty Name="atlName" ColumnName="atlName" />
+                <ScalarProperty Name="articlesID" ColumnName="articlesID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

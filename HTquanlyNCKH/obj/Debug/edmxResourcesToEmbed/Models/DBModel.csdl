@@ -218,12 +218,13 @@
     <EntitySet Name="Topics" EntityType="Self.Topic" />
     <EntitySet Name="Units" EntityType="Self.Unit" />
     <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
+    <EntitySet Name="Articles" EntityType="HTquanlyNCKHModel.Article" />
   </EntityContainer>
   <EntityType Name="Scientist">
     <Key>
       <PropertyRef Name="scientistID" />
     </Key>
-    <Property Name="scientistID" Type="Int32" Nullable="false" />
+    <Property Name="scientistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -238,5 +239,30 @@
     <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sctCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="sctCreateUser" Type="Int32" />
+    <Property Name="sctModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="articlesID" />
+    </Key>
+    <Property Name="articlesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="atlName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="scientistID" Type="Int32" />
+    <Property Name="nationID" Type="Int32" />
+    <Property Name="atlSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="keyID" Type="Int32" />
+    <Property Name="magazineID" Type="Int32" />
+    <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="statusID" Type="Int32" />
+    <Property Name="atlLink" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="typeID" Type="Int32" />
+    <Property Name="atlPublication" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fieldID" Type="Int32" />
+    <Property Name="atlNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="atlPageToPage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="atlPublicationDate" Type="DateTime" Precision="0" />
   </EntityType>
 </Schema>

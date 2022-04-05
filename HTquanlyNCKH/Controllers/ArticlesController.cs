@@ -272,5 +272,69 @@ namespace HTquanlyNCKH.Controllers
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
+
+        //Quản lý bài báo quốc tế của nhà khoa học
+        public ActionResult ArticlesGetData()
+        {
+            using (DBModel db = new DBModel())
+            {
+                List<Article> articlesList = db.Articles.ToList<Article>();
+                return Json(new { data = articlesList },
+                    JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult ArticlesStoreOrEdit(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new Article());
+            }
+            else
+            {
+                using (DBModel db = new DBModel())
+                {
+                    return View(db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult ArticlesStoreOrEdit(Article articleob)
+        {
+            using (DBModel db = new DBModel())
+            {
+                if (articleob.articlesID == 0)
+                {
+                    db.Articles.Add(articleob);
+                    //articleob.cfrCreateDate = DateTime.Now;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    //articleob.cfrModifierDate = DateTime.Now;
+                    db.Entry(articleob).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult ArticlesDelete(int id)
+        {
+            using (DBModel db = new DBModel())
+            {
+                Article emp = db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>();
+                db.Articles.Remove(emp);
+                db.SaveChanges();
+                return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+            }
+        }
+
+        public ActionResult ArticlesManage()
+        {
+            ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
+            return View();
+        }
     }
 }

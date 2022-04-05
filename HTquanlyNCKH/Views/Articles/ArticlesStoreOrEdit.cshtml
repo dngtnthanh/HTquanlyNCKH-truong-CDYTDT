@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.Article
+@using (Html.BeginForm("ArticlesStoreOrEdit", "Articles", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.articlesID)
+    @*@Html.HiddenFor(model => model.sctCreateDate)
+    @Html.HiddenFor(model => model.sctModifierDate)
+
+    @Html.HiddenFor(model => model.sctCreateUser)
+    @Html.HiddenFor(model => model.sctModifierUser)*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.atlName, "Tiêu đề", new { @class = "control-label" })
+        @Html.EditorFor(model => model.atlName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.atlName)
+    </div>
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.scientistID, "Nhà khoa học", new { @class = "control-label" })
+        @Html.EditorFor(model => model.scientistID, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.scientistID)
+    </div>*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.atlSummary, "Tóm lược", new { @class = "control-label" })
+        @Html.EditorFor(model => model.atlSummary, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.atlSummary)
+    </div>
+    @*<div class="dropdown">
+        <div class="form-group">
+            <label>Nơi sinh</label>
+            @Html.DropDownList("placeID", new SelectList(ViewBag.plaList, "placeID", "plaName", "Select"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="dropdown">
+        <div class="form-group">
+            <label>Trình độ</label>
+            @Html.DropDownList("degreeID", new SelectList(ViewBag.degList, "degreeID", "degName", "Select"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="dropdown">
+        <div class="form-group">
+            <label>Phòng ban</label>
+            @Html.DropDownList("unitID", new SelectList(ViewBag.unitList, "unitID", "untName", "Select"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="dropdown">
+        <div class="form-group">
+            <label>Chuyên ngành</label>
+            @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName", "Select"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="dropdown">
+        <div class="form-group">
+            <label>Ngoại ngữ</label>
+            @Html.DropDownList("foreignID", new SelectList(ViewBag.foreignList, "foreignID", "fgnName", "Select"), new { @class = "form-control" })
+        </div>
+    </div>*@
+
+    <div class="form-group">
+
+        <input type="submit" value="Lưu lại" class="btn btn-success " />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+}  

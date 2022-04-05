@@ -1,5 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HTquanlyNCKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Articles">
+    <Key>
+      <PropertyRef Name="articlesID" />
+    </Key>
+    <Property Name="articlesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="atlName" Type="nvarchar" MaxLength="255" />
+    <Property Name="scientistID" Type="int" />
+    <Property Name="nationID" Type="int" />
+    <Property Name="atlSummary" Type="nvarchar" MaxLength="500" />
+    <Property Name="keyID" Type="int" />
+    <Property Name="magazineID" Type="int" />
+    <Property Name="Point" Type="nvarchar" MaxLength="255" />
+    <Property Name="statusID" Type="int" />
+    <Property Name="atlLink" Type="varchar" MaxLength="500" />
+    <Property Name="typeID" Type="int" />
+    <Property Name="atlPublication" Type="nvarchar" MaxLength="255" />
+    <Property Name="fieldID" Type="int" />
+    <Property Name="atlNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="atlPageToPage" Type="nvarchar" MaxLength="255" />
+    <Property Name="atlPublicationDate" Type="date" />
+  </EntityType>
   <EntityType Name="ArtType">
     <Key>
       <PropertyRef Name="typeID" />
@@ -139,7 +160,7 @@
     <Key>
       <PropertyRef Name="scientistID" />
     </Key>
-    <Property Name="scientistID" Type="int" Nullable="false" />
+    <Property Name="scientistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="sctFirstName" Type="nvarchar" MaxLength="255" />
     <Property Name="sctLastName" Type="nvarchar" MaxLength="255" />
     <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
@@ -154,6 +175,10 @@
     <Property Name="sctAddress" Type="nvarchar" MaxLength="255" />
     <Property Name="sctPhone" Type="varchar" MaxLength="15" />
     <Property Name="sctEmail" Type="varchar" MaxLength="255" />
+    <Property Name="sctCreateDate" Type="datetime" />
+    <Property Name="sctModifierDate" Type="datetime" />
+    <Property Name="sctCreateUser" Type="int" />
+    <Property Name="sctModifierUser" Type="int" />
   </EntityType>
   <EntityType Name="Slider">
     <Key>
@@ -222,6 +247,7 @@
     <Property Name="untModifierUser" Type="int" />
   </EntityType>
   <EntityContainer Name="HTquanlyNCKHModelStoreContainer">
+    <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArtType" EntityType="Self.ArtType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Classification" EntityType="Self.Classification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Conference" EntityType="Self.Conference" Schema="dbo" store:Type="Tables" />

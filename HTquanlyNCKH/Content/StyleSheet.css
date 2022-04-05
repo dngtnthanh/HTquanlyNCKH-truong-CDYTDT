@@ -10,7 +10,7 @@
 #phanTrang li {
     list-style: none;
     float: left;
-    padding: 3px 5px;
+    padding: 7px 10px;
     margin: 5px;
     border: 1px solid #ccc;
 }
@@ -20,7 +20,7 @@
     }
 
         #phanTrang li:active a {
-            color: white;
+            color: #92c1e7;
         }
 
 .field-validation-error {
