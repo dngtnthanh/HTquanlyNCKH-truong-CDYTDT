@@ -211,7 +211,7 @@
     <Compile Include="Models\Status.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TableData.cs" />
+    <Compile Include="Models\TableFull.cs" />
     <Compile Include="Models\Topic.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -259,7 +259,7 @@
     <Content Include="Content\dist\img\avatar2.png" />
     <Content Include="Content\dist\img\avatar3.png" />
     <Content Include="Content\dist\img\avatar4.png" />
-    <Content Include="Content\dist\img\avatar5.png" />
+    <Content Include="Content\dist\img\AnhDaiDien\avatar5.png" />
     <Content Include="Content\dist\img\boxed-bg.jpg" />
     <Content Include="Content\dist\img\boxed-bg.png" />
     <Content Include="Content\dist\img\carousel-1.jpg" />
@@ -290,22 +290,20 @@
     <Content Include="Content\dist\img\prod-3.jpg" />
     <Content Include="Content\dist\img\prod-4.jpg" />
     <Content Include="Content\dist\img\prod-5.jpg" />
-    <Content Include="Content\dist\img\team-1.jpg" />
+    <Content Include="Content\dist\img\AnhDaiDien\team-1.jpg" />
     <Content Include="Content\dist\img\team-2.jpg" />
     <Content Include="Content\dist\img\team-3.jpg" />
     <Content Include="Content\dist\img\team-4.jpg" />
     <Content Include="Content\dist\img\testimonial-1.jpg" />
-    <Content Include="Content\dist\img\testimonial-2.jpg" />
-    <Content Include="Content\dist\img\testimonial-3.jpg" />
     <Content Include="Content\dist\img\testimonial-4.jpg" />
-    <Content Include="Content\dist\img\user1-128x128.jpg" />
-    <Content Include="Content\dist\img\user2-160x160.jpg" />
+    <Content Include="Content\dist\img\AnhDaiDien\user1-128x128.jpg" />
+    <Content Include="Content\dist\img\AnhDaiDien\user2-160x160.jpg" />
     <Content Include="Content\dist\img\user3-128x128.jpg" />
     <Content Include="Content\dist\img\user4-128x128.jpg" />
     <Content Include="Content\dist\img\user5-128x128.jpg" />
     <Content Include="Content\dist\img\user6-128x128.jpg" />
     <Content Include="Content\dist\img\user7-128x128.jpg" />
-    <Content Include="Content\dist\img\user8-128x128.jpg" />
+    <Content Include="Content\dist\img\AnhDaiDien\user8-128x128.jpg" />
     <Content Include="Content\dist\js\adminlte.js" />
     <Content Include="Content\dist\js\adminlte.min.js" />
     <Content Include="Content\dist\js\dataTables.bootstrap4.min.js" />
@@ -2413,6 +2411,10 @@
     <Content Include="Views\Home\Scientist.cshtml" />
     <Content Include="Views\Articles\ArticlesManage.cshtml" />
     <Content Include="Views\Articles\ArticlesStoreOrEdit.cshtml" />
+    <Content Include="Views\Home\TopicInfor.cshtml" />
+    <Content Include="Views\Topic\ApiManage.cshtml" />
+    <Content Include="Views\Topic\ApiStoreOrEdit.cshtml" />
+    <Content Include="Views\Home\ScientistInfor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

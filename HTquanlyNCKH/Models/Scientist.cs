@@ -20,6 +20,7 @@ namespace HTquanlyNCKH.Models
         public string sctSex { get; set; }
         public Nullable<System.DateTime> sctBirthday { get; set; }
         public Nullable<int> PlaceID { get; set; }
+        public string sctImage { get; set; }
         public Nullable<int> degreeID { get; set; }
         public Nullable<int> unitID { get; set; }
         public Nullable<int> fieldID { get; set; }

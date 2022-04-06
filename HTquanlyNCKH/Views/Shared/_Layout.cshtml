@@ -32,6 +32,7 @@
     <link href="~/Content/dist/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
     <link href="~/Content/dist/css/style.css" rel="stylesheet">
+    <script src="~/Content/dist/js/notify.min.js"></script>
 
     <script>
         // //lưu vị trí thanh cuộn scroll khi load trang
@@ -45,6 +46,7 @@
         };
     </script>
     <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />     <!-- Sử dụng cho PopupForm -->
 </head>
 
 <body>
@@ -67,14 +69,14 @@
             <div class="navbar-nav ms-auto p-1 p-lg-0">
 
                 <a href="@Url.Action("index", "Home")" class="nav-item nav-link active"><i class="fas fa-home"></i> Trang Chủ</a>
-                <a href="@Url.Action("About", "Home")" class="nav-item nav-link">Hội Nghị</a>
-                <a href="@Url.Action("Topic", "Home")" class="nav-item nav-link">Đề Tài Nghiên Cứu</a> 
+                <a href="@Url.Action("About", "Home")" class="nav-item nav-link">Bài Báo</a>
+                <a href="@Url.Action("Topic", "Home")" class="nav-item nav-link">Đề Tài Nghiên Cứu</a>
                 <a href="@Url.Action("Scientist", "Home")" class="nav-item nav-link">@*<i class="fas fa-user-graduate"></i>*@ Nhà Khoa Học</a>
-            </div>            
+            </div>
         </div>
     </nav>
     <!-- Navbar End -->
-    @RenderSection("Slider", false)    
+    @RenderSection("Slider", false)
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -83,7 +85,7 @@
                     <div class="col-sm-6" style="padding: 20px">
                         <h1 class="m-1">@ViewBag.Title</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6" style="font-size: 30px" >
+                    <div class="col-sm-6" style="font-size: 30px">
                         <ol class="breadcrumb float-sm-right" style="float: right; padding: 20px">
                             <li class="breadcrumb-item"><a href="@Url.Action("index", "Home")">Trang Chủ</a></li>
                             <li class="breadcrumb-item active">@ViewBag.Title</li>
@@ -119,7 +121,7 @@
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">TRƯỜNG CAO ĐẲNG Y TẾ ĐỒNG THÁP</h4>
                     <p>Đăng ký để nhận thông báo mới nhất</p>
@@ -173,6 +175,10 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+    <script src="~/Scripts/notify.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

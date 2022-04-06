@@ -75,15 +75,16 @@ namespace HTquanlyNCKH.Controllers
         {
             using (DBModel db = new DBModel())
             {
-                var TopicList = from tpc in db.Topics                                        //Nối từ bảng lớn Topic là đề tài đến các bảng nhỏ
+                var TopicList = from tpc in db.Topics                                        //Lấy bảng lớn Topic là đề tài nghiên cứu
                             join sct in db.Scientists on tpc.scientistID equals sct.scientistID     //Nối đến bảng nhà khoa học
                             join cls in db.Classifications on tpc.classifiID equals cls.classifiID  //Nối đến bảng xếp loại đề tài
                             join sts in db.Status on tpc.statusID equals sts.statusID               //Nối đến bảng trạng thái
                             join fie in db.Fields on tpc.fieldID equals fie.fieldID                 //Nối đến bảng lĩnh vực
-                            select new TopicFull()                                      //lưu vào một bảng Full tất cả các thông tin đề tài
+                            select new TopicFull()     // [W-A-R-N-I-N-G] những chỗ có liên kết các trường là khoá ngoại ở trên không được để NULL, cho nên nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
                             {
                                 topicID = tpc.topicID,                                  //Mã số đề tài
-                                scientistName = sct.sctFirstName + sct.sctLastName,     //Tên đầy đủ nhà khoa học
+                                scientistID = sct.scientistID,
+                                scientistName = sct.sctFirstName + " " + sct.sctLastName,     //Tên đầy đủ nhà khoa học
                                 classifiName = cls.clsName,                             //Tên xếp loại
                                 statusName = sts.stsName,                               //Trạng thái
                                 fieldName = fie.fieName,                                //Lĩnh vực
@@ -115,41 +116,122 @@ namespace HTquanlyNCKH.Controllers
         {
             using (DBModel db = new DBModel())
             {
-                //var scientistList = from p in db.Scientists.OrderBy(n => n.scientistID) select p;       //Lấy danh sách nhà khoa học
-
-                var scientistList = from sct in db.Scientists
-                                    join pla in db.Places on sct.PlaceID equals pla.placeID
-                                    join deg in db.Degrees on sct.degreeID equals deg.degreeID
-                                    join unt in db.Units on sct.unitID equals unt.unitID
-                                    join fie in db.Fields on sct.fieldID equals fie.fieldID
-                                    join frg in db.Foreigns on sct.sctForeignID equals frg.foreignID
-                                    select new ScientistFull()
+                var ScientistList = from sct in db.Scientists                                        //Lấy bảng nhà khoa học
+                                    join pla in db.Places on sct.PlaceID equals pla.placeID          //Nối bảng địa chỉ (tỉnh)
+                                    join deg in db.Degrees on sct.degreeID equals deg.degreeID       //Nối bảng học vị
+                                    join unt in db.Units on sct.unitID equals unt.unitID             //Nối bảng phòng ban
+                                    join fie in db.Fields on sct.fieldID equals fie.fieldID          //Nối bảng chuyên nghành
+                                    join frg in db.Foreigns on sct.sctForeignID equals frg.foreignID //Nối bảng ngoại ngữ
+                                    select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
                                     {
-                                        scientistID = sct.scientistID,
-                                        sctFirstName = sct.sctFirstName,
-                                        sctLastName = sct.sctLastName,
-                                        sctSex = sct.sctSex,
-                                        sctBirthday = sct.sctBirthday,
-                                        PlaceName = pla.plaName,
-                                        degreeName = deg.degName,
-                                        unitName = unt.untName,
-                                        fieldName = fie.fieName,
-                                        sctWorkingProcess = sct.sctWorkingProcess,
-                                        sctResult = sct.sctResult,
-                                        sctForeignName = frg.fgnName,
-                                        sctAddress = sct.sctAddress,
-                                        sctPhone = sct.sctPhone,
-                                        sctEmail = sct.sctEmail,
-                                        sctCreateDate = sct.sctCreateDate,
-                                        sctModifierDate = sct.sctModifierDate,
-                                        sctCreateUser = sct.sctCreateUser,
-                                        sctModifierUser = sct.sctModifierUser,
+                                        scientistID = sct.scientistID,              //Mã số nhà khoa học
+                                        sctFirstName = sct.sctFirstName,            //Họ và tên đệm
+                                        sctLastName = sct.sctLastName,              //Tên
+                                        sctSex = sct.sctSex,                        //Giới tính
+                                        sctBirthday = sct.sctBirthday,              //Ngày sinh
+                                        PlaceName = pla.plaName,                    //Địa chỉ (tỉnh)
+                                        sctImage = sct.sctImage,
+                                        degreeName = deg.degName,                   //Học vị vd: đại học, thạc sĩ
+                                        unitName = unt.untName,                     //Phòng ban
+                                        fieldName = fie.fieName,                    //Chuyên ngành
+                                        sctWorkingProcess = sct.sctWorkingProcess,  //Quá trình công tác
+                                        sctResult = sct.sctResult,                  //Kết quả nghiên cứu
+                                        sctForeignName = frg.fgnName,               //Trình độ ngoại ngữ
+                                        sctAddress = sct.sctAddress,                //Địa chỉ thường trú
+                                        sctPhone = sct.sctPhone,                    //Số điện thoại
+                                        sctEmail = sct.sctEmail,                    //Email
+                                        sctCreateDate = sct.sctCreateDate,          //Thời gian khởi tạo
+                                        sctModifierDate = sct.sctModifierDate,      //Thời gian thay đổi
+                                        sctCreateUser = sct.sctCreateUser,          //Người khởi tạo
+                                        sctModifierUser = sct.sctModifierUser,      //Người thay đổi
                                     };
 
-                int pagesize = 2;       //Hiển thị đơn vị dữ liệu trên mỗi trang (Phân trang)
+                int pagesize = 4;       //Hiển thị 4 đơn vị dữ liệu trên mỗi trang (Phân trang)
                 int pageindex = pageID ?? 1;        //Trang mặc định là 1 (Phân trang)
-                return View(scientistList.ToList().ToPagedList(pageindex, pagesize));
+                return View(ScientistList.ToList().ToPagedList(pageindex, pagesize));
             }
         }
+        [HttpGet]
+        public ActionResult TopicInfor(int? id)
+        {
+            using (DBModel db = new DBModel())
+            {
+                var TopicList = from tpc in db.Topics                                        //Lấy bảng lớn Topic là đề tài nghiên cứu
+                                join sct in db.Scientists on tpc.scientistID equals sct.scientistID     //Nối đến bảng nhà khoa học
+                                join cls in db.Classifications on tpc.classifiID equals cls.classifiID  //Nối đến bảng xếp loại đề tài
+                                join sts in db.Status on tpc.statusID equals sts.statusID               //Nối đến bảng trạng thái
+                                join fie in db.Fields on tpc.fieldID equals fie.fieldID                 //Nối đến bảng lĩnh vực
+                                where(tpc.topicID == id)
+                                select new TopicFull()     // [W-A-R-N-I-N-G] những chỗ có liên kết các trường là khoá ngoại ở trên không được để NULL, cho nên nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
+                                {
+                                    topicID = tpc.topicID,                                  //Mã số đề tài
+                                    scientistID = sct.scientistID,
+                                    scientistName = sct.sctFirstName + " " + sct.sctLastName,     //Tên đầy đủ nhà khoa học
+                                    classifiName = cls.clsName,                             //Tên xếp loại
+                                    statusName = sts.stsName,                               //Trạng thái
+                                    fieldName = fie.fieName,                                //Lĩnh vực
+
+                                    tpcYear = tpc.tpcYear,                                  //Năm thực hiện
+                                    tpcName = tpc.tpcName,                                  //Tên đề tài
+                                    tpcSummary = tpc.tpcSummary,                            //Tóm tắt sơ lượt
+                                    tpcCode = tpc.tpcCode,                                  //Mã số
+                                    tpcStartDate = tpc.tpcStartDate,                        //Ngày bắt đầu thực hiện
+                                    tpcEndDate = tpc.tpcEndDate,                            //Ngày kết thúc
+                                    tpcDateOfAcceptance = tpc.tpcDateOfAcceptance,          //Ngày nghiệm thu
+                                    tpcProofFile = tpc.tpcProofFile,                        //Tệp minh chứng
+                                    tpcReviewBoard = tpc.tpcReviewBoard,                    //Hội đồng nghiệm thu
+                                    tpcCreateData = tpc.tpcCreateData,                      //Thời gian khởi tạo
+                                    tpcModifierData = tpc.tpcModifierData,                  //Thời gian thay đổi
+                                    tpcCreateUser = tpc.tpcCreateUser,                      //Người khởi tạo
+                                    tpcModifierUser = tpc.tpcModifierUser,                  //Người thay đổi
+                                    tpcDeleteData = tpc.tpcDeleteData,                      //Thời gian xoá
+                                    tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
+                                    tpcImage = tpc.tpcImage,                                //Ảnh bìa
+                                };
+
+                return View(TopicList.Single(n => n.topicID == id));
+            }
+
+        }
+
+        public ActionResult ScientistInfor(int? id)
+        {
+            using (DBModel db = new DBModel())
+            {
+                var ScientistList = from sct in db.Scientists                                        //Lấy bảng nhà khoa học
+                                    join pla in db.Places on sct.PlaceID equals pla.placeID          //Nối bảng địa chỉ (tỉnh)
+                                    join deg in db.Degrees on sct.degreeID equals deg.degreeID       //Nối bảng học vị
+                                    join unt in db.Units on sct.unitID equals unt.unitID             //Nối bảng phòng ban
+                                    join fie in db.Fields on sct.fieldID equals fie.fieldID          //Nối bảng chuyên nghành
+                                    join frg in db.Foreigns on sct.sctForeignID equals frg.foreignID //Nối bảng ngoại ngữ
+                                    select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
+                                    {                                       
+                                        scientistID = sct.scientistID,              //Mã số nhà khoa học
+                                        sctFirstName = sct.sctFirstName,            //Họ và tên đệm
+                                        sctLastName = sct.sctLastName,              //Tên
+                                        sctSex = sct.sctSex,                        //Giới tính
+                                        sctBirthday = sct.sctBirthday,              //Ngày sinh                                                                            
+                                        PlaceName = pla.plaName,                    //Địa chỉ (tỉnh)
+                                        sctImage = sct.sctImage,
+                                        degreeName = deg.degName,                   //Học vị vd: đại học, thạc sĩ
+                                        unitName = unt.untName,                     //Phòng ban
+                                        fieldName = fie.fieName,                    //Chuyên ngành
+                                        sctWorkingProcess = sct.sctWorkingProcess,  //Quá trình công tác
+                                        sctResult = sct.sctResult,                  //Kết quả nghiên cứu
+                                        sctForeignName = frg.fgnName,               //Trình độ ngoại ngữ
+                                        sctAddress = sct.sctAddress,                //Địa chỉ thường trú
+                                        sctPhone = sct.sctPhone,                    //Số điện thoại
+                                        sctEmail = sct.sctEmail,                    //Email
+                                        sctCreateDate = sct.sctCreateDate,          //Thời gian khởi tạo
+                                        sctModifierDate = sct.sctModifierDate,      //Thời gian thay đổi
+                                        sctCreateUser = sct.sctCreateUser,          //Người khởi tạo
+                                        sctModifierUser = sct.sctModifierUser,      //Người thay đổi
+                                        
+                                    };
+
+                return View(ScientistList.Single(n => n.scientistID == id));
+            }
+        }
+
     }
 }

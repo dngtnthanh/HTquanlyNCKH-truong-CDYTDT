@@ -171,6 +171,7 @@
           <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
           <Property Name="sctBirthday" Type="date" />
           <Property Name="PlaceID" Type="int" />
+          <Property Name="sctImage" Type="text" />
           <Property Name="degreeID" Type="int" />
           <Property Name="unitID" Type="int" />
           <Property Name="fieldID" Type="int" />
@@ -491,33 +492,9 @@
           <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="Topics" EntityType="Self.Topic" />
           <EntitySet Name="Units" EntityType="Self.Unit" />
-          <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
           <EntitySet Name="Articles" EntityType="HTquanlyNCKHModel.Article" />
+          <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
         </EntityContainer>
-        <EntityType Name="Scientist">
-          <Key>
-            <PropertyRef Name="scientistID" />
-          </Key>
-          <Property Name="scientistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="sctBirthday" Type="DateTime" Precision="0" />
-          <Property Name="PlaceID" Type="Int32" />
-          <Property Name="degreeID" Type="Int32" />
-          <Property Name="unitID" Type="Int32" />
-          <Property Name="fieldID" Type="Int32" />
-          <Property Name="sctWorkingProcess" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="sctResult" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="sctForeignID" Type="Int32" />
-          <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="sctCreateDate" Type="DateTime" Precision="3" />
-          <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
-          <Property Name="sctCreateUser" Type="Int32" />
-          <Property Name="sctModifierUser" Type="Int32" />
-        </EntityType>
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="articlesID" />
@@ -538,6 +515,31 @@
           <Property Name="atlNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="atlPageToPage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="atlPublicationDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Scientist">
+          <Key>
+            <PropertyRef Name="scientistID" />
+          </Key>
+          <Property Name="scientistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sctBirthday" Type="DateTime" Precision="0" />
+          <Property Name="PlaceID" Type="Int32" />
+          <Property Name="sctImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="degreeID" Type="Int32" />
+          <Property Name="unitID" Type="Int32" />
+          <Property Name="fieldID" Type="Int32" />
+          <Property Name="sctWorkingProcess" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sctResult" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sctForeignID" Type="Int32" />
+          <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sctCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="sctCreateUser" Type="Int32" />
+          <Property Name="sctModifierUser" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -761,31 +763,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Scientists">
-            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
-              <MappingFragment StoreEntitySet="Scientist">
-                <ScalarProperty Name="sctModifierUser" ColumnName="sctModifierUser" />
-                <ScalarProperty Name="sctCreateUser" ColumnName="sctCreateUser" />
-                <ScalarProperty Name="sctModifierDate" ColumnName="sctModifierDate" />
-                <ScalarProperty Name="sctCreateDate" ColumnName="sctCreateDate" />
-                <ScalarProperty Name="sctEmail" ColumnName="sctEmail" />
-                <ScalarProperty Name="sctPhone" ColumnName="sctPhone" />
-                <ScalarProperty Name="sctAddress" ColumnName="sctAddress" />
-                <ScalarProperty Name="sctForeignID" ColumnName="sctForeignID" />
-                <ScalarProperty Name="sctResult" ColumnName="sctResult" />
-                <ScalarProperty Name="sctWorkingProcess" ColumnName="sctWorkingProcess" />
-                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
-                <ScalarProperty Name="unitID" ColumnName="unitID" />
-                <ScalarProperty Name="degreeID" ColumnName="degreeID" />
-                <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
-                <ScalarProperty Name="sctBirthday" ColumnName="sctBirthday" />
-                <ScalarProperty Name="sctSex" ColumnName="sctSex" />
-                <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
-                <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
-                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="HTquanlyNCKHModel.Article">
               <MappingFragment StoreEntitySet="Articles">
@@ -805,6 +782,32 @@
                 <ScalarProperty Name="scientistID" ColumnName="scientistID" />
                 <ScalarProperty Name="atlName" ColumnName="atlName" />
                 <ScalarProperty Name="articlesID" ColumnName="articlesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scientists">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
+              <MappingFragment StoreEntitySet="Scientist">
+                <ScalarProperty Name="sctModifierUser" ColumnName="sctModifierUser" />
+                <ScalarProperty Name="sctCreateUser" ColumnName="sctCreateUser" />
+                <ScalarProperty Name="sctModifierDate" ColumnName="sctModifierDate" />
+                <ScalarProperty Name="sctCreateDate" ColumnName="sctCreateDate" />
+                <ScalarProperty Name="sctEmail" ColumnName="sctEmail" />
+                <ScalarProperty Name="sctPhone" ColumnName="sctPhone" />
+                <ScalarProperty Name="sctAddress" ColumnName="sctAddress" />
+                <ScalarProperty Name="sctForeignID" ColumnName="sctForeignID" />
+                <ScalarProperty Name="sctResult" ColumnName="sctResult" />
+                <ScalarProperty Name="sctWorkingProcess" ColumnName="sctWorkingProcess" />
+                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+                <ScalarProperty Name="unitID" ColumnName="unitID" />
+                <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+                <ScalarProperty Name="sctImage" ColumnName="sctImage" />
+                <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
+                <ScalarProperty Name="sctBirthday" ColumnName="sctBirthday" />
+                <ScalarProperty Name="sctSex" ColumnName="sctSex" />
+                <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
+                <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
+                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

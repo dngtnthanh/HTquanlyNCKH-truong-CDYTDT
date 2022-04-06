@@ -166,6 +166,7 @@
     <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
     <Property Name="sctBirthday" Type="date" />
     <Property Name="PlaceID" Type="int" />
+    <Property Name="sctImage" Type="text" />
     <Property Name="degreeID" Type="int" />
     <Property Name="unitID" Type="int" />
     <Property Name="fieldID" Type="int" />

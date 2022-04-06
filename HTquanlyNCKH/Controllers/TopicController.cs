@@ -296,5 +296,69 @@ namespace HTquanlyNCKH.Controllers
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
+
+
+        //Truy xuất API
+        public ActionResult ApiGetData()
+        {
+            using (DBModel db = new DBModel())
+            {
+                List<Field> fieldList = db.Fields.ToList<Field>();
+                return Json(new { data = fieldList },
+                JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult ApiStoreOrEdit(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new Field());
+            }
+            else
+            {
+                using (DBModel db = new DBModel())
+                {
+                    return View(db.Fields.Where(x => x.fieldID == id).FirstOrDefault<Field>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult ApiStoreOrEdit(Field fieldob)
+        {
+            using (DBModel db = new DBModel())
+            {
+                if (fieldob.fieldID == 0)
+                {
+                    db.Fields.Add(fieldob);
+                    fieldob.fieCreateDate = DateTime.Now;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    fieldob.fieModifierDate = DateTime.Now;
+                    db.Entry(fieldob).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult ApiDelete(int id)
+        {
+            using (DBModel db = new DBModel())
+            {
+                Field emp = db.Fields.Where(x => x.fieldID == id).FirstOrDefault<Field>();
+                db.Fields.Remove(emp);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+            }
+        }
+        public ActionResult ApiManage()
+        {
+            ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
+            return View();
+        }
     }
 }

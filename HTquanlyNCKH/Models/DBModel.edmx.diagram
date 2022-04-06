@@ -20,8 +20,8 @@
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Status" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Topic" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Unit" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HTquanlyNCKHModel.Scientist" Width="1.5" PointX="11.25" PointY="0.75" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Article" Width="1.5" PointX="11.375" PointY="6.75" />
+        <EntityTypeShape EntityType="HTquanlyNCKHModel.Scientist" Width="1.5" PointX="11.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

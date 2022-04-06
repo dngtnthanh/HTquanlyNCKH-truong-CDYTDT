@@ -1,0 +1,129 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.ScientistFull
+<table style="text-align: right" class="table table-striped">
+    <tbody>
+        <tr>
+            <td style="vertical-align:middle">
+                <b>Ảnh chân dung:</b>
+            </td>
+            <td style="text-align: left">
+                <img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" style="border-radius: 14px" width="150" height="150" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Tên nhà khoa học:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctFirstName @Model.sctLastName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Giới tính:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctSex
+            </td>
+
+
+
+        </tr>
+        <tr>
+            <td>
+                <b>Ngày sinh:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctBirthday
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Email</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctEmail
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Nơi sinh:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.PlaceName
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Trình độ:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.degreeName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Phòng ban:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.unitName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Chuyên ngành:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.fieldName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Quá trình làm việc:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctWorkingProcess
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kết quả thực hiện:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctResult
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Trình độ ngoại ngữ: </b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctForeignName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Địa chỉ thường trú: </b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctAddress
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Số điện thoại</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctPhone
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+

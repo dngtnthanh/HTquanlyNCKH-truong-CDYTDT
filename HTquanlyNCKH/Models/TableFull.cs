@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HTquanlyNCKH.Models
 {
-    public class TableData
+    public class TableFull
     {
         
     }
@@ -13,6 +13,7 @@ namespace HTquanlyNCKH.Models
     public class TopicFull      //Đầy đủ thông tin đề tài
     {
         public int topicID { get; set; }
+        public int scientistID { get; set; }
         public string scientistName { get; set; }
         public string classifiName { get; set; }
         public string statusName { get; set; }
@@ -37,7 +38,7 @@ namespace HTquanlyNCKH.Models
         public string tpcImage { get; set; }
     }
 
-    public class ScientistFull      //Đầy đủ thông tin nhà khoa hojc
+    public class ScientistFull      //Đầy đủ thông tin nhà khoa học
 
     {
         public int scientistID { get; set; }
@@ -45,6 +46,7 @@ namespace HTquanlyNCKH.Models
         public string sctLastName { get; set; }
         public string sctSex { get; set; }
         public Nullable<System.DateTime> sctBirthday { get; set; }
+        public string sctImage { get; set; }
         public string PlaceName { get; set; }
         public string degreeName { get; set; }
         public string unitName { get; set; }
