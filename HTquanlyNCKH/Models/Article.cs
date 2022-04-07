@@ -30,5 +30,9 @@ namespace HTquanlyNCKH.Models
         public string atlNumber { get; set; }
         public string atlPageToPage { get; set; }
         public Nullable<System.DateTime> atlPublicationDate { get; set; }
+        public Nullable<System.DateTime> atlCreateDate { get; set; }
+        public Nullable<System.DateTime> atlModifierDate { get; set; }
+        public Nullable<int> atlCreateUser { get; set; }
+        public Nullable<int> atlModifierUser { get; set; }
     }
 }

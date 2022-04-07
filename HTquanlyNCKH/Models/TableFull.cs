@@ -62,4 +62,29 @@ namespace HTquanlyNCKH.Models
         public Nullable<int> sctCreateUser { get; set; }
         public Nullable<int> sctModifierUser { get; set; }
     }
+
+    public partial class ArticleFull        //Thông tin đầy đủ bài báo quốc tế
+    {
+        public int articlesID { get; set; }
+        public string atlName { get; set; }
+        public Nullable<int> scientistID { get; set; }
+        public string scientistName { get; set; }
+        public string nationName { get; set; }
+        public string atlSummary { get; set; }
+        public string keyName { get; set; }
+        public Nullable<int> magazineName { get; set; }
+        public string Point { get; set; }
+        public Nullable<int> statusName { get; set; }
+        public string atlLink { get; set; }
+        public string typeName { get; set; }
+        public string atlPublication { get; set; }
+        public string fieldName { get; set; }
+        public string atlNumber { get; set; }
+        public string atlPageToPage { get; set; }
+        public Nullable<System.DateTime> atlPublicationDate { get; set; }
+        public Nullable<System.DateTime> atlCreateDate { get; set; }
+        public Nullable<System.DateTime> atlModifierDate { get; set; }
+        public Nullable<int> atlCreateUser { get; set; }
+        public Nullable<int> atlModifierUser { get; set; }
+    }
 }

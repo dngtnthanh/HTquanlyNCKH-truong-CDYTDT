@@ -71,7 +71,7 @@ namespace HTquanlyNCKH.Controllers
             return Json(States, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Topic(int? pageID)
+        public ActionResult Topic(int? pageID)  // Trang danh sách đề tài (truyền vào mã số phân trang)
         {
             using (DBModel db = new DBModel())
             {
@@ -88,7 +88,9 @@ namespace HTquanlyNCKH.Controllers
                                 classifiName = cls.clsName,                             //Tên xếp loại
                                 statusName = sts.stsName,                               //Trạng thái
                                 fieldName = fie.fieName,                                //Lĩnh vực
-
+                                
+                                //Phía trên là nối bảng
+                                
                                 tpcYear = tpc.tpcYear,                                  //Năm thực hiện
                                 tpcName = tpc.tpcName,                                  //Tên đề tài
                                 tpcSummary = tpc.tpcSummary,                            //Tóm tắt sơ lượt
@@ -107,12 +109,12 @@ namespace HTquanlyNCKH.Controllers
                                 tpcImage = tpc.tpcImage,                                //Ảnh bìa
                             };
                 
-                int pagesize = 4;                   //Hiển thị 4 đơn vị trên mỗi trang
-                int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên
-                return View(TopicList.ToList().ToPagedList(pageindex, pagesize));
+                int pagesize = 4;                   //Hiển thị 4 đơn vị trên mỗi trang  (phân trang)
+                int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên (phân trang)
+                return View(TopicList.ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
             }
         }        
-        public ActionResult Scientist(int? pageID)     //Trang nhà khoa học
+        public ActionResult Scientist(int? pageID)     //Trang danh sách nhà khoa học (truyền vào mã số phân trang)
         {
             using (DBModel db = new DBModel())
             {
@@ -121,7 +123,7 @@ namespace HTquanlyNCKH.Controllers
                                     join deg in db.Degrees on sct.degreeID equals deg.degreeID       //Nối bảng học vị
                                     join unt in db.Units on sct.unitID equals unt.unitID             //Nối bảng phòng ban
                                     join fie in db.Fields on sct.fieldID equals fie.fieldID          //Nối bảng chuyên nghành
-                                    join frg in db.Foreigns on sct.sctForeignID equals frg.foreignID //Nối bảng ngoại ngữ
+                                    join frg in db.Foreigns on sct.foreignID equals frg.foreignID //Nối bảng ngoại ngữ
                                     select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
                                     {
                                         scientistID = sct.scientistID,              //Mã số nhà khoa học
@@ -130,7 +132,7 @@ namespace HTquanlyNCKH.Controllers
                                         sctSex = sct.sctSex,                        //Giới tính
                                         sctBirthday = sct.sctBirthday,              //Ngày sinh
                                         PlaceName = pla.plaName,                    //Địa chỉ (tỉnh)
-                                        sctImage = sct.sctImage,
+                                        sctImage = sct.sctImage,                    //Ảnh chân dung
                                         degreeName = deg.degName,                   //Học vị vd: đại học, thạc sĩ
                                         unitName = unt.untName,                     //Phòng ban
                                         fieldName = fie.fieName,                    //Chuyên ngành
@@ -148,11 +150,11 @@ namespace HTquanlyNCKH.Controllers
 
                 int pagesize = 4;       //Hiển thị 4 đơn vị dữ liệu trên mỗi trang (Phân trang)
                 int pageindex = pageID ?? 1;        //Trang mặc định là 1 (Phân trang)
-                return View(ScientistList.ToList().ToPagedList(pageindex, pagesize));
+                return View(ScientistList.ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách nhà khoa học có (Phân trang)
             }
         }
         [HttpGet]
-        public ActionResult TopicInfor(int? id)
+        public ActionResult TopicInfor(int? id)     //Hiện Popup thông tin đề tài (truyền vào mã số topicID nhà khoa học)
         {
             using (DBModel db = new DBModel())
             {
@@ -189,12 +191,12 @@ namespace HTquanlyNCKH.Controllers
                                     tpcImage = tpc.tpcImage,                                //Ảnh bìa
                                 };
 
-                return View(TopicList.Single(n => n.topicID == id));
+                return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
             }
 
         }
 
-        public ActionResult ScientistInfor(int? id)
+        public ActionResult ScientistInfor(int? id)     //Hiện Popup thông tin nhà khoa học (truyền vào mã số scientistID nhà khoa học
         {
             using (DBModel db = new DBModel())
             {
@@ -203,8 +205,8 @@ namespace HTquanlyNCKH.Controllers
                                     join deg in db.Degrees on sct.degreeID equals deg.degreeID       //Nối bảng học vị
                                     join unt in db.Units on sct.unitID equals unt.unitID             //Nối bảng phòng ban
                                     join fie in db.Fields on sct.fieldID equals fie.fieldID          //Nối bảng chuyên nghành
-                                    join frg in db.Foreigns on sct.sctForeignID equals frg.foreignID //Nối bảng ngoại ngữ
-                                    select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
+                                    join frg in db.Foreigns on sct.foreignID equals frg.foreignID //Nối bảng ngoại ngữ
+                                    select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL. Tương ứng, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
                                     {                                       
                                         scientistID = sct.scientistID,              //Mã số nhà khoa học
                                         sctFirstName = sct.sctFirstName,            //Họ và tên đệm
@@ -212,7 +214,7 @@ namespace HTquanlyNCKH.Controllers
                                         sctSex = sct.sctSex,                        //Giới tính
                                         sctBirthday = sct.sctBirthday,              //Ngày sinh                                                                            
                                         PlaceName = pla.plaName,                    //Địa chỉ (tỉnh)
-                                        sctImage = sct.sctImage,
+                                        sctImage = sct.sctImage,                    //Ảnh chân dung
                                         degreeName = deg.degName,                   //Học vị vd: đại học, thạc sĩ
                                         unitName = unt.untName,                     //Phòng ban
                                         fieldName = fie.fieName,                    //Chuyên ngành
@@ -229,9 +231,106 @@ namespace HTquanlyNCKH.Controllers
                                         
                                     };
 
-                return View(ScientistList.Single(n => n.scientistID == id));
+                return View(ScientistList.Single(n => n.scientistID == id));        //Trả về thông tin nhà khoa học tương ứng mã số ID truyền vào
+            }
+        }
+        public ActionResult ArticlesInfor(int id)
+        {
+            using (DBModel db = new DBModel())
+            {
+                var ArticlesList = from arl in db.Articles
+                                   join sct in db.Scientists on arl.scientistID equals sct.scientistID //Noi bang nha khoa hoc
+                                   join nat in db.Nations on arl.nationID equals nat.nationID           //Noi bang quoc gia
+                                   join key in db.KeyWords on arl.keyID equals key.keyID                //noi bang tu khoa
+                                   join tpe in db.ArtTypes on arl.typeID equals tpe.typeID              //noi bang loai bai viet
+                                   join fie in db.Fields on arl.fieldID equals fie.fieldID              //noi bang linh vuc nghien cuu
+                                   select new ArticleFull()
+                                   {
+                                       articlesID = arl.articlesID,
+                                       scientistID = sct.scientistID,
+                                       atlName = arl.atlName,
+                                       scientistName = sct.sctFirstName + " " + sct.sctLastName,
+                                       nationName = nat.natName,
+                                       atlSummary = arl.atlSummary,
+                                       keyName = key.keyName,
+                                       typeName = tpe.typName,
+                                       Point = arl.Point,
+                                       atlLink = arl.atlLink,
+                                       atlPublication = arl.atlPublication,
+                                       atlPublicationDate = arl.atlPublicationDate,
+                                       atlNumber = arl.atlNumber,
+                                       atlPageToPage = arl.atlPageToPage,
+                                       atlCreateDate = arl.atlCreateDate,
+                                       atlModifierDate = arl.atlModifierDate,
+                                       atlCreateUser = arl.atlCreateUser,
+                                       atlModifierUser = arl.atlModifierUser,
+
+
+                                   };
+                return View(ArticlesList.Single(n => n.articlesID == id));
+            }
+            
+        }
+        //Quản lý bài báo quốc tế của nhà khoa học
+        public ActionResult ArticlesGetData()
+        {
+            using (DBModel db = new DBModel())
+            {
+                List<Article> articlesList = db.Articles.ToList<Article>();
+                return Json(new { data = articlesList },
+                    JsonRequestBehavior.AllowGet);
             }
         }
 
+        public ActionResult Articles()
+        {
+            return View();
+        }
+        public ActionResult ArticlesPopup(int id)
+        {
+            
+            using (DBModel db = new DBModel())
+            {
+                if (id == 0)
+                {
+                    List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
+                    ViewBag.nat = nat;
+
+
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = sct;
+
+                    List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
+                    ViewBag.key = key;
+
+                    List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
+                    ViewBag.types = types;
+
+                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
+                    ViewBag.fieldList = fields;
+                    return View(new Article());
+                }
+                else
+                {
+                    List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
+                    ViewBag.nat = nat;
+
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = sct;
+
+                    List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
+                    ViewBag.key = key;
+
+                    List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
+                    ViewBag.types = types;
+
+                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
+                    ViewBag.fieldList = fields;
+                    return View(db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>());
+
+                }
+            }
+            
+        }
     }
 }

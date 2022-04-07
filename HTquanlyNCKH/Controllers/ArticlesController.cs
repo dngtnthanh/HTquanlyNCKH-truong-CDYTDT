@@ -286,17 +286,48 @@ namespace HTquanlyNCKH.Controllers
         [HttpGet]
         public ActionResult ArticlesStoreOrEdit(int id = 0)
         {
-            if (id == 0)
+            using (DBModel db = new DBModel())
             {
-                return View(new Article());
-            }
-            else
-            {
-                using (DBModel db = new DBModel())
+                if (id == 0)
                 {
+                    List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
+                    ViewBag.nat = nat;
+
+
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = sct;
+
+                    List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
+                    ViewBag.key = key;
+
+                    List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
+                    ViewBag.types = types;
+
+                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
+                    ViewBag.fieldList = fields;
+                    return View(new Article());
+                }
+                else
+                {
+                    List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
+                    ViewBag.nat = nat;
+
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = sct;
+
+                    List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
+                    ViewBag.key = key;
+
+                    List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
+                    ViewBag.types = types;
+
+                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
+                    ViewBag.fieldList = fields;
                     return View(db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>());
+                    
                 }
             }
+                
         }
         [HttpPost]
         public ActionResult ArticlesStoreOrEdit(Article articleob)

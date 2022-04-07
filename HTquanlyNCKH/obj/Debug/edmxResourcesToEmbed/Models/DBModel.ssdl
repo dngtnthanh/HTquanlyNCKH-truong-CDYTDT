@@ -20,6 +20,10 @@
     <Property Name="atlNumber" Type="nvarchar" MaxLength="255" />
     <Property Name="atlPageToPage" Type="nvarchar" MaxLength="255" />
     <Property Name="atlPublicationDate" Type="date" />
+    <Property Name="atlCreateDate" Type="datetime" />
+    <Property Name="atlModifierDate" Type="datetime" />
+    <Property Name="atlCreateUser" Type="int" />
+    <Property Name="atlModifierUser" Type="int" />
   </EntityType>
   <EntityType Name="ArtType">
     <Key>
@@ -172,7 +176,7 @@
     <Property Name="fieldID" Type="int" />
     <Property Name="sctWorkingProcess" Type="nvarchar" MaxLength="500" />
     <Property Name="sctResult" Type="nvarchar" MaxLength="500" />
-    <Property Name="sctForeignID" Type="int" />
+    <Property Name="foreignID" Type="int" />
     <Property Name="sctAddress" Type="nvarchar" MaxLength="255" />
     <Property Name="sctPhone" Type="varchar" MaxLength="15" />
     <Property Name="sctEmail" Type="varchar" MaxLength="255" />
@@ -220,7 +224,7 @@
     <Property Name="fieldID" Type="int" />
     <Property Name="tpcYear" Type="varchar" MaxLength="4" />
     <Property Name="tpcName" Type="nvarchar" MaxLength="255" />
-    <Property Name="tpcSummary" Type="nvarchar" MaxLength="255" />
+    <Property Name="tpcSummary" Type="ntext" />
     <Property Name="tpcCode" Type="nvarchar" MaxLength="255" />
     <Property Name="tpcStartDate" Type="date" />
     <Property Name="tpcEndDate" Type="date" />

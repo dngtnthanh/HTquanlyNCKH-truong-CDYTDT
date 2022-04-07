@@ -1,121 +1,139 @@
 ﻿
 @{
-    ViewBag.Title = "Thông tin đề tài";
+    ViewBag.Title = "Thông tin bài báo quốc tế";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
+
+
 <!DOCTYPE html>
-@model HTquanlyNCKH.Models.TopicFull
+@model HTquanlyNCKH.Models.ArticleFull
 <div class="form-check">
-    <table style="text-align: right" class="table table-striped">
+    <table class="table table-striped">
         <tbody>
             <tr>
-                <td>
-                    <b>Tên đề tài:</b>
+                <td style="vertical-align:middle">
+                    <b>Tên bài báo:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.tpcName
+                    @Model.atlName
                 </td>
             </tr>
             <tr>
                 <td>
-                    <b>Người thực hiện:</b>
+                    <b>Tên nhà khoa học:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.scientistName <a style="margin-left: 1em" class="btn btn-primary btn-sm" href="@Url.Action("ScientistInfor", "Home", new { id = Model.scientistID})"> Xem thông tin</a>
+                    @Model.scientistName
                 </td>
-
-
-
             </tr>
             <tr>
                 <td>
-                    <b>Phân loại:</b>
+                    <b>Quốc gia:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.classifiName
+                    @Model.nationName
                 </td>
             </tr>
-
-
             <tr>
                 <td>
-                    <b>Trạng thái:</b>
+                    <b>Tóm lượt:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.statusName
+                    @Model.atlSummary
                 </td>
             </tr>
-
             <tr>
                 <td>
-                    <b>Chuyên nghành:</b>
+                    <b>Từ khoá: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.keyName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Điểm công trình: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.Point
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Công bố trang báo trên Website:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.atlLink
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Loại bài viết:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.typeName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Nới xuất bản:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.atlPublication
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Thể loại:</b>
                 </td>
                 <td style="text-align: left">
                     @Model.fieldName
                 </td>
             </tr>
+
             <tr>
                 <td>
-                    <b>Năm thực hiện:</b>
+                    <b>Số bài báo: </b>
                 </td>
                 <td style="text-align: left">
-                    @Model.tpcYear
+                    @Model.atlNumber
                 </td>
             </tr>
             <tr>
                 <td>
-                    <b>Tóm lượt đề tài:</b>
+                    <b>Từ trang đến trang: </b>
                 </td>
                 <td style="text-align: left">
-                    @Model.tpcSummary
+                    @Model.atlPageToPage
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <b>Mã số:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.tpcCode
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Hội đồng xét duyệt:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.tpcReviewBoard
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Ngày bắt đầu:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.tpcStartDate
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Ngày kết thúc:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.tpcEndDate
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Ngày nghiệm thu:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.tpcDateOfAcceptance
-                </td>
-            </tr>
+            
         </tbody>
     </table>
-
 </div>
 
 
+<style type='text/css'>
 
+    table {
+        counter-reset: rowNumber;
+        counter-reset: number 1; /*mặc định số thứ tự bắt đầu*/
+    }
+
+        table tr {
+            counter-increment: rowNumber;
+        }
+
+            table tr td:first-child::before {
+                content: counter(rowNumber);
+                min-width: auto;
+                margin-right: 0.5em;
+            }
+
+        table td {
+            vertical-align: middle;
+            text-align: right;
+        }
+</style>

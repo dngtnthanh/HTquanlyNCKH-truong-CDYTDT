@@ -26,7 +26,7 @@ namespace HTquanlyNCKH.Models
         public Nullable<int> fieldID { get; set; }
         public string sctWorkingProcess { get; set; }
         public string sctResult { get; set; }
-        public Nullable<int> sctForeignID { get; set; }
+        public Nullable<int> foreignID { get; set; }
         public string sctAddress { get; set; }
         public string sctPhone { get; set; }
         public string sctEmail { get; set; }

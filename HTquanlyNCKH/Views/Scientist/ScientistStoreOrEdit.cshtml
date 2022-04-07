@@ -13,6 +13,10 @@
 
     @Html.HiddenFor(model => model.sctCreateUser)
     @Html.HiddenFor(model => model.sctModifierUser)
+    @Html.HiddenFor(model => model.sctBirthday)
+    @Html.HiddenFor(model => model.sctImage)
+
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.sctFirstName, "Họ và Tên Đệm", new { @class = "control-label" })
@@ -39,6 +43,21 @@
         @Html.LabelFor(model => model.sctEmail, "Email", new { @class = "control-label" })
         @Html.EditorFor(model => model.sctEmail, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
         @Html.ValidationMessageFor(model => model.sctEmail)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sctPhone, "Số điện thoại", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sctPhone, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+        @Html.ValidationMessageFor(model => model.sctPhone)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sctWorkingProcess, "Quá trình làm việc", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sctWorkingProcess, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sctWorkingProcess)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sctResult, "Kết quả thực hiện", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sctResult, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sctResult)
     </div>
     <div class="dropdown">
         <div class="form-group">

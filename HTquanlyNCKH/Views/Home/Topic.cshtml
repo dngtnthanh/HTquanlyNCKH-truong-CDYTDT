@@ -26,8 +26,8 @@
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="~/Content/dist/img/course-1.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a onclick="PopupForm('@Url.Action("TopicInfor", "Home", new { id = item.topicID})')" @*onclick="PopupForm('@Url.Action("TopicStoreOrEdit","Topic")')"*@ class="flex-shrink-0 btn btn-sm btn-primary px-2 border-end" style="border-radius: 30px 0 0 30px;">Xem Đề Tài</a>
-                                <a onclick="PopupForm('@Url.Action("ScientistInfor", "Home", new { id = item.scientistID})')" class="flex-shrink-0 btn btn-sm btn-primary px-2" style="border-radius: 0 30px 30px 0;">Lý lịch nhà khoa học</a>
+                                <a href=" @Url.Action("TopicInfor", "Home", new { id = item.topicID})" class="flex-shrink-0 btn btn-sm btn-primary px-2 border-end" style="border-radius: 30px 0 0 30px;">Xem Đề Tài</a>
+                                <a href="@Url.Action("ScientistInfor", "Home", new { id = item.scientistID})"  class="flex-shrink-0 btn btn-sm btn-primary px-2" style="border-radius: 0 30px 30px 0;">Lý lịch nhà khoa học</a>
                             </div>
                         </div>
 
@@ -58,52 +58,4 @@
         </div>
     </div>
 </div>
-
-
-@section scripts{
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
-    <script src="~/Content/dist/js/jquery.dataTables.min.js"></script>
-
-    <script>
-
-        var Popup, dataTable;
-
-        $(document).ready(function () {
-            //Hai dòng dưới để chỉnh cho khai báo jquery trước boostrap (hiện nút close)
-            var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
-            $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
-        });
-
-
-
-        function PopupForm(url) {
-
-            var formDiv = $('<div/>');
-            $.get(url)
-                .done(function (response) {
-
-                    formDiv.html(response);
-
-                    Popup = formDiv.dialog({
-
-                        autoOpen: true,
-                        resizable: false,
-                        title: 'Thông Tin Về Đề Tài',
-                        height: 500,
-                        width: 550,
-                        close: function () {
-
-                            Popup.dialog('destroy').remove();
-                        }
-
-                    });
-
-                });
-        }
-
-
-
-
-    </script>
-
 }

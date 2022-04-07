@@ -2415,6 +2415,11 @@
     <Content Include="Views\Topic\ApiManage.cshtml" />
     <Content Include="Views\Topic\ApiStoreOrEdit.cshtml" />
     <Content Include="Views\Home\ScientistInfor.cshtml" />
+    <Content Include="Views\Scientist\ScientistInfor.cshtml" />
+    <Content Include="Views\Topic\TopicInfor.cshtml" />
+    <Content Include="Views\Home\Articles.cshtml" />
+    <Content Include="Views\Home\ArticlesInfor.cshtml" />
+    <Content Include="Views\Home\ArticlesPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

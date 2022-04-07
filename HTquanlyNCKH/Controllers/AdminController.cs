@@ -16,8 +16,8 @@ namespace HTquanlyNCKH.Controllers
         {
             return View();
         }
-
-        public ActionResult SliderGetData()
+        //Quản lý thông tin ảnh bìa
+        public ActionResult SliderGetData() //Lấy Json danh sách ảnh bìa
         {
             using (DBModel db = new DBModel())
             {
@@ -29,7 +29,7 @@ namespace HTquanlyNCKH.Controllers
         }
 
         [HttpGet]
-        public ActionResult SliderStoreOrEdit(int id = 0)
+        public ActionResult SliderStoreOrEdit(int id = 0)   //Hiện thông tin thêm mới hoặc sửa chữa ảnh bìa
         {
             if (id == 0)
             {
@@ -44,7 +44,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
         [HttpPost]
-        public ActionResult SliderStoreOrEdit(Slider sliderob, HttpPostedFileBase file)
+        public ActionResult SliderStoreOrEdit(Slider sliderob, HttpPostedFileBase file) //Thêm mới hoặc sửa chữa ảnh bìa
         {
             using (DBModel db = new DBModel())
             {
@@ -79,7 +79,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
         [HttpPost]
-        public ActionResult SliderDelete(int id)
+        public ActionResult SliderDelete(int id)    //Xoá ảnh bìa
         {
             using (DBModel db = new DBModel())
             {
@@ -90,7 +90,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
 
-        public ActionResult SliderManage()
+        public ActionResult SliderManage()  // Index của quản lý ảnh bìa
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
@@ -100,7 +100,7 @@ namespace HTquanlyNCKH.Controllers
 
         //Quản lý giới thiệu Intro
         
-        public ActionResult IntroGetData()
+        public ActionResult IntroGetData()      //Lấy Json danh sách thông tin trang chủ
         {
             using (DBModel db = new DBModel())
             {
@@ -111,7 +111,7 @@ namespace HTquanlyNCKH.Controllers
         }
         
         [HttpGet]
-        public ActionResult IntroStoreOrEdit(int id = 0)
+        public ActionResult IntroStoreOrEdit(int id = 0)        //Hiện thông tin thêm mới hoặc sửa chữa thông tin trang chủ
         {
             if (id == 0)
             {
@@ -127,7 +127,7 @@ namespace HTquanlyNCKH.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult IntroStoreOrEdit(Intro introob)
+        public ActionResult IntroStoreOrEdit(Intro introob)     //Thêm mới hoặc sửa chữa thông tin trang chủ
         {
            
             using (DBModel db = new DBModel())
@@ -149,7 +149,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
         [HttpPost]
-        public ActionResult IntroDelete(int id)
+        public ActionResult IntroDelete(int id)     //Xoá thông tin trang chủ
         {
             using (DBModel db = new DBModel())
             {
@@ -159,7 +159,7 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
-        public ActionResult IntroManage()
+        public ActionResult IntroManage()   //Index quản lý thông tin trang chủ
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
@@ -170,12 +170,12 @@ namespace HTquanlyNCKH.Controllers
             return View();
         }
 
-        public ActionResult GetIconSupport()
+        public ActionResult GetIconSupport()    //Hiện Popup hưỡng dẫn lấy icon
         {
             return View();
         }
 
-        public ActionResult SliderSupport()
+        public ActionResult SliderSupport()     //Hiện Popup hướng dẫn quản lý ảnh bìa
         {
             return View();
         }

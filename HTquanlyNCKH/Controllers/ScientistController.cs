@@ -324,6 +324,26 @@ namespace HTquanlyNCKH.Controllers
             {
                 using (DBModel db = new DBModel())
                 {
+                    //Lấy danh sách nơi sinh (tỉnh)
+                    List<Place> places = db.Places.OrderByDescending(n => n.placeID).ToList<Place>();
+                    ViewBag.plaList = places;
+
+                    //Lấy danh sách trình độ nhà khoa học
+                    List<Degree> degrees = db.Degrees.OrderByDescending(n => n.degreeID).ToList<Degree>();
+                    ViewBag.degList = degrees;
+
+                    //Lấy danh sách phòng ban
+                    List<Unit> units = db.Units.OrderByDescending(n => n.unitID).ToList<Unit>();
+                    ViewBag.unitList = units;
+
+                    //Lấy danh sách chuyên ngành nghiên cứu
+                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
+                    ViewBag.fieldList = fields;
+
+                    //Lấy danh sách ngoại ngữ nhà khoa học
+                    List<Foreign> foreigns = db.Foreigns.OrderByDescending(n => n.foreignID).ToList<Foreign>();
+                    ViewBag.foreignList = foreigns;
+
                     return View(db.Scientists.Where(x => x.scientistID == id).FirstOrDefault<Scientist>());
                 }
             }
@@ -364,7 +384,48 @@ namespace HTquanlyNCKH.Controllers
         public ActionResult ScientistManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
+            ViewBag.ViewIcon = "<i class='fas fa-eye - alt'></i>";
+            
             return View();
+        }
+
+        public ActionResult ScientistInfor(int? id)     //Hiện Popup thông tin nhà khoa học (truyền vào mã số scientistID nhà khoa học
+        {
+            using (DBModel db = new DBModel())
+            {
+                var ScientistList = from sct in db.Scientists                                        //Lấy bảng nhà khoa học
+                                    join pla in db.Places on sct.PlaceID equals pla.placeID          //Nối bảng địa chỉ (tỉnh)
+                                    join deg in db.Degrees on sct.degreeID equals deg.degreeID       //Nối bảng học vị
+                                    join unt in db.Units on sct.unitID equals unt.unitID             //Nối bảng phòng ban
+                                    join fie in db.Fields on sct.fieldID equals fie.fieldID          //Nối bảng chuyên nghành
+                                    join frg in db.Foreigns on sct.foreignID equals frg.foreignID //Nối bảng ngoại ngữ
+                                    select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL. Tương ứng, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
+                                    {
+                                        scientistID = sct.scientistID,              //Mã số nhà khoa học
+                                        sctFirstName = sct.sctFirstName,            //Họ và tên đệm
+                                        sctLastName = sct.sctLastName,              //Tên
+                                        sctSex = sct.sctSex,                        //Giới tính
+                                        sctBirthday = sct.sctBirthday,              //Ngày sinh                                                                            
+                                        PlaceName = pla.plaName,                    //Địa chỉ (tỉnh)
+                                        sctImage = sct.sctImage,                    //Ảnh chân dung
+                                        degreeName = deg.degName,                   //Học vị vd: đại học, thạc sĩ
+                                        unitName = unt.untName,                     //Phòng ban
+                                        fieldName = fie.fieName,                    //Chuyên ngành
+                                        sctWorkingProcess = sct.sctWorkingProcess,  //Quá trình công tác
+                                        sctResult = sct.sctResult,                  //Kết quả nghiên cứu
+                                        sctForeignName = frg.fgnName,               //Trình độ ngoại ngữ
+                                        sctAddress = sct.sctAddress,                //Địa chỉ thường trú
+                                        sctPhone = sct.sctPhone,                    //Số điện thoại
+                                        sctEmail = sct.sctEmail,                    //Email
+                                        sctCreateDate = sct.sctCreateDate,          //Thời gian khởi tạo
+                                        sctModifierDate = sct.sctModifierDate,      //Thời gian thay đổi
+                                        sctCreateUser = sct.sctCreateUser,          //Người khởi tạo
+                                        sctModifierUser = sct.sctModifierUser,      //Người thay đổi
+
+                                    };
+
+                return View(ScientistList.Single(n => n.scientistID == id));        //Trả về thông tin nhà khoa học tương ứng mã số ID truyền vào
+            }
         }
     }
 }

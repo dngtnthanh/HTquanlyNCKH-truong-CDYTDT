@@ -294,6 +294,7 @@ namespace HTquanlyNCKH.Controllers
         public ActionResult TopicManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
+            ViewBag.ViewIcon = "<i class='fas fa-eye - alt'></i>";
             return View();
         }
 
@@ -359,6 +360,49 @@ namespace HTquanlyNCKH.Controllers
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult TopicInfor(int? id)     //Hiện Popup thông tin đề tài (truyền vào mã số topicID nhà khoa học)
+        {
+            using (DBModel db = new DBModel())
+            {
+                var TopicList = from tpc in db.Topics                                        //Lấy bảng lớn Topic là đề tài nghiên cứu
+                                join sct in db.Scientists on tpc.scientistID equals sct.scientistID     //Nối đến bảng nhà khoa học
+                                join cls in db.Classifications on tpc.classifiID equals cls.classifiID  //Nối đến bảng xếp loại đề tài
+                                join sts in db.Status on tpc.statusID equals sts.statusID               //Nối đến bảng trạng thái
+                                join fie in db.Fields on tpc.fieldID equals fie.fieldID                 //Nối đến bảng lĩnh vực
+                                where (tpc.topicID == id)
+                                select new TopicFull()     // [W-A-R-N-I-N-G] những chỗ có liên kết các trường là khoá ngoại ở trên không được để NULL, cho nên nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
+                                {
+                                    topicID = tpc.topicID,                                  //Mã số đề tài
+                                    scientistID = sct.scientistID,
+                                    scientistName = sct.sctFirstName + " " + sct.sctLastName,     //Tên đầy đủ nhà khoa học
+                                    classifiName = cls.clsName,                             //Tên xếp loại
+                                    statusName = sts.stsName,                               //Trạng thái
+                                    fieldName = fie.fieName,                                //Lĩnh vực
+
+                                    tpcYear = tpc.tpcYear,                                  //Năm thực hiện
+                                    tpcName = tpc.tpcName,                                  //Tên đề tài
+                                    tpcSummary = tpc.tpcSummary,                            //Tóm tắt sơ lượt
+                                    tpcCode = tpc.tpcCode,                                  //Mã số
+                                    tpcStartDate = tpc.tpcStartDate,                        //Ngày bắt đầu thực hiện
+                                    tpcEndDate = tpc.tpcEndDate,                            //Ngày kết thúc
+                                    tpcDateOfAcceptance = tpc.tpcDateOfAcceptance,          //Ngày nghiệm thu
+                                    tpcProofFile = tpc.tpcProofFile,                        //Tệp minh chứng
+                                    tpcReviewBoard = tpc.tpcReviewBoard,                    //Hội đồng nghiệm thu
+                                    tpcCreateData = tpc.tpcCreateData,                      //Thời gian khởi tạo
+                                    tpcModifierData = tpc.tpcModifierData,                  //Thời gian thay đổi
+                                    tpcCreateUser = tpc.tpcCreateUser,                      //Người khởi tạo
+                                    tpcModifierUser = tpc.tpcModifierUser,                  //Người thay đổi
+                                    tpcDeleteData = tpc.tpcDeleteData,                      //Thời gian xoá
+                                    tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
+                                    tpcImage = tpc.tpcImage,                                //Ảnh bìa
+                                };
+
+                return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
+            }
+
         }
     }
 }

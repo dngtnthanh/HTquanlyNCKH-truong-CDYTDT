@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.TopicFull
+<table style="text-align: right" class="table table-striped">
+    <tbody>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Tên đề tài:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcName
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Người thực hiện:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.scientistName <a style="margin-left: 1em" class="btn btn-primary btn-sm" onclick="PopupForm('@Url.Action("ScientistInfor", "Scientist", new { id = Model.scientistID})')"> Xem thông tin</a>
+            </td>
+
+
+
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Phân loại:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.classifiName
+            </td>
+        </tr>
+
+
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Trạng thái:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.statusName
+            </td>
+        </tr>
+
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Chuyên nghành:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.fieldName
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Năm thực hiện:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcYear
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Tóm lượt đề tài:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcSummary
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Mã số:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcCode
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Hội đồng xét duyệt:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcReviewBoard
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Ngày bắt đầu:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcStartDate
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Ngày kết thúc:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcEndDate
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Ngày nghiệm thu:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.tpcDateOfAcceptance
+            </td>
+        </tr>
+    </tbody>
+</table>
+
