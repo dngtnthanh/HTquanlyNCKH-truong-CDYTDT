@@ -63,15 +63,51 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
+
+        //[HttpPost]
+        //public ActionResult ClassifiDelete(int id)      //Xoá phân loại đề tài
+        //{
+        //    using (DBModel db = new DBModel())
+        //    {
+        //        Classification emp = db.Classifications.Where(x => x.classifiID == id).FirstOrDefault<Classification>();
+
+        //        if (db.Topics.SingleOrDefault(n => n.classifiID == id) == null)
+        //        {
+        //            db.Classifications.Remove(emp);
+        //            db.SaveChanges();
+        //            return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+        //        }
+        //        else
+        //        {
+        //            var tpc = db.Topics.Single(n => n.classifiID == id);
+        //            return Json(new { success = false, message = "Xoá không thành công! Còn tồn tại dữ liệu trong đề tài mã số: " + tpc.topicID + ", tên: " + tpc.tpcName, JsonRequestBehavior.AllowGet });
+        //        }
+        //    }
+        //}
+
         [HttpPost]
         public ActionResult ClassifiDelete(int id)      //Xoá phân loại đề tài
         {
             using (DBModel db = new DBModel())
             {
                 Classification emp = db.Classifications.Where(x => x.classifiID == id).FirstOrDefault<Classification>();
-                db.Classifications.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var tpc = db.Topics.Where(n => n.classifiID == id);    //Kiểm tra xem có tồn tại id của classifi trong bảng Topic
+                if (tpc == null)      //Kiểm tra toàn vẹn dữ liệu
+                {
+                    db.Classifications.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach (var item in tpc)
+                    {
+                        mess += "\n Mã đề tài: " + item.topicID + " tên đề tài: " + item.tpcName;
+                    }
+
+                    return Json(new { success = false, message = "Xoá không thành công! Còn tồn tại dữ liệu trong: " + mess , JsonRequestBehavior.AllowGet });
+                }
             }
         }
 

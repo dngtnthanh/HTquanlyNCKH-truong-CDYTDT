@@ -31,6 +31,7 @@ namespace HTquanlyNCKH.Controllers
         [HttpGet]
         public ActionResult SliderStoreOrEdit(int id = 0)   //Hiện thông tin thêm mới hoặc sửa chữa ảnh bìa
         {
+
             if (id == 0)
             {
                 return View(new Slider());
