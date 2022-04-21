@@ -106,7 +106,8 @@ namespace HTquanlyNCKH.Controllers
                         mess += "\n Mã đề tài: " + item.topicID + " tên đề tài: " + item.tpcName;
                     }
 
-                    return Json(new { success = false, message = "Xoá không thành công! Còn tồn tại dữ liệu trong: " + mess , JsonRequestBehavior.AllowGet });
+                    return Json(new { success = false, message = "Xoá không thành công! Còn tồn tại dữ liệu trong" +
+                        " " + mess , JsonRequestBehavior.AllowGet });
                 }
             }
         }
