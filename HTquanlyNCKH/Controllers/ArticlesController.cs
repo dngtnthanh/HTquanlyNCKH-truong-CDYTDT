@@ -67,9 +67,30 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Nation emp = db.Nations.Where(x => x.nationID == id).FirstOrDefault<Nation>();
-                db.Nations.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var nat = db.Articles.Where(n => n.nationID == id);
+                if (nat.Count() < 1)
+                {
+                    db.Nations.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach (var item in nat)
+                    {
+                        mess += "\n [Mã bài báo: " + item.articlesID + ". Tên bài báo: " + item.atlName + ". Quốc gia: " + emp.natName + "]";
+                    }
+
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Xoá không thành công! Còn " + nat.Count() + " hàng dữ liệu trong danh sách bài báo quốc tế"
+                         + mess,
+                        JsonRequestBehavior.AllowGet
+                    });
+                }
+                
             }
         }
 
@@ -336,6 +357,7 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (articleob.articlesID == 0)
                 {
+                    articleob.scientistID = 1;
                     db.Articles.Add(articleob);
                     //articleob.cfrCreateDate = DateTime.Now;
                     db.SaveChanges();

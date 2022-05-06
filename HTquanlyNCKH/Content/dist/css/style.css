@@ -432,3 +432,28 @@
     padding-right: 0;
     border-right: none;
 }
+
+#wapperLogin {
+    width: 500px;
+    min-height: 600px;
+    background-color: LightGray;
+    margin: 0px auto;
+    padding-right: 700px;
+    padding-top: 130px;
+    padding-left: 400px;
+}
+
+#Log {
+    display: block;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.tua-dang-nhap {
+    text-align: center;
+    font-size: 26px;
+    color: #262261;
+    background-color: #cdbae5;
+    border-radius: 5px;
+}

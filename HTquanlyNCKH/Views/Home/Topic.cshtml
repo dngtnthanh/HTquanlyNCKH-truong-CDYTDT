@@ -12,9 +12,15 @@
 @using PagedList.Mvc;
 <div class="container-xxl py-5">
     <div class="container">
+
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center text-primary px-3" style="margin-bottom: 60px">Trường Cao Đẳng Y Tế Đồng Tháp</h6>
 
+        </div>
+
+        <div class="position-relative mx-auto " style="max-width: 600px; margin-bottom: 20px">
+            <input class="form-control border-1 w-100 py-3 ps-4 pe-5" type="email" placeholder="Nhập tên đề tài">
+            <button type="button" name="" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Tìm kiếm</button>
         </div>
         <div class="row g-4 justify-content-center">
             @foreach (var item in Model)
@@ -27,7 +33,7 @@
                             <img class="img-fluid" src="~/Content/dist/img/course-1.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href=" @Url.Action("TopicInfor", "Home", new { id = item.topicID})" class="flex-shrink-0 btn btn-sm btn-primary px-2 border-end" style="border-radius: 30px 0 0 30px;">Xem Đề Tài</a>
-                                <a href="@Url.Action("ScientistInfor", "Home", new { id = item.scientistID})"  class="flex-shrink-0 btn btn-sm btn-primary px-2" style="border-radius: 0 30px 30px 0;">Lý lịch nhà khoa học</a>
+                                <a href="@Url.Action("ScientistInfor", "Home", new { id = item.scientistID})" class="flex-shrink-0 btn btn-sm btn-primary px-2" style="border-radius: 0 30px 30px 0;">Lý lịch nhà khoa học</a>
                             </div>
                         </div>
 
@@ -58,4 +64,3 @@
         </div>
     </div>
 </div>
-}

@@ -14,7 +14,18 @@ namespace HTquanlyNCKH.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            using (DBModel db = new DBModel())
+            {
+                var tpc = db.Topics.OrderBy(n => n.topicID);
+                ViewBag.DeTai = tpc.Count();
+
+                var sct = db.Scientists.OrderBy(n => n.scientistID);
+                ViewBag.NhaKhoaHoc = sct.Count();
+
+                var art = db.Articles.OrderBy(n => n.articlesID);
+                ViewBag.BaiBao = art.Count();
+            }
+                return View();
         }
         //Quản lý thông tin ảnh bìa
         public ActionResult SliderGetData() //Lấy Json danh sách ảnh bìa

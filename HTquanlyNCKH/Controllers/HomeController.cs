@@ -11,9 +11,49 @@ namespace HTquanlyNCKH.Controllers
     
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int? pageID)
         {
-            return View();        
+            using (DBModel db = new DBModel())
+            {
+                var TopicList = from tpc in db.Topics                                        //Lấy bảng lớn Topic là đề tài nghiên cứu
+                                join sct in db.Scientists on tpc.scientistID equals sct.scientistID     //Nối đến bảng nhà khoa học
+                                join cls in db.Classifications on tpc.classifiID equals cls.classifiID  //Nối đến bảng xếp loại đề tài
+                                join sts in db.Status on tpc.statusID equals sts.statusID               //Nối đến bảng trạng thái
+                                join fie in db.Fields on tpc.fieldID equals fie.fieldID                 //Nối đến bảng lĩnh vực
+                                select new TopicFull()     // [W-A-R-N-I-N-G] những chỗ có liên kết các trường là khoá ngoại ở trên không được để NULL, cho nên nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
+                                {
+                                    topicID = tpc.topicID,                                  //Mã số đề tài
+                                    scientistID = sct.scientistID,
+                                    scientistName = sct.sctFirstName + " " + sct.sctLastName,     //Tên đầy đủ nhà khoa học
+                                    classifiName = cls.clsName,                             //Tên xếp loại
+                                    statusName = sts.stsName,                               //Trạng thái
+                                    fieldName = fie.fieName,                                //Lĩnh vực
+
+                                    //Phía trên là nối bảng
+
+                                    tpcYear = tpc.tpcYear,                                  //Năm thực hiện
+                                    tpcName = tpc.tpcName,                                  //Tên đề tài
+                                    tpcSummary = tpc.tpcSummary,                            //Tóm tắt sơ lượt
+                                    tpcCode = tpc.tpcCode,                                  //Mã số
+                                    tpcStartDate = tpc.tpcStartDate,                        //Ngày bắt đầu thực hiện
+                                    tpcEndDate = tpc.tpcEndDate,                            //Ngày kết thúc
+                                    tpcDateOfAcceptance = tpc.tpcDateOfAcceptance,          //Ngày nghiệm thu
+                                    tpcProofFile = tpc.tpcProofFile,                        //Tệp minh chứng
+                                    tpcReviewBoard = tpc.tpcReviewBoard,                    //Hội đồng nghiệm thu
+                                    tpcCreateData = tpc.tpcCreateData,                      //Thời gian khởi tạo
+                                    tpcModifierData = tpc.tpcModifierData,                  //Thời gian thay đổi
+                                    tpcCreateUser = tpc.tpcCreateUser,                      //Người khởi tạo
+                                    tpcModifierUser = tpc.tpcModifierUser,                  //Người thay đổi
+                                    tpcDeleteData = tpc.tpcDeleteData,                      //Thời gian xoá
+                                    tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
+                                    tpcImage = tpc.tpcImage,                                //Ảnh bìa
+                                };
+
+                int pagesize = 4;                   //Hiển thị 4 đơn vị trên mỗi trang  (phân trang)
+                int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên (phân trang)
+                return View(TopicList.ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
+            }
+                 
         }
 
         public ActionResult About()
@@ -29,14 +69,7 @@ namespace HTquanlyNCKH.Controllers
 
             return View();
         }
-        //public JsonResult GetCountries()
-        //{
-        //    var Countries = new List<string>();
-        //    Countries.Add("Australia");
-        //    Countries.Add("India");
-        //    Countries.Add("Russia");
-        //    return Json(Countries, JsonRequestBehavior.AllowGet);
-        //}
+
         public JsonResult GetCountries()    
         {
             using (DBModel db = new DBModel())
@@ -288,49 +321,41 @@ namespace HTquanlyNCKH.Controllers
         }
         public ActionResult ArticlesPopup(int id)
         {
-            
+
             using (DBModel db = new DBModel())
             {
-                if (id == 0)
-                {
-                    List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
-                    ViewBag.nat = nat;
+                var ArticlesList = from arl in db.Articles
+                                   join sct in db.Scientists on arl.scientistID equals sct.scientistID //Noi bang nha khoa hoc
+                                   join nat in db.Nations on arl.nationID equals nat.nationID           //Noi bang quoc gia
+                                   join key in db.KeyWords on arl.keyID equals key.keyID                //noi bang tu khoa
+                                   join tpe in db.ArtTypes on arl.typeID equals tpe.typeID              //noi bang loai bai viet
+                                   join fie in db.Fields on arl.fieldID equals fie.fieldID              //noi bang linh vuc nghien cuu
+                                   select new ArticleFull()
+                                   {
+                                       articlesID = arl.articlesID,
+                                       scientistID = sct.scientistID,
+                                       atlName = arl.atlName,
+                                       scientistName = sct.sctFirstName + " " + sct.sctLastName,
+                                       nationName = nat.natName,
+                                       atlSummary = arl.atlSummary,
+                                       keyName = key.keyName,
+                                       typeName = tpe.typName,
+                                       Point = arl.Point,
+                                       atlLink = arl.atlLink,
+                                       atlPublication = arl.atlPublication,
+                                       atlPublicationDate = arl.atlPublicationDate,
+                                       atlNumber = arl.atlNumber,
+                                       atlPageToPage = arl.atlPageToPage,
+                                       atlCreateDate = arl.atlCreateDate,
+                                       atlModifierDate = arl.atlModifierDate,
+                                       atlCreateUser = arl.atlCreateUser,
+                                       atlModifierUser = arl.atlModifierUser,
 
 
-                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
-                    ViewBag.sct = sct;
-
-                    List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
-                    ViewBag.key = key;
-
-                    List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
-                    ViewBag.types = types;
-
-                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
-                    ViewBag.fieldList = fields;
-                    return View(new Article());
-                }
-                else
-                {
-                    List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
-                    ViewBag.nat = nat;
-
-                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
-                    ViewBag.sct = sct;
-
-                    List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
-                    ViewBag.key = key;
-
-                    List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
-                    ViewBag.types = types;
-
-                    List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
-                    ViewBag.fieldList = fields;
-                    return View(db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>());
-
-                }
+                                   };
+                return View(ArticlesList.Single(n => n.articlesID == id));
             }
-            
+
         }
     }
 }

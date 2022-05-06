@@ -2,6 +2,8 @@
     ViewBag.Title = "Giới Thiệu";
 }
 @using HTquanlyNCKH.Models
+@model PagedList.IPagedList<HTquanlyNCKH.Models.TopicFull>
+@using PagedList.Mvc;
 @section Slider{
     @using (DBModel db = new DBModel())
     {
@@ -39,7 +41,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
-            
+
             @using (DBModel db = new DBModel())
             {
                 var introList = from p in db.Introes select p;
@@ -48,7 +50,7 @@
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item text-center pt-3">
                             <div class="p-4">
-                                @Html.Raw(item.itdIcon) 
+                                @Html.Raw(item.itdIcon)
                                 <h5 class="mb-3">@item.itdName</h5>
                                 <p>@item.itdSummary</p>
                             </div>
@@ -163,142 +165,53 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center text-primary px-3">THÔNG TIN</h6>
-            <h1 class="mb-5">Đề Tài Nghiên Cứu</h1>
+            <h6 class="section-title bg-white text-center text-primary px-3" style="margin-bottom: 60px">Trường Cao Đẳng Y Tế Đồng Tháp</h6>
+
         </div>
         <div class="row g-4 justify-content-center">
-
-            @using (DBModel db = new DBModel())
+            @foreach (var item in Model)
             {
-                var topicList = from p in db.Topics select p;
-                foreach (var item in topicList)
-                {
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="course-item bg-light">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="course-item bg-light">
 
 
-                            <div class="position-relative overflow-hidden">
-                                <img class="img-fluid" src="~/Content/dist/img/course-1.jpg" alt="">
-                                <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Xem Đề Tài</a>
-                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Lý lịch nhà khoa học</a>
-                                </div>
-                            </div>
-
-
-
-                            <div class="text-center p-4 pb-0">
-                                <h3 class="mb-0">@item.tpcName</h3>
-                                <div class="mb-3">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small>(123) Đánh Giá</small>
-                                </div>
-                                <h5 class="mb-4"></h5>
-                            </div>
-                            <div class="d-flex border-top">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Dương Tấn Thành</small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>1 năm</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>1 Thành Viên</small>
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid" src="~/Content/dist/img/course-1.jpg" alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                <a href=" @Url.Action("TopicInfor", "Home", new { id = item.topicID})" class="flex-shrink-0 btn btn-sm btn-primary px-2 border-end" style="border-radius: 30px 0 0 30px;">Xem Đề Tài</a>
+                                <a href="@Url.Action("ScientistInfor", "Home", new { id = item.scientistID})" class="flex-shrink-0 btn btn-sm btn-primary px-2" style="border-radius: 0 30px 30px 0;">Lý lịch nhà khoa học</a>
                             </div>
                         </div>
+
+
+
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0" style="min-height: 100px">@item.tpcName</h3>
+                            <div class="mb-3">
+                                <small> Lĩnh vực @item.fieldName</small>
+                            </div>
+                            <h5 class="mb-4">Năm @item.tpcYear</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>@item.scientistName</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>@item.tpcYear</small>
+                            <small class="flex-fill text-center py-2"><i class="fas fa-info text-primary me-2"></i> @item.statusName</small>
+                        </div>
                     </div>
-                }
+                </div>
             }
+            <nav id="phanTrang" style="float: left">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Topic", "Home", new { pageID = page }))
+            </nav>
 
 
-            
+
         </div>
     </div>
 </div>
+}
 <!-- Courses End -->
-<!-- Team Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center text-primary px-3">Thông Tin</h6>
-            <h1 class="mb-5">Nhà Khoa Học</h1>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="team-item bg-light">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="~/Content/dist/img/team-2.jpg" alt="">
-                    </div>
-                    <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                        <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">Instructor Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="team-item bg-light">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="~/Content/dist/img/team-2.jpg" alt="">
-                    </div>
-                    <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                        <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">Instructor Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="team-item bg-light">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="~/Content/dist/img/team-3.jpg" alt="">
-                    </div>
-                    <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                        <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">Instructor Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="team-item bg-light">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="~/Content/dist/img/team-4.jpg" alt="">
-                    </div>
-                    <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                        <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">Instructor Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Team End -->
 <!-- Testimonial Start -->
 @*<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">

@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@section Slider{
+    <img src="~/Content/dist/img/23 3 2022 5.png" width="100%" />
+}
 <div class="form-control">
 
 
@@ -13,7 +15,6 @@
             <tr>
                 <th width="10px">STT</th>
                 <th>Tên bài</th>
-                <th>Tóm lược</th>
                 <th>Mã số</th>
                 <th>Từ trang</th>
                 <th>Liên kết</th>
@@ -59,7 +60,6 @@
                 "columns": [
                     { "defaultContent": "" },
                     { "data": "atlName" },
-                    { "data": "atlSummary" },
                     { "data": "atlNumber" },
                     { "data": "atlPageToPage" },
                     { "data": "atlLink" },
@@ -101,8 +101,8 @@
                         autoOpen : true,
                         resizable : false,
                         title : 'Thông Tin Bài Báo Quốc Tế',
-                        height : 500,
-                        width : 700,
+                        height : 700,
+                        width : 900,
                         close: function () {
 
                             Popup.dialog('destroy').remove();

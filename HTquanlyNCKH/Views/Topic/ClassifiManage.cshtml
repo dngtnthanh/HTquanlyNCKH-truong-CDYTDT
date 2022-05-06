@@ -4,18 +4,6 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<!--<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />-->
-<!-- Font Awesome -->
-<!--<link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
-<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet" />-->
-@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Xoá
-    </button>*@
-
-
-<img src="~/Content/dist/img/HuongDanSuDung/24 3 2022 1.PNG" width="100%" height="300"  />
-
-
 <a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("ClassifiStoreOrEdit","Topic")')">
     <i class="fa fa-plus"></i> Thêm Mới
 </a>
@@ -162,10 +150,8 @@
 
                             dataTable.ajax.reload();
 
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className: "success"
-                            })
+                            alert(data.message);
+                            
 
                         } else alert(data.message);
                     }

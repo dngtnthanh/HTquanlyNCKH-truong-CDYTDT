@@ -64,26 +64,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
 
-        //[HttpPost]
-        //public ActionResult ClassifiDelete(int id)      //Xoá phân loại đề tài
-        //{
-        //    using (DBModel db = new DBModel())
-        //    {
-        //        Classification emp = db.Classifications.Where(x => x.classifiID == id).FirstOrDefault<Classification>();
-
-        //        if (db.Topics.SingleOrDefault(n => n.classifiID == id) == null)
-        //        {
-        //            db.Classifications.Remove(emp);
-        //            db.SaveChanges();
-        //            return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
-        //        }
-        //        else
-        //        {
-        //            var tpc = db.Topics.Single(n => n.classifiID == id);
-        //            return Json(new { success = false, message = "Xoá không thành công! Còn tồn tại dữ liệu trong đề tài mã số: " + tpc.topicID + ", tên: " + tpc.tpcName, JsonRequestBehavior.AllowGet });
-        //        }
-        //    }
-        //}
+        
 
         [HttpPost]
         public ActionResult ClassifiDelete(int id)      //Xoá phân loại đề tài
@@ -91,8 +72,8 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Classification emp = db.Classifications.Where(x => x.classifiID == id).FirstOrDefault<Classification>();
-                var tpc = db.Topics.Where(n => n.classifiID == id);    //Kiểm tra xem có tồn tại id của classifi trong bảng Topic
-                if (tpc == null)      //Kiểm tra toàn vẹn dữ liệu
+                var tpc = db.Topics.Where(n => n.classifiID == id);   //Kiểm tra xem có tồn tại id của classifi trong bảng Topic
+                if (tpc.Count() < 1)      //Kiểm tra toàn vẹn dữ liệu
                 {
                     db.Classifications.Remove(emp);
                     db.SaveChanges();
@@ -103,11 +84,11 @@ namespace HTquanlyNCKH.Controllers
                     string mess = "";
                     foreach (var item in tpc)
                     {
-                        mess += "\n Mã đề tài: " + item.topicID + " tên đề tài: " + item.tpcName;
+                        mess += "\n [Mã đề tài: " + item.topicID + ". Tên đề tài: " + item.tpcName + ". Xếp loại: " + emp.clsName + "]";
                     }
 
-                    return Json(new { success = false, message = "Xoá không thành công! Còn tồn tại dữ liệu trong" +
-                        " " + mess , JsonRequestBehavior.AllowGet });
+                    return Json(new { success = false, message = "Xoá không thành công! Còn " + tpc.Count() + " hàng dữ liệu trong bảng đề tài"
+                         + mess , JsonRequestBehavior.AllowGet });
                 }
             }
         }
@@ -170,9 +151,32 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Field emp = db.Fields.Where(x => x.fieldID == id).FirstOrDefault<Field>();
-                db.Fields.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var fie = db.Topics.Where(n => n.fieldID == id); //Kiểm tra xem có tồn tại id của bảng Field trong bảng Topic
+                var field = db.Scientists.Where(n => n.fieldID == id); //Kiểm tra xem có tồn tại lĩnh vực tức là chuyên ngành bên bảng nhà khoa học có tồn tại không
+                if (fie.Count() < 1 && field.Count() < 1)
+                {
+                    db.Fields.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach(var item in fie)
+                    {
+                        mess += "\n [Mã đề tài: " + item.topicID + ". Tên đề tài: " + item.tpcName + ". Lĩnh vực: " + emp.fieName + "]";
+                    }
+                    foreach (var item in field)
+                    {
+                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + " " + item.sctLastName + ". Chuyên nghành: " + emp.fieName + "]";
+                    }
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Xoá không thành công! Còn " + fie.Count() + " hàng dữ liệu trong bảng đề tài" + " và " + field.Count() + " dữ liệu trong danh sách nhà khoa học" 
+                         + mess, JsonRequestBehavior.AllowGet });
+                }
+                
             }
         }
         public ActionResult FieldManage()
@@ -231,9 +235,29 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Status emp = db.Status.Where(x => x.statusID == id).FirstOrDefault<Status>();
-                db.Status.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var sts = db.Topics.Where(n => n.statusID == id); //Kiểm tra xem có tồn tại id của bảng status trong bảng Topic
+                if (sts.Count() < 1)
+                {
+                    db.Status.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach (var item in sts)
+                    {
+                        mess += "\n [Mã đề tài: " + item.topicID + ". Tên đề tài: " + item.tpcName + ". Trạng thái: " + emp.stsName + "]";
+                    }
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Xoá không thành công! Còn " + sts.Count() + " hàng dữ liệu trong bảng đề tài"
+                         + mess,
+                        JsonRequestBehavior.AllowGet
+                    });
+                }
+                
             }
         }
         public ActionResult StatusManage()
@@ -302,6 +326,7 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (topicob.topicID == 0)
                 {
+                    topicob.scientistID = 1;
                     db.Topics.Add(topicob);
                     topicob.tpcCreateData = DateTime.Now;
                     topicob.tpcStartDate = Convert.ToDateTime(collection.Get("ngay-bat-dau"));

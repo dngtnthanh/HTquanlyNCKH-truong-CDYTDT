@@ -67,9 +67,30 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Degree emp = db.Degrees.Where(x => x.degreeID == id).FirstOrDefault<Degree>();
-                db.Degrees.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var deg = db.Scientists.Where(n => n.degreeID == id);
+                if (deg.Count() < 1)
+                {
+                    db.Degrees.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach (var item in deg)
+                    {
+                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Trình độ: " + emp.degName + "]";
+                    }
+
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Xoá không thành công! Còn " + deg.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                         + mess,
+                        JsonRequestBehavior.AllowGet
+                    });
+                }
+                
             }
         }
 
@@ -134,9 +155,30 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Foreign emp = db.Foreigns.Where(x => x.foreignID == id).FirstOrDefault<Foreign>();
-                db.Foreigns.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var fre = db.Scientists.Where(n => n.foreignID == id);
+                if (fre.Count() < 1)
+                {
+                    db.Foreigns.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach (var item in fre)
+                    {
+                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Ngoại ngữ: " + emp.fgnName + "]";
+                    }
+
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Xoá không thành công! Còn " + fre.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                         + mess,
+                        JsonRequestBehavior.AllowGet
+                    });
+                }
+                
             }
         }
 
@@ -198,9 +240,30 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Place emp = db.Places.Where(x => x.placeID == id).FirstOrDefault<Place>();
-                db.Places.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var pla = db.Scientists.Where(n => n.PlaceID == id);
+                if (pla.Count() < 1)
+                {
+                    db.Places.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach (var item in pla)
+                    {
+                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". nơi sinh: " + emp.plaName + "]";
+                    }
+
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Xoá không thành công! Còn " + pla.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                         + mess,
+                        JsonRequestBehavior.AllowGet
+                    });
+                }
+                
             }
         }
 
@@ -264,9 +327,30 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 Unit emp = db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>();
-                db.Units.Remove(emp);
-                db.SaveChanges();
-                return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                var uni = db.Scientists.Where(n => n.unitID == id);
+                if (uni.Count() < 1)
+                {
+                    db.Units.Remove(emp);
+                    db.SaveChanges();
+                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                }
+                else
+                {
+                    string mess = "";
+                    foreach (var item in uni)
+                    {
+                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Phòng ban: " + emp.untName + "]";
+                    }
+
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Xoá không thành công! Còn " + uni.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                         + mess,
+                        JsonRequestBehavior.AllowGet
+                    });
+                }
+                
             }
         }
 
@@ -355,6 +439,7 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (scientistob.scientistID == 0)
                 {
+                    scientistob.sctImage = "user1-128x128.jpg";
                     db.Scientists.Add(scientistob);
                     scientistob.sctCreateDate = DateTime.Now;
                     db.SaveChanges();
