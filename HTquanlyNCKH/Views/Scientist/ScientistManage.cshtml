@@ -4,13 +4,14 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("ScientistStoreOrEdit","Scientist")')">
-    <i class="fa fa-plus"></i>Thêm Mới
+    <i class="fa fa-plus"></i> Thêm Mới
 </a>
 <table id="ScientistTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th width="10px">STT</th>
             <th>Họ và tên đệm</th>
+
             <th>Tên</th>
             <th>Địa Chỉ</th>
             <th>Giới Tính</th>
@@ -99,8 +100,8 @@
                         autoOpen : true,
                         resizable : false,
                         title : 'Điền Thông Tin Về Nhà Khoa Học',
-                        height : 500,
-                        width : 850,
+                        height : 510,
+                        width : 1100,
                         close: function () {
 
                             Popup.dialog('destroy').remove();

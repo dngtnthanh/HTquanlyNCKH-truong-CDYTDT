@@ -295,7 +295,8 @@ namespace HTquanlyNCKH.Controllers
                     List<Status> sts = db.Status.OrderByDescending(n => n.statusID).ToList<Status>();
                     ViewBag.sts = sts;
 
-                    
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = sct;
 
                     return View(new Topic());
                 }                    
@@ -313,8 +314,15 @@ namespace HTquanlyNCKH.Controllers
                     List<Status> sts = db.Status.OrderByDescending(n => n.statusID).ToList<Status>();
                     ViewBag.sts = sts;
 
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = sct;
+
                     var tpc = db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>();
                     ViewBag.tpcStartDate = tpc.tpcStartDate;
+
+
+                    
+
                     return View(db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>());
                 }
             }
@@ -326,7 +334,7 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (topicob.topicID == 0)
                 {
-                    topicob.scientistID = 1;
+                    
                     db.Topics.Add(topicob);
                     topicob.tpcCreateData = DateTime.Now;
                     topicob.tpcStartDate = Convert.ToDateTime(collection.Get("ngay-bat-dau"));

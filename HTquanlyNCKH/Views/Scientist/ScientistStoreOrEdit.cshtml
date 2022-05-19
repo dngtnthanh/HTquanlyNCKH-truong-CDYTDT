@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 @model HTquanlyNCKH.Models.Scientist
-@using (Html.BeginForm("ScientistStoreOrEdit", "Scientist", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+@using (Html.BeginForm("ScientistStoreOrEdit", "Scientist", FormMethod.Post , new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(model => model.scientistID)
     @Html.HiddenFor(model => model.sctCreateDate)
@@ -34,7 +34,7 @@
         @Html.EditorFor(model => model.sctSex, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.sctSex)
     </div>
-    <div class="form-group" style="float: left; clear: both; margin: 10px">
+    <div class="form-group" style="float: left; margin: 10px">
         @Html.LabelFor(model => model.sctAddress, "Địa chỉ", new { @class = "control-label" })
         @Html.EditorFor(model => model.sctAddress, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.sctAddress)
@@ -55,18 +55,18 @@
         @Html.EditorFor(model => model.sctWorkingProcess, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.sctWorkingProcess)
     </div>
-    <div class="form-group" style="float: left; margin: 10px">
+    <div class="form-group" style="float: left;  margin: 10px">
         @Html.LabelFor(model => model.sctResult, "Kết quả thực hiện", new { @class = "control-label" })
         @Html.EditorFor(model => model.sctResult, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.sctResult)
     </div>
-    <div class="dropdown" style="float: left; margin: 10px">
+    <div class="dropdown" style="float: left;  margin: 10px">
         <div class="form-group">
             <label>Nơi sinh</label>
             @Html.DropDownList("placeID", new SelectList(ViewBag.plaList, "placeID", "plaName", "Select"), new { @class = "form-control" })
         </div>
     </div>
-    <div class="dropdown" style="float: left;clear: both ; margin: 10px">
+    <div class="dropdown" style="float: left; margin: 10px">
         <div class="form-group">
             <label>Trình độ</label>
             @Html.DropDownList("degreeID", new SelectList(ViewBag.degList, "degreeID", "degName", "Select"), new { @class = "form-control" })
@@ -84,14 +84,28 @@
             @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName", "Select"), new { @class = "form-control" })
         </div>
     </div>
-    <div class="dropdown" style="float: left ; margin: 10px">
+    <div class="dropdown" style="float: left; margin: 10px">
         <div class="form-group">
             <label>Ngoại ngữ</label>
             @Html.DropDownList("foreignID", new SelectList(ViewBag.foreignList, "foreignID", "fgnName", "Select"), new { @class = "form-control" })
         </div>
     </div>
-
-    <div class="form-group" style="float: left ; clear: both ; margin: 10px">
+    <div class="dropdown" style="float: left ; margin-left: 200px">
+        <label>Ảnh chân dung</label>
+        @if (Model.sctImage == null)
+        {
+            <img src="~/Content/dist/img/MacDinh2.jpg" width="100" height="100" style="margin: 10px" />
+        }
+        else
+        {
+            <img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" width="100" height="100" style="margin: 10px" />
+        }
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.sctImage, new { type = "file" })
+            @Html.ValidationMessageFor(model => model.sctImage)
+        </div>
+    </div>
+    <div class="form-group" style="float: left  ; margin-left: 100px; margin-top: 100px">
 
         <input type="submit" value="Lưu lại" class="btn btn-success " />
         <input type="reset" value="Làm mới" class="btn btn-warning" />

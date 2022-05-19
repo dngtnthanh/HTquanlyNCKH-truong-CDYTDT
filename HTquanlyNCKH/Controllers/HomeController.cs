@@ -8,7 +8,6 @@ using System.Data.Entity;
 using PagedList;
 namespace HTquanlyNCKH.Controllers
 {
-    
     public class HomeController : Controller
     {
         public ActionResult Index(int? pageID)
@@ -157,6 +156,7 @@ namespace HTquanlyNCKH.Controllers
                                     join unt in db.Units on sct.unitID equals unt.unitID             //Nối bảng phòng ban
                                     join fie in db.Fields on sct.fieldID equals fie.fieldID          //Nối bảng chuyên nghành
                                     join frg in db.Foreigns on sct.foreignID equals frg.foreignID //Nối bảng ngoại ngữ
+                                    
                                     select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
                                     {
                                         scientistID = sct.scientistID,              //Mã số nhà khoa học

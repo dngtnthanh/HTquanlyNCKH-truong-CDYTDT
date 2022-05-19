@@ -238,6 +238,7 @@
     <Property Name="tpcDeleteData" Type="datetime" />
     <Property Name="tpcDeleteUser" Type="int" />
     <Property Name="tpcImage" Type="text" />
+    <Property Name="tpcAcceptance" Type="ntext" />
   </EntityType>
   <EntityType Name="Unit">
     <Key>

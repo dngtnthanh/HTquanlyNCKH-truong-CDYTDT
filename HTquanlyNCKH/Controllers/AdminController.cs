@@ -17,13 +17,13 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 var tpc = db.Topics.OrderBy(n => n.topicID);
-                ViewBag.DeTai = tpc.Count();
+                ViewBag.DeTai = tpc.Count();            //Thống kê số lượng đề tài
 
                 var sct = db.Scientists.OrderBy(n => n.scientistID);
-                ViewBag.NhaKhoaHoc = sct.Count();
+                ViewBag.NhaKhoaHoc = sct.Count();       //Thống kê số lượng nhà khoa học
 
                 var art = db.Articles.OrderBy(n => n.articlesID);
-                ViewBag.BaiBao = art.Count();
+                ViewBag.BaiBao = art.Count();           //Thống kê số lượng bài báo quốc tế
             }
                 return View();
         }
@@ -55,39 +55,128 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
-        public ActionResult SliderStoreOrEdit(Slider sliderob, HttpPostedFileBase file) //Thêm mới hoặc sửa chữa ảnh bìa
+        public ActionResult Create(Slider sliderob)
+        {
+            using (DBModel db = new DBModel())
+            {
+                if (ModelState.IsValid)
+                {
+                    if (Request.Files.Count > 0)
+                    {
+                        HttpPostedFileBase file = Request.Files[0];
+                        if (file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            sliderob.sldImage = Path.Combine(
+                                Server.MapPath("~/Content/dist/img"), fileName);                            
+                            file.SaveAs(sliderob.sldImage);
+                            sliderob.sldImage = fileName;
+                        }
+                        db.Sliders.Add(sliderob);
+                        db.SaveChanges();
+                        return View();
+                    }
+                }
+
+                return View(sliderob);
+            }
+                
+        }
+        [HttpPost]
+        public ActionResult SliderStoreOrEdit(Slider sliderob) //Thêm mới hoặc sửa chữa ảnh bìa
         {
             using (DBModel db = new DBModel())
             {
                 if (sliderob.sliderID == 0)
                 {
-                    
-                        if (file != null && file.ContentLength > 0)
+                    if (ModelState.IsValid)
+                    {
+                        if (Request.Files.Count > 0)
                         {
-                            string _FileName = Path.GetFileName(file.FileName);
-                            string _path = Path.Combine(Server.MapPath("~/Content/dist/img"), _FileName);
-                            sliderob.sldImage = _FileName;
-                            file.SaveAs(_path);
-                            ViewBag.Message = "File Uploaded Successfully!!";
-
+                            HttpPostedFileBase file = Request.Files[0];
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                sliderob.sldImage = Path.Combine(
+                                    Server.MapPath("~/Content/dist/img"), fileName);
+                                file.SaveAs(sliderob.sldImage);
+                                sliderob.sldImage = fileName;
+                            }
+                            db.Sliders.Add(sliderob);
+                            db.SaveChanges();
+                            return RedirectToAction("SliderManage");
                         }
-
-
-                    db.Sliders.Add(sliderob);
-                    sliderob.sldCreateDate = DateTime.Now;  //Lưu lại thời gian khởi tạo
-                    db.SaveChanges();
-                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
-
-
+                    }
+                    return RedirectToAction("SliderManage");
+                    //return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
+                    if (ModelState.IsValid)
+                    {
+                        if (Request.Files.Count > 0)
+                        {
+                            HttpPostedFileBase file = Request.Files[0];
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                sliderob.sldImage = Path.Combine(
+                                    Server.MapPath("~/Content/dist/img"), fileName);
+                                file.SaveAs(sliderob.sldImage);
+                                sliderob.sldImage = fileName;
+                            }        
+                        }
+                    }               
                     sliderob.sldModifierDate = DateTime.Now;
                     db.Entry(sliderob).State = EntityState.Modified;
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                    return RedirectToAction("SliderManage");
+                    //return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
+                //if (sliderob.sliderID == 0)
+                //{
+                //            //file.SaveAs(Server.MapPath("~/Content/dist/img/" + file.FileName));
+
+                //            //sliderob.sldImage = file.FileName;
+
+                //    //        ViewBag.Message = "File Uploaded Successfully!!";
+
+                //    //sliderob.sldImage = "carousel-2.jpg";
+                //    if (file != null)
+                //    {
+                //        try
+                //        {
+                //            string path = Path.Combine(Server.MapPath("~/Content/dist/img"), Path.GetFileName(file.FileName));
+                //            file.SaveAs(path);
+                //            db.Sliders.Add(sliderob);
+                //            sliderob.sldCreateDate = DateTime.Now;  //Lưu lại thời gian khởi tạo
+                //            db.SaveChanges();
+                //            return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                //        }
+                //        catch (Exception e)
+                //        {
+                //            ViewBag.Loi = e;
+                //        }
+                //    }           
+                //    return Json(new { success = false, message = "Lưu lại không thành công!", JsonRequestBehavior.AllowGet });
+
+
+
+
+
+                //}
+                //else
+                //{
+                //    sliderob.sldModifierDate = DateTime.Now;
+                //    db.Entry(sliderob).State = EntityState.Modified;
+                //    db.SaveChanges();
+                //    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                //}
             }
         }
         [HttpPost]

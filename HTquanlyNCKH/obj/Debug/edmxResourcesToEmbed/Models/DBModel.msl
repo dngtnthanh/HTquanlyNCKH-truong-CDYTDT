@@ -215,34 +215,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Topics">
-      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
-        <MappingFragment StoreEntitySet="Topic">
-          <ScalarProperty Name="tpcImage" ColumnName="tpcImage" />
-          <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
-          <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
-          <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
-          <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
-          <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
-          <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
-          <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
-          <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
-          <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
-          <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
-          <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
-          <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
-          <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
-          <ScalarProperty Name="tpcName" ColumnName="tpcName" />
-          <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
-          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
-          <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
-          <ScalarProperty Name="statusID" ColumnName="statusID" />
-          <ScalarProperty Name="classifiID" ColumnName="classifiID" />
-          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
-          <ScalarProperty Name="topicID" ColumnName="topicID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Articles">
       <EntityTypeMapping TypeName="HTquanlyNCKHModel.Article">
         <MappingFragment StoreEntitySet="Articles">
@@ -266,6 +238,35 @@
           <ScalarProperty Name="scientistID" ColumnName="scientistID" />
           <ScalarProperty Name="atlName" ColumnName="atlName" />
           <ScalarProperty Name="articlesID" ColumnName="articlesID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
+        <MappingFragment StoreEntitySet="Topic">
+          <ScalarProperty Name="tpcAcceptance" ColumnName="tpcAcceptance" />
+          <ScalarProperty Name="tpcImage" ColumnName="tpcImage" />
+          <ScalarProperty Name="tpcDeleteUser" ColumnName="tpcDeleteUser" />
+          <ScalarProperty Name="tpcDeleteData" ColumnName="tpcDeleteData" />
+          <ScalarProperty Name="tpcModifierUser" ColumnName="tpcModifierUser" />
+          <ScalarProperty Name="tpcCreateUser" ColumnName="tpcCreateUser" />
+          <ScalarProperty Name="tpcModifierData" ColumnName="tpcModifierData" />
+          <ScalarProperty Name="tpcCreateData" ColumnName="tpcCreateData" />
+          <ScalarProperty Name="tpcReviewBoard" ColumnName="tpcReviewBoard" />
+          <ScalarProperty Name="tpcProofFile" ColumnName="tpcProofFile" />
+          <ScalarProperty Name="tpcDateOfAcceptance" ColumnName="tpcDateOfAcceptance" />
+          <ScalarProperty Name="tpcEndDate" ColumnName="tpcEndDate" />
+          <ScalarProperty Name="tpcStartDate" ColumnName="tpcStartDate" />
+          <ScalarProperty Name="tpcCode" ColumnName="tpcCode" />
+          <ScalarProperty Name="tpcSummary" ColumnName="tpcSummary" />
+          <ScalarProperty Name="tpcName" ColumnName="tpcName" />
+          <ScalarProperty Name="tpcYear" ColumnName="tpcYear" />
+          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+          <ScalarProperty Name="acceptsID" ColumnName="acceptsID" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="classifiID" ColumnName="classifiID" />
+          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+          <ScalarProperty Name="topicID" ColumnName="topicID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

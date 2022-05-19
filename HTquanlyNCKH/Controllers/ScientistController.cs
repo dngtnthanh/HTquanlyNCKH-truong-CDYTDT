@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using HTquanlyNCKH.Models;
+using System.IO;
+
 namespace HTquanlyNCKH.Controllers
 {
     public class ScientistController : Controller
@@ -432,6 +434,7 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
+
         [HttpPost]
         public ActionResult ScientistStoreOrEdit(Scientist scientistob)
         {
@@ -439,21 +442,75 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (scientistob.scientistID == 0)
                 {
-                    scientistob.sctImage = "user1-128x128.jpg";
-                    db.Scientists.Add(scientistob);
-                    scientistob.sctCreateDate = DateTime.Now;
-                    db.SaveChanges();
-                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                    if (ModelState.IsValid)
+                    {
+                        if (Request.Files.Count > 0)
+                        {
+                            HttpPostedFileBase file = Request.Files[0];
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                scientistob.sctImage = Path.Combine(
+                                    Server.MapPath("~/Content/dist/img/AnhDaiDien"), fileName);
+                                file.SaveAs(scientistob.sctImage);
+                                scientistob.sctImage = fileName;
+                            }
+                            db.Scientists.Add(scientistob);
+                            db.SaveChanges();
+                            return RedirectToAction("ScientistManage");
+                        }
+                    }
+                    return RedirectToAction("ScientistManage");
+                    //return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
                 {
+                    if (ModelState.IsValid)
+                    {
+                        if (Request.Files.Count > 0)
+                        {
+                            HttpPostedFileBase file = Request.Files[0];
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                scientistob.sctImage = Path.Combine(
+                                    Server.MapPath("~/Content/dist/img/AnhDaiDien"), fileName);
+                                file.SaveAs(scientistob.sctImage);
+                                scientistob.sctImage = fileName;
+                            }
+                        }
+                    }
                     scientistob.sctModifierDate = DateTime.Now;
                     db.Entry(scientistob).State = EntityState.Modified;
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                    return RedirectToAction("ScientistManage");
+                    //return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
             }
         }
+
+        //[HttpPost]
+        //public ActionResult ScientistStoreOrEdit(Scientist scientistob)
+        //{
+        //    using (DBModel db = new DBModel())
+        //    {
+        //        if (scientistob.scientistID == 0)
+        //        {
+        //            scientistob.sctImage = "user1-128x128.jpg";
+        //            db.Scientists.Add(scientistob);
+        //            scientistob.sctCreateDate = DateTime.Now;
+        //            db.SaveChanges();
+        //            return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+        //        }
+        //        else
+        //        {
+        //            scientistob.sctModifierDate = DateTime.Now;
+        //            db.Entry(scientistob).State = EntityState.Modified;
+        //            db.SaveChanges();
+        //            return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+        //        }
+        //    }
+        //}
         [HttpPost]
         public ActionResult ScientistDelete(int id)
         {

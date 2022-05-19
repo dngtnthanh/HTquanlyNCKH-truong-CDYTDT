@@ -315,8 +315,18 @@ namespace HTquanlyNCKH.Controllers
                     ViewBag.nat = nat;
 
 
-                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();                   
+                    
                     ViewBag.sct = sct;
+                    
+
+                    
+
+
+
+
+
+
 
                     List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
                     ViewBag.key = key;
@@ -357,7 +367,7 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (articleob.articlesID == 0)
                 {
-                    articleob.scientistID = 1;
+                    
                     db.Articles.Add(articleob);
                     //articleob.cfrCreateDate = DateTime.Now;
                     db.SaveChanges();
