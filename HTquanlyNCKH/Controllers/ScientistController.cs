@@ -436,7 +436,7 @@ namespace HTquanlyNCKH.Controllers
         }
 
         [HttpPost]
-        public ActionResult ScientistStoreOrEdit(Scientist scientistob)
+        public ActionResult ScientistStoreOrEdit(Scientist scientistob, FormCollection collection)
         {
             using (DBModel db = new DBModel())
             {
@@ -455,12 +455,15 @@ namespace HTquanlyNCKH.Controllers
                                 file.SaveAs(scientistob.sctImage);
                                 scientistob.sctImage = fileName;
                             }
-                            db.Scientists.Add(scientistob);
-                            db.SaveChanges();
-                            return RedirectToAction("ScientistManage");
+                            scientistob.sctFullName = scientistob.sctFirstName + " " + scientistob.sctLastName;
+                            
                         }
                     }
+                    scientistob.sctSex = collection.Get("gioi-tinh");
+                    db.Scientists.Add(scientistob);
+                    db.SaveChanges();
                     return RedirectToAction("ScientistManage");
+                    
                     //return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
@@ -480,6 +483,7 @@ namespace HTquanlyNCKH.Controllers
                             }
                         }
                     }
+                    scientistob.sctSex = collection.Get("gioi-tinh");
                     scientistob.sctModifierDate = DateTime.Now;
                     db.Entry(scientistob).State = EntityState.Modified;
                     db.SaveChanges();

@@ -93,7 +93,8 @@
                     <b>Ngày bắt đầu:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.tpcStartDate
+                    @Convert.ToDateTime(Model.tpcStartDate).ToString("dd-MM-yyyy")
+                    
                 </td>
             </tr>
             <tr>
@@ -101,7 +102,8 @@
                     <b>Ngày kết thúc:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.tpcEndDate
+                    @Convert.ToDateTime(Model.tpcEndDate).ToString("dd-MM-yyyy")
+                    
                 </td>
             </tr>
             <tr>
@@ -109,7 +111,8 @@
                     <b>Ngày nghiệm thu:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.tpcDateOfAcceptance
+                    @Convert.ToDateTime(Model.tpcDateOfAcceptance).ToString("dd-MM-yyyy")
+                    
                 </td>
             </tr>
         </tbody>

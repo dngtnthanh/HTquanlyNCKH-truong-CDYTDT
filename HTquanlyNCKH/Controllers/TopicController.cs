@@ -63,9 +63,6 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
-
-        
-
         [HttpPost]
         public ActionResult ClassifiDelete(int id)      //Xoá phân loại đề tài
         {
@@ -175,8 +172,7 @@ namespace HTquanlyNCKH.Controllers
                         success = false,
                         message = "Xoá không thành công! Còn " + fie.Count() + " hàng dữ liệu trong bảng đề tài" + " và " + field.Count() + " dữ liệu trong danh sách nhà khoa học" 
                          + mess, JsonRequestBehavior.AllowGet });
-                }
-                
+                }                
             }
         }
         public ActionResult FieldManage()
@@ -319,10 +315,6 @@ namespace HTquanlyNCKH.Controllers
 
                     var tpc = db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>();
                     ViewBag.tpcStartDate = tpc.tpcStartDate;
-
-
-                    
-
                     return View(db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>());
                 }
             }
@@ -469,10 +461,8 @@ namespace HTquanlyNCKH.Controllers
                                     tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
                                     tpcImage = tpc.tpcImage,                                //Ảnh bìa
                                 };
-
                 return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
             }
-
         }
     }
 }

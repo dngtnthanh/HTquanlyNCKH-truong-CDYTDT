@@ -38,7 +38,8 @@
                     <b>Ngày sinh:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.sctBirthday
+                    @Convert.ToDateTime(Model.sctBirthday).ToString("dd-MM-yyyy")
+                    
                 </td>
             </tr>
             <tr>

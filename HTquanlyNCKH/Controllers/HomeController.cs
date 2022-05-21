@@ -143,7 +143,8 @@ namespace HTquanlyNCKH.Controllers
                 
                 int pagesize = 4;                   //Hiển thị 4 đơn vị trên mỗi trang  (phân trang)
                 int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên (phân trang)
-                return View(TopicList.ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
+                
+                return View(TopicList.OrderByDescending(n => n.topicID).ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
             }
         }        
         public ActionResult Scientist(int? pageID)     //Trang danh sách nhà khoa học (truyền vào mã số phân trang)

@@ -167,6 +167,7 @@
     <Property Name="scientistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="sctFirstName" Type="nvarchar" MaxLength="255" />
     <Property Name="sctLastName" Type="nvarchar" MaxLength="255" />
+    <Property Name="sctFullName" Type="nvarchar" MaxLength="255" />
     <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
     <Property Name="sctBirthday" Type="date" />
     <Property Name="PlaceID" Type="int" />
