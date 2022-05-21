@@ -15,6 +15,7 @@
             <td style="text-align: left">
                 @Model.tpcName
             </td>
+
         </tr>
         <tr>
             <td></td> <!--Số thứ tự tự tăng-->
@@ -100,7 +101,7 @@
                 <b>Ngày bắt đầu:</b>
             </td>
             <td style="text-align: left">
-                @Convert.ToDateTime(Model.tpcStartDate).ToString("dd-MM-yyyy")                
+                @ViewBag.ngaybatdau                
             </td>
         </tr>
         <tr>
@@ -109,7 +110,7 @@
                 <b>Ngày kết thúc:</b>
             </td>
             <td style="text-align: left">
-                @Convert.ToDateTime(Model.tpcEndDate).ToString("dd-MM-yyyy")
+                @ViewBag.ngayketthuc
                 
             </td>
         </tr>
@@ -119,7 +120,7 @@
                 <b>Ngày nghiệm thu:</b>
             </td>
             <td style="text-align: left">
-                @Convert.ToDateTime(Model.tpcDateOfAcceptance).ToString("dd-MM-yyyy")
+                @ViewBag.ngaynghiemthu
                 
             </td>
         </tr>

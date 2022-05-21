@@ -459,6 +459,7 @@ namespace HTquanlyNCKH.Controllers
                             
                         }
                     }
+                    scientistob.sctBirthday = Convert.ToDateTime(collection.Get("ngay-sinh"));
                     scientistob.sctSex = collection.Get("gioi-tinh");
                     db.Scientists.Add(scientistob);
                     db.SaveChanges();
@@ -483,6 +484,7 @@ namespace HTquanlyNCKH.Controllers
                             }
                         }
                     }
+                    scientistob.sctBirthday = Convert.ToDateTime(collection.Get("ngay-sinh"));
                     scientistob.sctSex = collection.Get("gioi-tinh");
                     scientistob.sctModifierDate = DateTime.Now;
                     db.Entry(scientistob).State = EntityState.Modified;

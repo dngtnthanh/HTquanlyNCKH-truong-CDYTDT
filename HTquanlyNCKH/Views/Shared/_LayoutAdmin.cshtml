@@ -34,6 +34,8 @@
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
     <script>
         // //lưu vị trí thanh cuộn scroll khi load trang
         document.addEventListener("DOMContentLoaded", function (event) {
@@ -500,6 +502,15 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/Scripts/notify.min.js"></script>
+
+
+    <script src="~/Assets/libs/chart.js/Chart.bundle.min.js"></script>
+    <script src="~/Assets/js/pages/chartjs.init.js"></script>
+
+    <!-- Plugin Js-->
+    @*<script src="~/Assets/libs/chartist/chartist.min.js"></script>*@
+    <script src="~/Assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

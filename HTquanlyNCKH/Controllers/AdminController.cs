@@ -24,6 +24,11 @@ namespace HTquanlyNCKH.Controllers
 
                 var art = db.Articles.OrderBy(n => n.articlesID);
                 ViewBag.BaiBao = art.Count();           //Thống kê số lượng bài báo quốc tế
+
+                ViewBag.dangdexuat = db.Topics.Where(n => n.statusID == 4).Count();
+                ViewBag.dangthuchien = db.Topics.Where(n => n.statusID == 7).Count();
+                ViewBag.danghiemthu = db.Topics.Where(n => n.statusID == 5).Count();
+                ViewBag.khac = db.Topics.Where(n => n.statusID == 8).Count();
             }
                 return View();
         }

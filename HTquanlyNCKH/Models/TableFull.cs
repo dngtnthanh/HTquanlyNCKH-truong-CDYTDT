@@ -44,6 +44,7 @@ namespace HTquanlyNCKH.Models
         public int scientistID { get; set; }
         public string sctFirstName { get; set; }
         public string sctLastName { get; set; }
+        public string sctFullName { get; set; }
         public string sctSex { get; set; }
         public Nullable<System.DateTime> sctBirthday { get; set; }
         public string sctImage { get; set; }

@@ -65,7 +65,7 @@
                     { "data": "atlLink" },
                     {
                         "data": "articlesID", "render": function (data) {
-                            return "<a class='btn btn-sm btn-info' onclick=PopupForm('@Url.Action("ArticlesPopup", "Home")/" + data + "')><i class='fa fa-pencil'></i> Xem</a>";
+                            return "<a class='btn btn-sm btn-info' href='@Url.Action("ArticlesInfor", "Home")/" + data + "'><i class='fa fa-pencil'></i> Xem</a>";
                             @*return "<a class='btn btn-sm btn-warning'  href='@Url.Action("ArticlesInfor", "Home")/" + data + "'><i class='fa fa-pencil'></i> Xem</a>  ";*@
                         },
 

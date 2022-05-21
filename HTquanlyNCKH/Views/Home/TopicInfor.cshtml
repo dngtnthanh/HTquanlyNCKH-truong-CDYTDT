@@ -17,6 +17,10 @@
                 <td style="text-align: left">
                     @Model.tpcName
                 </td>
+                <td><b>Mã số đề tài: </b></td>
+                <td style="text-align: left">
+                    @Model.topicID  
+                </td>
             </tr>
             <tr>
                 <td>
@@ -26,17 +30,15 @@
                     @Model.scientistName <a style="margin-left: 1em" class="btn btn-primary btn-sm" href="@Url.Action("ScientistInfor", "Home", new { id = Model.scientistID})"> Xem thông tin</a>
                 </td>
 
-
-
-            </tr>
-            <tr>
                 <td>
                     <b>Phân loại:</b>
                 </td>
                 <td style="text-align: left">
                     @Model.classifiName
                 </td>
+
             </tr>
+
 
 
             <tr>
@@ -46,9 +48,6 @@
                 <td style="text-align: left">
                     @Model.statusName
                 </td>
-            </tr>
-
-            <tr>
                 <td>
                     <b>Chuyên nghành:</b>
                 </td>
@@ -56,6 +55,7 @@
                     @Model.fieldName
                 </td>
             </tr>
+
             <tr>
                 <td>
                     <b>Năm thực hiện:</b>
@@ -63,59 +63,58 @@
                 <td style="text-align: left">
                     @Model.tpcYear
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    <b>Tóm lượt đề tài:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.tpcSummary
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Mã số:</b>
+                    <b>CODE:</b>
                 </td>
                 <td style="text-align: left">
                     @Model.tpcCode
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <b>Hội đồng xét duyệt:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.tpcReviewBoard
-                </td>
-            </tr>
+
             <tr>
                 <td>
                     <b>Ngày bắt đầu:</b>
                 </td>
                 <td style="text-align: left">
                     @Convert.ToDateTime(Model.tpcStartDate).ToString("dd-MM-yyyy")
-                    
+
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Ngày kết thúc:</b>
-                </td>
-                <td style="text-align: left">
-                    @Convert.ToDateTime(Model.tpcEndDate).ToString("dd-MM-yyyy")
-                    
-                </td>
-            </tr>
-            <tr>
+                @*<td>
+                <b>Ngày kết thúc:</b>
+            </td>
+            <td style="text-align: left">
+                @Convert.ToDateTime(Model.tpcEndDate).ToString("dd-MM-yyyy")
+
+            </td>*@
                 <td>
                     <b>Ngày nghiệm thu:</b>
                 </td>
                 <td style="text-align: left">
                     @Convert.ToDateTime(Model.tpcDateOfAcceptance).ToString("dd-MM-yyyy")
-                    
+
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <b>Hội đồng xét duyệt:</b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @Model.tpcReviewBoard
+                </td>
+
+            </tr>
+            
         </tbody>
+    </table>
+    <table>
+        <tr>
+            <td width="120px">
+                <b>Tóm lượt đề tài: </b>
+            </td>
+            <td>
+                @Html.Raw(Model.tpcSummary)
+            </td>
+        </tr>
     </table>
 
 </div>

@@ -16,32 +16,26 @@
                 <td style="vertical-align:middle">
                     <b>Tên bài báo:</b>
                 </td>
-                <td style="text-align: left">
+                <td colspan="3" style="text-align: left">
                     @Model.atlName
                 </td>
+
             </tr>
             <tr>
                 <td>
-                    <b>Họ và tên:</b>
+                    <b>Người thực hiện:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.scientistName
+                    <a style="margin-left: 1em" href="@Url.Action("ScientistInfor", "Home", new { id = Model.scientistID})">
+
+                        @Model.scientistName - Mã số: @Model.scientistID
+                    </a>
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    <b>Quốc gia:</b>
+                    <b>Nơi xuất bản:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.nationName
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Tóm lượt:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.atlSummary
+                    @Model.atlPublication
                 </td>
             </tr>
             <tr>
@@ -51,21 +45,11 @@
                 <td style="text-align: left">
                     @Model.keyName
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Điểm công trình: </b>
-                </td>
-                <td style="text-align: left">
-                    @Model.Point
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <b>Công bố trang báo trên Website:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.atlLink
+                    <a href="@Model.atlLink">Đi tới Website</a>
                 </td>
             </tr>
             <tr>
@@ -75,16 +59,6 @@
                 <td style="text-align: left">
                     @Model.typeName
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Nới xuất bản:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.atlPublication
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <b>Thể loại:</b>
                 </td>
@@ -100,8 +74,6 @@
                 <td style="text-align: left">
                     @Model.atlNumber
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <b>Từ trang đến trang: </b>
                 </td>
@@ -111,21 +83,11 @@
             </tr>
             <tr>
                 <td>
-                    <b>Người thực hiện: </b>
-                </td>
-                <td style="text-align: left">
-                    @Model.scientistName
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <b>Quốc gia: </b>
                 </td>
                 <td style="text-align: left">
                     @Model.nationName
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <b>Từ khoá: </b>
                 </td>
@@ -140,8 +102,6 @@
                 <td style="text-align: left">
                     @Model.typeName
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <b>Lĩnh vực: </b>
                 </td>
@@ -149,6 +109,23 @@
                     @Model.fieldName
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <b>Điểm công trình: </b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @Model.Point
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Tóm lượt:</b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @Model.atlSummary
+                </td>
+            </tr>
+
 
 
         </tbody>

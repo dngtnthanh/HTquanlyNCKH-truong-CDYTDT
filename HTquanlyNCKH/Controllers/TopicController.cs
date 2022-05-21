@@ -294,6 +294,10 @@ namespace HTquanlyNCKH.Controllers
                     List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
                     ViewBag.sct = sct;
 
+                    ViewBag.ngaybatdau = null;
+                    ViewBag.ngayketthuc = null;
+                    ViewBag.ngaynghiemthu = null;
+
                     return View(new Topic());
                 }                    
             }
@@ -313,6 +317,36 @@ namespace HTquanlyNCKH.Controllers
                     List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
                     ViewBag.sct = sct;
 
+                    var topicob = db.Topics.Where(n => n.topicID == id).FirstOrDefault<Topic>();
+                    
+                    if (topicob.tpcStartDate != null)
+                    {
+                        ViewBag.ngaybatdau = Convert.ToDateTime(topicob.tpcStartDate).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        ViewBag.ngaybatdau = null;
+                    }
+
+                    if (topicob.tpcDateOfAcceptance != null)
+                    {
+                        ViewBag.ngaynghiemthu = Convert.ToDateTime(topicob.tpcDateOfAcceptance).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        ViewBag.ngaynghiemthu = null;
+                    }
+
+                    if (topicob.tpcEndDate != null)
+                    {
+                        ViewBag.ngayketthuc = Convert.ToDateTime(topicob.tpcEndDate).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        ViewBag.ngayketthuc = null;
+                    }
+
+
                     var tpc = db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>();
                     ViewBag.tpcStartDate = tpc.tpcStartDate;
                     return View(db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>());
@@ -326,19 +360,75 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (topicob.topicID == 0)
                 {
-                    
-                    db.Topics.Add(topicob);
                     topicob.tpcCreateData = DateTime.Now;
-                    topicob.tpcStartDate = Convert.ToDateTime(collection.Get("ngay-bat-dau"));
+                    if (collection.Get("ngay-bat-dau") != "")
+                    {
+                        topicob.tpcStartDate = Convert.ToDateTime(collection.Get("ngay-bat-dau"));
+                    }
+                    else
+                    {
+                        topicob.tpcStartDate = null;
+                    }
+
+
+                    if (collection.Get("ngay-nghiem-thu") != "")
+                    {
+                        topicob.tpcDateOfAcceptance = Convert.ToDateTime(collection.Get("ngay-nghiem-thu"));
+                    }
+                    else
+                    {
+                        topicob.tpcDateOfAcceptance = null;
+                    }
+
+
+                    if (collection.Get("ngay-ket-thuc") != "")
+                    {
+                        topicob.tpcEndDate = Convert.ToDateTime(collection.Get("ngay-ket-thuc"));
+                    }
+                    else
+                    {
+                        topicob.tpcEndDate = null;
+                    }
+
+                    db.Topics.Add(topicob);                    
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                    return RedirectToAction("TopicManage", "Topic");
                 }
                 else
                 {
                     topicob.tpcModifierData = DateTime.Now;
+                    if(collection.Get("ngay-bat-dau") != "")
+                    {
+                        topicob.tpcStartDate = Convert.ToDateTime(collection.Get("ngay-bat-dau"));
+                    }
+                    else
+                    {
+                        topicob.tpcStartDate = null;
+                    }
+
+
+                    if (collection.Get("ngay-nghiem-thu") != "")
+                    {
+                        topicob.tpcDateOfAcceptance = Convert.ToDateTime(collection.Get("ngay-nghiem-thu"));
+                    }
+                    else
+                    {
+                        topicob.tpcDateOfAcceptance = null;
+                    }
+
+
+                    if (collection.Get("ngay-ket-thuc") != "")
+                    {
+                        topicob.tpcEndDate = Convert.ToDateTime(collection.Get("ngay-ket-thuc"));
+                    }
+                    else
+                    {
+                        topicob.tpcEndDate = null;
+                    }                    
+                    
                     db.Entry(topicob).State = EntityState.Modified;
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                    return RedirectToAction("TopicManage", "Topic");
                 }
             }
         }
@@ -461,6 +551,37 @@ namespace HTquanlyNCKH.Controllers
                                     tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
                                     tpcImage = tpc.tpcImage,                                //Ảnh bìa
                                 };
+
+                var topicob = db.Topics.Where(n => n.topicID == id).FirstOrDefault<Topic>();
+                    
+                    if (topicob.tpcStartDate != null)
+                    {
+                        ViewBag.ngaybatdau = Convert.ToDateTime(topicob.tpcStartDate).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        ViewBag.ngaybatdau = null;
+                    }
+
+                    if (topicob.tpcDateOfAcceptance != null)
+                    {
+                        ViewBag.ngaynghiemthu = Convert.ToDateTime(topicob.tpcDateOfAcceptance).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        ViewBag.ngaynghiemthu = null;
+                    }
+
+                    if (topicob.tpcEndDate != null)
+                    {
+                        ViewBag.ngayketthuc = Convert.ToDateTime(topicob.tpcEndDate).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        ViewBag.ngayketthuc = null;
+                    }
+
+
                 return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
             }
         }

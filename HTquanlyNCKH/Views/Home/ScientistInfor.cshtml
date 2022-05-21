@@ -6,16 +6,29 @@
 
 <!DOCTYPE html>
 @model HTquanlyNCKH.Models.ScientistFull
+@using HTquanlyNCKH.Models;
 <div class="form-check">
     <table class="table table-striped">
         <tbody>
             <tr>
-                <td style="vertical-align:middle">
+
+                <td rowspan="7" style="vertical-align:middle">
                     <b>Ảnh chân dung:</b>
                 </td>
-                <td style="text-align: left">
-                    <img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" style="border-radius: 14px" width="250" height="250" />
+                <td rowspan="7" style="text-align: left">
+                    @*<img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" style="border-radius: 14px" width="200" height="200" />*@
+                    @if (Model.sctImage == null)
+                    {
+                        <img src="~/Content/dist/img/AnhDaiDien/unname2.png" style="border-radius: 14px" width="200" height="200" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" style="border-radius: 14px" width="200" height="200" />
+                    }
                 </td>
+
+
+
             </tr>
             <tr>
                 <td>
@@ -24,8 +37,26 @@
                 <td style="text-align: left">
                     @Model.sctFirstName @Model.sctLastName
                 </td>
+
+                <td>
+                    <b>Mã số:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.scientistID
+                </td>
+
             </tr>
+
             <tr>
+                <td>
+                    <b>Ngày sinh:</b>
+                </td>
+                <td style="text-align: left">
+                    @Convert.ToDateTime(Model.sctBirthday).ToString("dd-MM-yyyy")
+
+                </td>
+
+
                 <td>
                     <b>Giới tính:</b>
                 </td>
@@ -35,30 +66,11 @@
             </tr>
             <tr>
                 <td>
-                    <b>Ngày sinh:</b>
-                </td>
-                <td style="text-align: left">
-                    @Convert.ToDateTime(Model.sctBirthday).ToString("dd-MM-yyyy")
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Email: </b>
-                </td>
-                <td style="text-align: left">
-                    @Model.sctEmail
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <b>Số điện thoại: </b>
                 </td>
                 <td style="text-align: left">
                     @Model.sctPhone
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <b>Nơi sinh:</b>
                 </td>
@@ -66,6 +78,7 @@
                     @Model.PlaceName
                 </td>
             </tr>
+
             <tr>
                 <td>
                     <b>Trình độ:</b>
@@ -73,31 +86,13 @@
                 <td style="text-align: left">
                     @Model.degreeName
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    <b>Phòng ban:</b>
+                    <b>Email: </b>
                 </td>
                 <td style="text-align: left">
-                    @Model.unitName
+                    @Model.sctEmail
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Chuyên ngành:</b>
-                </td>
-                <td style="text-align: left">
-                    @Model.fieldName
-                </td>
-            </tr>
 
-            <tr>
-                <td>
-                    <b>Trình độ ngoại ngữ: </b>
-                </td>
-                <td style="text-align: left">
-                    @Model.sctForeignName
-                </td>
             </tr>
             <tr>
                 <td>
@@ -106,12 +101,62 @@
                 <td style="text-align: left">
                     @Model.sctAddress
                 </td>
+                <td>
+                    <b>Phòng ban:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.unitName
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <b>Chuyên ngành:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.fieldName
+                </td>
+                <td>
+                    <b>Trình độ ngoại ngữ: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.sctForeignName
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:top"><b>Các đề tài thực hiện:</b></td>
+                <td colspan="5" style="text-align: left">
+
+                    @using (DBModel db = new DBModel())
+                    {
+                        var TpcList = db.Topics.Where(n => n.scientistID == Model.scientistID);
+
+                        foreach (var item in TpcList)
+                        {                           
+                            <a href="@Url.Action("TopicInfor", "Home", new { id = item.topicID })">Mã số: @item.topicID - @item.tpcName </a>    <br />
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td><b>Số bài báo khoa học:</b></td>
+                <td colspan="5" style="text-align: left">
+                    @using (DBModel db = new DBModel())
+                    {
+                        var TpcList = db.Articles.Where(n => n.articlesID == Model.scientistID);
+
+                        foreach (var item in TpcList)
+                        {
+                            <a href="@Url.Action("ArticlesInfor", "Home", new { id = item.articlesID })">Mã số: @item.articlesID - @item.atlName </a> <br />
+                        }
+                    }
+                </td>
             </tr>
             <tr>
                 <td>
                     <b>Quá trình làm việc:</b>
                 </td>
-                <td style="text-align: left">
+                <td colspan="5" style="text-align: left">
                     @Model.sctWorkingProcess
                 </td>
             </tr>
@@ -119,7 +164,7 @@
                 <td>
                     <b>Kết quả thực hiện:</b>
                 </td>
-                <td style="text-align: left">
+                <td colspan="5" style="text-align: left">
                     @Model.sctResult
                 </td>
             </tr>
@@ -131,23 +176,10 @@
 
 <style type='text/css'>
 
-    table {
-        counter-reset: rowNumber;
-        counter-reset: number 1; /*mặc định số thứ tự bắt đầu*/
+
+
+    table td {
+        vertical-align: middle;
+        text-align: right;
     }
-
-        table tr {
-            counter-increment: rowNumber;
-        }
-
-            table tr td:first-child::before {
-                content: counter(rowNumber);
-                min-width: auto;
-                margin-right: 0.5em;
-            }
-
-        table td {
-            vertical-align: middle;
-            text-align: right;
-        }
 </style>

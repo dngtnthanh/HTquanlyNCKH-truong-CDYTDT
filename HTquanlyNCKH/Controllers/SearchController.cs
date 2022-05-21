@@ -105,6 +105,7 @@ namespace HTquanlyNCKH.Controllers
                                         scientistID = sct.scientistID,              //Mã số nhà khoa học
                                         sctFirstName = sct.sctFirstName,            //Họ và tên đệm
                                         sctLastName = sct.sctLastName,              //Tên
+                                        sctFullName = sct.sctFirstName + " " + sct.sctLastName, //Họ tên đầy đủ
                                         sctSex = sct.sctSex,                        //Giới tính
                                         sctBirthday = sct.sctBirthday,              //Ngày sinh                                                                            
                                         PlaceName = pla.plaName,                    //Địa chỉ (tỉnh)
@@ -131,14 +132,26 @@ namespace HTquanlyNCKH.Controllers
                     ViewBag.key = key;
 
                     var sctList = from p in ScientistList.OrderByDescending(p => p.scientistID)
-
-                                .Where(p => p.sctLastName.Contains(key) || p.sctFirstName.Contains(key))
+                                  
+                                .Where(p => p.sctFullName.Contains(key) || p.scientistID.ToString().Contains(key))
                                 .OrderBy(p => p.scientistID)
                                     select p;
                     ViewBag.Pages = sctList;
                     //Đếm số lượng kết quả tìm kiếm
-                    var _slkq = sctList.Count();
-                    ViewBag.slkq = _slkq;
+                    
+                    if (sctList.Count() != null)
+                    {
+                        int _slkq = sctList.Count();
+                        ViewBag.slkq = _slkq;
+                    }
+                    else
+                    {
+                        ViewBag.slkq = 0;
+                    }
+                    
+                    
+                    
+                    
                     //Phân trang
                     int pagesize = 4;
                     int pageindex = pageID ?? 1;

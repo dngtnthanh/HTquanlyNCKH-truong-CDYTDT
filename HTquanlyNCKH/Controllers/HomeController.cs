@@ -50,58 +50,12 @@ namespace HTquanlyNCKH.Controllers
 
                 int pagesize = 4;                   //Hiển thị 4 đơn vị trên mỗi trang  (phân trang)
                 int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên (phân trang)
-                return View(TopicList.ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
+                return View(TopicList.OrderByDescending(n => n.topicID).ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
             }
                  
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public JsonResult GetCountries()    
-        {
-            using (DBModel db = new DBModel())
-            {
-                List<Classification> cls = db.Classifications.ToList<Classification>();
-                var Countries = cls.Select(n => n.clsName);
-                return Json(Countries, JsonRequestBehavior.AllowGet);
-            }
-        }
-        [HttpPost]
-        public JsonResult GetStates(string country)
-        {
-            var States = new List<string>();
-            if (!string.IsNullOrWhiteSpace(country))
-            {
-                if (country.Equals("Australia"))
-                {
-                    States.Add("Sydney");
-                    States.Add("Perth");
-                }
-                if (country.Equals("India"))
-                {
-                    States.Add("Delhi");
-                    States.Add("Mumbai");
-                }
-                if (country.Equals("Russia"))
-                {
-                    States.Add("Minsk");
-                    States.Add("Moscow");
-                }
-            }
-            return Json(States, JsonRequestBehavior.AllowGet);
-        }
+       
 
         public ActionResult Topic(int? pageID)  // Trang danh sách đề tài (truyền vào mã số phân trang)
         {
@@ -184,7 +138,7 @@ namespace HTquanlyNCKH.Controllers
 
                 int pagesize = 4;       //Hiển thị 4 đơn vị dữ liệu trên mỗi trang (Phân trang)
                 int pageindex = pageID ?? 1;        //Trang mặc định là 1 (Phân trang)
-                return View(ScientistList.ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách nhà khoa học có (Phân trang)
+                return View(ScientistList.OrderByDescending(n => n.scientistID).ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách nhà khoa học có (Phân trang)
             }
         }
         [HttpGet]
@@ -264,7 +218,13 @@ namespace HTquanlyNCKH.Controllers
                                         sctModifierUser = sct.sctModifierUser,      //Người thay đổi
                                         
                                     };
-
+                //var TpcList = db.Topics.Where(n => n.scientistID == id);
+                //string sctTopic = "";
+                //foreach (var item in TpcList)
+                //{
+                //    sctTopic +=  "<a href='https://localhost:44386/Home/TopicInfor/"+ item.topicID +"'>" + item.tpcName + " </a> "   + "</br> ";
+                //}
+                //ViewBag.sctDeTai =  sctTopic;
                 return View(ScientistList.Single(n => n.scientistID == id));        //Trả về thông tin nhà khoa học tương ứng mã số ID truyền vào
             }
         }

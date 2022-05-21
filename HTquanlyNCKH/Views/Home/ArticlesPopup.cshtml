@@ -30,6 +30,15 @@
             <tr>
                 <td></td> <!--Số thứ tự tự tăng-->
                 <td>
+                    <b>Người thực hiện:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.scientistName <a style="margin-left: 1em" class="btn btn-primary btn-sm" href="@Url.Action("ScientistInfor", "Home", new { id = Model.scientistID})"> Xem thông tin</a>
+                </td>
+            </tr>
+            <tr>
+                <td></td> <!--Số thứ tự tự tăng-->
+                <td>
                     <b>Tóm lượt:</b>
                 </td>
                 <td style="text-align: left">
