@@ -142,7 +142,7 @@ namespace HTquanlyNCKH.Controllers
             }
         }
         [HttpGet]
-        public ActionResult TopicInfor(int? id)     //Hiện Popup thông tin đề tài (truyền vào mã số topicID nhà khoa học)
+        public ActionResult TopicInfor(int? id)     //Hiện Popup thông tin đề tài (truyền vào mã số topicID đề tài nghiên)
         {
             using (DBModel db = new DBModel())
             {
@@ -178,6 +178,36 @@ namespace HTquanlyNCKH.Controllers
                                     tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
                                     tpcImage = tpc.tpcImage,                                //Ảnh bìa
                                 };
+
+
+                var topicob = db.Topics.SingleOrDefault(n => n.topicID == id); //lấy thông tin đề tài nghiên cứu
+                
+                if (topicob.tpcStartDate != null)
+                {
+                    ViewBag.ngaybatdau = Convert.ToDateTime(topicob.tpcStartDate).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    ViewBag.ngaybatdau = null;
+                }
+
+                if (topicob.tpcDateOfAcceptance != null)
+                {
+                    ViewBag.ngaynghiemthu = Convert.ToDateTime(topicob.tpcDateOfAcceptance).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    ViewBag.ngaynghiemthu = null;
+                }
+
+                if (topicob.tpcEndDate != null)
+                {
+                    ViewBag.ngayketthuc = Convert.ToDateTime(topicob.tpcEndDate).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    ViewBag.ngayketthuc = null;
+                }
 
                 return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
             }
@@ -225,6 +255,24 @@ namespace HTquanlyNCKH.Controllers
                 //    sctTopic +=  "<a href='https://localhost:44386/Home/TopicInfor/"+ item.topicID +"'>" + item.tpcName + " </a> "   + "</br> ";
                 //}
                 //ViewBag.sctDeTai =  sctTopic;
+                //var TpcList = db.Topics.Where(n => n.scientistID == id);
+                //var ArtList = db.Articles.Where(n => n.scientistID == id);
+                //ViewBag.tpcNumber = TpcList.Count() + 1;
+
+                //ViewBag.artNumber = ArtList.Count() + 1;
+
+                var scientistob = db.Scientists.SingleOrDefault(n => n.scientistID == id); //lấy thông tin nhà khoa học
+
+                if (scientistob.sctBirthday != null)
+                {
+                    ViewBag.ngaysinh = Convert.ToDateTime(scientistob.sctBirthday).ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    ViewBag.ngaysinh = null;
+                }
+                ViewBag.maso = "KH" + scientistob.scientistID.ToString();
+
                 return View(ScientistList.Single(n => n.scientistID == id));        //Trả về thông tin nhà khoa học tương ứng mã số ID truyền vào
             }
         }

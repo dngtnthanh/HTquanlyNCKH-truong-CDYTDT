@@ -401,6 +401,9 @@ namespace HTquanlyNCKH.Controllers
                     //Lấy danh sách ngoại ngữ nhà khoa học
                     List<Foreign> foreigns = db.Foreigns.OrderByDescending(n => n.foreignID).ToList<Foreign>();
                     ViewBag.foreignList = foreigns;
+
+
+                    ViewBag.ngaysinh = null;
                 }
                 
 
@@ -430,6 +433,18 @@ namespace HTquanlyNCKH.Controllers
                     List<Foreign> foreigns = db.Foreigns.OrderByDescending(n => n.foreignID).ToList<Foreign>();
                     ViewBag.foreignList = foreigns;
 
+                    var sct = db.Scientists.SingleOrDefault(n => n.scientistID == id);
+
+                    if(sct.sctBirthday == null)
+                    {
+                        ViewBag.ngaysinh = null;
+                    }
+                    else
+                    {
+                        ViewBag.ngaysinh = Convert.ToDateTime(sct.sctBirthday).ToString("yyyy-MM-dd");
+                    }
+                    
+
                     return View(db.Scientists.Where(x => x.scientistID == id).FirstOrDefault<Scientist>());
                 }
             }
@@ -455,16 +470,20 @@ namespace HTquanlyNCKH.Controllers
                                 file.SaveAs(scientistob.sctImage);
                                 scientistob.sctImage = fileName;
                             }
-                            scientistob.sctFullName = scientistob.sctFirstName + " " + scientistob.sctLastName;
-                            
-                        }
+                        }                        
                     }
+                    
                     scientistob.sctBirthday = Convert.ToDateTime(collection.Get("ngay-sinh"));
                     scientistob.sctSex = collection.Get("gioi-tinh");
                     db.Scientists.Add(scientistob);
                     db.SaveChanges();
-                    return RedirectToAction("ScientistManage");
-                    
+
+                    var sctMS = db.Scientists.Max<Scientist>(n => n.scientistID);   //Lấy mã số nhà khoa học
+                    scientistob.sctFullName = scientistob.sctFirstName + " " + scientistob.sctLastName + " - KH" + sctMS.ToString();
+                    db.Entry(scientistob).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("ScientistManage");                    
                     //return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
                 else
@@ -478,13 +497,22 @@ namespace HTquanlyNCKH.Controllers
                             {
                                 var fileName = Path.GetFileName(file.FileName);
                                 scientistob.sctImage = Path.Combine(
-                                    Server.MapPath("~/Content/dist/img/AnhDaiDien"), fileName);
+                                Server.MapPath("~/Content/dist/img/AnhDaiDien"), fileName);
                                 file.SaveAs(scientistob.sctImage);
                                 scientistob.sctImage = fileName;
                             }
                         }
                     }
-                    scientistob.sctBirthday = Convert.ToDateTime(collection.Get("ngay-sinh"));
+                    
+                    if(collection.Get("ngay-sinh") != "")
+                    {
+                        scientistob.sctBirthday = Convert.ToDateTime(collection.Get("ngay-sinh"));
+                    }
+                    else
+                    {
+                        scientistob.sctBirthday = null;
+                    }
+                    
                     scientistob.sctSex = collection.Get("gioi-tinh");
                     scientistob.sctModifierDate = DateTime.Now;
                     db.Entry(scientistob).State = EntityState.Modified;
@@ -571,6 +599,15 @@ namespace HTquanlyNCKH.Controllers
                                         sctModifierUser = sct.sctModifierUser,      //Người thay đổi
 
                                     };
+                var _sct = db.Scientists.SingleOrDefault(n => n.scientistID == id);
+                if (_sct.sctBirthday == null)
+                {
+                    ViewBag.ngaysinh = null;
+                }
+                else
+                {
+                    ViewBag.ngaysinh = Convert.ToDateTime(_sct.sctBirthday).ToString("dd-MM-yyyy");
+                }
 
                 return View(ScientistList.Single(n => n.scientistID == id));        //Trả về thông tin nhà khoa học tương ứng mã số ID truyền vào
             }

@@ -135,20 +135,7 @@
 
 <style type='text/css'>
 
-    table {
-        counter-reset: rowNumber;
-        counter-reset: number 1; /*mặc định số thứ tự bắt đầu*/
-    }
-
-        table tr {
-            counter-increment: rowNumber;
-        }
-
-            table tr td:first-child::before {
-                content: counter(rowNumber);
-                min-width: auto;
-                margin-right: 0.5em;
-            }
+  
 
         table td {
             vertical-align: middle;

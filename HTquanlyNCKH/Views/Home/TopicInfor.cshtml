@@ -76,7 +76,7 @@
                     <b>Ngày bắt đầu:</b>
                 </td>
                 <td style="text-align: left">
-                    @Convert.ToDateTime(Model.tpcStartDate).ToString("dd-MM-yyyy")
+                    @ViewBag.ngaybatdau
 
                 </td>
                 @*<td>
@@ -87,10 +87,10 @@
 
             </td>*@
                 <td>
-                    <b>Ngày nghiệm thu:</b>
+                    <b>Ngày kết thúc:</b>
                 </td>
                 <td style="text-align: left">
-                    @Convert.ToDateTime(Model.tpcDateOfAcceptance).ToString("dd-MM-yyyy")
+                    @ViewBag.ngayketthuc
 
                 </td>
             </tr>
@@ -98,10 +98,16 @@
                 <td>
                     <b>Hội đồng xét duyệt:</b>
                 </td>
-                <td colspan="3" style="text-align: left">
+                <td style="text-align: left">
                     @Model.tpcReviewBoard
                 </td>
+                <td>
+                    <b>Ngày nghiệm thu:</b>
+                </td>
+                <td style="text-align: left">
+                    @ViewBag.ngaynghiemthu
 
+                </td>
             </tr>
             
         </tbody>

@@ -8,6 +8,8 @@
 @model HTquanlyNCKH.Models.ScientistFull
 @using HTquanlyNCKH.Models;
 <div class="form-check">
+    <br /><br />
+    <b>1. Lý lịch</b><br /><br />
     <table class="table table-striped">
         <tbody>
             <tr>
@@ -42,7 +44,7 @@
                     <b>Mã số:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.scientistID
+                     @ViewBag.maso
                 </td>
 
             </tr>
@@ -52,7 +54,7 @@
                     <b>Ngày sinh:</b>
                 </td>
                 <td style="text-align: left">
-                    @Convert.ToDateTime(Model.sctBirthday).ToString("dd-MM-yyyy")
+                    @ViewBag.ngaysinh
 
                 </td>
 
@@ -109,6 +111,7 @@
                 </td>
 
             </tr>
+
             <tr>
                 <td>
                     <b>Chuyên ngành:</b>
@@ -123,40 +126,19 @@
                     @Model.sctForeignName
                 </td>
             </tr>
-            <tr>
-                <td style="vertical-align:top"><b>Các đề tài thực hiện:</b></td>
-                <td colspan="5" style="text-align: left">
+        </tbody>
+    </table>
 
-                    @using (DBModel db = new DBModel())
-                    {
-                        var TpcList = db.Topics.Where(n => n.scientistID == Model.scientistID);
+    <br />
+    <b>2. Quá trình nghiên cứu</b><br /><br />
 
-                        foreach (var item in TpcList)
-                        {                           
-                            <a href="@Url.Action("TopicInfor", "Home", new { id = item.topicID })">Mã số: @item.topicID - @item.tpcName </a>    <br />
-                        }
-                    }
-                </td>
-            </tr>
-            <tr>
-                <td><b>Số bài báo khoa học:</b></td>
-                <td colspan="5" style="text-align: left">
-                    @using (DBModel db = new DBModel())
-                    {
-                        var TpcList = db.Articles.Where(n => n.articlesID == Model.scientistID);
-
-                        foreach (var item in TpcList)
-                        {
-                            <a href="@Url.Action("ArticlesInfor", "Home", new { id = item.articlesID })">Mã số: @item.articlesID - @item.atlName </a> <br />
-                        }
-                    }
-                </td>
-            </tr>
+    <table class="table table-striped">
+        <tbody>
             <tr>
                 <td>
                     <b>Quá trình làm việc:</b>
                 </td>
-                <td colspan="5" style="text-align: left">
+                <td colspan="5" style="text-align: left; min-width: 800px">
                     @Model.sctWorkingProcess
                 </td>
             </tr>
@@ -166,6 +148,63 @@
                 </td>
                 <td colspan="5" style="text-align: left">
                     @Model.sctResult
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <b>3. Sản phẩm nghiên cứu</b><br /><br />
+    <table class="table table-striped">
+        <caption align="top">CÁC ĐỀ TÀI NGHIÊN CỨU</caption>
+        <tbody>
+            @*<tr>
+                    <td  rowspan="@ViewBag.tpcNumber" style="vertical-align:top; min-width: 200px"><b>Các đề tài nghiên cứu:</b></td>
+
+                </tr>*@
+
+            @using (DBModel db = new DBModel())
+            {
+                var TpcList = db.Topics.Where(n => n.scientistID == Model.scientistID);
+
+                foreach (var item in TpcList)
+                {
+                    <tr>
+                        <td style="text-align: left; padding-left: 25px">
+                            <i class="fas fa-folder-open"></i>
+                            <a href="@Url.Action("TopicInfor", "Home", new { id = item.topicID })">
+                                Mã số: @item.topicID - @item.tpcName
+                                <i style="color: #808080; font-size: 14px">
+                                    <i class="fas fa-calendar-alt"></i> (@Convert.ToDateTime(item.tpcCreateData).ToString("dd-MM-yyyy"))
+                                </i>
+                            </a> <br />
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <caption align="top">BÀI BÁO KHOA HỌC</caption>
+        <tbody>
+            <tr>
+                @*<td style="min-width: 200px" rowspan="@ViewBag.artNumber"><b>Số bài báo khoa học:</b></td>*@
+                <td style="text-align: left; padding-left: 25px">
+                    @using (DBModel db = new DBModel())
+                    {
+                        var TpcList = db.Articles.Where(n => n.articlesID == Model.scientistID);
+
+                        foreach (var item in TpcList)
+                        {
+                            <i class="fas fa-newspaper"></i> <a href="@Url.Action("ArticlesInfor", "Home", new { id = item.articlesID })">
+                                Mã số: @item.articlesID - @item.atlName
+                                <i style="color: #808080; font-size: 15px">
+                                    - Nơi xuất bản: @item.atlPublication <i class="fas fa-calendar-alt"></i>  (@Convert.ToDateTime(item.atlCreateDate).ToString("dd-MM-yyyy"))
+                                </i>
+                            </a> <br />
+                        }
+                    }
                 </td>
             </tr>
 
