@@ -61,31 +61,31 @@
     <div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Quốc gia</label>
-            @Html.DropDownList("nationID", new SelectList(ViewBag.nat, "nationID", "natName", "Select"), new { @class = "form-control" })
+            @Html.DropDownList("nationID", new SelectList(ViewBag.nat, "nationID", "natName"), "--Trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Nhà khoa học</label>
-            @Html.DropDownList("scientistID", new SelectList(ViewBag.sct, "scientistID", "sctFullName", "Select"), new { @class = "form-control" })
+            @Html.DropDownList("scientistID", new SelectList(ViewBag.sct, "scientistID", "sctFullName"), "--Trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Từ khoá</label>
-            @Html.DropDownList("keyID", new SelectList(ViewBag.key, "keyID", "keyName", "Select"), new { @class = "form-control" })
+            @Html.DropDownList("keyID", new SelectList(ViewBag.key, "keyID", "keyName"), "--Trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Loại bài viết</label>
-            @Html.DropDownList("typeID", new SelectList(ViewBag.types, "typeID", "typName", "Select"), new { @class = "form-control" })
+            @Html.DropDownList("typeID", new SelectList(ViewBag.types, "typeID", "typName"), "--Trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Lĩnh vực</label>
-            @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName", "Select"), new { @class = "form-control" })
+            @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName"), "--Trống--", new { @class = "form-control" })
         </div>
     </div>
 

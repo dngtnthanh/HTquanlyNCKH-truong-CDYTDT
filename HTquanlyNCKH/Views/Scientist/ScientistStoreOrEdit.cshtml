@@ -115,32 +115,32 @@
     </div>
     <div class="dropdown" style="clear: both; float: left;  margin: 2px">
         <div class="form-group">
-            <label>Nơi sinh</label>
-            @Html.DropDownList("placeID", new SelectList(ViewBag.plaList, "placeID", "plaName", "Select"), new { @class = "form-control" })
+            <label>Nơi sinh(*)</label>
+            @Html.DropDownList("placeID", new SelectList(ViewBag.plaList, "placeID", "plaName"), "--Không để trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left; margin: 2px">
         <div class="form-group">
-            <label>Trình độ</label>
-            @Html.DropDownList("degreeID", new SelectList(ViewBag.degList, "degreeID", "degName", "Select"), new { @class = "form-control" })
+            <label>Trình độ(*)</label>
+            @Html.DropDownList("degreeID", new SelectList(ViewBag.degList, "degreeID", "degName"), "--Không để trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left ; margin: 2px">
         <div class="form-group">
-            <label>Phòng ban</label>
-            @Html.DropDownList("unitID", new SelectList(ViewBag.unitList, "unitID", "untName", "Select"), new { @class = "form-control" })
+            <label>Phòng ban(*)</label>
+            @Html.DropDownList("unitID", new SelectList(ViewBag.unitList, "unitID", "untName"), "--Không để trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left ; margin: 2px">
         <div class="form-group">
-            <label>Chuyên ngành</label>
-            @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName", "Select"), new { @class = "form-control" })
+            <label>Chuyên ngành(*)</label>
+            @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName"), "--Không để trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="dropdown" style="float: left; margin: 2px">
         <div class="form-group">
-            <label>Ngoại ngữ</label>
-            @Html.DropDownList("foreignID", new SelectList(ViewBag.foreignList, "foreignID", "fgnName", "Select"), new { @class = "form-control" })
+            <label>Ngoại ngữ(*)</label>
+            @Html.DropDownList("foreignID", new SelectList(ViewBag.foreignList, "foreignID", "fgnName"), "--Không để trống--", new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group" style="clear: both; margin: 2px">
@@ -163,13 +163,14 @@
             @Html.ValidationMessageFor(model => model.sctImage)
         </div>
     </div>
-
     <div class="form-group" style="float: left; margin: 100px">
 
         <input type="submit" value="Lưu lại" class="btn btn-success " />
         <input type="reset" value="Làm mới" class="btn btn-warning" />
     </div>
 }
+
+
 
 <style type='text/css'>
     label {

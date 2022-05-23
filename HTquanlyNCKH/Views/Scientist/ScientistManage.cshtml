@@ -3,6 +3,7 @@
     ViewBag.Title = "Quản Lý Danh Sách Nhà Khoa Học";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("ScientistStoreOrEdit","Scientist")')">
     <i class="fa fa-plus"></i> Thêm Mới
 </a>
@@ -171,16 +172,15 @@
 
         table tr {
             counter-increment: rowNumber;
-
         }
 
             table tr td:first-child::before {
                 content: counter(rowNumber);
                 min-width: auto;
                 margin-right: 0.5em;
-
             }
+
         table td {
-            vertical-align: middle;            
+            vertical-align: middle;
         }
 </style>
