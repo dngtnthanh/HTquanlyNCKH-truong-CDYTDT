@@ -15,7 +15,14 @@ namespace HTquanlyNCKH
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Session_Start()
+        {
+            Session.Add("Username", "Login");
+            Session.Add("Permission", "0");
+
+
         }
     }
 }

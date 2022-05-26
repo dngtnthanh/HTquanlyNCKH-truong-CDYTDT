@@ -40,7 +40,8 @@ namespace HTquanlyNCKH.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<Scientist> Scientists { get; set; }
+        public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<Acount> Acounts { get; set; }
     }
 }

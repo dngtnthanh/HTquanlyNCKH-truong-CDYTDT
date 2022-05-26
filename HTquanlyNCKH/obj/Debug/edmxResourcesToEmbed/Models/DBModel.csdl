@@ -190,8 +190,9 @@
     <EntitySet Name="Status" EntityType="Self.Status" />
     <EntitySet Name="Units" EntityType="Self.Unit" />
     <EntitySet Name="Articles" EntityType="HTquanlyNCKHModel.Article" />
-    <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
     <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
+    <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
+    <EntitySet Name="Acounts" EntityType="HTquanlyNCKHModel.Acount" />
   </EntityContainer>
   <EntityType Name="Article">
     <Key>
@@ -217,6 +218,32 @@
     <Property Name="atlModifierDate" Type="DateTime" Precision="3" />
     <Property Name="atlCreateUser" Type="Int32" />
     <Property Name="atlModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Scientist">
+    <Key>
+      <PropertyRef Name="scientistID" />
+    </Key>
+    <Property Name="scientistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sctFullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="sctBirthday" Type="DateTime" Precision="0" />
+    <Property Name="PlaceID" Type="Int32" />
+    <Property Name="sctImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="degreeID" Type="Int32" />
+    <Property Name="unitID" Type="Int32" />
+    <Property Name="fieldID" Type="Int32" />
+    <Property Name="sctWorkingProcess" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="sctResult" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="foreignID" Type="Int32" />
+    <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sctCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="sctCreateUser" Type="Int32" />
+    <Property Name="sctModifierUser" Type="Int32" />
   </EntityType>
   <EntityType Name="Topic">
     <Key>
@@ -245,31 +272,18 @@
     <Property Name="tpcDeleteUser" Type="Int32" />
     <Property Name="tpcImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="tpcAcceptance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tpcFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="Scientist">
+  <EntityType Name="Acount">
     <Key>
-      <PropertyRef Name="scientistID" />
+      <PropertyRef Name="Username" />
     </Key>
-    <Property Name="scientistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="sctFullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="sctBirthday" Type="DateTime" Precision="0" />
-    <Property Name="PlaceID" Type="Int32" />
-    <Property Name="sctImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="degreeID" Type="Int32" />
-    <Property Name="unitID" Type="Int32" />
-    <Property Name="fieldID" Type="Int32" />
-    <Property Name="sctWorkingProcess" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="sctResult" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="foreignID" Type="Int32" />
-    <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="sctCreateDate" Type="DateTime" Precision="3" />
-    <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
-    <Property Name="sctCreateUser" Type="Int32" />
-    <Property Name="sctModifierUser" Type="Int32" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Permission" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lock" Type="Int32" />
+    <Property Name="Active" Type="Int32" />
   </EntityType>
 </Schema>

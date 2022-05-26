@@ -76,7 +76,8 @@
                     <b>Ngày bắt đầu:</b>
                 </td>
                 <td style="text-align: left">
-                    @ViewBag.ngaybatdau
+                    @Convert.ToDateTime(ViewBag.ngaybatdau).ToString("dd-MM-yyyy")
+                    
 
                 </td>
                 @*<td>
@@ -90,7 +91,12 @@
                     <b>Ngày kết thúc:</b>
                 </td>
                 <td style="text-align: left">
-                    @ViewBag.ngayketthuc
+                    @if (ViewBag.ngayketthuc != null)
+                    {
+                        @Convert.ToDateTime(ViewBag.ngayketthuc).ToString("dd-MM-yyyy")
+                    }
+
+
 
                 </td>
             </tr>
@@ -105,8 +111,28 @@
                     <b>Ngày nghiệm thu:</b>
                 </td>
                 <td style="text-align: left">
-                    @ViewBag.ngaynghiemthu
+                    @if (ViewBag.ngaynghiemthu != null)
+                    {
+                        @Convert.ToDateTime(ViewBag.ngaynghiemthu).ToString("dd-MM-yyyy")
+                    }
 
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>File đính kèm: </b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @if (Model.tpcProofFile != null)
+                    {
+                        <a style="color: #0026ff" href="~/Content/dist/FileDinhKem/@Model.tpcProofFile" download><i class="fas fa-file"></i> TẢI VỀ</a>
+                    }
+                    else
+                    {
+                        <p>Trống</p>
+                    }
                 </td>
             </tr>
             

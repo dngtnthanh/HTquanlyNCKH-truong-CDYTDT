@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using HTquanlyNCKH.Models;
 using System.Data.Entity;
+using System.IO;
+
 namespace HTquanlyNCKH.Controllers
 {
     public class TopicController : Controller
@@ -48,7 +50,7 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 if (classificationob.classifiID == 0)       //Nếu id truyền vào là 0 thì thực hiện thêm mới
-                {
+                {                    
                     db.Classifications.Add(classificationob);
                     classificationob.clsCreateDate = DateTime.Now;  //Lưu lại thời gian khởi tạo
                     db.SaveChanges();
@@ -70,6 +72,7 @@ namespace HTquanlyNCKH.Controllers
             {
                 Classification emp = db.Classifications.Where(x => x.classifiID == id).FirstOrDefault<Classification>();
                 var tpc = db.Topics.Where(n => n.classifiID == id);   //Kiểm tra xem có tồn tại id của classifi trong bảng Topic
+                
                 if (tpc.Count() < 1)      //Kiểm tra toàn vẹn dữ liệu
                 {
                     db.Classifications.Remove(emp);
@@ -150,29 +153,44 @@ namespace HTquanlyNCKH.Controllers
                 Field emp = db.Fields.Where(x => x.fieldID == id).FirstOrDefault<Field>();
                 var fie = db.Topics.Where(n => n.fieldID == id); //Kiểm tra xem có tồn tại id của bảng Field trong bảng Topic
                 var field = db.Scientists.Where(n => n.fieldID == id); //Kiểm tra xem có tồn tại lĩnh vực tức là chuyên ngành bên bảng nhà khoa học có tồn tại không
-                if (fie.Count() < 1 && field.Count() < 1)
+                if(id != 29) 
                 {
-                    db.Fields.Remove(emp);
-                    db.SaveChanges();
-                    return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    if (fie.Count() < 1 && field.Count() < 1)
+                    {
+                        db.Fields.Remove(emp);
+                        db.SaveChanges();
+                        return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    }
+                    else
+                    {
+                        string mess = "";
+                        foreach (var item in fie)
+                        {
+                            mess += "\n [Mã đề tài: " + item.topicID + ". Tên đề tài: " + item.tpcName + ". Lĩnh vực: " + emp.fieName + "]";
+                        }
+                        foreach (var item in field)
+                        {
+                            mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + " " + item.sctLastName + ". Chuyên nghành: " + emp.fieName + "]";
+                        }
+                        return Json(new
+                        {
+                            success = false,
+                            message = "Xoá không thành công! Còn " + fie.Count() + " hàng dữ liệu trong bảng đề tài" + " và " + field.Count() + " dữ liệu trong danh sách nhà khoa học"
+                             + mess,
+                            JsonRequestBehavior.AllowGet
+                        });
+                    }
                 }
                 else
                 {
-                    string mess = "";
-                    foreach(var item in fie)
-                    {
-                        mess += "\n [Mã đề tài: " + item.topicID + ". Tên đề tài: " + item.tpcName + ". Lĩnh vực: " + emp.fieName + "]";
-                    }
-                    foreach (var item in field)
-                    {
-                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + " " + item.sctLastName + ". Chuyên nghành: " + emp.fieName + "]";
-                    }
                     return Json(new
                     {
                         success = false,
-                        message = "Xoá không thành công! Còn " + fie.Count() + " hàng dữ liệu trong bảng đề tài" + " và " + field.Count() + " dữ liệu trong danh sách nhà khoa học" 
-                         + mess, JsonRequestBehavior.AllowGet });
-                }                
+                        message = "Xoá không thành công. Không thể xoá dữ liệu này",
+                        JsonRequestBehavior.AllowGet
+                    });
+                }
+                
             }
         }
         public ActionResult FieldManage()
@@ -232,27 +250,40 @@ namespace HTquanlyNCKH.Controllers
             {
                 Status emp = db.Status.Where(x => x.statusID == id).FirstOrDefault<Status>();
                 var sts = db.Topics.Where(n => n.statusID == id); //Kiểm tra xem có tồn tại id của bảng status trong bảng Topic
-                if (sts.Count() < 1)
+                if (id != 8)
                 {
-                    db.Status.Remove(emp);
-                    db.SaveChanges();
-                    return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    if (sts.Count() < 1)
+                    {
+                        db.Status.Remove(emp);
+                        db.SaveChanges();
+                        return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    }
+                    else
+                    {
+                        string mess = "";
+                        foreach (var item in sts)
+                        {
+                            mess += "\n [Mã đề tài: " + item.topicID + ". Tên đề tài: " + item.tpcName + ". Trạng thái: " + emp.stsName + "]";
+                        }
+                        return Json(new
+                        {
+                            success = false,
+                            message = "Xoá không thành công! Còn " + sts.Count() + " hàng dữ liệu trong bảng đề tài"
+                             + mess,
+                            JsonRequestBehavior.AllowGet
+                        });
+                    }
                 }
                 else
                 {
-                    string mess = "";
-                    foreach (var item in sts)
-                    {
-                        mess += "\n [Mã đề tài: " + item.topicID + ". Tên đề tài: " + item.tpcName + ". Trạng thái: " + emp.stsName + "]";
-                    }
                     return Json(new
                     {
                         success = false,
-                        message = "Xoá không thành công! Còn " + sts.Count() + " hàng dữ liệu trong bảng đề tài"
-                         + mess,
+                        message = "Xoá không thành công. Không thể xoá dữ liệu này",
                         JsonRequestBehavior.AllowGet
                     });
                 }
+                
                 
             }
         }
@@ -346,7 +377,8 @@ namespace HTquanlyNCKH.Controllers
                         ViewBag.ngayketthuc = null;
                     }
 
-
+                    var nkh = sct.Single(n => n.scientistID == topicob.scientistID);
+                    ViewBag.tenNhaKhoaHoc = nkh.sctFullName;
                     var tpc = db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>();
                     ViewBag.tpcStartDate = tpc.tpcStartDate;
                     return View(db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>());
@@ -390,12 +422,58 @@ namespace HTquanlyNCKH.Controllers
                         topicob.tpcEndDate = null;
                     }
 
+                    if (topicob.classifiID == null)
+                    {
+                        topicob.classifiID = 1071;
+                    }
+                    if(topicob.fieldID == null)
+                    {
+                        topicob.fieldID = 29;
+                    }
+                    if(topicob.statusID == null)
+                    {
+                        topicob.statusID = 8;
+                    }
+
+                    if (ModelState.IsValid)
+                    {
+                        if (Request.Files.Count > 0)
+                        {
+                            HttpPostedFileBase file = Request.Files[0];
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = db.Topics.Max(n => n.topicID) + Path.GetExtension(file.FileName);
+                                topicob.tpcProofFile = Path.Combine(
+                                Server.MapPath("~/Content/dist/FileDinhKem"), fileName);
+                                file.SaveAs(topicob.tpcProofFile);
+                                topicob.tpcProofFile = fileName;
+                            }
+                           
+                        }
+                    }
+                    topicob.scientistID = int.Parse(collection.Get("nhakhoahoc"));
                     db.Topics.Add(topicob);                    
                     db.SaveChanges();
                     return RedirectToAction("TopicManage", "Topic");
                 }
                 else
                 {
+                    if (ModelState.IsValid)
+                    {
+                        if (Request.Files.Count > 0)
+                        {
+                            HttpPostedFileBase file = Request.Files[0];
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = db.Topics.Max(n => n.topicID) + Path.GetExtension(file.FileName);
+                                topicob.tpcProofFile = Path.Combine(
+                                Server.MapPath("~/Content/dist/FileDinhKem"), fileName);
+                                file.SaveAs(topicob.tpcProofFile);
+                                topicob.tpcProofFile = fileName;
+                            }
+
+                        }
+                    }
                     topicob.tpcModifierData = DateTime.Now;
                     if(collection.Get("ngay-bat-dau") != "")
                     {
@@ -424,8 +502,20 @@ namespace HTquanlyNCKH.Controllers
                     else
                     {
                         topicob.tpcEndDate = null;
-                    }                    
-                    
+                    }
+                    if (topicob.classifiID == null)
+                    {
+                        topicob.classifiID = 1071;
+                    }
+                    if (topicob.fieldID == null)
+                    {
+                        topicob.fieldID = 29;
+                    }
+                    if (topicob.statusID == null)
+                    {
+                        topicob.statusID = 8;
+                    }
+                    topicob.scientistID = int.Parse(collection.Get("nhakhoahoc"));
                     db.Entry(topicob).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("TopicManage", "Topic");

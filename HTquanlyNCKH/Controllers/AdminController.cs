@@ -14,6 +14,10 @@ namespace HTquanlyNCKH.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            //if (Session["Permission"].ToString() != "1")//Kiểm tra nếu chưa đăng nhập, thì yêu cầu đăng nhập
+            //{
+            //    return RedirectToAction("index", "Login");
+            //}
             using (DBModel db = new DBModel())
             {
                 var tpc = db.Topics.OrderBy(n => n.topicID);

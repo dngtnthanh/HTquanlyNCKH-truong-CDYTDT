@@ -223,7 +223,7 @@ namespace HTquanlyNCKH.Controllers
                                     join deg in db.Degrees on sct.degreeID equals deg.degreeID       //Nối bảng học vị
                                     join unt in db.Units on sct.unitID equals unt.unitID             //Nối bảng phòng ban
                                     join fie in db.Fields on sct.fieldID equals fie.fieldID          //Nối bảng chuyên nghành
-                                    join frg in db.Foreigns on sct.foreignID equals frg.foreignID //Nối bảng ngoại ngữ
+                                    join frg in db.Foreigns on sct.foreignID equals frg.foreignID //Nối bảng chức vụ
                                     select new ScientistFull()      // [W-A-R-N-I-N-G] những chỗ có liên kết các trường dữ liệu là khoá ngoại ở trên không được để NULL. Tương ứng, nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
                                     {                                       
                                         scientistID = sct.scientistID,              //Mã số nhà khoa học
@@ -365,6 +365,44 @@ namespace HTquanlyNCKH.Controllers
                 return View(ArticlesList.Single(n => n.articlesID == id));
             }
 
+        }
+
+        public ActionResult Index2()
+        {
+            List<SelectListItem> customerList = GetCustomers();
+            ViewBag.mn = customerList.ToList();
+            return View(customerList);
+        }
+
+        [HttpPost]
+        public ActionResult Index2(string ddlCustomers)
+        {
+            List<SelectListItem> customerList = GetCustomers();
+            if (!string.IsNullOrEmpty(ddlCustomers))
+            {
+                SelectListItem selectedItem = customerList.Find(p => p.Value == ddlCustomers);
+                ViewBag.Message = "Name: " + selectedItem.Text;
+                ViewBag.Message += "\\nID: " + selectedItem.Value;
+            }
+            return View(customerList);
+        }
+
+        private static List<SelectListItem> GetCustomers()
+        {
+            DBModel entities = new DBModel();
+             
+            List<SelectListItem> customerList = (from p in entities.Scientists.AsEnumerable()
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = p.sctFullName,
+                                                     Value = p.scientistID.ToString()
+                                                 }).ToList();
+
+            
+            //Add Default Item at First Position.
+            customerList.Insert(0, new SelectListItem { Text = "--Select Customer--", Value = "" });
+
+            return customerList;
         }
     }
 }

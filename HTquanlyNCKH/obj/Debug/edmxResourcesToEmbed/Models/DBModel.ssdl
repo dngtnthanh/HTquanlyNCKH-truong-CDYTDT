@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HTquanlyNCKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Acount">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="ntext" />
+    <Property Name="Fullname" Type="ntext" />
+    <Property Name="Permission" Type="int" />
+    <Property Name="Email" Type="ntext" />
+    <Property Name="Lock" Type="int" />
+    <Property Name="Active" Type="int" />
+  </EntityType>
   <EntityType Name="Articles">
     <Key>
       <PropertyRef Name="articlesID" />
@@ -240,6 +252,7 @@
     <Property Name="tpcDeleteUser" Type="int" />
     <Property Name="tpcImage" Type="text" />
     <Property Name="tpcAcceptance" Type="ntext" />
+    <Property Name="tpcFile" Type="ntext" />
   </EntityType>
   <EntityType Name="Unit">
     <Key>
@@ -254,6 +267,7 @@
     <Property Name="untModifierUser" Type="int" />
   </EntityType>
   <EntityContainer Name="HTquanlyNCKHModelStoreContainer">
+    <EntitySet Name="Acount" EntityType="Self.Acount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArtType" EntityType="Self.ArtType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Classification" EntityType="Self.Classification" Schema="dbo" store:Type="Tables" />

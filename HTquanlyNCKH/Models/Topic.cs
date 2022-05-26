@@ -37,5 +37,6 @@ namespace HTquanlyNCKH.Models
         public Nullable<int> tpcDeleteUser { get; set; }
         public string tpcImage { get; set; }
         public string tpcAcceptance { get; set; }
+        public string tpcFile { get; set; }
     }
 }

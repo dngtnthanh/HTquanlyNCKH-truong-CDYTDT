@@ -70,25 +70,37 @@ namespace HTquanlyNCKH.Controllers
             {
                 Degree emp = db.Degrees.Where(x => x.degreeID == id).FirstOrDefault<Degree>();
                 var deg = db.Scientists.Where(n => n.degreeID == id);
-                if (deg.Count() < 1)
+                if (id != 9)
                 {
-                    db.Degrees.Remove(emp);
-                    db.SaveChanges();
-                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    if (deg.Count() < 1)
+                    {
+                        db.Degrees.Remove(emp);
+                        db.SaveChanges();
+                        return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    }
+                    else
+                    {
+                        string mess = "";
+                        foreach (var item in deg)
+                        {
+                            mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Trình độ: " + emp.degName + "]";
+                        }
+
+                        return Json(new
+                        {
+                            success = false,
+                            message = "Xoá không thành công! Còn " + deg.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                             + mess,
+                            JsonRequestBehavior.AllowGet
+                        });
+                    }
                 }
                 else
                 {
-                    string mess = "";
-                    foreach (var item in deg)
-                    {
-                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Trình độ: " + emp.degName + "]";
-                    }
-
                     return Json(new
                     {
                         success = false,
-                        message = "Xoá không thành công! Còn " + deg.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
-                         + mess,
+                        message = "Không thể xoá dữ liệu này",
                         JsonRequestBehavior.AllowGet
                     });
                 }
@@ -158,25 +170,37 @@ namespace HTquanlyNCKH.Controllers
             {
                 Foreign emp = db.Foreigns.Where(x => x.foreignID == id).FirstOrDefault<Foreign>();
                 var fre = db.Scientists.Where(n => n.foreignID == id);
-                if (fre.Count() < 1)
+                if (id != 13)
                 {
-                    db.Foreigns.Remove(emp);
-                    db.SaveChanges();
-                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    if (fre.Count() < 1)
+                    {
+                        db.Foreigns.Remove(emp);
+                        db.SaveChanges();
+                        return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    }
+                    else
+                    {
+                        string mess = "";
+                        foreach (var item in fre)
+                        {
+                            mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Ngoại ngữ: " + emp.fgnName + "]";
+                        }
+
+                        return Json(new
+                        {
+                            success = false,
+                            message = "Xoá không thành công! Còn " + fre.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                             + mess,
+                            JsonRequestBehavior.AllowGet
+                        });
+                    }
                 }
                 else
                 {
-                    string mess = "";
-                    foreach (var item in fre)
-                    {
-                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Ngoại ngữ: " + emp.fgnName + "]";
-                    }
-
                     return Json(new
                     {
                         success = false,
-                        message = "Xoá không thành công! Còn " + fre.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
-                         + mess,
+                        message = "Xoá không thành công. Không thể xoá dữ liệu này",
                         JsonRequestBehavior.AllowGet
                     });
                 }
@@ -243,29 +267,42 @@ namespace HTquanlyNCKH.Controllers
             {
                 Place emp = db.Places.Where(x => x.placeID == id).FirstOrDefault<Place>();
                 var pla = db.Scientists.Where(n => n.PlaceID == id);
-                if (pla.Count() < 1)
+                if (id != 67)
                 {
-                    db.Places.Remove(emp);
-                    db.SaveChanges();
-                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+
+
+                    if (pla.Count() < 1)
+                    {
+                        db.Places.Remove(emp);
+                        db.SaveChanges();
+                        return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    }
+                    else
+                    {
+                        string mess = "";
+                        foreach (var item in pla)
+                        {
+                            mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". nơi sinh: " + emp.plaName + "]";
+                        }
+
+                        return Json(new
+                        {
+                            success = false,
+                            message = "Xoá không thành công! Còn " + pla.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                             + mess,
+                            JsonRequestBehavior.AllowGet
+                        });
+                    }
                 }
                 else
                 {
-                    string mess = "";
-                    foreach (var item in pla)
-                    {
-                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". nơi sinh: " + emp.plaName + "]";
-                    }
-
                     return Json(new
                     {
                         success = false,
-                        message = "Xoá không thành công! Còn " + pla.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
-                         + mess,
+                        message = "Xoá không thành công. Không thể xoá dữ liệu này",
                         JsonRequestBehavior.AllowGet
                     });
                 }
-                
             }
         }
 
@@ -330,26 +367,39 @@ namespace HTquanlyNCKH.Controllers
             {
                 Unit emp = db.Units.Where(x => x.unitID == id).FirstOrDefault<Unit>();
                 var uni = db.Scientists.Where(n => n.unitID == id);
-                if (uni.Count() < 1)
+                if (id != 4)
                 {
-                    db.Units.Remove(emp);
-                    db.SaveChanges();
-                    return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    if (uni.Count() < 1)
+                    {
+                        db.Units.Remove(emp);
+                        db.SaveChanges();
+                        return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
+                    }
+                    else
+                    {
+                        string mess = "";
+                        foreach (var item in uni)
+                        {
+                            mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Phòng ban: " + emp.untName + "]";
+                        }
+
+                        return Json(new
+                        {
+                            success = false,
+                            message = "Xoá không thành công! Còn " + uni.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
+                             + mess,
+                            JsonRequestBehavior.AllowGet
+                        });
+                    }
                 }
                 else
                 {
-                    string mess = "";
-                    foreach (var item in uni)
-                    {
-                        mess += "\n [Mã nhà khoa học: " + item.scientistID + ". Tên nhà khoa học: " + item.sctFirstName + item.sctLastName + ". Phòng ban: " + emp.untName + "]";
-                    }
 
                     return Json(new
                     {
                         success = false,
-                        message = "Xoá không thành công! Còn " + uni.Count() + " hàng dữ liệu trong danh sách nhà khoa học"
-                         + mess,
-                        JsonRequestBehavior.AllowGet
+                        message = "Xoá không thành công, không thể xoá dữ liệu này"
+                        ,JsonRequestBehavior.AllowGet
                     });
                 }
                 
@@ -487,16 +537,35 @@ namespace HTquanlyNCKH.Controllers
 
                     try
                     {
-                        if(scientistob.degreeID == null    || scientistob.fieldID == null
-                            || scientistob.PlaceID == null || scientistob.unitID == null 
-                            || scientistob.foreignID == null
-                          )
+                        //if(scientistob.degreeID == null)    || scientistob.fieldID == null
+                        //    || scientistob.PlaceID == null || scientistob.unitID == null 
+                        //    || scientistob.foreignID == null
+                        //  )
+                        //{
+                        //    ViewBag.loi = "Lưu không thành công. Lưu ý: không để các trường đánh dấu (*) trống";
+                        //    return RedirectToAction("ScientistManage", "Scientist");
+                        //}
+                        if(scientistob.degreeID == null)
                         {
-                            ViewBag.loi = "Lưu không thành công. Lưu ý: không để các trường đánh dấu (*) trống";
-                            return RedirectToAction("ScientistManage", "Scientist");
+                            scientistob.degreeID = 9;
                         }
-                        else
+                        if(scientistob.fieldID == null)
                         {
+                            scientistob.fieldID = 29;
+                        }
+                        if(scientistob.PlaceID == null)
+                        {
+                            scientistob.PlaceID = 67;
+                        }
+                        if(scientistob.unitID == null)
+                        {
+                            scientistob.unitID = 4;
+                        }
+                        if(scientistob.foreignID == null)
+                        {
+                            scientistob.foreignID = 13;
+                        }
+                            
                             scientistob.sctSex = collection.Get("gioi-tinh");
                             db.Scientists.Add(scientistob);
                             db.SaveChanges();
@@ -506,7 +575,7 @@ namespace HTquanlyNCKH.Controllers
                             db.Entry(scientistob).State = EntityState.Modified;
                             db.SaveChanges();
 
-                        }
+                        
                     }
                     catch (Exception e)
                     {
@@ -536,8 +605,30 @@ namespace HTquanlyNCKH.Controllers
                             }
                         }
                     }
-                    
-                    if(collection.Get("ngay-sinh") != "")
+
+                    if (scientistob.degreeID == null)
+                    {
+                        scientistob.degreeID = 9;
+                    }
+                    if (scientistob.fieldID == null)
+                    {
+                        scientistob.fieldID = 9;
+                    }
+                    if (scientistob.PlaceID == null)
+                    {
+                        scientistob.PlaceID = 67;
+                    }
+                    if (scientistob.unitID == null)
+                    {
+                        scientistob.unitID = 4;
+                    }
+                    if (scientistob.foreignID == null)
+                    {
+                        scientistob.foreignID = 13;
+                    }
+
+
+                    if (collection.Get("ngay-sinh") != "")
                     {
                         scientistob.sctBirthday = Convert.ToDateTime(collection.Get("ngay-sinh"));
                     }
@@ -601,7 +692,7 @@ namespace HTquanlyNCKH.Controllers
         public ActionResult ScientistInfor(int? id)     //Hiện Popup thông tin nhà khoa học (truyền vào mã số scientistID nhà khoa học
         {
             using (DBModel db = new DBModel())
-            {
+            {                
                 var ScientistList = from sct in db.Scientists                                        //Lấy bảng nhà khoa học
                                     join pla in db.Places on sct.PlaceID equals pla.placeID          //Nối bảng địa chỉ (tỉnh)
                                     join deg in db.Degrees on sct.degreeID equals deg.degreeID       //Nối bảng học vị
@@ -641,7 +732,7 @@ namespace HTquanlyNCKH.Controllers
                 {
                     ViewBag.ngaysinh = Convert.ToDateTime(_sct.sctBirthday).ToString("dd-MM-yyyy");
                 }
-
+                
                 return View(ScientistList.SingleOrDefault(n => n.scientistID == id));        //Trả về thông tin nhà khoa học tương ứng mã số ID truyền vào
             }
         }

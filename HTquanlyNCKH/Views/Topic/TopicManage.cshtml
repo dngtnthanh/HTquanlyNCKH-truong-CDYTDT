@@ -2,11 +2,6 @@
     ViewBag.Title = "Quản Lý Danh Sách Đề Tài";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-
-
-
-
 <a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("TopicStoreOrEdit","Topic")')">
     <i class="fa fa-plus"></i> Thêm Mới
 </a>
@@ -17,8 +12,8 @@
             <th width="10px">STT</th>
             <th> Tên Đề Tài</th>
             <th>Mã số</th>
-            <th>Năm Thực Hiện</th>
-            <th><i class="fa-solid fa-screwdriver-wrench"></i> Tuỳ Chọn</th>
+            <th>Năm</th>
+            <th style="min-width: 160px"><i class="fa-solid fa-screwdriver-wrench"></i> Tuỳ Chọn</th>
         </tr>
     </thead>
     <tr>
@@ -39,7 +34,7 @@
 
 
 
-<script>
+    <script>
 
         var Popup, dataTable;
 
@@ -163,7 +158,7 @@
                 });
             }
         }
-</script>
+    </script>
 }
 <style type='text/css'>
 

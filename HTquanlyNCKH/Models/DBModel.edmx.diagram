@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7b617586ee154465b5f3e7cdf72c5263" Name="Diagram1" ZoomLevel="46">
+      <Diagram DiagramId="7b617586ee154465b5f3e7cdf72c5263" Name="Diagram1" ZoomLevel="59">
         <EntityTypeShape EntityType="HTquanlyNCKHModel.ArtType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Classification" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Conference" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -20,8 +20,9 @@
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Status" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Unit" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Article" Width="1.5" PointX="11.375" PointY="6.75" />
-        <EntityTypeShape EntityType="HTquanlyNCKHModel.Topic" Width="1.5" PointX="6.75" PointY="8.75" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Scientist" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HTquanlyNCKHModel.Topic" Width="1.5" PointX="6.75" PointY="8.75" />
+        <EntityTypeShape EntityType="HTquanlyNCKHModel.Acount" Width="1.5" PointX="0.75" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

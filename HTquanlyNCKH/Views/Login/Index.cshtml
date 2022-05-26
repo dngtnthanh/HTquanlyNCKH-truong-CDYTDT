@@ -47,17 +47,17 @@
                             <h4 class="font-size-22 mt-5 text-center text-primary">DTHU - MIT</h4>
                             <p class="text-muted text-center mb-1">Chào mừng bạn đã đến với hệ thống</p>
                             <p class="text-muted text-center ">Quản lý nghiên cứu khoa học</p>
-                            @using (@Html.BeginForm("SignIn", "DangNhap", FormMethod.Post, new { @class = "auth-form" }))
+                            @using (@Html.BeginForm("index", "Login", FormMethod.Post, new { @class = "auth-form" }))
                             {
                                 <div class="mb-3 ">
                                     <label class="form-label " for="username ">Tài khoản</label>
-                                    <input type="text" class="form-control " name="TenTaiKhoan" id="TenTaiKhoan " placeholder="Tài khoản ">
+                                    <input type="text" class="form-control " name="Username" id="TenTaiKhoan " placeholder="Tài khoản ">
                                 </div>
 
 
                                 <div class="mb-3 ">
                                     <label class="form-label " for="userpassword ">Mật khẩu</label>
-                                    <input type="password" class="form-control" name="MatKhau" id="MatKhau " placeholder="Mật khẩu ">
+                                    <input type="password" class="form-control" name="Password" id="MatKhau " placeholder="Mật khẩu ">
                                 </div>
                                 <div class="mb-3 mt-2 mb-0 row ">
                                     <div class="col-12 mt-3 ">
