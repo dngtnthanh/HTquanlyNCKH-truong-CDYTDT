@@ -4689,7 +4689,6 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Search\TopicSearch.cshtml" />
     <Content Include="Views\Search\ScientistSearch.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

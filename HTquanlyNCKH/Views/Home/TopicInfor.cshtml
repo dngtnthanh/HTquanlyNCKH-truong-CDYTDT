@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@section Slider{
+    <img src="~/Content/dist/img/20namDthu.jpg" width="100%" />
+}
 <!DOCTYPE html>
 @model HTquanlyNCKH.Models.TopicFull
 <div class="form-check">
@@ -19,7 +21,7 @@
                 </td>
                 <td><b>Mã số đề tài: </b></td>
                 <td style="text-align: left">
-                    @Model.topicID  
+                    @Model.topicID
                 </td>
             </tr>
             <tr>
@@ -76,17 +78,18 @@
                     <b>Ngày bắt đầu:</b>
                 </td>
                 <td style="text-align: left">
-                    @Convert.ToDateTime(ViewBag.ngaybatdau).ToString("dd-MM-yyyy")
-                    
-
+                    @if (ViewBag.ngaybatdau != null)
+                    {
+                        @Convert.ToDateTime(ViewBag.ngaybatdau).ToString("dd-MM-yyyy")
+                    }
                 </td>
                 @*<td>
-                <b>Ngày kết thúc:</b>
-            </td>
-            <td style="text-align: left">
-                @Convert.ToDateTime(Model.tpcEndDate).ToString("dd-MM-yyyy")
+                        <b>Ngày kết thúc:</b>
+                    </td>
+                    <td style="text-align: left">
+                        @Convert.ToDateTime(Model.tpcEndDate).ToString("dd-MM-yyyy")
 
-            </td>*@
+                    </td>*@
                 <td>
                     <b>Ngày kết thúc:</b>
                 </td>
@@ -135,7 +138,7 @@
                     }
                 </td>
             </tr>
-            
+
         </tbody>
     </table>
     <table>

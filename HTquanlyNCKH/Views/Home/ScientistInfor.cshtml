@@ -3,7 +3,9 @@
     ViewBag.Title = "Thông Tin Nhà Khoa Học";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section Slider{
+    <img src="~/Content/dist/img/20namDthu.jpg" width="100%" />
+}
 <!DOCTYPE html>
 @model HTquanlyNCKH.Models.ScientistFull
 @using HTquanlyNCKH.Models;
@@ -44,7 +46,7 @@
                     <b>Mã số:</b>
                 </td>
                 <td style="text-align: left">
-                     @ViewBag.maso
+                    @ViewBag.maso
                 </td>
 
             </tr>
@@ -178,9 +180,9 @@
         <caption align="top">CÁC ĐỀ TÀI NGHIÊN CỨU</caption>
         <tbody>
             @*<tr>
-            <td  rowspan="@ViewBag.tpcNumber" style="vertical-align:top; min-width: 200px"><b>Các đề tài nghiên cứu:</b></td>
+                    <td  rowspan="@ViewBag.tpcNumber" style="vertical-align:top; min-width: 200px"><b>Các đề tài nghiên cứu:</b></td>
 
-        </tr>*@
+                </tr>*@
 
             @using (DBModel db = new DBModel())
             {

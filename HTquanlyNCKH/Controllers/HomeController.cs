@@ -211,7 +211,6 @@ namespace HTquanlyNCKH.Controllers
 
                 return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
             }
-
         }
 
         public ActionResult ScientistInfor(int? id)     //Hiện Popup thông tin nhà khoa học (truyền vào mã số scientistID nhà khoa học
@@ -246,7 +245,6 @@ namespace HTquanlyNCKH.Controllers
                                         sctModifierDate = sct.sctModifierDate,      //Thời gian thay đổi
                                         sctCreateUser = sct.sctCreateUser,          //Người khởi tạo
                                         sctModifierUser = sct.sctModifierUser,      //Người thay đổi
-                                        
                                     };
                 //var TpcList = db.Topics.Where(n => n.scientistID == id);
                 //string sctTopic = "";
@@ -306,8 +304,6 @@ namespace HTquanlyNCKH.Controllers
                                        atlModifierDate = arl.atlModifierDate,
                                        atlCreateUser = arl.atlCreateUser,
                                        atlModifierUser = arl.atlModifierUser,
-
-
                                    };
                 return View(ArticlesList.Single(n => n.articlesID == id));
             }
@@ -330,7 +326,6 @@ namespace HTquanlyNCKH.Controllers
         }
         public ActionResult ArticlesPopup(int id)
         {
-
             using (DBModel db = new DBModel())
             {
                 var ArticlesList = from arl in db.Articles
@@ -359,50 +354,9 @@ namespace HTquanlyNCKH.Controllers
                                        atlModifierDate = arl.atlModifierDate,
                                        atlCreateUser = arl.atlCreateUser,
                                        atlModifierUser = arl.atlModifierUser,
-
-
                                    };
                 return View(ArticlesList.Single(n => n.articlesID == id));
             }
-
-        }
-
-        public ActionResult Index2()
-        {
-            List<SelectListItem> customerList = GetCustomers();
-            ViewBag.mn = customerList.ToList();
-            return View(customerList);
-        }
-
-        [HttpPost]
-        public ActionResult Index2(string ddlCustomers)
-        {
-            List<SelectListItem> customerList = GetCustomers();
-            if (!string.IsNullOrEmpty(ddlCustomers))
-            {
-                SelectListItem selectedItem = customerList.Find(p => p.Value == ddlCustomers);
-                ViewBag.Message = "Name: " + selectedItem.Text;
-                ViewBag.Message += "\\nID: " + selectedItem.Value;
-            }
-            return View(customerList);
-        }
-
-        private static List<SelectListItem> GetCustomers()
-        {
-            DBModel entities = new DBModel();
-             
-            List<SelectListItem> customerList = (from p in entities.Scientists.AsEnumerable()
-                                                 select new SelectListItem
-                                                 {
-                                                     Text = p.sctFullName,
-                                                     Value = p.scientistID.ToString()
-                                                 }).ToList();
-
-            
-            //Add Default Item at First Position.
-            customerList.Insert(0, new SelectListItem { Text = "--Select Customer--", Value = "" });
-
-            return customerList;
         }
     }
 }
