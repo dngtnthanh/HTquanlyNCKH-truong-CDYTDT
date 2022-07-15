@@ -4634,7 +4634,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -4724,6 +4723,15 @@
     <Folder Include="Assets\libs\raphael\dev\test\" />
     <Folder Include="Assets\libs\table-edits\src\" />
     <Folder Include="Content\dist\FileDinhKem\" />
+    <Folder Include="Uploads\document\articles\" />
+    <Folder Include="Uploads\document\scientist\" />
+    <Folder Include="Uploads\document\topic\" />
+    <Folder Include="Uploads\image\avatar\" />
+    <Folder Include="Uploads\image\banner\" />
+    <Folder Include="Uploads\image\guide\" />
+    <Folder Include="Uploads\image\logo\" />
+    <Folder Include="Uploads\image\other\" />
+    <Folder Include="Uploads\image\slider\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

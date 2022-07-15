@@ -15,7 +15,7 @@
     @Html.HiddenFor(model => model.untModifierUser)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.untName, "Tên trình độ", new { @class = "control-label" })
+        @Html.LabelFor(model => model.untName, "Tên đơn vị", new { @class = "control-label" })
         @Html.EditorFor(model => model.untName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.untName)
     </div>

@@ -15,11 +15,11 @@ namespace HTquanlyNCKH.Models
     public partial class Topic
     {
         public int topicID { get; set; }
-        public Nullable<int> scientistID { get; set; }
-        public Nullable<int> classifiID { get; set; }
-        public Nullable<int> statusID { get; set; }
+        public int scientistID { get; set; }
+        public int classifiID { get; set; }
+        public int statusID { get; set; }
         public Nullable<int> acceptsID { get; set; }
-        public Nullable<int> fieldID { get; set; }
+        public int fieldID { get; set; }
         public string tpcYear { get; set; }
         public string tpcName { get; set; }
         public string tpcSummary { get; set; }

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HTquanlyNCKH.Models;
 
 namespace HTquanlyNCKH.Models
 {
-    public class TableFull
-    {
-        
-    }
+
 
     public class TopicFull      //Đầy đủ thông tin đề tài
     {
@@ -44,7 +42,7 @@ namespace HTquanlyNCKH.Models
         public int scientistID { get; set; }
         public string sctFirstName { get; set; }
         public string sctLastName { get; set; }
-        public string sctFullName { get; set; }
+
         public string sctSex { get; set; }
         public Nullable<System.DateTime> sctBirthday { get; set; }
         public string sctImage { get; set; }
@@ -87,5 +85,49 @@ namespace HTquanlyNCKH.Models
         public Nullable<System.DateTime> atlModifierDate { get; set; }
         public Nullable<int> atlCreateUser { get; set; }
         public Nullable<int> atlModifierUser { get; set; }
+    }
+
+    public class TableFull
+    {
+        //public static IQueryable<TopicFull> TopicList()
+        //{
+        //    using(DBModel db = new DBModel())
+        //    {
+        //        var topicList = from tpc in db.Topics                                        //Lấy bảng lớn Topic là đề tài nghiên cứu
+        //                        join sct in db.Scientists on tpc.scientistID equals sct.scientistID     //Nối đến bảng nhà khoa học
+        //                        join cls in db.Classifications on tpc.classifiID equals cls.classifiID  //Nối đến bảng xếp loại đề tài
+        //                        join sts in db.Status on tpc.statusID equals sts.statusID               //Nối đến bảng trạng thái
+        //                        join fie in db.Fields on tpc.fieldID equals fie.fieldID                 //Nối đến bảng lĩnh vực
+        //                        select new TopicFull()     // [W-A-R-N-I-N-G] những chỗ có liên kết các trường là khoá ngoại ở trên không được để NULL, cho nên nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
+        //                        {
+        //                            topicID = tpc.topicID,                                  //Mã số đề tài
+        //                            scientistID = sct.scientistID,
+        //                            scientistName = sct.sctFirstName + " " + sct.sctLastName,     //Tên đầy đủ nhà khoa học
+        //                            classifiName = cls.clsName,                             //Tên xếp loại
+        //                            statusName = sts.stsName,                               //Trạng thái
+        //                            fieldName = fie.fieName,                                //Lĩnh vực
+
+        //                            //Phía trên là nối bảng
+
+        //                            tpcYear = tpc.tpcYear,                                  //Năm thực hiện
+        //                            tpcName = tpc.tpcName,                                  //Tên đề tài
+        //                            tpcSummary = tpc.tpcSummary,                            //Tóm tắt sơ lượt
+        //                            tpcCode = tpc.tpcCode,                                  //Mã số
+        //                            tpcStartDate = tpc.tpcStartDate,                        //Ngày bắt đầu thực hiện
+        //                            tpcEndDate = tpc.tpcEndDate,                            //Ngày kết thúc
+        //                            tpcDateOfAcceptance = tpc.tpcDateOfAcceptance,          //Ngày nghiệm thu
+        //                            tpcProofFile = tpc.tpcProofFile,                        //Tệp minh chứng
+        //                            tpcReviewBoard = tpc.tpcReviewBoard,                    //Hội đồng nghiệm thu
+        //                            tpcCreateData = tpc.tpcCreateData,                      //Thời gian khởi tạo
+        //                            tpcModifierData = tpc.tpcModifierData,                  //Thời gian thay đổi
+        //                            tpcCreateUser = tpc.tpcCreateUser,                      //Người khởi tạo
+        //                            tpcModifierUser = tpc.tpcModifierUser,                  //Người thay đổi
+        //                            tpcDeleteData = tpc.tpcDeleteData,                      //Thời gian xoá
+        //                            tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
+        //                            tpcImage = tpc.tpcImage,                                //Ảnh bìa
+        //                        };
+        //        return topicList;
+        //    }
+        //}
     }
 }

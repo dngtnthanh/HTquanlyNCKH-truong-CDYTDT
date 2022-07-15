@@ -215,33 +215,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Scientists">
-      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
-        <MappingFragment StoreEntitySet="Scientist">
-          <ScalarProperty Name="sctModifierUser" ColumnName="sctModifierUser" />
-          <ScalarProperty Name="sctCreateUser" ColumnName="sctCreateUser" />
-          <ScalarProperty Name="sctModifierDate" ColumnName="sctModifierDate" />
-          <ScalarProperty Name="sctCreateDate" ColumnName="sctCreateDate" />
-          <ScalarProperty Name="sctEmail" ColumnName="sctEmail" />
-          <ScalarProperty Name="sctPhone" ColumnName="sctPhone" />
-          <ScalarProperty Name="sctAddress" ColumnName="sctAddress" />
-          <ScalarProperty Name="foreignID" ColumnName="foreignID" />
-          <ScalarProperty Name="sctResult" ColumnName="sctResult" />
-          <ScalarProperty Name="sctWorkingProcess" ColumnName="sctWorkingProcess" />
-          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
-          <ScalarProperty Name="unitID" ColumnName="unitID" />
-          <ScalarProperty Name="degreeID" ColumnName="degreeID" />
-          <ScalarProperty Name="sctImage" ColumnName="sctImage" />
-          <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
-          <ScalarProperty Name="sctBirthday" ColumnName="sctBirthday" />
-          <ScalarProperty Name="sctSex" ColumnName="sctSex" />
-          <ScalarProperty Name="sctFullName" ColumnName="sctFullName" />
-          <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
-          <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
-          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Topics">
       <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
         <MappingFragment StoreEntitySet="Topic">
@@ -282,6 +255,32 @@
           <ScalarProperty Name="Fullname" ColumnName="Fullname" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Username" ColumnName="Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Scientists">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
+        <MappingFragment StoreEntitySet="Scientist">
+          <ScalarProperty Name="sctModifierUser" ColumnName="sctModifierUser" />
+          <ScalarProperty Name="sctCreateUser" ColumnName="sctCreateUser" />
+          <ScalarProperty Name="sctModifierDate" ColumnName="sctModifierDate" />
+          <ScalarProperty Name="sctCreateDate" ColumnName="sctCreateDate" />
+          <ScalarProperty Name="sctEmail" ColumnName="sctEmail" />
+          <ScalarProperty Name="sctPhone" ColumnName="sctPhone" />
+          <ScalarProperty Name="sctAddress" ColumnName="sctAddress" />
+          <ScalarProperty Name="foreignID" ColumnName="foreignID" />
+          <ScalarProperty Name="sctResult" ColumnName="sctResult" />
+          <ScalarProperty Name="sctWorkingProcess" ColumnName="sctWorkingProcess" />
+          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+          <ScalarProperty Name="unitID" ColumnName="unitID" />
+          <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+          <ScalarProperty Name="sctImage" ColumnName="sctImage" />
+          <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
+          <ScalarProperty Name="sctBirthday" ColumnName="sctBirthday" />
+          <ScalarProperty Name="sctSex" ColumnName="sctSex" />
+          <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
+          <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
+          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

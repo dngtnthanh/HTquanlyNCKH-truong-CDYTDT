@@ -65,7 +65,7 @@
                     {
                         "data": "scientistID", "render": function (data) {
 
-                            return "<a class='btn btn-sm btn-info' onclick=PopupForm('@Url.Action("ScientistInfor", "Scientist")/" + data + "')>@Html.Raw(ViewBag.ViewIcon)  Xem</a>   <a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("ScientistStoreOrEdit", "Scientist")/" + data + "')><i class='fa fa-pencil'></i> Sửa</a>  <a class='btn btn-danger btn-sm'    onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon)</a>";
+                            return "<a class='btn btn-sm btn-info' onclick=PopupForm('@Url.Action("ScientistInfor", "Scientist")/" + data + "')>@Html.Raw(ViewBag.ViewIcon)</a>   <a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("ScientistStoreOrEdit", "Scientist")/" + data + "')><i class='fa fa-pencil'></i></a>  <a class='btn btn-danger btn-sm'    onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon)</a>";
                         },
 
                         "orderable": false,

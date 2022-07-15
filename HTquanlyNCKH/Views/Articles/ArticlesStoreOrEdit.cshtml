@@ -5,6 +5,8 @@
 
 <!DOCTYPE html>
 @model HTquanlyNCKH.Models.Article
+@using HTquanlyNCKH.Models
+
 @using (Html.BeginForm("ArticlesStoreOrEdit", "Articles", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
     @Html.HiddenFor(model => model.articlesID)
@@ -67,10 +69,26 @@
     <div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Nhà khoa học</label>
-            @Html.DropDownList("scientistID", new SelectList(ViewBag.sct, "scientistID", "sctFullName"), "--Trống--", new { @class = "form-control" })
+            @Html.DropDownList("scientistID", new SelectList(ViewBag.sct, "scientistID"), "--Trống--", new { @class = "form-control" })
         </div>
     </div>
-   
+
+    @*<select name="nhakhoahoc" data-placeholder="Nhà khoa học thực hiện" class="chosen-select">
+        @{
+            using (DBModel db = new DBModel())
+            {
+                var sct = db.Scientists.OrderBy(n => n.scientistID);
+
+                <option value="@Model.scientistID" selected="selected">@ViewBag.tenNhaKhoaHoc</option>
+                foreach (var item in sct)
+                {
+                    var fullName = item.sctFirstName + item.sctLastName;
+                    <option value="@item.scientistID">@fullName</option>
+                }
+            }
+        }
+    </select>*@
+
     <div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Từ khoá</label>

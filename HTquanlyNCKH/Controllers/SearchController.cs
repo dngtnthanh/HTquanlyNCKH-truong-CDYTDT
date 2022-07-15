@@ -105,7 +105,7 @@ namespace HTquanlyNCKH.Controllers
                                         scientistID = sct.scientistID,              //Mã số nhà khoa học
                                         sctFirstName = sct.sctFirstName,            //Họ và tên đệm
                                         sctLastName = sct.sctLastName,              //Tên
-                                        sctFullName = sct.sctFirstName + " " + sct.sctLastName, //Họ tên đầy đủ
+                                       
                                         sctSex = sct.sctSex,                        //Giới tính
                                         sctBirthday = sct.sctBirthday,              //Ngày sinh                                                                            
                                         PlaceName = pla.plaName,                    //Địa chỉ (tỉnh)
@@ -133,7 +133,7 @@ namespace HTquanlyNCKH.Controllers
 
                     var sctList = from p in ScientistList.OrderByDescending(p => p.scientistID)
                                   
-                                .Where(p => p.sctFullName.Contains(key) || p.scientistID.ToString().Contains(key))
+                                .Where(p => p.sctFirstName.Contains(key) || p.scientistID.ToString().Contains(key) || p.sctLastName.Contains(key))
                                 .OrderBy(p => p.scientistID)
                                     select p;
                     ViewBag.Pages = sctList;

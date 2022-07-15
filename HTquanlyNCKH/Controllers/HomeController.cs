@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using HTquanlyNCKH.Models;
 using System.Data.Entity;
 using PagedList;
+
+
 namespace HTquanlyNCKH.Controllers
 {
     public class HomeController : Controller
@@ -293,7 +295,10 @@ namespace HTquanlyNCKH.Controllers
                                        nationName = nat.natName,
                                        atlSummary = arl.atlSummary,
                                        keyName = key.keyName,
+
                                        typeName = tpe.typName,
+                                       fieldName = fie.fieName,
+
                                        Point = arl.Point,
                                        atlLink = arl.atlLink,
                                        atlPublication = arl.atlPublication,

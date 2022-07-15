@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Slider{
-    <img src="~/Content/dist/img/20namDthu.jpg" width="100%" />
+    <img src="~/Uploads/image/banner/slider11.png" width="100%" />
+
 }
 <!DOCTYPE html>
 @model HTquanlyNCKH.Models.ScientistFull
@@ -23,11 +24,11 @@
                     @*<img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" style="border-radius: 14px" width="200" height="200" />*@
                     @if (Model.sctImage == null)
                     {
-                        <img src="~/Content/dist/img/AnhDaiDien/unname2.png" style="border-radius: 14px" width="200" height="200" />
+                        <img src="~/Uploads/image/avatar/unname2.png" style="border-radius: 14px" width="200" height="200" />
                     }
                     else
                     {
-                        <img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" style="border-radius: 14px" width="200" height="200" />
+                        <img src="~/Uploads/image/avatar/@Model.sctImage" style="border-radius: 14px" width="200" height="200" />
                     }
                 </td>
 

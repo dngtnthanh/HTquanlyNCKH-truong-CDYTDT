@@ -179,7 +179,6 @@
     <Property Name="scientistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="sctFirstName" Type="nvarchar" MaxLength="255" />
     <Property Name="sctLastName" Type="nvarchar" MaxLength="255" />
-    <Property Name="sctFullName" Type="nvarchar" MaxLength="255" />
     <Property Name="sctSex" Type="nvarchar" MaxLength="10" />
     <Property Name="sctBirthday" Type="date" />
     <Property Name="PlaceID" Type="int" />
@@ -230,11 +229,11 @@
       <PropertyRef Name="topicID" />
     </Key>
     <Property Name="topicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="scientistID" Type="int" />
-    <Property Name="classifiID" Type="int" />
-    <Property Name="statusID" Type="int" />
+    <Property Name="scientistID" Type="int" Nullable="false" />
+    <Property Name="classifiID" Type="int" Nullable="false" />
+    <Property Name="statusID" Type="int" Nullable="false" />
     <Property Name="acceptsID" Type="int" />
-    <Property Name="fieldID" Type="int" />
+    <Property Name="fieldID" Type="int" Nullable="false" />
     <Property Name="tpcYear" Type="varchar" MaxLength="4" />
     <Property Name="tpcName" Type="nvarchar" MaxLength="255" />
     <Property Name="tpcSummary" Type="ntext" />

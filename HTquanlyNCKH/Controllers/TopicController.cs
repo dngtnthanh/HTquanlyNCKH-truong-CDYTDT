@@ -313,8 +313,7 @@ namespace HTquanlyNCKH.Controllers
                 using (DBModel db = new DBModel())
                 {
                     List<Field> fie = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
-                    ViewBag.fie = fie;
-                    
+                    ViewBag.fie = fie;                    
 
                     List<Classification> cls = db.Classifications.OrderByDescending(n => n.classifiID).ToList<Classification>();
                     ViewBag.cls = cls;
@@ -328,6 +327,7 @@ namespace HTquanlyNCKH.Controllers
                     ViewBag.ngaybatdau = null;
                     ViewBag.ngayketthuc = null;
                     ViewBag.ngaynghiemthu = null;
+
 
                     return View(new Topic());
                 }                    
@@ -378,7 +378,17 @@ namespace HTquanlyNCKH.Controllers
                     }
 
                     var nkh = sct.Single(n => n.scientistID == topicob.scientistID);
-                    ViewBag.tenNhaKhoaHoc = nkh.sctFullName;
+                    ViewBag.tenNhaKhoaHoc = nkh.sctFirstName + " " + nkh.sctLastName + " - KH" +  nkh.scientistID;   //Lấy tên + mã nhà khoa học mặc định
+
+                    var fieName = fie.Single(n => n.fieldID == topicob.fieldID);    //Lấy tên lĩnh vực hiển thị mặc định
+                    ViewBag.fieldName = fieName.fieName;
+
+                    var classfiName = cls.Single(n => n.classifiID == topicob.classifiID);  //Lấy tên xếp loại mặc định
+                    ViewBag.classifiName = classfiName.clsName;
+
+                    var statusName = sts.Single(n => n.statusID == topicob.statusID);      //Lấy tên trạng thái mặc định
+                    ViewBag.statusName = statusName.stsName;
+
                     var tpc = db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>();
                     ViewBag.tpcStartDate = tpc.tpcStartDate;
                     return View(db.Topics.Where(x => x.topicID == id).FirstOrDefault<Topic>());
@@ -435,6 +445,8 @@ namespace HTquanlyNCKH.Controllers
                         topicob.statusID = 8;
                     }
 
+                     
+
                     if (ModelState.IsValid)
                     {
                         if (Request.Files.Count > 0)
@@ -444,16 +456,25 @@ namespace HTquanlyNCKH.Controllers
                             {
                                 var fileName = db.Topics.Max(n => n.topicID) + Path.GetExtension(file.FileName);
                                 topicob.tpcProofFile = Path.Combine(
-                                Server.MapPath("~/Content/dist/FileDinhKem"), fileName);
+                                Server.MapPath("~/Uploads/document/topic"), fileName);
                                 file.SaveAs(topicob.tpcProofFile);
                                 topicob.tpcProofFile = fileName;
                             }
                            
                         }
                     }
+
+                    topicob.classifiID = int.Parse(collection.Get("xepLoai"));
+
                     topicob.scientistID = int.Parse(collection.Get("nhakhoahoc"));
-                    db.Topics.Add(topicob);                    
+
+                    topicob.fieldID = int.Parse(collection.Get("linhVuc"));
+
+                    topicob.statusID = int.Parse(collection.Get("trangThai"));
+
+                    db.Topics.Add(topicob);
                     db.SaveChanges();
+
                     return RedirectToAction("TopicManage", "Topic");
                 }
                 else
@@ -467,7 +488,7 @@ namespace HTquanlyNCKH.Controllers
                             {
                                 var fileName = db.Topics.Max(n => n.topicID) + Path.GetExtension(file.FileName);
                                 topicob.tpcProofFile = Path.Combine(
-                                Server.MapPath("~/Content/dist/FileDinhKem"), fileName);
+                                Server.MapPath("~/Uploads/document/topic"), fileName);
                                 file.SaveAs(topicob.tpcProofFile);
                                 topicob.tpcProofFile = fileName;
                             }
@@ -515,7 +536,14 @@ namespace HTquanlyNCKH.Controllers
                     {
                         topicob.statusID = 8;
                     }
+                    topicob.classifiID = int.Parse(collection.Get("xepLoai"));
+
                     topicob.scientistID = int.Parse(collection.Get("nhakhoahoc"));
+
+                    topicob.fieldID = int.Parse(collection.Get("linhVuc"));
+
+                    topicob.statusID = int.Parse(collection.Get("trangThai"));
+
                     db.Entry(topicob).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("TopicManage", "Topic");

@@ -5,10 +5,10 @@
 
 <!DOCTYPE html>
 @model HTquanlyNCKH.Models.Scientist
+@using HTquanlyNCKH.Models
 @using (Html.BeginForm("ScientistStoreOrEdit", "Scientist", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(model => model.scientistID)
-    @Html.HiddenFor(model => model.sctFullName)
     @Html.HiddenFor(model => model.sctCreateDate)
     @Html.HiddenFor(model => model.sctModifierDate)
 
@@ -87,7 +87,7 @@
         @Html.ValidationMessageFor(model => model.sctSex)
     </div>
 
-    <div class="form-group" style="float: left; margin: 2px">
+    <div class="form-group" style="padding-left: 40px ;float: left; margin: 2px">
         @Html.LabelFor(model => model.sctBirthday, "Ngày sinh", new { @class = "control-label" })
         <input type="date" name="ngay-sinh" value="@ViewBag.ngaysinh" />
     </div>
@@ -113,36 +113,143 @@
         @Html.EditorFor(model => model.sctResult, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.sctResult)
     </div>
-    <div class="dropdown" style="clear: both; float: left;  margin: 2px">
-        <div class="form-group">
-            <label>Nơi sinh(*)</label>
-            @Html.DropDownList("placeID", new SelectList(ViewBag.plaList, "placeID", "plaName"), "--Không để trống--", new { @class = "form-control" })
-        </div>
+    @*<div class="dropdown" style="clear: both; float: left;  margin: 2px">
+            <div class="form-group">
+                <label>Nơi sinh(*)</label>
+                @Html.DropDownList("placeID", new SelectList(ViewBag.plaList, "placeID", "plaName"), "--Không để trống--", new { @class = "form-control" })
+            </div>
+        </div>*@
+
+    <div class="form-group" style="width: 220px; float: left; margin: 2px">
+        <label id="noiSinhText">
+            Nơi sinh(*):
+        </label>
+        <select onchange="changeNull()" id="noiSinh" name="noiSinh" data-placeholder="Nơi sinh" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var pla = db.Places.OrderBy(n => n.placeID);
+
+                    <option value="@Model.PlaceID" selected="selected">@ViewBag.placeName</option>
+                    foreach (var item in pla)
+                    {
+
+                        <option value="@item.placeID">@item.plaName</option>
+                    }
+
+                }
+            }
+        </select>
     </div>
-    <div class="dropdown" style="float: left; margin: 2px">
-        <div class="form-group">
-            <label>Trình độ(*)</label>
-            @Html.DropDownList("degreeID", new SelectList(ViewBag.degList, "degreeID", "degName"), "--Không để trống--", new { @class = "form-control" })
-        </div>
+
+    @*<div class="dropdown" style="float: left; margin: 2px">
+            <div class="form-group">
+                <label>Trình độ(*)</label>
+                @Html.DropDownList("degreeID", new SelectList(ViewBag.degList, "degreeID", "degName"), "--Không để trống--", new { @class = "form-control" })
+            </div>
+        </div>*@
+
+    <div class="form-group" style="width: 200px; float: left; margin: 2px">
+        <label id="trinhDoText">
+            Trình độ(*):
+        </label>
+        <select id="trinhDo" onchange="changeNull()" name="trinhDo" data-placeholder="Trình độ" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var deg = db.Degrees.OrderBy(n => n.degreeID);
+
+                    <option value="@Model.degreeID" selected="selected">@ViewBag.degreeName</option>
+                    foreach (var item in deg)
+                    {
+                        <option value="@item.degreeID">@item.degName</option>
+                    }
+                }
+            }
+        </select>
     </div>
-    <div class="dropdown" style="float: left ; margin: 2px">
-        <div class="form-group">
-            <label>Phòng ban(*)</label>
-            @Html.DropDownList("unitID", new SelectList(ViewBag.unitList, "unitID", "untName"), "--Không để trống--", new { @class = "form-control" })
-        </div>
+
+    @*<div class="dropdown" style="float: left ; margin: 2px">
+            <div class="form-group">
+                <label>Phòng ban(*)</label>
+                @Html.DropDownList("unitID", new SelectList(ViewBag.unitList, "unitID", "untName"), "--Không để trống--", new { @class = "form-control" })
+            </div>
+        </div>*@
+
+    <div class="form-group" style="width: 200px; float: left; margin: 2px">
+        <label id="phongBanText">
+            Phòng ban(*):
+        </label>
+        <select id="phongBan" onchange="changeNull()" name="phongBan" data-placeholder="Phòng ban" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var uni = db.Units.OrderBy(n => n.unitID);
+
+                    <option value="@Model.unitID" selected="selected">@ViewBag.unitName</option>
+                    foreach (var item in uni)
+                    {
+                        <option value="@item.unitID">@item.untName</option>
+                    }
+                }
+            }
+        </select>
     </div>
-    <div class="dropdown" style="float: left ; margin: 2px">
-        <div class="form-group">
-            <label>Chuyên ngành(*)</label>
-            @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName"), "--Không để trống--", new { @class = "form-control" })
-        </div>
+
+    @*<div class="dropdown" style="float: left ; margin: 2px">
+            <div class="form-group">
+                <label>Chuyên ngành(*)</label>
+                @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName"), "--Không để trống--", new { @class = "form-control" })
+            </div>
+        </div>*@
+
+    <div class="form-group" style="width: 200px; float: left; margin: 2px">
+        <label id="chuyenNganhText">
+            Chuyên nghành(*):
+        </label>
+        <select id="chuyenNganh" onchange="changeNull()" name="chuyenNganh" data-placeholder="Chuyên ngành" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var fie = db.Fields.OrderBy(n => n.fieldID);
+
+                    <option value="@Model.fieldID" selected="selected">@ViewBag.fieldName</option>
+                    foreach (var item in fie)
+                    {
+                        <option value="@item.fieldID">@item.fieName</option>
+                    }
+                }
+            }
+        </select>
     </div>
-    <div class="dropdown" style="float: left; margin: 2px">
+
+    @*<div class="dropdown" style="float: left; margin: 2px">
         <div class="form-group">
             <label>Chức vụ(*)</label>
             @Html.DropDownList("foreignID", new SelectList(ViewBag.foreignList, "foreignID", "fgnName"), "--Không để trống--", new { @class = "form-control" })
         </div>
+    </div>*@
+
+    <div class="form-group" style="width: 200px; float: left; margin: 2px">
+        <label id="chucVuText">
+            Chức vụ(*):
+        </label>
+        <select id="chucVu" onchange="changeNull()" name="chucVu" data-placeholder="Chức vụ" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var forei = db.Foreigns.OrderBy(n => n.foreignID);
+
+                    <option value="@Model.foreignID" selected="selected">@ViewBag.foreignName</option>
+                    foreach (var item in forei)
+                    {
+                        <option value="@item.foreignID">@item.fgnName</option>
+                    }
+                }
+            }
+        </select>
     </div>
+
     <div class="form-group" style="clear: both; margin: 2px">
         @Html.LabelFor(model => model.sctWorkingProcess, "Quá trình làm việc", new { @class = "control-label" })
         @Html.EditorFor(model => model.sctWorkingProcess, new { htmlAttributes = new { @class = "form-control" } })
@@ -152,11 +259,11 @@
         <label>Ảnh chân dung</label>
         @if (Model.sctImage == null)
         {
-            <img src="~/Content/dist/img/AnhDaiDien/unname.png" width="100" height="100" style="margin: 2px" />
+            <img src="~/Uploads/image/avatar/unname.png" width="100" height="100" style="margin: 2px" />
         }
         else
         {
-            <img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" width="100" height="100" style="margin: 2px" />
+            <img src="~/Uploads/image/avatar/@Model.sctImage" width="100" height="100" style="margin: 2px" />
         }
         <div class="editor-field">
             @Html.TextBoxFor(model => model.sctImage, new { type = "file" })
@@ -165,13 +272,100 @@
     </div>
     <div class="form-group" style="float: left; margin: 100px">
 
-        <input type="submit" value="Lưu lại" class="btn btn-success " />
+        <input id="submit" onclick="checkNull()" value="Lưu lại" class="btn btn-success " />
         <input type="reset" value="Làm mới" class="btn btn-warning" />
     </div>
 }
 
 
+<script>
+    $(".chosen-select").chosen({
+        allow_single_deselect: true,
+        width: '50%',
+        no_results_text: "Không tìm thấy kết quả :"
+    });
 
+    function checkNull() {
+        var noiSinh = document.getElementById('noiSinh');
+        var trinhDo = document.getElementById('trinhDo');
+        var phongBan = document.getElementById('phongBan');
+        var chuyenNganh = document.getElementById('chuyenNganh');
+        var chucVu = document.getElementById('chucVu');
+
+        var noiSinhText = document.getElementById("noiSinhText");
+        var trinhDoText = document.getElementById("trinhDoText");
+        var phongBanText = document.getElementById("phongBanText");
+        var chuyenNganhText = document.getElementById("chuyenNganhText");
+        var chucVuText = document.getElementById("chucVuText");
+
+        var mes = '';
+        if (noiSinh.value == ''
+            || trinhDo.value == ''
+            || phongBan.value == ''
+            || chuyenNganh.value == ''
+            || chucVu.value == '')
+        {
+            mes += 'Không được bỏ trống ';
+            if (noiSinh.value == '') { noiSinhText.setAttribute("style", "color: red"); mes += "nơi sinh, " }
+            else { noiSinhText.setAttribute("style", "color: #000") }
+
+            if (trinhDo.value == '') { trinhDoText.setAttribute("style", "color: red"); mes += "trình độ, " }
+            else { trinhDoText.setAttribute("style", "color: #000") }
+
+            if (phongBan.value == '') { phongBanText.setAttribute("style", "color: red"); mes += "phòng ban, " }
+            else { phongBanText.setAttribute("style", "color: #000") }
+
+            if (chuyenNganh.value == '') { chuyenNganhText.setAttribute("style", "color: red"); mes += "chuyên ngành, " }
+            else { chuyenNganhText.setAttribute("style", "color: #000") }
+
+            if (chucVu.value == '') { chucVuText.setAttribute("style", "color: red"); mes += "chức vụ." }
+            else (chucVuText.setAttribute("style", "color: #000"))
+            alert(mes)  //In ra thong bao nhap thieu
+        }
+        else
+        {
+            var submit = document.getElementById('submit');
+            submit.setAttribute("type", "submit");
+            submit.onclick();
+        }
+    }
+
+    function changeNull() {
+
+
+        var noiSinh = document.getElementById('noiSinh');
+        var trinhDo = document.getElementById('trinhDo');
+        var phongBan = document.getElementById('phongBan');
+        var chuyenNganh = document.getElementById('chuyenNganh');
+        var chucVu = document.getElementById('chucVu');
+
+        var noiSinhText = document.getElementById("noiSinhText");
+        var trinhDoText = document.getElementById("trinhDoText");
+        var phongBanText = document.getElementById("phongBanText");
+        var chuyenNganhText = document.getElementById("chuyenNganhText");
+        var chucVuText = document.getElementById("chucVuText");
+
+        
+
+            if (noiSinh.value == '') { noiSinhText.setAttribute("style", "color: red") }
+            else { noiSinhText.setAttribute("style", "color: #000") }
+
+            if (trinhDo.value == '') { trinhDoText.setAttribute("style", "color: red") }
+            else { trinhDoText.setAttribute("style", "color: #000") }
+
+            if (phongBan.value == '') { phongBanText.setAttribute("style", "color: red") }
+            else { phongBanText.setAttribute("style", "color: #000") }
+
+            if (chuyenNganh.value == '') { chuyenNganhText.setAttribute("style", "color: red") }
+            else { chuyenNganhText.setAttribute("style", "color: #000") }
+
+            if (chucVu.value == '') { chucVuText.setAttribute("style", "color: red") }
+            else (chucVuText.setAttribute("style", "color: #000"))
+        
+
+    }
+
+</script>
 <style type='text/css'>
     label {
         font-size: 14px;

@@ -7,13 +7,14 @@
 @model PagedList.IPagedList<HTquanlyNCKH.Models.ScientistFull>
 @using PagedList.Mvc;
 @section Slider{
-    <img src="~/Content/dist/img/20namDthu.jpg" width="100%" />
+    <img src="~/Uploads/image/banner/slider11.png" width="100%" />
+
 }
 <!-- Team Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 style="margin-bottom: 50px" class="section-title bg-white text-center text-primary px-3">Trường Đại học Đồng Tháp</h6>
+            <h6 style="margin-bottom: 50px" class="section-title bg-white text-center text-primary px-3">Trường Cao Đẳng Y Tế Đồng Tháp</h6>
         </div>
         @using (Html.BeginForm("ScientistSearch", "Search"))
         {
@@ -31,11 +32,11 @@
                             @*<img width="336" height="336" class="img-fluid" src="~/Content/dist/img/AnhDaiDien/@item.sctImage" alt="">*@
                             @if (item.sctImage == null)
                             {
-                                <img src="~/Content/dist/img/AnhDaiDien/unname2.png" width="336" height="336" class="img-fluid" />
+                                <img src="~/Uploads/image/avatar/unname2.png" width="336" height="336" class="img-fluid" />
                             }
                             else
                             {
-                                <img src="~/Content/dist/img/AnhDaiDien/@item.sctImage" width="336" height="336" class="img-fluid" />
+                                <img src="~/Uploads/image/avatar/@item.sctImage" width="336" height="336" class="img-fluid" />
                             }
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">

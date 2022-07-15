@@ -82,7 +82,7 @@ namespace HTquanlyNCKH.Controllers
                         {
                             var fileName = Path.GetFileName(file.FileName);
                             sliderob.sldImage = Path.Combine(
-                                Server.MapPath("~/Content/dist/img"), fileName);                            
+                                Server.MapPath("~/App_Data/Uploads/image/slider"), fileName);                            
                             file.SaveAs(sliderob.sldImage);
                             sliderob.sldImage = fileName;
                         }
@@ -112,7 +112,7 @@ namespace HTquanlyNCKH.Controllers
                             {
                                 var fileName = Path.GetFileName(file.FileName);
                                 sliderob.sldImage = Path.Combine(
-                                    Server.MapPath("~/Content/dist/img"), fileName);
+                                    Server.MapPath("~/Uploads/image/slider"), fileName);
                                 file.SaveAs(sliderob.sldImage);
                                 sliderob.sldImage = fileName;
                             }
@@ -135,7 +135,7 @@ namespace HTquanlyNCKH.Controllers
                             {
                                 var fileName = Path.GetFileName(file.FileName);
                                 sliderob.sldImage = Path.Combine(
-                                    Server.MapPath("~/Content/dist/img"), fileName);
+                                    Server.MapPath("~/Uploads/image/slider"), fileName);
                                 file.SaveAs(sliderob.sldImage);
                                 sliderob.sldImage = fileName;
                             }        
@@ -147,45 +147,7 @@ namespace HTquanlyNCKH.Controllers
                     return RedirectToAction("SliderManage");
                     //return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
                 }
-                //if (sliderob.sliderID == 0)
-                //{
-                //            //file.SaveAs(Server.MapPath("~/Content/dist/img/" + file.FileName));
-
-                //            //sliderob.sldImage = file.FileName;
-
-                //    //        ViewBag.Message = "File Uploaded Successfully!!";
-
-                //    //sliderob.sldImage = "carousel-2.jpg";
-                //    if (file != null)
-                //    {
-                //        try
-                //        {
-                //            string path = Path.Combine(Server.MapPath("~/Content/dist/img"), Path.GetFileName(file.FileName));
-                //            file.SaveAs(path);
-                //            db.Sliders.Add(sliderob);
-                //            sliderob.sldCreateDate = DateTime.Now;  //Lưu lại thời gian khởi tạo
-                //            db.SaveChanges();
-                //            return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
-                //        }
-                //        catch (Exception e)
-                //        {
-                //            ViewBag.Loi = e;
-                //        }
-                //    }           
-                //    return Json(new { success = false, message = "Lưu lại không thành công!", JsonRequestBehavior.AllowGet });
-
-
-
-
-
-                //}
-                //else
-                //{
-                //    sliderob.sldModifierDate = DateTime.Now;
-                //    db.Entry(sliderob).State = EntityState.Modified;
-                //    db.SaveChanges();
-                //    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
-                //}
+                
             }
         }
         [HttpPost]
