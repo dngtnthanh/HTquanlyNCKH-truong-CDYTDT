@@ -63,7 +63,7 @@
                     {
                         "data": "topicID", "render": function (data) {
 
-                            return "<a class='btn btn-sm btn-info' onclick=PopupForm('@Url.Action("TopicInfor", "Topic")/" + data + "')>@Html.Raw(ViewBag.ViewIcon)  Xem</a>  <a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("TopicStoreOrEdit", "Topic")/" + data + "')><i class='fa fa-pencil'></i> Sửa</a>  <a class='btn btn-danger btn-sm' style='margin-left:5px'   onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon)</a>";
+                            return "<a class='btn btn-sm btn-info' onclick=PopupForm('@Url.Action("TopicInfor", "Topic")/" + data + "')>@Html.Raw(ViewBag.ViewIcon)  </a>  <a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("TopicStoreOrEdit", "Topic")/" + data + "')><i class='fa fa-pencil'></i> </a>  <a class='btn btn-danger btn-sm' style='margin-left:5px'   onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon)</a>";
                         },
 
                         "orderable": false,

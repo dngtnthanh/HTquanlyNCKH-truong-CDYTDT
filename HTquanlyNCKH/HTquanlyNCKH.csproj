@@ -4675,8 +4675,6 @@
     <Content Include="Views\Articles\ArticlesManage.cshtml" />
     <Content Include="Views\Articles\ArticlesStoreOrEdit.cshtml" />
     <Content Include="Views\Home\TopicInfor.cshtml" />
-    <Content Include="Views\Topic\ApiManage.cshtml" />
-    <Content Include="Views\Topic\ApiStoreOrEdit.cshtml" />
     <Content Include="Views\Home\ScientistInfor.cshtml" />
     <Content Include="Views\Scientist\ScientistInfor.cshtml" />
     <Content Include="Views\Topic\TopicInfor.cshtml" />

@@ -22,8 +22,8 @@
     @Html.HiddenFor(model => model.tpcProofFile)
 
     <div class="form-group" style="float: left; margin: 2px">
-        @Html.LabelFor(model => model.tpcName, "Tên đề tài", new { @class = "control-label" })
-        @Html.EditorFor(model => model.tpcName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.LabelFor(model => model.tpcName, "Tên đề tài(*)", new { @class = "control-label", @id="tenDeTaiText" })
+        @Html.EditorFor(model => model.tpcName, new { htmlAttributes = new { @class = "form-control", @onclick="changeNull()" } })
         @Html.ValidationMessageFor(model => model.tpcName)
     </div>
     <div class="form-group" style="float: left; margin: 2px">
@@ -54,10 +54,10 @@
             </div>
         </div>*@
     <div class="form-group" style="width: 400px; float: left; margin: 2px">
-        <label>
-            Nhà khoa học:
+        <label id="nhaKhoaHocText">
+            Nhà khoa học(*):
         </label>
-        <select id="nhaKhoaHoc" name="nhakhoahoc" data-placeholder="Người thực hiện" class="chosen-select">
+        <select id="nhaKhoaHoc" onchange="changeNull()" name="nhakhoahoc" data-placeholder="Người thực hiện" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -99,10 +99,10 @@
         </div>*@
 
     <div class="form-group" style="width: 300px; float: left; margin: 2px">
-        <label>
-            Lĩnh vực:
+        <label id="linhVucText">
+            Lĩnh vực(*):
         </label>
-        <select id="linhVuc" name="linhVuc" data-placeholder="Lĩnh vực" class="chosen-select">
+        <select id="linhVuc" onchange="changeNull()" name="linhVuc" data-placeholder="Lĩnh vực" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -121,10 +121,10 @@
     </div>
 
     <div class="form-group" style="width: 300px; float: left; margin: 2px">
-        <label>
-            Xếp loại:
+        <label id="xepLoaiText">
+            Xếp loại(*):
         </label>
-        <select id="xepLoai" name="xepLoai" data-placeholder="Xếp loại" class="chosen-select">
+        <select id="xepLoai" onchange="changeNull()" name="xepLoai" data-placeholder="Xếp loại" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -152,10 +152,10 @@
     </div>*@
 
     <div class="form-group" style="width: 300px; float: left; margin: 2px">
-        <label>
-            Trạng thái:
+        <label id="trangThaiText">
+            Trạng thái(*):
         </label>
-        <select id="trangThai" name="trangThai" data-placeholder="Trạng thái" class="chosen-select">
+        <select id="trangThai" onchange="changeNull()"  name="trangThai" data-placeholder="Trạng thái" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -186,7 +186,7 @@
         @Html.ValidationMessageFor(model => model.tpcSummary)
     </div>
     <div class="form-group" style="padding-top: 20px">
-        <input id="submit" onclick="checkNull()" @*type="submit"*@ value="Lưu lại" class="btn btn-success " />
+        <input id="submit" onclick="checkNull()"  value="Lưu lại" class="btn btn-success " />
         <input type="reset" value="Làm mới" class="btn btn-warning" />
     </div>
 
@@ -200,24 +200,57 @@
         });
 
         function checkNull() {
-            var nhaKhoaHoc = document.getElementById('nhaKhoaHoc').value;
-            var linhVuc = document.getElementById('linhVuc').value;
-            var xepLoai = document.getElementById('xepLoai').value;
-            var trangThai = document.getElementById('trangThai').value;
+            var tenDeTai = document.getElementById('tpcName');
+            var nhaKhoaHoc = document.getElementById('nhaKhoaHoc');
+            var linhVuc = document.getElementById('linhVuc');
+            var xepLoai = document.getElementById('xepLoai');
+            var trangThai = document.getElementById('trangThai');
 
             var mes = '';
-            if (nhaKhoaHoc == '' || linhVuc == '' || xepLoai == '' || trangThai == '') {
-                mes += 'Không được bỏ trống ';
-                if (nhaKhoaHoc == '') { mes += "nhà khoa học, " }
-                if (linhVuc == '') { mes += "lĩnh vực, " }
-                if (xepLoai == '') { mes += "xếp loại, " }
-                if (trangThai == '') { mes += "trạng thái." }
+            if (tenDeTai.value == 0
+                || nhaKhoaHoc.value == 0
+                || linhVuc.value == 0
+                || xepLoai.value == 0
+                || trangThai.value == 0 )
+            {
+                mes += 'Không được bỏ trống: ';
+                if (tenDeTai.value == 0) {mes += "tên đề tài, "}
+                if (nhaKhoaHoc.value == 0) { mes += "nhà khoa học, " }
+                if (linhVuc.value == 0) { mes += "lĩnh vực, " }
+                if (xepLoai.value == 0) { mes += "xếp loại, " }
+                if (trangThai.value == 0) { mes += "trạng thái." }
                 alert(mes)  //In ra thong bao nhap thieu
-            } else {                
+            } else {
+                alert(nhaKhoaHoc.value)
                 var submit = document.getElementById('submit');
                 submit.setAttribute("type", "submit");
                 submit.onclick();
             }      
+        }
+
+
+        function changeNull() {
+            var nhaKhoaHocText = document.getElementById("nhaKhoaHocText");
+            var linhVucText = document.getElementById("linhVucText");
+            var xepLoaiText = document.getElementById("xepLoaiText");
+            var trangThaiText = document.getElementById("trangThaiText");
+
+
+
+            if (tpcName.value == 0) { tenDeTaiText.setAttribute("style", "color: red") }
+            else { tenDeTaiText.setAttribute("style", "color: #000") }
+
+            if (nhaKhoaHoc.value == 0) { nhaKhoaHocText.setAttribute("style", "color: red") }
+            else { nhaKhoaHocText.setAttribute("style", "color: #000") }
+
+            if (linhVuc.value == 0) { linhVucText.setAttribute("style", "color: red") }
+            else { linhVucText.setAttribute("style", "color: #000") }
+
+            if (xepLoai.value == 0) { xepLoaiText.setAttribute("style", "color: red") }
+            else { xepLoaiText.setAttribute("style", "color: #000") }
+
+            if (trangThai.value == 0) { trangThaiText.setAttribute("style", "color: red") }
+            else { trangThaiText.setAttribute("style", "color: #000") }
         }
     </script>
 }  

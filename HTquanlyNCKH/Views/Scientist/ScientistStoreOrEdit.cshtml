@@ -20,8 +20,8 @@
 
 
     <div class="form-group" style="float: left; margin: 2px">
-        @Html.LabelFor(model => model.sctFirstName, "Họ và tên đệm", new { @class = "control-label" })
-        @Html.EditorFor(model => model.sctFirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.LabelFor(model => model.sctFirstName, "Họ và tên đệm", new { @class = "control-label", @id="hoVaTenDemLabel" })
+        @Html.EditorFor(model => model.sctFirstName, new { htmlAttributes = new { @class = "form-control", @onclick="changeNull()" } })
         @Html.ValidationMessageFor(model => model.sctFirstName)
     </div>
 
@@ -121,7 +121,7 @@
         </div>*@
 
     <div class="form-group" style="width: 220px; float: left; margin: 2px">
-        <label id="noiSinhText">
+        <label id="noiSinhLabel">
             Nơi sinh(*):
         </label>
         <select onchange="changeNull()" id="noiSinh" name="noiSinh" data-placeholder="Nơi sinh" class="chosen-select">
@@ -150,7 +150,7 @@
         </div>*@
 
     <div class="form-group" style="width: 200px; float: left; margin: 2px">
-        <label id="trinhDoText">
+        <label id="trinhDoLable">
             Trình độ(*):
         </label>
         <select id="trinhDo" onchange="changeNull()" name="trinhDo" data-placeholder="Trình độ" class="chosen-select">
@@ -177,7 +177,7 @@
         </div>*@
 
     <div class="form-group" style="width: 200px; float: left; margin: 2px">
-        <label id="phongBanText">
+        <label id="phongBanLabel">
             Phòng ban(*):
         </label>
         <select id="phongBan" onchange="changeNull()" name="phongBan" data-placeholder="Phòng ban" class="chosen-select">
@@ -204,7 +204,7 @@
         </div>*@
 
     <div class="form-group" style="width: 200px; float: left; margin: 2px">
-        <label id="chuyenNganhText">
+        <label id="chuyenNganhLabel">
             Chuyên nghành(*):
         </label>
         <select id="chuyenNganh" onchange="changeNull()" name="chuyenNganh" data-placeholder="Chuyên ngành" class="chosen-select">
@@ -231,7 +231,7 @@
     </div>*@
 
     <div class="form-group" style="width: 200px; float: left; margin: 2px">
-        <label id="chucVuText">
+        <label id="chucVuLabel">
             Chức vụ(*):
         </label>
         <select id="chucVu" onchange="changeNull()" name="chucVu" data-placeholder="Chức vụ" class="chosen-select">
@@ -285,41 +285,50 @@
         no_results_text: "Không tìm thấy kết quả :"
     });
 
-    function checkNull() {
-        var noiSinh = document.getElementById('noiSinh');
-        var trinhDo = document.getElementById('trinhDo');
-        var phongBan = document.getElementById('phongBan');
-        var chuyenNganh = document.getElementById('chuyenNganh');
-        var chucVu = document.getElementById('chucVu');
+    var hoVaTenDem = document.getElementById('sctFirstName');
+    var noiSinh = document.getElementById('noiSinh');
+    var trinhDo = document.getElementById('trinhDo');
+    var phongBan = document.getElementById('phongBan');
+    var chuyenNganh = document.getElementById('chuyenNganh');
+    var chucVu = document.getElementById('chucVu');
 
-        var noiSinhText = document.getElementById("noiSinhText");
-        var trinhDoText = document.getElementById("trinhDoText");
-        var phongBanText = document.getElementById("phongBanText");
-        var chuyenNganhText = document.getElementById("chuyenNganhText");
-        var chucVuText = document.getElementById("chucVuText");
+    var hoVaTenDemLabel = document.getElementById("hoVaTenDemLabel");
+    var noiSinhLabel = document.getElementById("noiSinhLabel");
+    var trinhDoLable = document.getElementById("trinhDoLable");
+    var phongBanLabel = document.getElementById("phongBanLabel");
+    var chuyenNganhLabel = document.getElementById("chuyenNganhLabel");
+    var chucVuLabel = document.getElementById("chucVuLabel");
+
+    function checkNull() {
+        
 
         var mes = '';
-        if (noiSinh.value == ''
+        if (hoVaTenDem.value == ''
+            ||noiSinh.value == ''
             || trinhDo.value == ''
             || phongBan.value == ''
             || chuyenNganh.value == ''
             || chucVu.value == '')
         {
-            mes += 'Không được bỏ trống ';
-            if (noiSinh.value == '') { noiSinhText.setAttribute("style", "color: red"); mes += "nơi sinh, " }
-            else { noiSinhText.setAttribute("style", "color: #000") }
+            mes += 'Không được bỏ trống: ';
 
-            if (trinhDo.value == '') { trinhDoText.setAttribute("style", "color: red"); mes += "trình độ, " }
-            else { trinhDoText.setAttribute("style", "color: #000") }
+            if (hoVaTenDem.value == '') { hoVaTenDemLabel.setAttribute("style", "color: red"); mes += "họ và tên đệm, " }
+            else {hoVaTenDemLabel.setAttribute("style", "color: #000")}
 
-            if (phongBan.value == '') { phongBanText.setAttribute("style", "color: red"); mes += "phòng ban, " }
-            else { phongBanText.setAttribute("style", "color: #000") }
+            if (noiSinh.value == '') { noiSinhLabel.setAttribute("style", "color: red"); mes += "nơi sinh, " }
+            else { noiSinhLabel.setAttribute("style", "color: #000") }
 
-            if (chuyenNganh.value == '') { chuyenNganhText.setAttribute("style", "color: red"); mes += "chuyên ngành, " }
-            else { chuyenNganhText.setAttribute("style", "color: #000") }
+            if (trinhDo.value == '') { trinhDoLable.setAttribute("style", "color: red"); mes += "trình độ, " }
+            else { trinhDoLable.setAttribute("style", "color: #000") }
 
-            if (chucVu.value == '') { chucVuText.setAttribute("style", "color: red"); mes += "chức vụ." }
-            else (chucVuText.setAttribute("style", "color: #000"))
+            if (phongBan.value == '') { phongBanLabel.setAttribute("style", "color: red"); mes += "phòng ban, " }
+            else { phongBanLabel.setAttribute("style", "color: #000") }
+
+            if (chuyenNganh.value == '') { chuyenNganhLabel.setAttribute("style", "color: red"); mes += "chuyên ngành, " }
+            else { chuyenNganhLabel.setAttribute("style", "color: #000") }
+
+            if (chucVu.value == '') { chucVuLabel.setAttribute("style", "color: red"); mes += "chức vụ." }
+            else (chucVuLabel.setAttribute("style", "color: #000"))
             alert(mes)  //In ra thong bao nhap thieu
         }
         else
@@ -331,38 +340,23 @@
     }
 
     function changeNull() {
+            if (hoVaTenDem.value == '') { hoVaTenDemLabel.setAttribute("style", "color: red") }
+            else {hoVaTenDemLabel.setAttribute("style", "color: $000")}
 
+            if (noiSinh.value == '') { noiSinhLabel.setAttribute("style", "color: red") }
+            else { noiSinhLabel.setAttribute("style", "color: #000") }
 
-        var noiSinh = document.getElementById('noiSinh');
-        var trinhDo = document.getElementById('trinhDo');
-        var phongBan = document.getElementById('phongBan');
-        var chuyenNganh = document.getElementById('chuyenNganh');
-        var chucVu = document.getElementById('chucVu');
+            if (trinhDo.value == '') { trinhDoLable.setAttribute("style", "color: red") }
+            else { trinhDoLable.setAttribute("style", "color: #000") }
 
-        var noiSinhText = document.getElementById("noiSinhText");
-        var trinhDoText = document.getElementById("trinhDoText");
-        var phongBanText = document.getElementById("phongBanText");
-        var chuyenNganhText = document.getElementById("chuyenNganhText");
-        var chucVuText = document.getElementById("chucVuText");
+            if (phongBan.value == '') { phongBanLabel.setAttribute("style", "color: red") }
+            else { phongBanLabel.setAttribute("style", "color: #000") }
 
-        
+            if (chuyenNganh.value == '') { chuyenNganhLabel.setAttribute("style", "color: red") }
+            else { chuyenNganhLabel.setAttribute("style", "color: #000") }
 
-            if (noiSinh.value == '') { noiSinhText.setAttribute("style", "color: red") }
-            else { noiSinhText.setAttribute("style", "color: #000") }
-
-            if (trinhDo.value == '') { trinhDoText.setAttribute("style", "color: red") }
-            else { trinhDoText.setAttribute("style", "color: #000") }
-
-            if (phongBan.value == '') { phongBanText.setAttribute("style", "color: red") }
-            else { phongBanText.setAttribute("style", "color: #000") }
-
-            if (chuyenNganh.value == '') { chuyenNganhText.setAttribute("style", "color: red") }
-            else { chuyenNganhText.setAttribute("style", "color: #000") }
-
-            if (chucVu.value == '') { chucVuText.setAttribute("style", "color: red") }
-            else (chucVuText.setAttribute("style", "color: #000"))
-        
-
+            if (chucVu.value == '') { chucVuLabel.setAttribute("style", "color: red") }
+            else (chucVuLabel.setAttribute("style", "color: #000"))
     }
 
 </script>
