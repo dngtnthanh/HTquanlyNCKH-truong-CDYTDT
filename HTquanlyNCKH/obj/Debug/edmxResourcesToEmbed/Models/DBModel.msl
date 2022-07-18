@@ -189,32 +189,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Articles">
-      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Article">
-        <MappingFragment StoreEntitySet="Articles">
-          <ScalarProperty Name="atlModifierUser" ColumnName="atlModifierUser" />
-          <ScalarProperty Name="atlCreateUser" ColumnName="atlCreateUser" />
-          <ScalarProperty Name="atlModifierDate" ColumnName="atlModifierDate" />
-          <ScalarProperty Name="atlCreateDate" ColumnName="atlCreateDate" />
-          <ScalarProperty Name="atlPublicationDate" ColumnName="atlPublicationDate" />
-          <ScalarProperty Name="atlPageToPage" ColumnName="atlPageToPage" />
-          <ScalarProperty Name="atlNumber" ColumnName="atlNumber" />
-          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
-          <ScalarProperty Name="atlPublication" ColumnName="atlPublication" />
-          <ScalarProperty Name="typeID" ColumnName="typeID" />
-          <ScalarProperty Name="atlLink" ColumnName="atlLink" />
-          <ScalarProperty Name="statusID" ColumnName="statusID" />
-          <ScalarProperty Name="Point" ColumnName="Point" />
-          <ScalarProperty Name="magazineID" ColumnName="magazineID" />
-          <ScalarProperty Name="keyID" ColumnName="keyID" />
-          <ScalarProperty Name="atlSummary" ColumnName="atlSummary" />
-          <ScalarProperty Name="nationID" ColumnName="nationID" />
-          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
-          <ScalarProperty Name="atlName" ColumnName="atlName" />
-          <ScalarProperty Name="articlesID" ColumnName="articlesID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Topics">
       <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
         <MappingFragment StoreEntitySet="Topic">
@@ -245,19 +219,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Acounts">
-      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Acount">
-        <MappingFragment StoreEntitySet="Acount">
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Lock" ColumnName="Lock" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Permission" ColumnName="Permission" />
-          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Scientists">
       <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
         <MappingFragment StoreEntitySet="Scientist">
@@ -281,6 +242,46 @@
           <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
           <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
           <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Article">
+        <MappingFragment StoreEntitySet="Articles">
+          <ScalarProperty Name="atlModifierUser" ColumnName="atlModifierUser" />
+          <ScalarProperty Name="atlCreateUser" ColumnName="atlCreateUser" />
+          <ScalarProperty Name="atlModifierDate" ColumnName="atlModifierDate" />
+          <ScalarProperty Name="atlCreateDate" ColumnName="atlCreateDate" />
+          <ScalarProperty Name="atlPublicationDate" ColumnName="atlPublicationDate" />
+          <ScalarProperty Name="atlPageToPage" ColumnName="atlPageToPage" />
+          <ScalarProperty Name="atlNumber" ColumnName="atlNumber" />
+          <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+          <ScalarProperty Name="atlPublication" ColumnName="atlPublication" />
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="atlLink" ColumnName="atlLink" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="magazineID" ColumnName="magazineID" />
+          <ScalarProperty Name="keyID" ColumnName="keyID" />
+          <ScalarProperty Name="atlNation" ColumnName="atlNation" />
+          <ScalarProperty Name="atlSummary" ColumnName="atlSummary" />
+          <ScalarProperty Name="nationID" ColumnName="nationID" />
+          <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+          <ScalarProperty Name="atlName" ColumnName="atlName" />
+          <ScalarProperty Name="articlesID" ColumnName="articlesID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Acounts">
+      <EntityTypeMapping TypeName="HTquanlyNCKHModel.Acount">
+        <MappingFragment StoreEntitySet="Acount">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Lock" ColumnName="Lock" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

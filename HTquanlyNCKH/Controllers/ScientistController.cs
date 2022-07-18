@@ -114,9 +114,6 @@ namespace HTquanlyNCKH.Controllers
             return View();
         }
 
-
-
-
         //Thực thể ngoại ngữ của nhà nghiên cứu, nhà khoa học
         public ActionResult ForeignGetData()
         {
@@ -246,8 +243,8 @@ namespace HTquanlyNCKH.Controllers
             {
                 if (placeob.placeID == 0)
                 {
-                    db.Places.Add(placeob);
                     placeob.plaCreateDate = DateTime.Now;
+                    db.Places.Add(placeob);
                     db.SaveChanges();
                     return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
@@ -424,6 +421,7 @@ namespace HTquanlyNCKH.Controllers
                     JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpGet]
         public ActionResult ScientistStoreOrEdit(int id = 0)
         {
@@ -459,7 +457,7 @@ namespace HTquanlyNCKH.Controllers
 
                 return View(new Scientist());
             }
-            else
+            else  // Post != 0
             {
                 using (DBModel db = new DBModel())
                 {
@@ -494,6 +492,10 @@ namespace HTquanlyNCKH.Controllers
 
                     ViewBag.foreignName = foreigns.Single(n => n.foreignID == sct.foreignID).fgnName;
 
+                    ViewBag.sctWorkingProcess = sct.sctWorkingProcess;
+
+                    
+
                     if (sct.sctBirthday == null)
                     {
                         ViewBag.ngaysinh = null;
@@ -501,12 +503,14 @@ namespace HTquanlyNCKH.Controllers
                     else
                     {
                         ViewBag.ngaysinh = Convert.ToDateTime(sct.sctBirthday).ToString("yyyy-MM-dd");
-                    }                    
+                    }
+                    ViewBag.plaList = db.Places.OrderBy(n => n.placeID).ToList();   //comboBox nơi sinh
 
                     return View(db.Scientists.Where(x => x.scientistID == id).FirstOrDefault<Scientist>());
                 }
             }
         }
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult ScientistStoreOrEdit(Scientist scientistob, FormCollection collection)
         {
@@ -549,15 +553,10 @@ namespace HTquanlyNCKH.Controllers
                         //Thêm mới Post
                         scientistob.sctSex = collection.Get("gioi-tinh");
 
-                        scientistob.PlaceID = int.Parse(collection.Get("noiSinh"));                         
 
-                        scientistob.degreeID = int.Parse(collection.Get("trinhDo"));
 
-                        scientistob.unitID = int.Parse(collection.Get("phongBan"));
 
-                        scientistob.fieldID = int.Parse(collection.Get("chuyenNganh"));
 
-                        scientistob.foreignID = int.Parse(collection.Get("chucVu"));
 
                        db.Scientists.Add(scientistob);
                        db.SaveChanges();
@@ -567,13 +566,12 @@ namespace HTquanlyNCKH.Controllers
 
                         ViewBag.loi = e;
                     }
-                   
-                    
 
-                    return RedirectToAction("ScientistManage");                    
+
+                    return RedirectToAction("ScientistManage");
                     //return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
-                else      //POST != 0
+                else  
                 {
                     if (ModelState.IsValid)
                     {
@@ -591,27 +589,7 @@ namespace HTquanlyNCKH.Controllers
                         }
                     }
 
-                    if (scientistob.degreeID == null)
-                    {
-                        scientistob.degreeID = 9;
-                    }
-                    if (scientistob.fieldID == null)
-                    {
-                        scientistob.fieldID = 9;
-                    }
-                    if (scientistob.PlaceID == null)
-                    {
-                        scientistob.PlaceID = 67;
-                    }
-                    if (scientistob.unitID == null)
-                    {
-                        scientistob.unitID = 4;
-                    }
-                    if (scientistob.foreignID == null)
-                    {
-                        scientistob.foreignID = 13;
-                    }
-
+                    
 
                     if (collection.Get("ngay-sinh") != "")
                     {
@@ -625,11 +603,8 @@ namespace HTquanlyNCKH.Controllers
                     //Sửa Post
 
                     scientistob.sctSex = collection.Get("gioi-tinh");
-                    scientistob.PlaceID = int.Parse(collection.Get("noiSinh"));
-                    scientistob.degreeID = int.Parse(collection.Get("trinhDo"));
-                    scientistob.unitID = int.Parse(collection.Get("phongBan"));
-                    scientistob.fieldID = int.Parse(collection.Get("chuyenNganh"));
-                    scientistob.foreignID = int.Parse(collection.Get("chucVu"));
+
+
 
                     scientistob.sctModifierDate = DateTime.Now;
                     db.Entry(scientistob).State = EntityState.Modified;

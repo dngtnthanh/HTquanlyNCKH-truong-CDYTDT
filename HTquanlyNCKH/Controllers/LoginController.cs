@@ -20,20 +20,37 @@ namespace HTquanlyNCKH.Controllers
             {
                 string us = collection.Get("Username");
                 string p = Security.MD5(collection.Get("Password"));
-                Acount ac = db.Acounts.SingleOrDefault(a => a.Username == us && a.Password == p);
-                if (ac != null)
+                Acount acUser = db.Acounts.SingleOrDefault(a => a.Username.Contains(us));
+                Acount acPass = db.Acounts.SingleOrDefault(a => a.Password.Contains(p));
+                try
                 {
-                    Session["Username"] = us;
-                    Session["Permission"] = ac.Permission;
-                    return RedirectToAction("Index", "admin");
+                    if (acUser != null && acPass != null)
+                    {
+                        Session["Username"] = us;
+                        Session["Permission"] = acPass.Permission;
+                        return RedirectToAction("Index", "admin");
+                    }
+                    else
+                    {
+                        if (acUser == null)
+                        {
+                            ViewBag.error = "Tên đăng nhập hoặc mật khẩu sai";
+                        }
+                        else
+                        {
+                            if (acPass == null)
+                            {
+                                ViewBag.error = "Mật khẩu sai";
+                            }
+                        }
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    ViewBag.ThongBao = "Đăng nhập thất bại";
-                }
+                    ViewBag.error = e;
+                }                
                 return View();
-            }
-               
+            }               
         }
     }
 }

@@ -12,7 +12,7 @@
                 <b>Ảnh chân dung:</b>
             </td>
             <td style="text-align: left">              
-                    <img src="~/Uploads/image/avatar/@Model.sctImage" width="100" height="100" style="margin: 10px" />
+                    <img src="~/Uploads/image/avatar/@Model.sctImage" width="100" height="100" style="margin: 10px; border-radius: 7px" />
             </td>
         </tr>
         <tr>
@@ -104,7 +104,7 @@
                 <b>Quá trình làm việc:</b>
             </td>
             <td style="text-align: left">
-                @Model.sctWorkingProcess
+                @Html.Raw(Model.sctWorkingProcess) 
             </td>
         </tr>
         <tr>

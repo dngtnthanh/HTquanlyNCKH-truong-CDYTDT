@@ -19,6 +19,7 @@ namespace HTquanlyNCKH.Models
         public Nullable<int> scientistID { get; set; }
         public Nullable<int> nationID { get; set; }
         public string atlSummary { get; set; }
+        public string atlNation { get; set; }
         public Nullable<int> keyID { get; set; }
         public Nullable<int> magazineID { get; set; }
         public string Point { get; set; }

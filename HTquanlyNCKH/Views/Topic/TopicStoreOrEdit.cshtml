@@ -57,7 +57,7 @@
         <label id="nhaKhoaHocText">
             Nhà khoa học(*):
         </label>
-        <select id="nhaKhoaHoc" onchange="changeNull()" name="nhakhoahoc" data-placeholder="Người thực hiện" class="chosen-select">
+        <select id="nhaKhoaHoc" onchange="changeNull()" name="nhakhoahoc" data-placeholder="--Trống--" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -74,18 +74,18 @@
             }
         </select>
     </div>
-    <div class="form-group" style="clear: both;float: left; margin: 2px">
-        <label>Ngày bắt đầu</label>
+    <div class="form-group" style="clear: both; padding: 10px 20px;float: left; margin: 2px">
+        <label>Ngày bắt đầu: </label>
         <input type="date" name="ngay-bat-dau" value="@ViewBag.ngaybatdau" />
         @Html.ValidationMessageFor(model => model.tpcEndDate)
     </div>
-    <div class="form-group" style="float: left; margin: 2px">
-        <label>Ngày kết thúc</label>
+    <div class="form-group" style="float: left; padding: 10px 20px; margin: 2px">
+        <label>Ngày kết thúc: </label>
         <input type="date" name="ngay-ket-thuc" value="@ViewBag.ngayketthuc" />
         @Html.ValidationMessageFor(model => model.tpcEndDate)
     </div>
-    <div class="form-group" style="float: left; margin: 2px">
-        <label>Ngày nghiệm thu</label>
+    <div class="form-group" style="float: left; padding: 10px 20px; margin: 2px">
+        <label>Ngày nghiệm thu: </label>
         <input type="date" name="ngay-nghiem-thu" value="@ViewBag.ngaynghiemthu" />
         @Html.ValidationMessageFor(model => model.tpcDateOfAcceptance)
     </div>
@@ -102,7 +102,7 @@
         <label id="linhVucText">
             Lĩnh vực(*):
         </label>
-        <select id="linhVuc" onchange="changeNull()" name="linhVuc" data-placeholder="Lĩnh vực" class="chosen-select">
+        <select id="linhVuc" onchange="changeNull()" name="linhVuc" data-placeholder="--Trống--" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -124,7 +124,7 @@
         <label id="xepLoaiText">
             Xếp loại(*):
         </label>
-        <select id="xepLoai" onchange="changeNull()" name="xepLoai" data-placeholder="Xếp loại" class="chosen-select">
+        <select id="xepLoai" onchange="changeNull()" name="xepLoai" data-placeholder="--Trống--" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -155,7 +155,7 @@
         <label id="trangThaiText">
             Trạng thái(*):
         </label>
-        <select id="trangThai" onchange="changeNull()"  name="trangThai" data-placeholder="Trạng thái" class="chosen-select">
+        <select id="trangThai" onchange="changeNull()"  name="trangThai" data-placeholder="--Trống--" class="chosen-select">
             @{
                 using (DBModel db = new DBModel())
                 {
@@ -173,7 +173,7 @@
         </select>
     </div>
 
-    <div class="editor-field" style="float: left; margin: 2px">
+    <div class="editor-field" style="float: left; padding: 10px 15px; margin: 2px">
         <label>File đính kèm</label>
         @Html.TextBoxFor(model => model.tpcProofFile, new { type = "file" })
         @Html.ValidationMessageFor(model => model.tpcProofFile)
@@ -181,8 +181,8 @@
 
 
     <div class="form-group" style="clear: both; margin: 2px">
-        @Html.LabelFor(model => model.tpcSummary, "Tóm lượt đề tài", new { @class = "control-label" })
-        @Html.EditorFor(model => model.tpcSummary, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.LabelFor(model => model.tpcSummary, "Tóm lượt đề tài: ", new { @class = "control-label" })
+        @Html.TextAreaFor(model => model.tpcSummary, new { @cols = "100", @id = "editor1", @rows = "10", htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.tpcSummary)
     </div>
     <div class="form-group" style="padding-top: 20px">
@@ -221,7 +221,6 @@
                 if (trangThai.value == 0) { mes += "trạng thái." }
                 alert(mes)  //In ra thong bao nhap thieu
             } else {
-                alert(nhaKhoaHoc.value)
                 var submit = document.getElementById('submit');
                 submit.setAttribute("type", "submit");
                 submit.onclick();
@@ -252,5 +251,11 @@
             if (trangThai.value == 0) { trangThaiText.setAttribute("style", "color: red") }
             else { trangThaiText.setAttribute("style", "color: #000") }
         }
+
+        CKEDITOR.replace('editor1', {
+            height: 65,
+            removeButtons: 'PasteFromWord'
+        });
+
     </script>
 }  

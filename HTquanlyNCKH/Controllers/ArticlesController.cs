@@ -314,20 +314,10 @@ namespace HTquanlyNCKH.Controllers
                     List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
                     ViewBag.nat = nat;
 
-
                     List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();                   
                     
                     ViewBag.sct = sct;
                     
-
-                    
-
-
-
-
-
-
-
                     List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
                     ViewBag.key = key;
 
@@ -336,6 +326,7 @@ namespace HTquanlyNCKH.Controllers
 
                     List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
                     ViewBag.fieldList = fields;
+
                     return View(new Article());
                 }
                 else
@@ -354,31 +345,48 @@ namespace HTquanlyNCKH.Controllers
 
                     List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
                     ViewBag.fieldList = fields;
-                    return View(db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>());
-                    
+
+                    var nationName = db.Articles.Single(n => n.articlesID == id);
+                    ViewBag.nationName = nationName.atlNation;
+
+                    var art = db.Articles.SingleOrDefault(n => n.articlesID == id); //Lấy danh sách bài báo
+                    var sctItem = sct.Single(n => n.scientistID == art.scientistID);        //Lấy 1 Record tương ứng nhà khoa học
+                    ViewBag.tenNhaKhoaHoc = sctItem.sctFirstName + " " + sctItem.sctLastName + " - KH"+ sctItem.scientistID;
+
+                    return View(db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>());                    
                 }
             }
                 
         }
         [HttpPost]
-        public ActionResult ArticlesStoreOrEdit(Article articleob)
+        public ActionResult ArticlesStoreOrEdit(Article articleob, FormCollection collection)
         {
             using (DBModel db = new DBModel())
             {
                 if (articleob.articlesID == 0)
                 {
                     
-                    db.Articles.Add(articleob);
+                    articleob.scientistID = int.Parse(collection.Get("nhaKhoaHoc"));
                     //articleob.cfrCreateDate = DateTime.Now;
+                    articleob.atlNation = collection.Get("quocGia");
+
+                    db.Articles.Add(articleob);
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                    //return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
+                    return RedirectToAction("ArticlesManage");
                 }
                 else
                 {
                     //articleob.cfrModifierDate = DateTime.Now;
+                    articleob.atlNation = collection.Get("quocGia");
+                    articleob.scientistID = int.Parse(collection.Get("nhaKhoaHoc"));
+
+                    
+
                     db.Entry(articleob).State = EntityState.Modified;
                     db.SaveChanges();
-                    return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                    //return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+                    return RedirectToAction("ArticlesManage");
                 }
             }
         }

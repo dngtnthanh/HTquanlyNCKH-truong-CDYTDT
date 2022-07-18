@@ -25,7 +25,7 @@
                     <b>Người thực hiện:</b>
                 </td>
                 <td style="text-align: left">
-                    @Model.scientistName <a style="margin-left: 1em" class="btn btn-primary btn-sm" href="@Url.Action("ScientistInfor", "Home", new { id = Model.scientistID})"> Xem thông tin</a>
+                    @Model.scientistName <a style="margin-left: 1em" class="btn btn-primary btn-sm" onclick=PopupForm('@Url.Action("ScientistInfor", "Scientist", new { id = Model.scientistID})')> Xem thông tin</a>
                 </td>
 
                 <td>

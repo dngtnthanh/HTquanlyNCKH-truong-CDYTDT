@@ -5,7 +5,7 @@
       <PropertyRef Name="Username" />
     </Key>
     <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="ntext" />
+    <Property Name="Password" Type="text" />
     <Property Name="Fullname" Type="ntext" />
     <Property Name="Permission" Type="int" />
     <Property Name="Email" Type="ntext" />
@@ -21,6 +21,7 @@
     <Property Name="scientistID" Type="int" />
     <Property Name="nationID" Type="int" />
     <Property Name="atlSummary" Type="nvarchar" MaxLength="500" />
+    <Property Name="atlNation" Type="nvarchar" MaxLength="255" />
     <Property Name="keyID" Type="int" />
     <Property Name="magazineID" Type="int" />
     <Property Name="Point" Type="nvarchar" MaxLength="255" />

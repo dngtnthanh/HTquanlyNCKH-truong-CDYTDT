@@ -7,111 +7,242 @@
 @model HTquanlyNCKH.Models.Article
 @using HTquanlyNCKH.Models
 
-@using (Html.BeginForm("ArticlesStoreOrEdit", "Articles", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+@using (Html.BeginForm("ArticlesStoreOrEdit", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }@*, new { onsubmit = "return SubmitForm(this)" }*@))
 {
-    @Html.HiddenFor(model => model.articlesID)
-    @Html.HiddenFor(model => model.atlCreateDate)
-    @Html.HiddenFor(model => model.atlModifierDate)
+@Html.HiddenFor(model => model.articlesID)
+@Html.HiddenFor(model => model.atlCreateDate)
+@Html.HiddenFor(model => model.atlModifierDate)
 
-    @Html.HiddenFor(model => model.atlCreateUser)
-    @Html.HiddenFor(model => model.atlModifierUser)
-    @Html.HiddenFor(model => model.atlPublicationDate)
+@Html.HiddenFor(model => model.atlCreateUser)
+@Html.HiddenFor(model => model.atlModifierUser)
+@Html.HiddenFor(model => model.atlPublicationDate)
 
-    <div class="form-group" style="float: left ; margin: 10px">
-        @Html.LabelFor(model => model.atlName, "Tiêu đề", new { @class = "control-label" })
-        @Html.EditorFor(model => model.atlName, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.atlName)
-    </div>
+<div class="form-group" style="float: left ; margin: 10px">
+    @Html.LabelFor(model => model.atlName, "Tiêu đề(*): ", new { @class = "control-label", @id="tieuDeLabel" })
+    @Html.EditorFor(model => model.atlName, new { htmlAttributes = new { @class = "form-control", @id="tieuDe", @onchange="changeNull()" } })
+    @Html.ValidationMessageFor(model => model.atlName)
+</div>
 
 
-    <div class="form-group" style="float: left ; margin: 10px">
-        @Html.LabelFor(model => model.atlSummary, "Tóm lược", new { @class = "control-label" })
-        @Html.EditorFor(model => model.atlSummary, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.atlSummary)
-    </div>
-    <div class="form-group" style="float: left ; margin: 10px">
-        @Html.LabelFor(model => model.Point, "Điểm số", new { @class = "control-label" })
-        @Html.EditorFor(model => model.Point, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Point)
-    </div>
-    <div class="form-group" style="float: left ; margin: 10px">
-        @Html.LabelFor(model => model.atlLink, "Đường dẫn", new { @class = "control-label" })
-        @Html.EditorFor(model => model.atlLink, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.atlLink)
-    </div>
-    <div class="form-group" style="float: left ; margin: 10px">
-        @Html.LabelFor(model => model.atlPublication, "Nhà xuất bản", new { @class = "control-label" })
-        @Html.EditorFor(model => model.atlPublication, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.atlPublication)
-    </div>
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.atlPublicationDate, "Ngày xuất bản", new { @class = "control-label" })
-            @Html.EditorFor(model => model.atlPublicationDate, new { htmlAttributes = new { @class = "form-control"  } })
-            @Html.ValidationMessageFor(model => model.atlPublicationDate)
-        </div>*@
-    <div class="form-group" style="float: left ; margin: 10px">
-        @Html.LabelFor(model => model.atlNumber, "Số bài báo", new { @class = "control-label" })
-        @Html.EditorFor(model => model.atlNumber, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.atlNumber)
-    </div>
-    <div class="form-group" style="float: left ; margin: 10px">
-        @Html.LabelFor(model => model.atlPageToPage, "Từ trang đến trang", new { @class = "control-label" })
-        @Html.EditorFor(model => model.atlPageToPage, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.atlPageToPage)
-    </div>
+<div class="form-group" style="float: left ; margin: 10px">
+    @Html.LabelFor(model => model.atlSummary, "Tóm lược", new { @class = "control-label" })
+    @Html.EditorFor(model => model.atlSummary, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.atlSummary)
+</div>
+<div class="form-group" style="float: left ; margin: 10px">
+    @Html.LabelFor(model => model.Point, "Điểm số", new { @class = "control-label" })
+    @Html.EditorFor(model => model.Point, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Point)
+</div>
+<div class="form-group" style="float: left ; margin: 10px">
+    @Html.LabelFor(model => model.atlLink, "Đường dẫn", new { @class = "control-label" })
+    @Html.EditorFor(model => model.atlLink, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.atlLink)
+</div>
+<div class="form-group" style="float: left ; margin: 10px">
+    @Html.LabelFor(model => model.atlPublication, "Nhà xuất bản", new { @class = "control-label" })
+    @Html.EditorFor(model => model.atlPublication, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.atlPublication)
+</div>
+@*<div class="form-group">
+        @Html.LabelFor(model => model.atlPublicationDate, "Ngày xuất bản", new { @class = "control-label" })
+        @Html.EditorFor(model => model.atlPublicationDate, new { htmlAttributes = new { @class = "form-control"  } })
+        @Html.ValidationMessageFor(model => model.atlPublicationDate)
+    </div>*@
+<div class="form-group" style="float: left ; margin: 10px">
+    @Html.LabelFor(model => model.atlNumber, "Số bài báo", new { @class = "control-label" })
+    @Html.EditorFor(model => model.atlNumber, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.atlNumber)
+</div>
+<div class="form-group" style="float: left ; margin: 10px">
+    @Html.LabelFor(model => model.atlPageToPage, "Từ trang đến trang", new { @class = "control-label" })
+    @Html.EditorFor(model => model.atlPageToPage, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.atlPageToPage)
+</div>
 
-    <div class="dropdown" style="float: left ; margin: 10px">
+@*<div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Quốc gia</label>
             @Html.DropDownList("nationID", new SelectList(ViewBag.nat, "nationID", "natName"), "--Trống--", new { @class = "form-control" })
         </div>
+    </div>*@
+
+<div class="dropdown" style="float: left; min-width: 300px">
+    <div class="form-group">
+        <label>Quốc gia: </label>
+        <select id="quocGia" onchange="changeNull()" name="quocGia" data-placeholder="--Trống--" @*class="chosen-select"*@>
+            @*@{
+                    using (DBModel db = new DBModel())
+                    {
+                        var sct = db.Scientists.OrderBy(n => n.scientistID);
+
+                        <option value="@Model.scientistID" selected="selected">@ViewBag.tenNhaKhoaHoc</option>
+                        foreach (var item in sct)
+                        {
+                            var fullName = item.sctFirstName + " " + item.sctLastName + " - KH" + item.scientistID;
+                            <option value="@item.scientistID">@fullName</option>
+                        }
+                    }
+                }*@
+
+        </select>
     </div>
-    <div class="dropdown" style="float: left ; margin: 10px">
+</div>
+
+@*<div class="dropdown" style="float: left ; margin: 10px">
         <div class="form-group">
             <label>Nhà khoa học</label>
-            @Html.DropDownList("scientistID", new SelectList(ViewBag.sct, "scientistID"), "--Trống--", new { @class = "form-control" })
+            @Html.DropDownList("scientistID", new SelectList(ViewBag.sct, "scientistID"), "--Trống--", new { @class = "chosen-select" })
         </div>
-    </div>
+    </div>*@
 
-    @*<select name="nhakhoahoc" data-placeholder="Nhà khoa học thực hiện" class="chosen-select">
-        @{
-            using (DBModel db = new DBModel())
-            {
-                var sct = db.Scientists.OrderBy(n => n.scientistID);
 
-                <option value="@Model.scientistID" selected="selected">@ViewBag.tenNhaKhoaHoc</option>
-                foreach (var item in sct)
+<div class="dropdown" style="float: left; min-width: 300px">
+    <div class="form-group">
+        <label id="nhaKhoaHocLabel">Nhà khoa học(*): </label>
+        <select name="nhaKhoaHoc" id="nhaKhoaHoc" onchange="changeNull()" data-placeholder="--Trống--" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
                 {
-                    var fullName = item.sctFirstName + item.sctLastName;
-                    <option value="@item.scientistID">@fullName</option>
+                    var sct = db.Scientists.OrderBy(n => n.scientistID);
+
+                    <option value="@Model.scientistID" selected="selected">@ViewBag.tenNhaKhoaHoc</option>
+                    foreach (var item in sct)
+                    {
+                        var fullName = item.sctFirstName + " " + item.sctLastName + " - KH" + item.scientistID;
+                        <option value="@item.scientistID">@fullName</option>
+                    }
                 }
             }
+        </select>
+    </div>
+</div>
+
+<div class="dropdown" style="float: left ; min-width: 300px">
+    <div class="form-group">
+        <label id="tuKhoaLabel">Từ khoá(*): </label>
+        @Html.DropDownList("keyID", new SelectList(ViewBag.key, "keyID", "keyName"), "--Trống--", new { @class = "chosen-select", @id="tuKhoa", @onchange= "changeNull()" })
+    </div>
+</div>
+<div class="dropdown" style="float: left; min-width: 300px">
+    <div class="form-group">
+        <label id="loaiBaiVietLabel">Loại bài viết(*): </label>
+        @Html.DropDownList("typeID", new SelectList(ViewBag.types, "typeID", "typName"), "--Trống--", new { @class = "chosen-select", @id="loaiBaiViet", @onchange= "changeNull()" })
+    </div>
+</div>
+<div class="dropdown" style="float: left ; min-width: 300px">
+    <div class="form-group">
+        <label id="linhVucLabel">Lĩnh vực(*): </label>
+        @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName"), "--Trống--", new { @class = "chosen-select", @id="linhVuc", @onchange="changeNull()" })
+    </div>
+</div>
+
+
+<div class="form-group" style="float: left ; clear: both">
+
+    <input id="submit" onclick="checkNull()" value="Lưu lại" class="btn btn-success " />
+    <input type="reset" value="Làm mới" class="btn btn-warning" />
+</div>
+}
+
+
+<script>
+    function searchChosen() {
+        $(".chosen-select").chosen({
+            allow_single_deselect: true,
+            width: '50%',
+            no_results_text: "Không tìm thấy kết quả :"
+        });
+    }
+    searchChosen();
+
+    var countryAPI = "https://restcountries.com/v3.1/all"
+    function start() {
+        getCountry(renderCountry)
+    }
+    start()
+    function getCountry(callback) {
+        fetch(countryAPI)
+            .then((response) => {
+                return response.json()
+            })
+            .then(callback)
+    }
+    function renderCountry(country) {
+        var listCountryBlock = document.getElementById('quocGia')
+
+        var htmls = country.map(function (item, index) {
+            return `
+            <option value="${item.name.common}">${item.name.common}</option>
+        `
+        })
+        htmls.push(' <option value="@ViewBag.nationName" selected="selected">  @ViewBag.nationName  </option>');
+        listCountryBlock.innerHTML = htmls;
+        listCountryBlock.setAttribute("class", "chosen-select");
+        searchChosen();
+    }
+
+    var tieuDe = document.getElementById('tieuDe')
+    var nhaKhoaHoc = document.getElementById('nhaKhoaHoc');     //Nhà khoa học
+    var tuKhoa = document.getElementById('tuKhoa');             //
+    var loaiBaiViet = document.getElementById('loaiBaiViet');
+    var linhVuc = document.getElementById('linhVuc')
+
+    var tieuDeLabel = document.getElementById('tieuDeLabel');
+    var nhaKhoaHocLabel = document.getElementById('nhaKhoaHocLabel');
+    var tuKhoaLabel = document.getElementById('tuKhoaLabel');
+    var loaiBaiVietLabel = document.getElementById('loaiBaiVietLabel');
+    var linhVucLabel = document.getElementById('linhVucLabel')
+
+    function checkNull() {
+        var mes = "";
+        if (tieuDe.value == ''
+            || nhaKhoaHoc.value == ''
+            || tuKhoa.value == ''
+            || loaiBaiViet.value == ''
+            || linhVuc.value == ''
+        ) {
+
+            mes = 'Không được bỏ trống: ';
+            {
+                if (tieuDe.value == '') {mes += ' Tiêu đề, '}
+
+                if (nhaKhoaHoc.value == '') { mes += 'nhà khoa học, ' }
+
+                if (tuKhoa.value == '') { mes += 'từ khoá, ' }
+
+                if (loaiBaiViet.value == '') { mes += 'loại bài viết, ' }
+
+                if (linhVuc.value == '') { mes += 'lĩnh vực.' }
+                alert(mes)
+            }
+        } else {
+            var submit = document.getElementById('submit');
+
+            submit.setAttribute("type", "submit")
+            submit.onclick();
         }
-    </select>*@
+    }
 
-    <div class="dropdown" style="float: left ; margin: 10px">
-        <div class="form-group">
-            <label>Từ khoá</label>
-            @Html.DropDownList("keyID", new SelectList(ViewBag.key, "keyID", "keyName"), "--Trống--", new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="dropdown" style="float: left ; margin: 10px">
-        <div class="form-group">
-            <label>Loại bài viết</label>
-            @Html.DropDownList("typeID", new SelectList(ViewBag.types, "typeID", "typName"), "--Trống--", new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="dropdown" style="float: left ; margin: 10px">
-        <div class="form-group">
-            <label>Lĩnh vực</label>
-            @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName"), "--Trống--", new { @class = "form-control" })
-        </div>
-    </div>
+    function changeNull() {
+
+        if (tieuDe.value == '') { tieuDeLabel.setAttribute("style", "color: red") }
+        else { tieuDeLabel.setAttribute("style", "color: #000") }
+
+        if (nhaKhoaHoc.value == '') { nhaKhoaHocLabel.setAttribute("style", "color: red") }
+        else { nhaKhoaHocLabel.setAttribute("style", "color: #000") }
+
+        if (tuKhoa.value == '') { tuKhoaLabel.setAttribute("style", "color: red") }
+        else { tuKhoaLabel.setAttribute("style", "color: #000") }
+
+        if (loaiBaiViet.value == '') { loaiBaiVietLabel.setAttribute("style", "color: red") }
+        else { loaiBaiVietLabel.setAttribute("style", "color: #000") }
+
+        if (linhVuc.value == '') { linhVucLabel.setAttribute("style", "color: red") }
+        else { linhVucLabel.setAttribute("style", "color: #000") }
+    }
 
 
-    <div class="form-group" style="float: left ; clear: both; margin: 10px">
 
-        <input type="submit" value="Lưu lại" class="btn btn-success " />
-        <input type="reset" value="Làm mới" class="btn btn-warning" />
-    </div>
-}  
+
+</script>

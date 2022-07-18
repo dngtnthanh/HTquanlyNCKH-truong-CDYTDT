@@ -100,8 +100,8 @@
                         autoOpen : true,
                         resizable : false,
                         title : 'Điền Thông Tin Về Nhà Khoa Học',
-                        height : 510,
-                        width : 1100,
+                        height : 517,
+                        width : 1110,
                         close: function () {
 
                             Popup.dialog('destroy').remove();
@@ -112,6 +112,8 @@
                 });
         }
 
+
+
         function SubmitForm(form) {
 
             $.validator.unobtrusive.parse(form);
@@ -120,12 +122,13 @@
             $.ajax({
                 type: "POST",
                 url: form.action,
+
                 data: $(form).serialize(),
                 success: function (data) {
 
                     if (data.success) {
 
-                        Popup.dialog('close');
+                        Popup.dialog('close');  
                         dataTable.ajax.reload();
 
                         $.notify(data.message, {

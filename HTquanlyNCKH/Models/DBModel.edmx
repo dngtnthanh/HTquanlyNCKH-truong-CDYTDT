@@ -10,7 +10,7 @@
             <PropertyRef Name="Username" />
           </Key>
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="ntext" />
+          <Property Name="Password" Type="text" />
           <Property Name="Fullname" Type="ntext" />
           <Property Name="Permission" Type="int" />
           <Property Name="Email" Type="ntext" />
@@ -26,6 +26,7 @@
           <Property Name="scientistID" Type="int" />
           <Property Name="nationID" Type="int" />
           <Property Name="atlSummary" Type="nvarchar" MaxLength="500" />
+          <Property Name="atlNation" Type="nvarchar" MaxLength="255" />
           <Property Name="keyID" Type="int" />
           <Property Name="magazineID" Type="int" />
           <Property Name="Point" Type="nvarchar" MaxLength="255" />
@@ -483,36 +484,11 @@
           <EntitySet Name="Sliders" EntityType="Self.Slider" />
           <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="Units" EntityType="Self.Unit" />
-          <EntitySet Name="Articles" EntityType="HTquanlyNCKHModel.Article" />
           <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
-          <EntitySet Name="Acounts" EntityType="HTquanlyNCKHModel.Acount" />
           <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
+          <EntitySet Name="Articles" EntityType="HTquanlyNCKHModel.Article" />
+          <EntitySet Name="Acounts" EntityType="HTquanlyNCKHModel.Acount" />
         </EntityContainer>
-        <EntityType Name="Article">
-          <Key>
-            <PropertyRef Name="articlesID" />
-          </Key>
-          <Property Name="articlesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="atlName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="scientistID" Type="Int32" />
-          <Property Name="nationID" Type="Int32" />
-          <Property Name="atlSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="keyID" Type="Int32" />
-          <Property Name="magazineID" Type="Int32" />
-          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="statusID" Type="Int32" />
-          <Property Name="atlLink" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="typeID" Type="Int32" />
-          <Property Name="atlPublication" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="fieldID" Type="Int32" />
-          <Property Name="atlNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="atlPageToPage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="atlPublicationDate" Type="DateTime" Precision="0" />
-          <Property Name="atlCreateDate" Type="DateTime" Precision="3" />
-          <Property Name="atlModifierDate" Type="DateTime" Precision="3" />
-          <Property Name="atlCreateUser" Type="Int32" />
-          <Property Name="atlModifierUser" Type="Int32" />
-        </EntityType>
         <EntityType Name="Topic">
           <Key>
             <PropertyRef Name="topicID" />
@@ -542,18 +518,6 @@
           <Property Name="tpcAcceptance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="tpcFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Acount">
-          <Key>
-            <PropertyRef Name="Username" />
-          </Key>
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Permission" Type="Int32" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Lock" Type="Int32" />
-          <Property Name="Active" Type="Int32" />
-        </EntityType>
         <EntityType Name="Scientist">
           <Key>
             <PropertyRef Name="scientistID" />
@@ -578,6 +542,44 @@
           <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
           <Property Name="sctCreateUser" Type="Int32" />
           <Property Name="sctModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="articlesID" />
+          </Key>
+          <Property Name="articlesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="atlName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="scientistID" Type="Int32" />
+          <Property Name="nationID" Type="Int32" />
+          <Property Name="atlSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="atlNation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="keyID" Type="Int32" />
+          <Property Name="magazineID" Type="Int32" />
+          <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="statusID" Type="Int32" />
+          <Property Name="atlLink" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="typeID" Type="Int32" />
+          <Property Name="atlPublication" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fieldID" Type="Int32" />
+          <Property Name="atlNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="atlPageToPage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="atlPublicationDate" Type="DateTime" Precision="0" />
+          <Property Name="atlCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="atlModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="atlCreateUser" Type="Int32" />
+          <Property Name="atlModifierUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Acount">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Permission" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lock" Type="Int32" />
+          <Property Name="Active" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -773,32 +775,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Articles">
-            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Article">
-              <MappingFragment StoreEntitySet="Articles">
-                <ScalarProperty Name="atlModifierUser" ColumnName="atlModifierUser" />
-                <ScalarProperty Name="atlCreateUser" ColumnName="atlCreateUser" />
-                <ScalarProperty Name="atlModifierDate" ColumnName="atlModifierDate" />
-                <ScalarProperty Name="atlCreateDate" ColumnName="atlCreateDate" />
-                <ScalarProperty Name="atlPublicationDate" ColumnName="atlPublicationDate" />
-                <ScalarProperty Name="atlPageToPage" ColumnName="atlPageToPage" />
-                <ScalarProperty Name="atlNumber" ColumnName="atlNumber" />
-                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
-                <ScalarProperty Name="atlPublication" ColumnName="atlPublication" />
-                <ScalarProperty Name="typeID" ColumnName="typeID" />
-                <ScalarProperty Name="atlLink" ColumnName="atlLink" />
-                <ScalarProperty Name="statusID" ColumnName="statusID" />
-                <ScalarProperty Name="Point" ColumnName="Point" />
-                <ScalarProperty Name="magazineID" ColumnName="magazineID" />
-                <ScalarProperty Name="keyID" ColumnName="keyID" />
-                <ScalarProperty Name="atlSummary" ColumnName="atlSummary" />
-                <ScalarProperty Name="nationID" ColumnName="nationID" />
-                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
-                <ScalarProperty Name="atlName" ColumnName="atlName" />
-                <ScalarProperty Name="articlesID" ColumnName="articlesID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Topics">
             <EntityTypeMapping TypeName="HTquanlyNCKHModel.Topic">
               <MappingFragment StoreEntitySet="Topic">
@@ -829,19 +805,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Acounts">
-            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Acount">
-              <MappingFragment StoreEntitySet="Acount">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Lock" ColumnName="Lock" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Permission" ColumnName="Permission" />
-                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Scientists">
             <EntityTypeMapping TypeName="HTquanlyNCKHModel.Scientist">
               <MappingFragment StoreEntitySet="Scientist">
@@ -865,6 +828,46 @@
                 <ScalarProperty Name="sctLastName" ColumnName="sctLastName" />
                 <ScalarProperty Name="sctFirstName" ColumnName="sctFirstName" />
                 <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="atlModifierUser" ColumnName="atlModifierUser" />
+                <ScalarProperty Name="atlCreateUser" ColumnName="atlCreateUser" />
+                <ScalarProperty Name="atlModifierDate" ColumnName="atlModifierDate" />
+                <ScalarProperty Name="atlCreateDate" ColumnName="atlCreateDate" />
+                <ScalarProperty Name="atlPublicationDate" ColumnName="atlPublicationDate" />
+                <ScalarProperty Name="atlPageToPage" ColumnName="atlPageToPage" />
+                <ScalarProperty Name="atlNumber" ColumnName="atlNumber" />
+                <ScalarProperty Name="fieldID" ColumnName="fieldID" />
+                <ScalarProperty Name="atlPublication" ColumnName="atlPublication" />
+                <ScalarProperty Name="typeID" ColumnName="typeID" />
+                <ScalarProperty Name="atlLink" ColumnName="atlLink" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="magazineID" ColumnName="magazineID" />
+                <ScalarProperty Name="keyID" ColumnName="keyID" />
+                <ScalarProperty Name="atlNation" ColumnName="atlNation" />
+                <ScalarProperty Name="atlSummary" ColumnName="atlSummary" />
+                <ScalarProperty Name="nationID" ColumnName="nationID" />
+                <ScalarProperty Name="scientistID" ColumnName="scientistID" />
+                <ScalarProperty Name="atlName" ColumnName="atlName" />
+                <ScalarProperty Name="articlesID" ColumnName="articlesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Acounts">
+            <EntityTypeMapping TypeName="HTquanlyNCKHModel.Acount">
+              <MappingFragment StoreEntitySet="Acount">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

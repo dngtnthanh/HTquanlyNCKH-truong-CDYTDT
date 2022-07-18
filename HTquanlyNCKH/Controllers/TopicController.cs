@@ -395,6 +395,7 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult TopicStoreOrEdit(Topic topicob, FormCollection collection)
         {
