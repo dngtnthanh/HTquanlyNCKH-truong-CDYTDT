@@ -11,7 +11,6 @@ namespace HTquanlyNCKH.Models
 {
     using System;
     using System.Collections.Generic;
-    
     public partial class Scientist
     {
         public int scientistID { get; set; }
@@ -34,5 +33,7 @@ namespace HTquanlyNCKH.Models
         public Nullable<System.DateTime> sctModifierDate { get; set; }
         public Nullable<int> sctCreateUser { get; set; }
         public Nullable<int> sctModifierUser { get; set; }
+
+
     }
 }

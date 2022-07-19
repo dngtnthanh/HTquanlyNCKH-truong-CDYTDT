@@ -11,7 +11,8 @@ namespace HTquanlyNCKH.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Topic
     {
         public int topicID { get; set; }
@@ -38,5 +39,12 @@ namespace HTquanlyNCKH.Models
         public string tpcImage { get; set; }
         public string tpcAcceptance { get; set; }
         public string tpcFile { get; set; }
+
+        public string scientistIDs { get; set; }
+        [NotMapped]
+        public IEnumerable<Scientist> ScientistsCollection { get; set; }
+
+        [NotMapped]
+        public string[] ScientistIDArray { get; set; }
     }
 }

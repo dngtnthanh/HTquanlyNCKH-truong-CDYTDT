@@ -19,10 +19,10 @@
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Slider" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Status" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Unit" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HTquanlyNCKHModel.Topic" Width="1.5" PointX="6.75" PointY="8.75" />
-        <EntityTypeShape EntityType="HTquanlyNCKHModel.Scientist" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Article" Width="1.5" PointX="11.375" PointY="6.75" />
         <EntityTypeShape EntityType="HTquanlyNCKHModel.Acount" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="HTquanlyNCKHModel.Scientist" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HTquanlyNCKHModel.Topic" Width="1.5" PointX="3.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

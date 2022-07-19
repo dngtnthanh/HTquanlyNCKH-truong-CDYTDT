@@ -4,8 +4,8 @@
     <Key>
       <PropertyRef Name="Username" />
     </Key>
-    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="text" />
+    <Property Name="Username" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="500" />
     <Property Name="Fullname" Type="ntext" />
     <Property Name="Permission" Type="int" />
     <Property Name="Email" Type="ntext" />
@@ -253,6 +253,7 @@
     <Property Name="tpcImage" Type="text" />
     <Property Name="tpcAcceptance" Type="ntext" />
     <Property Name="tpcFile" Type="ntext" />
+    <Property Name="scientistIDs" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Unit">
     <Key>
