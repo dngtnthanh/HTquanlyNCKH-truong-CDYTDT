@@ -42,7 +42,7 @@ namespace HTquanlyNCKH.Models
 
         public string scientistIDs { get; set; }
         [NotMapped]
-        public IEnumerable<Scientist> ScientistsCollection { get; set; }
+        public IEnumerable<ScientistFull> ScientistsCollection { get; set; }
 
         [NotMapped]
         public string[] ScientistIDArray { get; set; }

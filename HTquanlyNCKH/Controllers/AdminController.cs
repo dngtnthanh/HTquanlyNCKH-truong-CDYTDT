@@ -14,7 +14,7 @@ namespace HTquanlyNCKH.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            if (Session["Permission"].ToString() == "1")//Kiểm tra nếu chưa đăng nhập, thì yêu cầu đăng nhập
+            if (Session["Permission"].ToString() != "1")//Kiểm tra nếu chưa đăng nhập, thì yêu cầu đăng nhập
             {
                 return RedirectToAction("index", "Login");
             }
@@ -41,17 +41,14 @@ namespace HTquanlyNCKH.Controllers
         {
             using (DBModel db = new DBModel())
             {
-
                 List<Slider> sliderList = db.Sliders.ToList<Slider>();
                 return Json(new { data = sliderList },
                 JsonRequestBehavior.AllowGet);
             }
         }
-
         [HttpGet]
         public ActionResult SliderStoreOrEdit(int id = 0)   //Hiện thông tin thêm mới hoặc sửa chữa ảnh bìa
         {
-
             if (id == 0)
             {
                 return View(new Slider());
@@ -82,7 +79,7 @@ namespace HTquanlyNCKH.Controllers
                         {
                             var fileName = Path.GetFileName(file.FileName);
                             sliderob.sldImage = Path.Combine(
-                                Server.MapPath("~/App_Data/Uploads/image/slider"), fileName);                            
+                                Server.MapPath("~/Uploads/image/slider"), fileName);                            
                             file.SaveAs(sliderob.sldImage);
                             sliderob.sldImage = fileName;
                         }
@@ -91,10 +88,8 @@ namespace HTquanlyNCKH.Controllers
                         return View();
                     }
                 }
-
                 return View(sliderob);
-            }
-                
+            }                
         }
         [HttpPost]
         public ActionResult SliderStoreOrEdit(Slider sliderob) //Thêm mới hoặc sửa chữa ảnh bìa
@@ -146,8 +141,7 @@ namespace HTquanlyNCKH.Controllers
                     db.SaveChanges();
                     return RedirectToAction("SliderManage");
                     //return Json(new { success = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
-                }
-                
+                }                
             }
         }
         [HttpPost]
@@ -161,17 +155,12 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { success = true, message = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
-
         public ActionResult SliderManage()  // Index của quản lý ảnh bìa
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
-
-
-        //Quản lý giới thiệu Intro
-        
+        //Quản lý giới thiệu Intro        
         public ActionResult IntroGetData()      //Lấy Json danh sách thông tin trang chủ
         {
             using (DBModel db = new DBModel())
@@ -180,8 +169,7 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { data = introList },
                     JsonRequestBehavior.AllowGet);
             }
-        }
-        
+        }        
         [HttpGet]
         public ActionResult IntroStoreOrEdit(int id = 0)        //Hiện thông tin thêm mới hoặc sửa chữa thông tin trang chủ
         {
@@ -236,17 +224,14 @@ namespace HTquanlyNCKH.Controllers
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
         public ActionResult IntroSupport()      //Hiện popup hỗ trợ hướng dẫn thêm mới giới thiệu trên trang chủ
         {
             return View();
         }
-
         public ActionResult GetIconSupport()    //Hiện Popup hưỡng dẫn lấy icon
         {
             return View();
         }
-
         public ActionResult SliderSupport()     //Hiện Popup hướng dẫn quản lý ảnh bìa
         {
             return View();

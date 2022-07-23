@@ -53,11 +53,8 @@ namespace HTquanlyNCKH.Controllers
                 int pagesize = 4;                   //Hiển thị 4 đơn vị trên mỗi trang  (phân trang)
                 int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên (phân trang)
                 return View(TopicList.OrderByDescending(n => n.topicID).ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
-            }
-                 
-        }
-
-       
+            }                 
+        }       
 
         public ActionResult Topic(int? pageID)  // Trang danh sách đề tài (truyền vào mã số phân trang)
         {
@@ -95,11 +92,9 @@ namespace HTquanlyNCKH.Controllers
                                 tpcDeleteData = tpc.tpcDeleteData,                      //Thời gian xoá
                                 tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
                                 tpcImage = tpc.tpcImage,                                //Ảnh bìa
-                            };
-                
+                            };                
                 int pagesize = 4;                   //Hiển thị 4 đơn vị trên mỗi trang  (phân trang)
-                int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên (phân trang)
-                
+                int pageindex = pageID ?? 1;        //Mặc định xem trang 1 đầu tiên (phân trang)                
                 return View(TopicList.OrderByDescending(n => n.topicID).ToList().ToPagedList(pageindex, pagesize));   //Trả về danh sách đề tài có có (phân trang)
             }
         }        
@@ -163,6 +158,8 @@ namespace HTquanlyNCKH.Controllers
                                     statusName = sts.stsName,                               //Trạng thái
                                     fieldName = fie.fieName,                                //Lĩnh vực
 
+                                    //Phía trên là nối bảng
+
                                     tpcYear = tpc.tpcYear,                                  //Năm thực hiện
                                     tpcName = tpc.tpcName,                                  //Tên đề tài
                                     tpcSummary = tpc.tpcSummary,                            //Tóm tắt sơ lượt
@@ -180,10 +177,7 @@ namespace HTquanlyNCKH.Controllers
                                     tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
                                     tpcImage = tpc.tpcImage,                                //Ảnh bìa
                                 };
-
-
-                var topicob = db.Topics.SingleOrDefault(n => n.topicID == id); //lấy thông tin đề tài nghiên cứu
-                
+                var topicob = db.Topics.SingleOrDefault(n => n.topicID == id); //lấy thông tin đề tài nghiên cứu               
                 if (topicob.tpcStartDate != null)
                 {
                     ViewBag.ngaybatdau = Convert.ToDateTime(topicob.tpcStartDate).ToString("yyyy-MM-dd");
@@ -192,7 +186,6 @@ namespace HTquanlyNCKH.Controllers
                 {
                     ViewBag.ngaybatdau = null;
                 }
-
                 if (topicob.tpcDateOfAcceptance != null)
                 {
                     ViewBag.ngaynghiemthu = Convert.ToDateTime(topicob.tpcDateOfAcceptance).ToString("yyyy-MM-dd");
@@ -201,7 +194,6 @@ namespace HTquanlyNCKH.Controllers
                 {
                     ViewBag.ngaynghiemthu = null;
                 }
-
                 if (topicob.tpcEndDate != null)
                 {
                     ViewBag.ngayketthuc = Convert.ToDateTime(topicob.tpcEndDate).ToString("yyyy-MM-dd");
@@ -210,11 +202,9 @@ namespace HTquanlyNCKH.Controllers
                 {
                     ViewBag.ngayketthuc = null;
                 }
-
                 return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
             }
         }
-
         public ActionResult ScientistInfor(int? id)     //Hiện Popup thông tin nhà khoa học (truyền vào mã số scientistID nhà khoa học
         {
             using (DBModel db = new DBModel())
@@ -282,7 +272,7 @@ namespace HTquanlyNCKH.Controllers
             {
                 var ArticlesList = from arl in db.Articles
                                    join sct in db.Scientists on arl.scientistID equals sct.scientistID //Noi bang nha khoa hoc
-                                   join nat in db.Nations on arl.nationID equals nat.nationID           //Noi bang quoc gia
+                                   //join nat in db.Nations on arl.nationID equals nat.nationID           //Noi bang quoc gia      Đã dùng API, nên chưa cần xài bảng nation
                                    join key in db.KeyWords on arl.keyID equals key.keyID                //noi bang tu khoa
                                    join tpe in db.ArtTypes on arl.typeID equals tpe.typeID              //noi bang loai bai viet
                                    join fie in db.Fields on arl.fieldID equals fie.fieldID              //noi bang linh vuc nghien cuu
@@ -292,10 +282,10 @@ namespace HTquanlyNCKH.Controllers
                                        scientistID = sct.scientistID,
                                        atlName = arl.atlName,
                                        scientistName = sct.sctFirstName + " " + sct.sctLastName,
-                                       nationName = nat.natName,
                                        atlSummary = arl.atlSummary,
                                        keyName = key.keyName,
 
+                                       nationName = arl.atlNation,
                                        typeName = tpe.typName,
                                        fieldName = fie.fieName,
 
@@ -324,7 +314,6 @@ namespace HTquanlyNCKH.Controllers
                     JsonRequestBehavior.AllowGet);
             }
         }
-
         public ActionResult Articles()
         {
             return View();

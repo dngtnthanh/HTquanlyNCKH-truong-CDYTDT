@@ -1,0 +1,139 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.ScientistFull
+<table style="text-align: right" class="table table-striped">
+    <tbody>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td style="vertical-align:middle">
+                <b>Ảnh chân dung:</b>
+            </td>
+            <td style="text-align: left">              
+                    <img src="~/Uploads/image/avatar/@Model.sctImage" width="100" height="100" style="margin: 10px; border-radius: 7px" />
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Tên nhà khoa học:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctFirstName @Model.sctLastName
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Giới tính:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctSex
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Ngày sinh:</b>
+            </td>
+            <td style="text-align: left">
+                @ViewBag.ngaysinh
+            </td>
+        </tr>
+
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Email: </b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctEmail
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Số điện thoại: </b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctPhone
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Nơi sinh:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.PlaceName
+            </td>
+        </tr>
+
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Trình độ:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.degreeName
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Phòng ban:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.unitName
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Chuyên ngành:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.fieldName
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Quá trình làm việc:</b>
+            </td>
+            <td style="text-align: left">
+                @Html.Raw(Model.sctWorkingProcess) 
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Kết quả thực hiện:</b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctResult
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Chức vụ: </b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctForeignName
+            </td>
+        </tr>
+        <tr>
+            <td></td> <!--Số thứ tự tự tăng-->
+            <td>
+                <b>Địa chỉ thường trú: </b>
+            </td>
+            <td style="text-align: left">
+                @Model.sctAddress
+            </td>
+        </tr>
+    </tbody>
+</table>
+

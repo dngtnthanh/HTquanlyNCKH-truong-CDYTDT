@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Nhà khoa học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Slider{
+    <img src="~/Content/dist/img/20namDthu.jpg" width="100%" />
+}
+@using HTquanlyNCKH.Models;
+@model PagedList.IPagedList<HTquanlyNCKH.Models.ScientistFull>
+@using PagedList.Mvc;
+<div class="container-xxl py-5">
+    <div class="container">
+
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3" style="margin-bottom: 60px">Trường Cao Đẳng Y Tế Đồng Tháp</h6>
+
+        </div>
+        @using (Html.BeginForm("ScientistSearch", "Search"))
+        {
+            <div class="position-relative mx-auto " style="max-width: 600px; margin-bottom: 20px">
+                <input name="Key" class="form-control border-1 w-100 py-3 ps-4 pe-5" placeholder="Nhập tên nhà khoa học">
+                <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Tìm kiếm</button>
+            </div>
+            <div class="position-relative mx-auto " style="max-width: 600px; margin-bottom: 20px">
+                <p>Tìm kiếm được <b>@ViewBag.slkq</b> kết quả</p>
+            </div>
+
+        }
+
+        <div class="row g-4 justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden">
+                            <img width="336" height="336" class="img-fluid" src="~/Content/dist/img/AnhDaiDien/@item.sctImage" alt="">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a class="btn btn-sm btn-primary" href="@Url.Action("ScientistInfor", "Home", new { id = item.scientistID})"><i class="fas fa-info"></i> Thông tin</a>
+
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">@item.sctFirstName @item.sctLastName</h5>
+                            <small>Trình độ: @item.degreeName </small>
+                        </div>
+                    </div>
+                </div>
+            }
+            <nav id="phanTrang" style="float: left">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("ScientistSearch", "Search", new { pageID = page }))
+            </nav>
+
+
+
+        </div>
+    </div>
+</div>

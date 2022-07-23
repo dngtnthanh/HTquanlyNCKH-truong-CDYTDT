@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HTquanlyNCKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ArtType">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="typDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="typCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="typModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="typCreateUser" Type="Int32" />
+    <Property Name="typModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Classification">
+    <Key>
+      <PropertyRef Name="classifiID" />
+    </Key>
+    <Property Name="classifiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clsName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="clsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="clsCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="clsModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="clsCreateUser" Type="Int32" />
+    <Property Name="clsModifierUser" Type="Int32" />
+    <Property Name="clsOrder" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Conference">
+    <Key>
+      <PropertyRef Name="conferenceID" />
+    </Key>
+    <Property Name="conferenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cfrName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cfrDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="cfrCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="cfrModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="cfrCreateUser" Type="Int32" />
+    <Property Name="cfrModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Council">
+    <Key>
+      <PropertyRef Name="councilID" />
+    </Key>
+    <Property Name="councilID" Type="Int32" Nullable="false" />
+    <Property Name="cniName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cniChairman" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cniSecretary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cniReviewer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="cniComment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Degree">
+    <Key>
+      <PropertyRef Name="degreeID" />
+    </Key>
+    <Property Name="degreeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="degName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="degDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="degCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="degModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="degCreateUser" Type="Int32" />
+    <Property Name="degModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Field">
+    <Key>
+      <PropertyRef Name="fieldID" />
+    </Key>
+    <Property Name="fieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fieName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fieDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="fieCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="fieModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="fieCreateUser" Type="Int32" />
+    <Property Name="fieModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Foreign">
+    <Key>
+      <PropertyRef Name="foreignID" />
+    </Key>
+    <Property Name="foreignID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fgnName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fgnDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="fgnCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="fgnModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="fgnCreateUser" Type="Int32" />
+    <Property Name="fgnModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Intro">
+    <Key>
+      <PropertyRef Name="introID" />
+    </Key>
+    <Property Name="introID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="itdName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="itdSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="itdIcon" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="itdCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="itdModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="itdCreateUser" Type="Int32" />
+    <Property Name="itdModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="KeyWord">
+    <Key>
+      <PropertyRef Name="keyID" />
+    </Key>
+    <Property Name="keyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="keyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="keyDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="keyCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="keyModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="keyCreateUser" Type="Int32" />
+    <Property Name="keyModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Nation">
+    <Key>
+      <PropertyRef Name="nationID" />
+    </Key>
+    <Property Name="nationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="natName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="natTwoCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="natThreeCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="natDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="natCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="natModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="natCreateUser" Type="Int32" />
+    <Property Name="natModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Place">
+    <Key>
+      <PropertyRef Name="placeID" />
+    </Key>
+    <Property Name="placeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="plaName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="plaDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="plaCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="plaModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="plaCreateUser" Type="Int32" />
+    <Property Name="plaModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Slider">
+    <Key>
+      <PropertyRef Name="sliderID" />
+    </Key>
+    <Property Name="sliderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sldH5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sldH1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sldContent" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sldImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="sldDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="sldCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="sldModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="sldCreateUser" Type="Int32" />
+    <Property Name="ModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="statusID" />
+    </Key>
+    <Property Name="statusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stsName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="stsDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="stsCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="stsModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="stsCreateUser" Type="Int32" />
+    <Property Name="stsModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="unitID" />
+    </Key>
+    <Property Name="unitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="untName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="untDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="untCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="untModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="untCreateUser" Type="Int32" />
+    <Property Name="untModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ArtTypes" EntityType="Self.ArtType" />
+    <EntitySet Name="Classifications" EntityType="Self.Classification" />
+    <EntitySet Name="Conferences" EntityType="Self.Conference" />
+    <EntitySet Name="Councils" EntityType="Self.Council" />
+    <EntitySet Name="Degrees" EntityType="Self.Degree" />
+    <EntitySet Name="Fields" EntityType="Self.Field" />
+    <EntitySet Name="Foreigns" EntityType="Self.Foreign" />
+    <EntitySet Name="Introes" EntityType="Self.Intro" />
+    <EntitySet Name="KeyWords" EntityType="Self.KeyWord" />
+    <EntitySet Name="Nations" EntityType="Self.Nation" />
+    <EntitySet Name="Places" EntityType="Self.Place" />
+    <EntitySet Name="Sliders" EntityType="Self.Slider" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="Units" EntityType="Self.Unit" />
+    <EntitySet Name="Articles" EntityType="HTquanlyNCKHModel.Article" />
+    <EntitySet Name="Acounts" EntityType="HTquanlyNCKHModel.Acount" />
+    <EntitySet Name="Scientists" EntityType="HTquanlyNCKHModel.Scientist" />
+    <EntitySet Name="Topics" EntityType="HTquanlyNCKHModel.Topic" />
+  </EntityContainer>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="articlesID" />
+    </Key>
+    <Property Name="articlesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="atlName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="scientistID" Type="Int32" />
+    <Property Name="nationID" Type="Int32" />
+    <Property Name="atlSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="atlNation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="keyID" Type="Int32" />
+    <Property Name="magazineID" Type="Int32" />
+    <Property Name="Point" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="statusID" Type="Int32" />
+    <Property Name="atlLink" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="typeID" Type="Int32" />
+    <Property Name="atlPublication" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fieldID" Type="Int32" />
+    <Property Name="atlNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="atlPageToPage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="atlPublicationDate" Type="DateTime" Precision="0" />
+    <Property Name="atlCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="atlModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="atlCreateUser" Type="Int32" />
+    <Property Name="atlModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Acount">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Permission" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lock" Type="Int32" />
+    <Property Name="Active" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Scientist">
+    <Key>
+      <PropertyRef Name="scientistID" />
+    </Key>
+    <Property Name="scientistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sctFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sctLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sctSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="sctBirthday" Type="DateTime" Precision="0" />
+    <Property Name="PlaceID" Type="Int32" />
+    <Property Name="sctImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="degreeID" Type="Int32" />
+    <Property Name="unitID" Type="Int32" />
+    <Property Name="fieldID" Type="Int32" />
+    <Property Name="sctWorkingProcess" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="sctResult" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="foreignID" Type="Int32" />
+    <Property Name="sctAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sctPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sctEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sctCreateDate" Type="DateTime" Precision="3" />
+    <Property Name="sctModifierDate" Type="DateTime" Precision="3" />
+    <Property Name="sctCreateUser" Type="Int32" />
+    <Property Name="sctModifierUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="topicID" />
+    </Key>
+    <Property Name="topicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="scientistID" Type="Int32" Nullable="false" />
+    <Property Name="classifiID" Type="Int32" Nullable="false" />
+    <Property Name="statusID" Type="Int32" Nullable="false" />
+    <Property Name="acceptsID" Type="Int32" />
+    <Property Name="fieldID" Type="Int32" Nullable="false" />
+    <Property Name="tpcYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="tpcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tpcCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tpcStartDate" Type="DateTime" Precision="0" />
+    <Property Name="tpcEndDate" Type="DateTime" Precision="0" />
+    <Property Name="tpcDateOfAcceptance" Type="DateTime" Precision="0" />
+    <Property Name="tpcProofFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tpcReviewBoard" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="tpcCreateData" Type="DateTime" Precision="3" />
+    <Property Name="tpcModifierData" Type="DateTime" Precision="3" />
+    <Property Name="tpcCreateUser" Type="Int32" />
+    <Property Name="tpcModifierUser" Type="Int32" />
+    <Property Name="tpcDeleteData" Type="DateTime" Precision="3" />
+    <Property Name="tpcDeleteUser" Type="Int32" />
+    <Property Name="tpcImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tpcAcceptance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tpcFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="scientistIDs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

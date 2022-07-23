@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "Quản Lý Trình Độ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("DegreeStoreOrEdit","Scientist")')">
+    <i class="fa fa-plus"></i> Thêm Mới
+</a>
+<table id="DegreeTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr @*style="background-color: #bec4ed*@>
+            <th width="10px">STT</th>
+            <th> Tên Trình Độ</th>
+            <th>Mô Tả</th>
+            <th><i class="fa-solid fa-screwdriver-wrench"></i> Tuỳ Chọn</th>
+        </tr>
+    </thead>
+    <tr>
+        <td></td>
+    </tr>
+</table>
+
+
+@section scripts{
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+    <script src="~/Content/dist/js/jquery.dataTables.min.js"></script>
+
+
+
+
+    <script>
+
+        var Popup, dataTable;
+
+        $(document).ready(function () {
+            //Hai dòng dưới để chỉnh cho khai báo jquery trước boostrap (hiện nút close)
+            var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
+            $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
+
+
+
+            dataTable = $("#DegreeTable").DataTable({
+                /*"info": false,*/
+                "ajax": {
+
+                    "url": "/Scientist/DegreeGetData",
+                    "type": "GET",
+                    "datatype": "json"
+
+                },
+
+                "columns": [
+                    { "defaultContent": "" },
+                    { "data": "degName" },
+                    { "data": "degDescription" },
+                    {
+                        "data": "degreeID", "render": function (data) {
+
+                            return "<a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("DegreeStoreOrEdit", "Scientist")/" + data + "')><i class='fa fa-pencil'></i> Sửa</a>  <a class='btn btn-danger btn-sm' style='margin-left:5px'   onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon) Xoá</a>";
+                        },
+
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px",
+
+                    },
+
+
+                ],
+
+                "language": {
+                    "emptyTable": "Dữ liệu rỗng <b>Thêm mới </b> Button",
+                    "formatNavigator": "<%= số trang %> / <%= trên trang %>",
+                }
+
+            });
+
+
+        });
+
+        function PopupForm(url) {
+
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+
+                        autoOpen : true,
+                        resizable : false,
+                        title : 'Điền Thông Tin Về Xếp Loại Đề Tài',
+                        height : 500,
+                        width : 700,
+                        close: function () {
+
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+
+                });
+        }
+
+        function SubmitForm(form) {
+
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+                success: function (data) {
+
+                    if (data.success) {
+
+                        Popup.dialog('close');
+                        dataTable.ajax.reload();
+
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className:"success"
+                        })
+                    }
+                }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id) {
+            if (confirm('Bạn có chắc chắn muốn xoá?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DegreeDelete", "Scientist")/' + id,
+                    success: function (data) {
+
+                        if (data.success) {
+
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        } else alert(data.message);
+                    }
+                });
+            }
+        }
+    </script>
+}
+<style type='text/css'>
+
+    table {
+        counter-reset: rowNumber;
+        counter-reset: number 1; /*mặc định số thứ tự bắt đầu*/
+    }
+
+        table tr {
+            counter-increment: rowNumber;
+        }
+
+            table tr td:first-child::before {
+                content: counter(rowNumber);
+                min-width: auto;
+                margin-right: 0.5em;
+            }
+
+</style>

@@ -1,0 +1,291 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.Topic
+
+@using HTquanlyNCKH.Models
+@using (Html.BeginForm("TopicStoreOrEdit", "Topic", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.topicID)
+
+    @Html.HiddenFor(model => model.tpcCreateData)
+    @Html.HiddenFor(model => model.tpcModifierData)
+
+    @Html.HiddenFor(model => model.tpcCreateUser)
+    @Html.HiddenFor(model => model.tpcModifierUser)
+
+    @Html.HiddenFor(model => model.tpcStartDate)
+    @Html.HiddenFor(model => model.tpcEndDate)
+    @Html.HiddenFor(model => model.tpcDateOfAcceptance)
+    @Html.HiddenFor(model => model.tpcProofFile)
+
+
+
+
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.tpcName, "Tên đề tài(*)", new { @class = "control-label", @id = "tenDeTaiText" })
+        @Html.EditorFor(model => model.tpcName, new { htmlAttributes = new { @class = "form-control", @onclick = "changeNull()" } })
+        @Html.ValidationMessageFor(model => model.tpcName)
+    </div>
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.tpcYear, "Năm thực hiện", new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcYear, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = 1990, @max = 2100 } })
+        @Html.ValidationMessageFor(model => model.tpcYear)
+    </div>
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.tpcCode, "Mã số công khai", new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcCode, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+        @Html.ValidationMessageFor(model => model.tpcCode)
+    </div>
+
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.tpcReviewBoard, "Hội đồng xét duyệt", new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcReviewBoard, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.tpcReviewBoard)
+    </div>
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.tpcAcceptance, "Hội đồng nghiệm thu", new { @class = "control-label" })
+        @Html.EditorFor(model => model.tpcAcceptance, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.tpcAcceptance)
+    </div>
+    @*<div class="dropdown" style="float: left ; margin: 2px">
+            <div class="form-group">
+                <label>Nhà khoa học</label>
+                @Html.DropDownList("scientistID", new SelectList(ViewBag.sct, "scientistID", "sctFullName"), "Select", new { @class = "chosen - select" })
+            </div>
+        </div>*@
+    <div class="form-group" style="width: 400px; float: left; margin: 2px">
+        <label id="nhaKhoaHocText">
+            Chủ nhiệm đề tài(*):
+        </label>
+        <select id="nhaKhoaHoc" onchange="changeNull()" name="nhakhoahoc" data-placeholder="--Trống--" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var sct = db.Scientists.OrderBy(n => n.scientistID);
+
+                    <option value="@Model.scientistID" selected="selected">@ViewBag.tenNhaKhoaHoc</option>
+                    foreach (var item in sct)
+                    {
+                        var fullName = item.sctFirstName + " " + item.sctLastName + " - KH" + item.scientistID;
+                        <option value="@item.scientistID">@fullName</option>
+                    }
+
+                }
+            }
+        </select>
+    </div>
+    <div class="dropdown" style="float: left ; margin: 2px">
+        <div class="form-group">
+            <label>Thành viên khác: </label>
+            @Html.ListBoxFor(model => model.ScientistIDArray, new MultiSelectList(Model.ScientistsCollection, "scientistID", "sctLastName"), new { @class = "chosen-select", @multiple = "multiple" })
+        </div>
+    </div>
+    @*<div class="form-group" style="width: 400px; float: left; margin: 2px">
+            <label id="nhaKhoaHocText">
+                Nhà khoa học cùng tham gia:
+            </label>
+            <select id="nhaKhoaHocKhac" multiple tabindex="-1" style="display: none;" name="nhaKhoaHocKhac" data-placeholder="--Trống--" class="chosen-select">
+                @{
+                    using (DBModel db = new DBModel())
+                    {
+                        var sct = db.Scientists.OrderBy(n => n.scientistID);
+
+                        <option value="@Model.scientistID" selected="selected">@ViewBag.tenNhaKhoaHoc</option>
+                        foreach (var item in sct)
+                        {
+                            var fullName = item.sctFirstName + " " + item.sctLastName + " - KH" + item.scientistID;
+                            <option value="@item.scientistID">@fullName</option>
+                        }
+
+                    }
+                }
+            </select>
+        </div>*@
+    <div class="form-group" style="clear: both; padding: 10px 20px;float: left; margin: 2px">
+        <label>Ngày bắt đầu: </label>
+        <input type="date" name="ngay-bat-dau" value="@ViewBag.ngaybatdau" />
+        @Html.ValidationMessageFor(model => model.tpcEndDate)
+    </div>
+    <div class="form-group" style="float: left; padding: 10px 20px; margin: 2px">
+        <label>Ngày kết thúc: </label>
+        <input type="date" name="ngay-ket-thuc" value="@ViewBag.ngayketthuc" />
+        @Html.ValidationMessageFor(model => model.tpcEndDate)
+    </div>
+    <div class="form-group" style="float: left; padding: 10px 20px; margin: 2px">
+        <label>Ngày nghiệm thu: </label>
+        <input type="date" name="ngay-nghiem-thu" value="@ViewBag.ngaynghiemthu" />
+        @Html.ValidationMessageFor(model => model.tpcDateOfAcceptance)
+    </div>
+
+
+    @*<div class="dropdown" style="float: left; clear: both">
+            <div class="form-group">
+                <label>Lĩnh Vực: </label>
+                @Html.DropDownList("fieldID", new SelectList(ViewBag.fie, "fieldID", "fieName", "Select"), new { @class = "form-control" })
+            </div>
+        </div>*@
+
+    <div class="form-group" style="width: 300px; float: left; margin: 2px">
+        <label id="linhVucText">
+            Lĩnh vực(*):
+        </label>
+        <select id="linhVuc" onchange="changeNull()" name="linhVuc" data-placeholder="--Trống--" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var fie = db.Fields.OrderBy(n => n.fieldID);
+
+                    <option value="@Model.fieldID" selected="selected">@ViewBag.fieldName</option>
+                    foreach (var item in fie)
+                    {
+
+                        <option value="@item.fieldID">@item.fieName</option>
+                    }
+
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group" style="width: 300px; float: left; margin: 2px">
+        <label id="xepLoaiText">
+            Xếp loại(*):
+        </label>
+        <select id="xepLoai" onchange="changeNull()" name="xepLoai" data-placeholder="--Trống--" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var classifi = db.Classifications.OrderBy(n => n.classifiID);
+
+                    <option value="@Model.classifiID" selected="selected">@ViewBag.classifiName</option>
+                    foreach (var item in classifi)
+                    {
+
+                        <option value="@item.classifiID">@item.clsName</option>
+                    }
+
+                }
+            }
+        </select>
+    </div>
+
+    @*<div class="form-group" style="float: left; margin: 2px">
+            <label>Xếp loại: </label>
+            @Html.DropDownList("classifiID", new SelectList(ViewBag.cls, "classifiID", "clsName", "Select"), new { @class = "form-control" })
+        </div>*@
+    @*<div class="form-group" style="float: left; margin: 2px">
+            <label>Trạng thái: </label>
+            @Html.DropDownList("statusID", new SelectList(ViewBag.sts, "statusID", "stsName", "Select"), new { @class = "form-control" })
+        </div>*@
+
+    <div class="form-group" style="width: 300px; float: left; margin: 2px">
+        <label id="trangThaiText">
+            Trạng thái(*):
+        </label>
+        <select id="trangThai" onchange="changeNull()" name="trangThai" data-placeholder="--Trống--" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var status = db.Status.OrderBy(n => n.statusID);
+
+                    <option value="@Model.statusID" selected="selected">@ViewBag.statusName</option>
+                    foreach (var item in status)
+                    {
+
+                        <option value="@item.statusID">@item.stsName</option>
+                    }
+
+                }
+            }
+        </select>
+    </div>
+
+    <div class="editor-field" style="float: left; padding: 10px 15px; margin: 2px">
+        <label>File đính kèm</label>
+        @Html.TextBoxFor(model => model.tpcProofFile, new { type = "file" })
+        @Html.ValidationMessageFor(model => model.tpcProofFile)
+    </div>
+
+
+    <div class="form-group" style="clear: both; margin: 2px">
+        @Html.LabelFor(model => model.tpcSummary, "Tóm lượt đề tài: ", new { @class = "control-label" })
+        @Html.TextAreaFor(model => model.tpcSummary, new { @cols = "100", @id = "editor1", @rows = "10", htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.tpcSummary)
+    </div>
+    <div class="form-group" style="padding-top: 20px">
+        <input id="submit" onclick="checkNull()" value="Lưu lại" class="btn btn-success " />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+
+
+
+    <script>
+        $(".chosen-select").chosen({
+            allow_single_deselect: true,
+            width: '50%',
+            no_results_text: "Không tìm thấy kết quả :"
+        });
+        /*var nhaKhoaHocKhac = document.getElementById("nhaKhoaHocKhac")*/
+
+
+        function checkNull() {
+            var tenDeTai = document.getElementById('tpcName');
+            var nhaKhoaHoc = document.getElementById('nhaKhoaHoc');
+            var linhVuc = document.getElementById('linhVuc');
+            var xepLoai = document.getElementById('xepLoai');
+            var trangThai = document.getElementById('trangThai');
+            var mes = '';
+            if (tenDeTai.value == 0
+                || nhaKhoaHoc.value == 0
+                || linhVuc.value == 0
+                || xepLoai.value == 0
+                || trangThai.value == 0) {
+                mes += 'Không được bỏ trống: ';
+                if (tenDeTai.value == 0) { mes += "tên đề tài, " }
+                if (nhaKhoaHoc.value == 0) { mes += "nhà khoa học, " }
+                if (linhVuc.value == 0) { mes += "lĩnh vực, " }
+                if (xepLoai.value == 0) { mes += "xếp loại, " }
+                if (trangThai.value == 0) { mes += "trạng thái." }
+                alert(mes)  //In ra thong bao nhap thieu
+            } else {
+                var submit = document.getElementById('submit');
+                submit.setAttribute("type", "submit");
+                submit.onclick();
+            }
+        }
+
+
+        function changeNull() {
+            var nhaKhoaHocText = document.getElementById("nhaKhoaHocText");
+            var linhVucText = document.getElementById("linhVucText");
+            var xepLoaiText = document.getElementById("xepLoaiText");
+            var trangThaiText = document.getElementById("trangThaiText");
+
+
+
+            if (tpcName.value == 0) { tenDeTaiText.setAttribute("style", "color: red") }
+            else { tenDeTaiText.setAttribute("style", "color: #000") }
+
+            if (nhaKhoaHoc.value == 0) { nhaKhoaHocText.setAttribute("style", "color: red") }
+            else { nhaKhoaHocText.setAttribute("style", "color: #000") }
+
+            if (linhVuc.value == 0) { linhVucText.setAttribute("style", "color: red") }
+            else { linhVucText.setAttribute("style", "color: #000") }
+
+            if (xepLoai.value == 0) { xepLoaiText.setAttribute("style", "color: red") }
+            else { xepLoaiText.setAttribute("style", "color: #000") }
+
+            if (trangThai.value == 0) { trangThaiText.setAttribute("style", "color: red") }
+            else { trangThaiText.setAttribute("style", "color: #000") }
+        }
+
+        CKEDITOR.replace('editor1', {
+            height: 65,
+            removeButtons: 'PasteFromWord'
+        });
+
+    </script>
+}  

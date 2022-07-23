@@ -1,0 +1,330 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.Scientist
+@using HTquanlyNCKH.Models
+@using (Html.BeginForm("ScientistStoreOrEdit", "Scientist", FormMethod.Post, new { enctype = "multipart/form-data", id = "sctForm" }))
+{
+    @Html.HiddenFor(model => model.scientistID)
+    @Html.HiddenFor(model => model.sctCreateDate)
+    @Html.HiddenFor(model => model.sctModifierDate)
+    @Html.HiddenFor(model => model.sctCreateUser)
+    @Html.HiddenFor(model => model.sctModifierUser)
+    @Html.HiddenFor(model => model.sctBirthday)
+    @Html.HiddenFor(model => model.sctImage)
+
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.sctFirstName, "Họ và tên đệm(*)", new { @class = "control-label", @id = "sctFirstNameLabel" })
+        @Html.EditorFor(model => model.sctFirstName, new { htmlAttributes = new { @class = "form-control", @onclick = "changeNull()" } })
+        @Html.ValidationMessageFor(model => model.sctFirstName)
+    </div>
+
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.sctLastName, "Tên(*)", new { @class = "control-label", @id = "sctLastNameLabel" })
+        @Html.EditorFor(model => model.sctLastName, new { htmlAttributes = new { @class = "form-control", @onclick = "changeNull()" } })
+        @Html.ValidationMessageFor(model => model.sctLastName)
+    </div>
+    <div class="form-group" style="float: left">
+        <table>
+            <tr>
+                <td style="vertical-align:sub">
+                    <b>Giới tính:</b>
+                </td>
+                @if (Model.sctSex == "Nam")
+                {
+                    <td style="vertical-align:sub">
+                        <p>Nam</p>
+                    </td>
+                    <td style="vertical-align:sub">
+                        <input type="radio" checked name="gioi-tinh" value="Nam" />
+                    </td>
+
+                    <td style="vertical-align:sub">
+                        <p>Nữ</p>
+                    </td>
+                    <td style="vertical-align:sub">
+                        <input type="radio" name="gioi-tinh" value="Nữ" />
+                    </td>
+                }
+                else if (Model.sctSex == "Nữ")
+                {
+                    <td style="vertical-align:sub">
+                        <p>Nam</p>
+                    </td>
+                    <td style="vertical-align:sub">
+                        <input type="radio" name="gioi-tinh" value="Nam" />
+                    </td>
+                    <td style="vertical-align:sub">
+                        <p>Nữ</p>
+                    </td>
+                    <td style="vertical-align:sub">
+                        <input checked type="radio" name="gioi-tinh" value="Nữ" />
+                    </td>
+                }
+                else
+                {
+                    <td style="vertical-align:sub">
+                        <p>Nam</p>
+                    </td>
+                    <td style="vertical-align:sub">
+                        <input type="radio" name="gioi-tinh" value="Nam" />
+                    </td>
+                    <td style="vertical-align:sub">
+                        <p>Nữ</p>
+                    </td>
+                    <td style="vertical-align:sub">
+                        <input type="radio" name="gioi-tinh" value="Nữ" />
+                    </td>
+                }
+            </tr>
+        </table>
+        @Html.ValidationMessageFor(model => model.sctSex)
+    </div>
+
+    <div class="form-group" style="padding-left: 40px ;float: left; margin: 2px">
+        @Html.LabelFor(model => model.sctBirthday, "Ngày sinh", new { @class = "control-label" })
+        <input type="date" name="ngay-sinh" value="@ViewBag.ngaysinh" />
+    </div>
+    <div class="form-group" style="clear: both;float: left; margin: 2px">
+        @Html.LabelFor(model => model.sctAddress, "Địa chỉ", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sctAddress, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sctAddress)
+    </div>
+
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.sctEmail, "Email", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sctEmail, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+        @Html.ValidationMessageFor(model => model.sctEmail)
+    </div>
+    <div class="form-group" style="float: left; margin: 2px">
+        @Html.LabelFor(model => model.sctPhone, "Số điện thoại", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sctPhone, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+        @Html.ValidationMessageFor(model => model.sctPhone)
+    </div>
+
+    <div class="form-group" style="float: left;  margin: 2px">
+        @Html.LabelFor(model => model.sctResult, "Kết quả thực hiện", new { @class = "control-label" })
+        @Html.EditorFor(model => model.sctResult, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sctResult)
+    </div>
+    <div class="dropdown" style="clear: both; float: left; margin: 2px; min-width: 200px">
+            <div class="form-group">
+                <label id="placeNameLabel"> Nơi sinh(*)</label>
+                @Html.DropDownList("placeID", new SelectList(ViewBag.plaList, "placeID", "plaName"), "--Trống--", new { @class = "chosen-select", @onchange = "changeNull()", @id = "placeName" })
+            </div>
+        </div>
+
+    <div class="dropdown" style="float: left; margin: 2px; min-width: 200px">
+            <div class="form-group">
+                <label id="degreeNameLable">Trình độ(*)</label>
+                @Html.DropDownList("degreeID", new SelectList(ViewBag.degList, "degreeID", "degName"), "--Trống--", new { @class = "chosen-select", @id = "degreeName", @onchange = "changeNull()" })
+            </div>
+        </div>
+
+    <div class="dropdown" style="float: left; margin: 2px; min-width: 200px">
+            <div class="form-group">
+                <label id="unitNameLabel">Phòng ban(*)</label>
+                @Html.DropDownList("unitID", new SelectList(ViewBag.unitList, "unitID", "untName"), "--Trống--", new { @class = "chosen-select", @id = "unitName", @onchange = "changeNull()" })
+            </div>
+        </div>
+
+    <div class="dropdown" style="float: left; margin: 2px; min-width: 200px">
+            <div class="form-group">
+                <label id="fieldNameLabel">Chuyên ngành(*)</label>
+                @Html.DropDownList("fieldID", new SelectList(ViewBag.fieldList, "fieldID", "fieName"), "--Trống--", new { @class = "chosen-select", @id = "fieldName", @onchange = "changeNull()" })
+            </div>
+        </div>
+
+    @*<div class="form-group" style="width: 260px; float: left; margin: 2px">
+        <label id="fieldNameLabel">
+            Chuyên nghành(*):
+        </label>
+        <select id="fieldName" onchange="changeNull()" name="chuyenNganh" data-placeholder="--Trống--" class="chosen-select">
+            @{
+                using (DBModel db = new DBModel())
+                {
+                    var fie = db.Fields.OrderBy(n => n.fieldID);
+
+                    <option value="@Model.fieldID" selected="selected">@ViewBag.fieldName</option>
+                    foreach (var item in fie)
+                    {
+                        <option value="@item.fieldID">@item.fieName</option>
+                    }
+                }
+            }
+        </select>
+    </div>*@
+
+    <div class="dropdown" style="float: left; margin: 2px">
+            <div class="form-group">
+                <label id="ForeignNameLabel">Chức vụ(*)</label>
+                @Html.DropDownList("foreignID", new SelectList(ViewBag.foreignList, "foreignID", "fgnName"), "--Trống--", new { @class = "chosen-select", @id = "ForeignName", @onchange = "changeNull()" })
+            </div>
+        </div>
+
+
+    <div class="form-group" style="clear: both; margin: 2px">
+        @Html.LabelFor(model => model.sctWorkingProcess, "Quá trình làm việc:", new { @class = "control-label", @style = "vertical-align: top" })
+        @Html.TextAreaFor(model => model.sctWorkingProcess, new { @cols = "100", @id = "editor1", @rows = "10", htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sctWorkingProcess)
+    </div>
+
+@*<div class="form-group" style="clear: both; margin: 2px">
+    <label>
+        Quá trình làm việc:
+    </label>
+    <textarea cols="80" id="editor1" name="quaTrinhLamViec" rows="10" data-sample-short>
+            @ViewBag.sctWorkingProcess
+        </textarea>
+</div>*@
+    <div class="dropdown" style="float: left">
+        <label>Ảnh chân dung</label>
+        @if (Model.sctImage == null)
+        {
+            <img src="~/Uploads/image/avatar/unname.png" width="100" height="100" style="margin: 2px" />
+        }
+        else
+        {
+            <img src="~/Uploads/image/avatar/@Model.sctImage" width="100" height="100" style="margin: 2px" />
+        }
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.sctImage, new { @type = "file" })
+            @Html.ValidationMessageFor(model => model.sctImage)
+        </div>
+    </div>
+    <div class="form-group" style="float: left; margin: 100px">
+
+        <input id="submitForm" onclick="checkNull()" value="Lưu lại" class="btn btn-success " />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+}
+
+
+<script>
+    $(".chosen-select").chosen({
+        allow_single_deselect: true,
+        width: '50%',
+        no_results_text: "Không tìm thấy kết quả :"
+    });
+
+    var sctFirstName = document.getElementById('sctFirstName');     //Họ và tên đệm  input(text)
+    var sctLastName = document.getElementById('sctLastName');       //Tên            input(text)
+    var placeName = document.getElementById('placeName');           //Nơi sinh,      input(text)
+    var degreeName = document.getElementById('degreeName');         //Học vị,        input(text)
+    var unitName = document.getElementById('unitName');             //Phòng ban thẻ  input(text)
+    var fieldName = document.getElementById('fieldName');           //Chuyên nghành  input(text)
+    var ForeignName = document.getElementById('ForeignName');       //Trình độ ngoại ngữ    input(text)
+
+    var sctFirstNameLabel = document.getElementById("sctFirstNameLabel");   //Họ tên đệm  (mô tả label)
+    var sctLastNameLabel = document.getElementById("sctLastNameLabel");     //Tên           (mô tả label)
+    var placeNameLabel = document.getElementById("placeNameLabel");         //Nơi sinh(mô tả label)
+    var degreeNameLable = document.getElementById("degreeNameLable");       //Học vị(mô tả label)
+    var unitNameLabel = document.getElementById("unitNameLabel");           //Phòng ban(mô tả label)
+    var fieldNameLabel = document.getElementById("fieldNameLabel");         //Chuyên nghành(mô tả label)
+    var ForeignNameLabel = document.getElementById("ForeignNameLabel");     //Trình độ ngoại ngữ(mô tả label)
+
+    function checkNull() {      //kiểm tra điều kiện rỗng khi nhấn submit
+        var mes = '';
+        if (sctFirstName.value == ''
+            || sctLastName.value == ''
+            || placeName.value == ''
+            || degreeName.value == ''
+            || unitName.value == ''
+            || fieldName.value == ''
+            || ForeignName.value == '') {
+            mes += 'Không được bỏ trống: ';
+
+            if (sctFirstName.value == '') { sctFirstNameLabel.setAttribute("style", "color: red"); mes += "họ và tên đệm, " }
+            else { sctFirstNameLabel.setAttribute("style", "color: #000") }
+
+            if (sctLastName.value == '') { sctLastNameLabel.setAttribute("style", "color: red"); mes += "tên, " }
+            else { sctLastName.setAttribute("style", "color: #000") }
+
+            if (placeName.value == '') { placeNameLabel.setAttribute("style", "color: red"); mes += "nơi sinh, " }
+            else { placeNameLabel.setAttribute("style", "color: #000") }
+
+            if (degreeName.value == '') { degreeNameLable.setAttribute("style", "color: red"); mes += "trình độ, " }
+            else { degreeNameLable.setAttribute("style", "color: #000") }
+
+            if (unitName.value == '') { unitNameLabel.setAttribute("style", "color: red"); mes += "phòng ban, " }
+            else { unitNameLabel.setAttribute("style", "color: #000") }
+
+            if (fieldName.value == '') { fieldNameLabel.setAttribute("style", "color: red"); mes += "chuyên ngành, " }
+            else { fieldNameLabel.setAttribute("style", "color: #000") }
+
+            if (ForeignName.value == '') { ForeignNameLabel.setAttribute("style", "color: red"); mes += "chức vụ." }
+            else (ForeignNameLabel.setAttribute("style", "color: #000"))
+            alert(mes)  //In ra thong bao nhap thieu
+        }
+        else {
+            var submit = document.getElementById('submitForm');         //Xu ly SUBMIT form
+            submit.setAttribute("type", "submit");
+            submit.onclick();
+        }
+    }
+
+    function changeNull() {     //Kiểm tra điều kiện rỗng khi thay đổi giá trị
+        if (sctFirstName.value == '') { sctFirstNameLabel.setAttribute("style", "color: red") }
+        else { sctFirstNameLabel.setAttribute("style", "color: #000") }
+
+        if (sctLastName.value == '') { sctLastNameLabel.setAttribute("style", "color: red") }
+        else { sctLastNameLabel.setAttribute("style", "color: #000") }
+
+        if (placeName.value == '') { placeNameLabel.setAttribute("style", "color: red") }
+        else { placeNameLabel.setAttribute("style", "color: #000") }
+
+        if (degreeName.value == '') { degreeNameLable.setAttribute("style", "color: red") }
+        else { degreeNameLable.setAttribute("style", "color: #000") }
+
+        if (unitName.value == '') { unitNameLabel.setAttribute("style", "color: red") }
+        else { unitNameLabel.setAttribute("style", "color: #000") }
+
+        if (fieldName.value == '') { fieldNameLabel.setAttribute("style", "color: red") }
+        else { fieldNameLabel.setAttribute("style", "color: #000") }
+
+        if (ForeignName.value == '') { ForeignNameLabel.setAttribute("style", "color: red") }
+        else (ForeignNameLabel.setAttribute("style", "color: #000"))
+    }
+
+    CKEDITOR.replace('editor1', {
+        height: 65,
+        removeButtons: 'PasteFromWord'
+    });
+
+
+</script>
+<style type='text/css'>
+    label {
+        font-size: 14px;
+    }
+
+    b {
+        font-size: 14px;
+    }
+
+    input {
+        font-size: 10px;
+    }
+
+    table {
+        counter-reset: none;
+        counter-reset: none; /*mặc định số thứ tự bắt đầu*/
+    }
+
+        table tr {
+            counter-increment: none;
+        }
+
+            table tr td:first-child::before {
+                content: none;
+                min-width: auto;
+                margin-right: 0.5em;
+            }
+
+        table td {
+            vertical-align: middle;
+        }
+</style>

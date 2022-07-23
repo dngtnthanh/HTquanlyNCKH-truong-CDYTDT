@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "Thông Tin Nhà Khoa Học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Slider{
+    <img src="~/Uploads/image/banner/slider11.png" width="100%" />
+
+}
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.ScientistFull
+@using HTquanlyNCKH.Models;
+<div class="form-check">
+    <br /><br />
+    <b>1. Lý lịch</b><br /><br />
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+
+                <td rowspan="7" style="vertical-align:middle">
+                    <b>Ảnh chân dung:</b>
+                </td>
+                <td rowspan="7" style="text-align: left">
+                    @*<img src="~/Content/dist/img/AnhDaiDien/@Model.sctImage" style="border-radius: 14px" width="200" height="200" />*@
+                    @if (Model.sctImage == null)
+                    {
+                        <img src="~/Uploads/image/avatar/unname2.png" style="border-radius: 14px" width="200" height="200" />
+                    }
+                    else
+                    {
+                        <img src="~/Uploads/image/avatar/@Model.sctImage" style="border-radius: 14px" width="200" height="200" />
+                    }
+                </td>
+
+
+
+            </tr>
+            <tr>
+                <td>
+                    <b>Họ và tên:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.sctFirstName @Model.sctLastName
+                </td>
+
+                <td>
+                    <b>Mã số:</b>
+                </td>
+                <td style="text-align: left">
+                    @ViewBag.maso
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Ngày sinh:</b>
+                </td>
+                <td style="text-align: left">
+                    @ViewBag.ngaysinh
+
+                </td>
+
+
+                <td>
+                    <b>Giới tính:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.sctSex
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Số điện thoại: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.sctPhone
+                </td>
+                <td>
+                    <b>Nơi sinh:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.PlaceName
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Trình độ:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.degreeName
+                </td>
+                <td>
+                    <b>Email: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.sctEmail
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <b>Địa chỉ thường trú: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.sctAddress
+                </td>
+                <td>
+                    <b>Phòng ban:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.unitName
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Chuyên ngành:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.fieldName
+                </td>
+                <td>
+                    <b>Chức vụ: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.sctForeignName
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <b>2. Quá trình nghiên cứu</b><br /><br />
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>
+                    <b>Quá trình làm việc:</b>
+                </td>
+                <td colspan="5" style="text-align: left; min-width: 800px">
+                    @if (Model.sctWorkingProcess == null)
+                    {
+                        <p>Chưa có thông tin</p>
+                    }
+                    else
+                    {
+                        @Html.Raw(Model.sctWorkingProcess) 
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Kết quả thực hiện:</b>
+                </td>
+                <td colspan="5" style="text-align: left">
+                    @if (Model.sctResult == null)
+                    {
+
+
+                        <p>Chưa có thông tin</p>
+                    }
+                    else
+                    {
+                        @Model.sctResult
+                    }
+
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <b>3. Sản phẩm nghiên cứu</b><br /><br />
+    <table class="table table-striped">
+        <caption align="top">CÁC ĐỀ TÀI NGHIÊN CỨU</caption>
+        <tbody>
+            @*<tr>
+                    <td  rowspan="@ViewBag.tpcNumber" style="vertical-align:top; min-width: 200px"><b>Các đề tài nghiên cứu:</b></td>
+
+                </tr>*@
+
+            @using (DBModel db = new DBModel())
+            {
+                var TpcList = db.Topics.Where(n => n.scientistID == Model.scientistID);
+                if (TpcList.Count() == 0)
+                {
+                    <tr>
+                        <td style="text-align: center">
+                            <p>Chưa có thông tin</p>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in TpcList)
+                    {
+                        <tr>
+                            <td style="text-align: left; padding-left: 25px">
+                                <i class="fas fa-folder-open"></i>
+                                <a href="@Url.Action("TopicInfor", "Home", new { id = item.topicID })">
+                                    Mã số: @item.topicID - @item.tpcName
+                                    <i style="color: #808080; font-size: 14px">
+                                        <i class="fas fa-calendar-alt"></i> (@Convert.ToDateTime(item.tpcCreateData).ToString("dd-MM-yyyy"))
+                                    </i>
+                                </a> <br />
+                            </td>
+                        </tr>
+                    }
+                }
+
+            }
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <caption align="top">BÀI BÁO KHOA HỌC</caption>
+        <tbody>
+            <tr>
+                @*<td style="min-width: 200px" rowspan="@ViewBag.artNumber"><b>Số bài báo khoa học:</b></td>*@
+                <td style="text-align: center; padding-left: 25px">
+                    @using (DBModel db = new DBModel())
+                    {
+                        var TpcList = db.Articles.Where(n => n.articlesID == Model.scientistID);
+                        if (TpcList.Count() == 0)
+                        {
+                            <p>Chưa có thông tin</p>
+                        }
+                        else
+                        {
+                            foreach (var item in TpcList)
+                            {
+                                <i class="fas fa-newspaper"></i> <a href="@Url.Action("ArticlesInfor", "Home", new { id = item.articlesID })">
+                                    Mã số: @item.articlesID - @item.atlName
+                                    <i style="color: #808080; font-size: 15px">
+                                        - Nơi xuất bản: @item.atlPublication <i class="fas fa-calendar-alt"></i>  (@Convert.ToDateTime(item.atlCreateDate).ToString("dd-MM-yyyy"))
+                                    </i>
+                                </a> <br />
+                            }
+                        }
+
+                    }
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<style type='text/css'>
+
+
+
+    table td {
+        vertical-align: middle;
+        text-align: right;
+    }
+</style>

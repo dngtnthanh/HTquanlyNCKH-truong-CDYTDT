@@ -26,8 +26,7 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { data = classifiList },
                 JsonRequestBehavior.AllowGet);
             }
-        }
-        
+        }        
         [HttpGet]
         public ActionResult ClassifiStoreOrEdit(int id = 0)     //Hiển thị thông tin phân loại đề tài
         {
@@ -42,8 +41,7 @@ namespace HTquanlyNCKH.Controllers
                     return View(db.Classifications.Where(x => x.classifiID == id).FirstOrDefault<Classification>());
                 }
             }
-        }
-        
+        }        
         [HttpPost]
         public ActionResult ClassifiStoreOrEdit(Classification classificationob)    //Xác nhận thêm mới hoặc sửa chữa phân loại đề tài
         {
@@ -92,13 +90,11 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
-
         public ActionResult ClassifiManage()        //Hiển thị trang mặc định
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
         //Quản lý lĩnh vực đề tài
         public ActionResult FieldGetData()
         {
@@ -189,8 +185,7 @@ namespace HTquanlyNCKH.Controllers
                         message = "Xoá không thành công. Không thể xoá dữ liệu này",
                         JsonRequestBehavior.AllowGet
                     });
-                }
-                
+                }                
             }
         }
         public ActionResult FieldManage()
@@ -307,21 +302,28 @@ namespace HTquanlyNCKH.Controllers
             {
                 using (DBModel db = new DBModel())
                 {
-                    List<Field> fie = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
-                    ViewBag.fie = fie;                    
-                    List<Classification> cls = db.Classifications.OrderByDescending(n => n.classifiID).ToList<Classification>();
-                    ViewBag.cls = cls;
-                    List<Status> sts = db.Status.OrderByDescending(n => n.statusID).ToList<Status>();
-                    ViewBag.sts = sts;
-                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
-                    ViewBag.sct = sct;
+                    List<Field> _fie = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
+                    ViewBag.fie = _fie;                    
+                    List<Classification> _cls = db.Classifications.OrderByDescending(n => n.classifiID).ToList<Classification>();
+                    ViewBag.cls = _cls;
+                    List<Status> _sts = db.Status.OrderByDescending(n => n.statusID).ToList<Status>();
+                    ViewBag.sts = _sts;
+                    List<Scientist> _sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = _sct;
                     ViewBag.ngaybatdau = null;
                     ViewBag.ngayketthuc = null;
-                    ViewBag.ngaynghiemthu = null;
-                    
-                    Topic tpc = new Topic();
-                    tpc.ScientistsCollection = db.Scientists.ToList();
-                    return View(tpc);
+                    ViewBag.ngaynghiemthu = null;                    
+                    Topic _tpc = new Topic();
+
+                    var ScientistList = from sct in db.Scientists          //Lấy bảng nhà khoa học
+                                    select new ScientistFull()             
+                                    {                                       
+                                        scientistID = sct.scientistID,              //Mã số nhà khoa học
+                                        fullName = sct.sctFirstName + " " + sct.sctLastName + " - KH" + sct.scientistID,  //Tên + mã số nhà khoa học                                        
+                                    };
+
+                    _tpc.ScientistsCollection = ScientistList.ToList();
+                    return View(_tpc);
                 }                    
             }
             else    //  GET  TopicStoreOrEdit   id !=0
@@ -331,8 +333,14 @@ namespace HTquanlyNCKH.Controllers
                     Topic topicob = new Topic();
                     topicob = db.Topics.Where(n => n.topicID == id).FirstOrDefault();    
                     topicob.ScientistIDArray = topicob.scientistIDs.Split(',').ToArray();
-                    topicob.ScientistsCollection = db.Scientists.ToList();
-                    
+                    var ScientistList = from sct in db.Scientists   //Lấy bảng nhà khoa học
+                                        select new ScientistFull()      
+                                        {
+                                            scientistID = sct.scientistID,   //Mã số nhà khoa học
+                                            fullName = sct.sctFirstName + " " + sct.sctLastName + " - KH" + sct.scientistID,  //Tên + mã số nhà khoa học
+                                        };
+                    topicob.ScientistsCollection = ScientistList.ToList();
+
                     //ViewBag.ScientistsCollection = topicob.ScientistsCollection;
                     List<Field> fie = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
                     ViewBag.fie = fie;
@@ -340,8 +348,8 @@ namespace HTquanlyNCKH.Controllers
                     ViewBag.cls = cls;
                     List<Status> sts = db.Status.OrderByDescending(n => n.statusID).ToList<Status>();
                     ViewBag.sts = sts;
-                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
-                    ViewBag.sct = sct;                                       
+                    List<Scientist> _sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
+                    ViewBag.sct = _sct;                                       
                     if (topicob.tpcStartDate != null)
                     {
                         ViewBag.ngaybatdau = Convert.ToDateTime(topicob.tpcStartDate).ToString("yyyy-MM-dd");
@@ -366,7 +374,7 @@ namespace HTquanlyNCKH.Controllers
                     {
                         ViewBag.ngayketthuc = null;
                     }
-                    var nkh = sct.Single(n => n.scientistID == topicob.scientistID);
+                    var nkh = _sct.Single(n => n.scientistID == topicob.scientistID);
                     ViewBag.tenNhaKhoaHoc = nkh.sctFirstName + " " + nkh.sctLastName + " - KH" +  nkh.scientistID;   //Lấy tên + mã nhà khoa học mặc định
                     var fieName = fie.Single(n => n.fieldID == topicob.fieldID);    //Lấy tên lĩnh vực hiển thị mặc định
                     ViewBag.fieldName = fieName.fieName + " " + fieName.fieldID;
@@ -492,7 +500,6 @@ namespace HTquanlyNCKH.Controllers
                     topicob.scientistID = int.Parse(collection.Get("nhakhoahoc"));
                     topicob.fieldID = int.Parse(collection.Get("linhVuc"));
                     topicob.statusID = int.Parse(collection.Get("trangThai"));
-
                     if(topicob.ScientistIDArray != null)
                     {
                         topicob.scientistIDs = string.Join(",", topicob.ScientistIDArray);
@@ -501,8 +508,6 @@ namespace HTquanlyNCKH.Controllers
                     {
                         topicob.scientistIDs = "";
                     }
-
-
                     db.Entry(topicob).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("TopicManage", "Topic");
@@ -540,7 +545,7 @@ namespace HTquanlyNCKH.Controllers
                                 select new TopicFull()     // [W-A-R-N-I-N-G] những chỗ có liên kết các trường là khoá ngoại ở trên không được để NULL, cho nên nếu các hàng có hậu tố Name bên dưới RỖNG sẽ sinh lỗi không load lên được cả hàng đó
                                 {
                                     topicID = tpc.topicID,                                  //Mã số đề tài
-                                    scientistID = sct.scientistID,
+                                    scientistID = sct.scientistID,                          //Mã số nhà khoa học
                                     scientistName = sct.sctFirstName + " " + sct.sctLastName,     //Tên đầy đủ nhà khoa học
                                     classifiName = cls.clsName,                             //Tên xếp loại
                                     statusName = sts.stsName,                               //Trạng thái
@@ -563,9 +568,7 @@ namespace HTquanlyNCKH.Controllers
                                     tpcDeleteUser = tpc.tpcDeleteUser,                      //Người xoá
                                     tpcImage = tpc.tpcImage,                                //Ảnh bìa
                                 };
-
-                var topicob = db.Topics.Where(n => n.topicID == id).FirstOrDefault<Topic>();
-                    
+                var topicob = db.Topics.Where(n => n.topicID == id).FirstOrDefault<Topic>();                    
                     if (topicob.tpcStartDate != null)
                     {
                         ViewBag.ngaybatdau = Convert.ToDateTime(topicob.tpcStartDate).ToString("yyyy-MM-dd");
@@ -574,7 +577,6 @@ namespace HTquanlyNCKH.Controllers
                     {
                         ViewBag.ngaybatdau = null;
                     }
-
                     if (topicob.tpcDateOfAcceptance != null)
                     {
                         ViewBag.ngaynghiemthu = Convert.ToDateTime(topicob.tpcDateOfAcceptance).ToString("yyyy-MM-dd");
@@ -583,7 +585,6 @@ namespace HTquanlyNCKH.Controllers
                     {
                         ViewBag.ngaynghiemthu = null;
                     }
-
                     if (topicob.tpcEndDate != null)
                     {
                         ViewBag.ngayketthuc = Convert.ToDateTime(topicob.tpcEndDate).ToString("yyyy-MM-dd");
@@ -592,8 +593,6 @@ namespace HTquanlyNCKH.Controllers
                     {
                         ViewBag.ngayketthuc = null;
                     }
-
-
                 return View(TopicList.Single(n => n.topicID == id));                        //Trả về đề tài có mã số tương ứng ID truyền vào
             }
         }

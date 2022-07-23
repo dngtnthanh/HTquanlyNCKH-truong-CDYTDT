@@ -1,0 +1,41 @@
+﻿#phanTrang {
+    width: 1000px;
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 100px;
+    padding-left: 79px;
+    font-size: 17px;
+}
+
+#phanTrang li {
+    list-style: none;
+    float: left;
+    padding: 7px 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+}
+
+    #phanTrang li:active {
+        background-color: #3366FF;
+    }
+
+        #phanTrang li:active a {
+            color: #92c1e7;
+        }
+
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}  
+
+
+
+#tableTB{
+    width: 1000px;
+    width: 100px;
+}
+

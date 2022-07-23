@@ -89,18 +89,14 @@ namespace HTquanlyNCKH.Controllers
                          + mess,
                         JsonRequestBehavior.AllowGet
                     });
-                }
-                
+                }                
             }
         }
-
         public ActionResult NationManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
-
         //Quản lý từ khoá
         public ActionResult KeyWordGetData()
         {
@@ -158,13 +154,11 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
-
         public ActionResult KeyWordManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
         //Quản lý thể loại bài viết
         public ActionResult ArtTypeGetData()
         {
@@ -222,13 +216,11 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
-
         public ActionResult ArtTypeManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
 
         //Quản lý hội nghị
         public ActionResult ConferenceGetData()
@@ -287,7 +279,6 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
-
         public ActionResult ConferenceManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
@@ -313,50 +304,36 @@ namespace HTquanlyNCKH.Controllers
                 {
                     List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
                     ViewBag.nat = nat;
-
-                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();                   
-                    
-                    ViewBag.sct = sct;
-                    
+                    List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();                                      
+                    ViewBag.sct = sct;                    
                     List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
                     ViewBag.key = key;
-
                     List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
                     ViewBag.types = types;
-
                     List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
                     ViewBag.fieldList = fields;
-
                     return View(new Article());
                 }
                 else
                 {
                     List<Nation> nat = db.Nations.OrderByDescending(n => n.nationID).ToList<Nation>();
                     ViewBag.nat = nat;
-
                     List<Scientist> sct = db.Scientists.OrderByDescending(n => n.scientistID).ToList<Scientist>();
                     ViewBag.sct = sct;
-
                     List<KeyWord> key = db.KeyWords.OrderByDescending(n => n.keyID).ToList<KeyWord>();
                     ViewBag.key = key;
-
                     List<ArtType> types = db.ArtTypes.OrderByDescending(n => n.typeID).ToList<ArtType>();
                     ViewBag.types = types;
-
                     List<Field> fields = db.Fields.OrderByDescending(n => n.fieldID).ToList<Field>();
                     ViewBag.fieldList = fields;
-
                     var nationName = db.Articles.Single(n => n.articlesID == id);
                     ViewBag.nationName = nationName.atlNation;
-
                     var art = db.Articles.SingleOrDefault(n => n.articlesID == id); //Lấy danh sách bài báo
                     var sctItem = sct.Single(n => n.scientistID == art.scientistID);        //Lấy 1 Record tương ứng nhà khoa học
                     ViewBag.tenNhaKhoaHoc = sctItem.sctFirstName + " " + sctItem.sctLastName + " - KH"+ sctItem.scientistID;
-
                     return View(db.Articles.Where(x => x.articlesID == id).FirstOrDefault<Article>());                    
                 }
-            }
-                
+            }                
         }
         [HttpPost]
         public ActionResult ArticlesStoreOrEdit(Article articleob, FormCollection collection)
@@ -364,8 +341,7 @@ namespace HTquanlyNCKH.Controllers
             using (DBModel db = new DBModel())
             {
                 if (articleob.articlesID == 0)
-                {
-                    
+                {                    
                     articleob.scientistID = int.Parse(collection.Get("nhaKhoaHoc"));
                     //articleob.cfrCreateDate = DateTime.Now;
                     articleob.atlNation = collection.Get("quocGia");
@@ -379,9 +355,7 @@ namespace HTquanlyNCKH.Controllers
                 {
                     //articleob.cfrModifierDate = DateTime.Now;
                     articleob.atlNation = collection.Get("quocGia");
-                    articleob.scientistID = int.Parse(collection.Get("nhaKhoaHoc"));
-
-                    
+                    articleob.scientistID = int.Parse(collection.Get("nhaKhoaHoc"));                    
 
                     db.Entry(articleob).State = EntityState.Modified;
                     db.SaveChanges();
@@ -401,7 +375,6 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
-
         public ActionResult ArticlesManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";

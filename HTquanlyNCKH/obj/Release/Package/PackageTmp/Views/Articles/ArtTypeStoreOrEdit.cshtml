@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.ArtType
+@using (Html.BeginForm("ArtTypeStoreOrEdit", "Articles", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.typeID)
+    @Html.HiddenFor(model => model.typCreateDate)
+    @Html.HiddenFor(model => model.typModifierDate)
+
+    @Html.HiddenFor(model => model.typCreateUser)
+    @Html.HiddenFor(model => model.typModifierUser)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.typName, "Tên Thể Loại", new { @class = "control-label" })
+        @Html.EditorFor(model => model.typName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.typName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.typDescription, "Mô Tả", new { @class = "control-label" })
+        @Html.EditorFor(model => model.typDescription, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.typDescription)
+    </div>
+    <div class="form-group">
+
+        <input type="submit" value="Lưu lại" class="btn btn-success " />
+        <input type="reset" value="Làm mới" class="btn btn-warning" />
+    </div>
+}  

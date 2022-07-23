@@ -204,13 +204,11 @@ namespace HTquanlyNCKH.Controllers
                 
             }
         }
-
         public ActionResult ForeignManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
         //Quản lý nơi sinh vd: Đồng Tháp, Vĩnh Long,...
         public ActionResult PlaceGetData()
         {
@@ -302,15 +300,11 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
-
         public ActionResult PlaceManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
-
-
         //Quản lý đơn vị làm việc
         public ActionResult UnitGetData()
         {
@@ -402,15 +396,11 @@ namespace HTquanlyNCKH.Controllers
                 
             }
         }
-
         public ActionResult UnitManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
             return View();
         }
-
-
-
         //Quản lý nhà khoa học
         public ActionResult ScientistGetData()
         {
@@ -421,13 +411,11 @@ namespace HTquanlyNCKH.Controllers
                     JsonRequestBehavior.AllowGet);
             }
         }
-
         [HttpGet]
         public ActionResult ScientistStoreOrEdit(int id = 0)
         {
             if (id == 0)
-            {
-                
+            {               
                 using (DBModel db = new DBModel())
                 {
                     //Lấy danh sách nơi sinh (tỉnh)
@@ -450,11 +438,8 @@ namespace HTquanlyNCKH.Controllers
                     List<Foreign> foreigns = db.Foreigns.OrderByDescending(n => n.foreignID).ToList<Foreign>();
                     ViewBag.foreignList = foreigns;
 
-
                     ViewBag.ngaysinh = null;
-                }
-                
-
+                }                
                 return View(new Scientist());
             }
             else  // Post != 0
@@ -492,10 +477,7 @@ namespace HTquanlyNCKH.Controllers
 
                     ViewBag.foreignName = foreigns.Single(n => n.foreignID == sct.foreignID).fgnName;
 
-                    ViewBag.sctWorkingProcess = sct.sctWorkingProcess;
-
-                    
-
+                    ViewBag.sctWorkingProcess = sct.sctWorkingProcess;                  
                     if (sct.sctBirthday == null)
                     {
                         ViewBag.ngaysinh = null;
@@ -545,19 +527,10 @@ namespace HTquanlyNCKH.Controllers
                     {
                         scientistob.sctBirthday = null;
                     }
-
                     try
-                    {
-                        
-                        
+                    {                                               
                         //Thêm mới Post
-                        scientistob.sctSex = collection.Get("gioi-tinh");
-
-
-
-
-
-
+                       scientistob.sctSex = collection.Get("gioi-tinh");
                        db.Scientists.Add(scientistob);
                        db.SaveChanges();
                     }
@@ -566,8 +539,6 @@ namespace HTquanlyNCKH.Controllers
 
                         ViewBag.loi = e;
                     }
-
-
                     return RedirectToAction("ScientistManage");
                     //return Json(new { success = true, message = "Lưu lại thành công!", JsonRequestBehavior.AllowGet });
                 }
@@ -587,10 +558,7 @@ namespace HTquanlyNCKH.Controllers
                                 scientistob.sctImage = fileName;
                             }
                         }
-                    }
-
-                    
-
+                    }                   
                     if (collection.Get("ngay-sinh") != "")
                     {
                         scientistob.sctBirthday = Convert.ToDateTime(collection.Get("ngay-sinh"));
@@ -599,13 +567,8 @@ namespace HTquanlyNCKH.Controllers
                     {
                         scientistob.sctBirthday = null;
                     }
-
                     //Sửa Post
-
                     scientistob.sctSex = collection.Get("gioi-tinh");
-
-
-
                     scientistob.sctModifierDate = DateTime.Now;
                     db.Entry(scientistob).State = EntityState.Modified;
                     db.SaveChanges();
@@ -614,8 +577,6 @@ namespace HTquanlyNCKH.Controllers
                 }
             }
         }
-
-
         [HttpPost]
         public ActionResult ScientistDelete(int id)
         {
@@ -627,7 +588,6 @@ namespace HTquanlyNCKH.Controllers
                 return Json(new { success = true, mesage = "Xoá thành công!", JsonRequestBehavior.AllowGet });
             }
         }
-
         public ActionResult ScientistManage()
         {
             ViewBag.DeleteIcon = "<i class='fas fa-trash - alt'></i>";
@@ -635,7 +595,6 @@ namespace HTquanlyNCKH.Controllers
             
             return View();
         }
-
         public ActionResult ScientistInfor(int? id)     //Hiện Popup thông tin nhà khoa học (truyền vào mã số scientistID nhà khoa học
         {
             using (DBModel db = new DBModel())

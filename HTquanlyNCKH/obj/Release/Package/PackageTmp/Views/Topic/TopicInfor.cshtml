@@ -1,0 +1,137 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.TopicFull
+<div class="form-check">
+    <table style="text-align: right" class="table table-striped">
+        <tbody>
+            <tr>
+                <td>
+                    <b>Tên đề tài:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.tpcName
+                </td>
+                <td><b>Mã số đề tài: </b></td>
+                <td style="text-align: left">
+                    @Model.topicID
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Người thực hiện:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.scientistName <a style="margin-left: 1em" class="btn btn-primary btn-sm" onclick=PopupForm('@Url.Action("ScientistInfor", "Scientist", new { id = Model.scientistID})')> Xem thông tin</a>
+                </td>
+
+                <td>
+                    <b>Phân loại:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.classifiName
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+                <td>
+                    <b>Trạng thái:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.statusName
+                </td>
+                <td>
+                    <b>Chuyên nghành:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.fieldName
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Năm thực hiện:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.tpcYear
+                </td>
+                <td>
+                    <b>CODE:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.tpcCode
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Ngày bắt đầu:</b>
+                </td>
+                <td style="text-align: left">
+                    @ViewBag.ngaybatdau
+
+                </td>
+                @*<td>
+                        <b>Ngày kết thúc:</b>
+                    </td>
+                    <td style="text-align: left">
+                        @Convert.ToDateTime(Model.tpcEndDate).ToString("dd-MM-yyyy")
+
+                    </td>*@
+                <td>
+                    <b>Ngày kết thúc:</b>
+                </td>
+                <td style="text-align: left">
+                    @ViewBag.ngayketthuc
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Hội đồng xét duyệt:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.tpcReviewBoard
+                </td>
+                <td>
+                    <b>Ngày nghiệm thu:</b>
+                </td>
+                <td style="text-align: left">
+                    @ViewBag.ngaynghiemthu
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>File đính kèm</b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @if (Model.tpcProofFile != null)
+                    {
+                        <a style="color: #0026ff" href="~/Uploads/document/topic/@Model.tpcProofFile" download><i class="fas fa-file"></i> TẢI VỀ</a>
+                    }
+                    else
+                    {
+                        <p>Trống</p>
+                    }
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table>
+        <tr>
+            <td width="120px">
+                <b>Tóm lượt đề tài: </b>
+            </td>
+            <td>
+                @Html.Raw(Model.tpcSummary)
+            </td>
+        </tr>
+    </table>

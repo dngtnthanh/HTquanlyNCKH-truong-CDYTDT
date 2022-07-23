@@ -137,20 +137,9 @@ namespace HTquanlyNCKH.Controllers
                                 .OrderBy(p => p.scientistID)
                                     select p;
                     ViewBag.Pages = sctList;
+
                     //Đếm số lượng kết quả tìm kiếm
-                    
-                    if (sctList.Count() != null)
-                    {
-                        int _slkq = sctList.Count();
-                        ViewBag.slkq = _slkq;
-                    }
-                    else
-                    {
-                        ViewBag.slkq = 0;
-                    }
-                    
-                    
-                    
+                    ViewBag.slkq = sctList.Count(); 
                     
                     //Phân trang
                     int pagesize = 4;

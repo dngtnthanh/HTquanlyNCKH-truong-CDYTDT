@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin bài báo quốc tế";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Slider{
+    <img src="~/Uploads/image/banner/slider11.png" width="100%" />
+}
+
+
+<!DOCTYPE html>
+@model HTquanlyNCKH.Models.ArticleFull
+<div class="form-check">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td style="vertical-align:middle">
+                    <b>Tên bài báo:</b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @Model.atlName
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <b>Người thực hiện:</b>
+                </td>
+                <td style="text-align: left">
+                    <a style="margin-left: 1em" href="@Url.Action("ScientistInfor", "Home", new { id = Model.scientistID})">
+
+                        @Model.scientistName - Mã số: @Model.scientistID
+                    </a>
+                </td>
+                <td>
+                    <b>Nơi xuất bản:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.atlPublication
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Từ khoá: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.keyName
+                </td>
+                <td>
+                    <b>Công bố trang báo trên Website:</b>
+                </td>
+                <td style="text-align: left">
+                    <a href="@Model.atlLink">Đi tới Website</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Loại bài viết:</b>
+                </td>
+                <td style="text-align: left">
+                    @Model.typeName
+                </td>
+                <td>
+                    <b>Lĩnh vực: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.fieldName
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Số bài báo: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.atlNumber
+                </td>
+                <td>
+                    <b>Từ trang đến trang: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.atlPageToPage
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Quốc gia: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.nationName
+                </td>
+                <td>
+                    <b>Từ khoá: </b>
+                </td>
+                <td style="text-align: left">
+                    @Model.keyName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Thể loại: </b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @Model.typeName
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>
+                    <b>Điểm công trình: </b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @Model.Point
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Tóm lượt:</b>
+                </td>
+                <td colspan="3" style="text-align: left">
+                    @Model.atlSummary
+                </td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+</div>
+
+
+<style type='text/css'>
+
+
+
+    table td {
+        vertical-align: middle;
+        text-align: right;
+    }
+</style>

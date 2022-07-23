@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<h2>Create</h2>
+@model HTquanlyNCKH.Models.Slider
+<div class="form-control">
+    @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.sldImage, new { type = "file" })
+            @Html.ValidationMessageFor(model => model.sldImage)
+        </div>
+        <input type="submit" />
+    }
+</div>
+@using (Html.BeginForm("Create", "admin", FormMethod.Post, new { @class = "suggestion-dropdown form-horizontal" }))
+{
+    <div class="form-group">
+        @Html.Label("SearchLabel", "Cars: ", new { @class = "col-sm-1 control-label" })
+        <div class="col-sm-4">
+            @Html.TextBox("SearchTerm", string.Empty, new { @class = "search-term form-control" })
+            <div class="suggestions hidden">
+                <table class="table table-condensed table-striped suggest-grid">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>}
+<style>
+
+    smart-grid {
+        width: 100%;
+    }
+</style>
+
+<div class="demo-description">
+    Auto-Complete Readonly editor is used in the 'First Name' column. 'Last Name' column is with Auto-Complete Dropdown. The 'Product' Grid column is with Auto-Complete which opens automatically.
+    Click on a cell to begin edit. Start typing and auto-complete popup will be displayed.
+</div>
+<smart-grid id="grid"></smart-grid>
+<!-- scripts -->
+<script src="../../scripts/data.js"></script>
+<script type="module" src="../../source/modules/smart.grid.js"></script>
+<script type="module" src="../../source/modules/smart.button.js"></script>
+<script type="module" src="index.js"></script>
+
+<script>
+    Smart('#grid', class {
+        get properties() {
+            return {
+                dataSource: new Smart.DataAdapter(
+                    {
+                        dataSource: generateData(1000),
+                        dataFields:
+                            [
+                                'id: number',
+                                'firstName: string',
+                                'lastName: string',
+                                'productName: string',
+                                'available: bool',
+                                'quantity: number',
+                                'price: number',
+                                'total: number'
+                            ]
+                    }),
+                editing: {
+                    enabled: true,
+                    mode: 'cell'
+                },
+                columns: [
+                    {
+                        label: 'First Name', dataField: 'firstName', editor: {
+                            template: 'autoComplete',
+                            readonly: true
+                        }
+                    },
+                    {
+                        label: 'Last Name', dataField: 'lastName', editor: {
+                            template: 'autoComplete',
+                            dropDownButtonPosition: 'right'
+                        }
+                    },
+                    {
+                        label: 'Product', dataField: 'productName', editor: {
+                            template: 'autoComplete',
+                            readonly: true,
+                            autoOpen: true
+                        }
+                    }
+                ]
+            }
+        }
+    });
+</script>

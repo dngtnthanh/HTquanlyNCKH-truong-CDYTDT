@@ -13,22 +13,22 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="~/Assets/images/favicon.ico">
+    <link rel="shortcut icon" href="~/Content/dist/css/favicon.icon">
 
     <!-- Bootstrap Css -->
-    <link href="~/Assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <link href="~/Content/dist/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
     <!-- Icons Css -->
-    <link href="~/Assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/dist/css/icons.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
-    <link href="~/Assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+    <link href="~/Content/dist/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
 
 </head>
 
 
 <body class="account-pages">
     <!-- Begin page -->
-    <div class="accountbg" >
-        <img src="~/Assets/images/bg.jpg" style="width: 1250px" />
+    <div class="accountbg">
+        <img src="~/Uploads/image/slider/TRUONG_1.jpg" style="width: 1000px; margin-left: 300px" />
     </div>
 
     <div class=" wrapper-page account-page-full ">
@@ -41,25 +41,25 @@
                     <div class="card-box shadow-none p-4 ">
                         <div class="p-2 ">
                             <div class="text-center mt-4 ">
-                                <a href="index.html "><img src="~/Assets/images/logo-light.png " height="100 " alt="logo "></a>
+                                <a href="index.html "><img src="~/Uploads/image/logo/LOGOcdytDT.png" height="100 " alt="logo "></a>
                             </div>
 
-                            <h4 class="font-size-22 mt-5 text-center text-primary">DTHU - MIT</h4>
+                            <h4 class="font-size-22 mt-2 text-center text-primary">Trường Cao Đẳng Y Tế Đồng Tháp</h4>
                             <p class="text-muted text-center mb-1">Chào mừng bạn đã đến với hệ thống</p>
                             <p class="text-muted text-center ">Quản lý nghiên cứu khoa học</p>
                             @using (Html.BeginForm("index", "Login", FormMethod.Post, new { @class = "auth-form" }))
                             {
                                 <div class="mb-3 ">
                                     <label class="form-label " for="username ">Tài khoản</label>
-                                    <input id="TenTaiKhoan" type="text" required class="form-control " name="Username"  placeholder="Tài khoản ">
+                                    <input id="TenTaiKhoan" type="text" required class="form-control " name="Username" placeholder="Tài khoản ">
                                 </div>
 
 
                                 <div class="mb-3 ">
                                     <label class="form-label " for="userpassword ">Mật khẩu</label>
-                                    <input id="MatKhau" type="password" required class="form-control" name="Password"  placeholder="Mật khẩu ">
+                                    <input id="MatKhau" type="password" required class="form-control" name="Password" placeholder="Mật khẩu ">
                                 </div>
-                                <div class="mb-3" style="color: red" >
+                                <div class="mb-3" style="color: red">
                                     @ViewBag.error
                                 </div>
                                 <div class="mb-3 mt-2 mb-0 row ">
@@ -94,14 +94,17 @@
 
 
     <!-- JAVASCRIPT -->
-    <script src="~/Assets/libs/jquery/jquery.min.js "></script>
-    <script src="~/Assets/libs/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <script src="~/Assets/libs/metismenu/metisMenu.min.js "></script>
-    <script src="~/Assets/libs/simplebar/simplebar.min.js "></script>
-    <script src="~/Assets/libs/node-waves/waves.min.js "></script>
+    @*<script src="~/Assets/libs/jquery/jquery.min.js "></script>
+    <script src="~/Assets/libs/bootstrap/js/bootstrap.bundle.min.js "></script>*@
+    @*<script src="~/Assets/libs/metismenu/metisMenu.min.js "></script>*@
+    @*<script src="~/Assets/libs/simplebar/simplebar.min.js "></script>*@
+    @*<script src="~/Assets/libs/node-waves/waves.min.js "></script>*@
 
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/"></script>
 
-    <script src="~/Assets/js/app.js "></script>
+    @*<script src="~/Assets/js/app.js "></script>*@
 
 </body>
 

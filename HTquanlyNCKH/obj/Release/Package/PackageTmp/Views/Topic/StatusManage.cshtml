@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "Quản Lý trạng thái đề tài";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />-->
+<!-- Font Awesome -->
+<!--<link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet" />-->
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Xoá
+    </button>*@
+
+
+
+
+
+<a class="btn btn-primary" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("StatusStoreOrEdit","Topic")')">
+    <i class="fa fa-plus"></i> Thêm Mới
+</a>
+
+<table id="StatusTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr @*style="background-color: #bec4ed*@>
+            <th width="10px">STT</th>
+            <th> Tên trạng thái</th>
+            <th>Mô Tả</th>
+            <th><i class="fa-solid fa-screwdriver-wrench"></i> Tuỳ Chọn</th>
+        </tr>
+    </thead>
+    <tr>
+        <td></td>
+    </tr>
+</table>
+
+
+@section scripts{
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+
+    @*<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>*@
+    @*<script src="~/Content/dist/js/dataTables.bootstrap4.min.js"></script>*@
+
+    <script src="~/Content/dist/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+
+        var Popup, dataTable;
+
+        $(document).ready(function () {
+            //Hai dòng dưới để chỉnh cho khai báo jquery trước boostrap (hiện nút close)
+            var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
+            $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
+
+
+
+            dataTable =  $("#StatusTable").DataTable({
+                /*"info": false,*/
+                "ajax": {
+
+                    "url": "/Topic/StatusGetData",
+                    "type": "GET",
+                    "datatype": "json"
+
+                },
+
+                "columns": [
+                    { "defaultContent": "" },
+                    { "data": "stsName" },
+                    { "data": "stsDescription" },
+                    {
+                        "data": "statusID", "render": function (data) {
+
+                            return "<a class='btn btn-sm btn-warning' onclick=PopupForm('@Url.Action("StatusStoreOrEdit", "Topic")/" + data + "')><i class='fa fa-pencil'></i> Sửa</a>  <a class='btn btn-danger btn-sm' style='margin-left:5px'   onclick=Delete(" + data + ")> @Html.Raw(ViewBag.DeleteIcon) Xoá</a>";
+                        },
+
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px",
+
+                    },
+
+
+                ],
+
+                "language": {
+                    "emptyTable": "Dữ liệu rỗng <b>Thêm mới </b> Button",
+                    "formatNavigator": "<%= số trang %> / <%= trên trang %>",
+                }
+
+            });
+
+
+        });
+
+        function PopupForm(url) {
+
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+
+                        autoOpen : true,
+                        resizable : false,
+                        title : 'Điền Thông Tin Về Trạng Thái Đề Tài',
+                        height : 500,
+                        width : 700,
+                        close: function () {
+
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+
+                });
+        }
+
+        function SubmitForm(form) {
+
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+                success: function (data) {
+
+                    if (data.success) {
+
+                        Popup.dialog('close');
+                        dataTable.ajax.reload();
+
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className:"success"
+                        })
+                    }
+                }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id) {
+            if (confirm('Bạn có chắc chắn muốn xoá?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("StatusDelete", "Topic")/' + id,
+                    success: function (data) {
+
+                        if (data.success) {
+
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        } else alert(data.message);
+                    }
+                });
+            }
+        }
+    </script>
+}
+<style type='text/css'>
+
+    table {
+        counter-reset: rowNumber;
+        counter-reset: number 1; /*mặc định số thứ tự bắt đầu*/
+    }
+
+        table tr {
+            counter-increment: rowNumber;
+        }
+
+            table tr td:first-child::before {
+                content: counter(rowNumber);
+                min-width: auto;
+                margin-right: 0.5em;
+            }
+
+    /*.pagination a {
+        color: #505cdc;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+        background-color: #d3e1f5;
+        border: solid 1px #1f00ff;
+        border-radius: 100px;
+        font-size: 12px;
+    }*/
+
+    /* Style the active/current link */
+    /*.pagination a.active {
+            background-color: aqua;
+            color: white;
+        }*/
+
+    /* Add a grey background color on mouse-over */
+    /*.pagination a:hover:not(.active) {
+            background-color: #bec4ed;
+        }*/
+</style>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title ">
+                    Xác nhận xoá?
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+
+
+            <div class="modal-body">
+                <button type="button" class="btn btn-check" data-dismiss="modal">
+                    Đóng
+                </button>
+                <button type="button" class="btn btn-danger">
+                    Xoá
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
